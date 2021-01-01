@@ -1,7 +1,14 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Link } from "react-router-dom";
+import {Utility} from "models/Utility";
 
 export default function Login() {
+
+  const checkLogin = (e) => {
+    e.preventDefault();
+    Utility.Login("admin");
+  }
+
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -50,12 +57,12 @@ export default function Login() {
                       className="block uppercase text-gray-700 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Email
+                      Username
                     </label>
                     <input
-                      type="email"
+                      type="text"
                       className="px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full ease-linear transition-all duration-150"
-                      placeholder="Email"
+                      placeholder="Username"
                     />
                   </div>
 
@@ -86,7 +93,7 @@ export default function Login() {
                   </div>
 
                   <div className="text-center mt-6">
-                    <button
+                    <button onClick={checkLogin}
                       className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="button"
                     >

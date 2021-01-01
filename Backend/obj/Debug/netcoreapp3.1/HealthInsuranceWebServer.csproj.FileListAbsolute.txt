@@ -158,3 +158,4 @@ C:\Users\Shazamzzz\Desktop\Health-Insurance\Backend\bin\Debug\netcoreapp3.1\Swas
 C:\Users\Shazamzzz\Desktop\Health-Insurance\Backend\obj\Debug\netcoreapp3.1\HealthInsuranceWebServer.csproj.CoreCompileInputs.cache
 C:\Users\Shazamzzz\Desktop\Health-Insurance\Backend\obj\Debug\netcoreapp3.1\HealthInsuranceWebServer.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Shazamzzz\Desktop\Health-Insurance\Backend\obj\Debug\netcoreapp3.1\HealthInsuranceWebServer.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\Shazamzzz\Desktop\Health-Insurance\Backend\obj\Debug\netcoreapp3.1\HealthInsuranceWebServer.csprojAssemblyReference.cache
