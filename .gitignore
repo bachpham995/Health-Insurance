@@ -4,6 +4,9 @@
 /Frontend/node_modules
 .pnp
 .pnp.js
+/Backend/obj
+/Backend/bin
+
 
 
 # testing
