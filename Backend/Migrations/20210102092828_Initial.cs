@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HealthInsuranceWebServer.Migrations
 {
-    public partial class InitialCreater : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,7 +14,7 @@ namespace HealthInsuranceWebServer.Migrations
                     AddressId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Street = table.Column<string>(nullable: true),
-                    Districh = table.Column<string>(nullable: true),
+                    District = table.Column<string>(nullable: true),
                     City = table.Column<string>(nullable: true),
                     Country = table.Column<string>(nullable: true),
                     PostalCode = table.Column<string>(nullable: true)
@@ -255,11 +255,49 @@ namespace HealthInsuranceWebServer.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "Address",
+                columns: new[] { "AddressId", "City", "Country", "District", "PostalCode", "Street" },
+                values: new object[] { 1, "Random City", "Random Country", "Random District", "70000", "Random Street" });
+
+            migrationBuilder.InsertData(
+                table: "Policy",
+                columns: new[] { "PolicyId", "Amount", "Benefit", "Description", "Emi", "InsCompanyId", "InsuranceCompanyInsCompanyId", "PolicyName", "PolicyNumber", "Retired" },
+                values: new object[,]
+                {
+                    { 1, 3000f, "Random Benefit", "Random Description", 250f, 1, null, "Random Name", "21-00001", false },
+                    { 2, 2467f, "Random Benefit", "Random Description", 123f, 1, null, "Random Name", "21-00002", false },
+                    { 3, 9876f, "Random Benefit", "Random Description", 222f, 1, null, "Random Name", "21-00003", false },
+                    { 4, 2345f, "Random Benefit", "Random Description", 785f, 1, null, "Random Name", "21-00004", false },
+                    { 5, 9876f, "Random Benefit", "Random Description", 234f, 1, null, "Random Name", "21-00005", false },
+                    { 6, 12345f, "Random Benefit", "Random Description", 111f, 1, null, "Random Name", "21-00006", false },
+                    { 7, 123f, "Random Benefit", "Random Description", 222f, 1, null, "Random Name", "21-00007", false },
+                    { 8, 987654f, "Random Benefit", "Random Description", 250f, 1, null, "Random Name", "21-00008", false },
+                    { 9, 347f, "Random Benefit", "Random Description", 96f, 1, null, "Random Name", "21-00009", false },
+                    { 10, 1000f, "Random Benefit", "Random Description", 250f, 1, null, "Random Name", "21-00010", false }
+                });
+
+            migrationBuilder.InsertData(
+                table: "InsuranceCompany",
+                columns: new[] { "InsCompanyId", "AddressId", "Img", "InsCompanyName", "Phone", "Url" },
+                values: new object[,]
+                {
+                    { 1, 1, null, "UnitedHealth Group Incorporated", "1234-5678-1011", null },
+                    { 2, 1, null, "AXA S.A.", "1234-5678-1011", null },
+                    { 3, 1, null, "China Life Insurance (Group) Company", "1234-5678-1011", null },
+                    { 4, 1, null, "Ping An Insurance (Group) Company of China Ltd", "1234-5678-1011", null },
+                    { 5, 1, null, "Allianz SE", "1234-5678-1011", null },
+                    { 6, 1, null, "Anthem, Inc.", "1234-5678-1011", null },
+                    { 7, 1, null, "Kaiser Foundation Group of Health Plans", "1234-5678-1011", null },
+                    { 8, 1, null, "Assicurazioni Generali S.p.A", "1234-5678-1011", null },
+                    { 9, 1, null, "State Farm Group", "1234-5678-1011", null },
+                    { 10, 1, null, "People’s Insurance Company (Group) of China Ltd", "1234-5678-1011", null }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_Employee_AddressId",
                 table: "Employee",
-                column: "AddressId",
-                unique: true);
+                column: "AddressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedback_EmployeeId1",
@@ -269,8 +307,7 @@ namespace HealthInsuranceWebServer.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Hospital_AddressId",
                 table: "Hospital",
-                column: "AddressId",
-                unique: true);
+                column: "AddressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Hospital_PolicyId",
@@ -280,8 +317,7 @@ namespace HealthInsuranceWebServer.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_InsuranceCompany_AddressId",
                 table: "InsuranceCompany",
-                column: "AddressId",
-                unique: true);
+                column: "AddressId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Policy_InsuranceCompanyInsCompanyId",

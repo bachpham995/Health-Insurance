@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthInsuranceWebServer.Migrations
 {
     [DbContext(typeof(HealthInsuranceWebServerContext))]
-    [Migration("20210101112317_InitialCreater")]
-    partial class InitialCreater
+    [Migration("20210102092828_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -34,7 +34,7 @@ namespace HealthInsuranceWebServer.Migrations
                     b.Property<string>("Country")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Districh")
+                    b.Property<string>("District")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PostalCode")
@@ -46,6 +46,17 @@ namespace HealthInsuranceWebServer.Migrations
                     b.HasKey("AddressId");
 
                     b.ToTable("Address");
+
+                    b.HasData(
+                        new
+                        {
+                            AddressId = 1,
+                            City = "Random City",
+                            Country = "Random Country",
+                            District = "Random District",
+                            PostalCode = "70000",
+                            Street = "Random Street"
+                        });
                 });
 
             modelBuilder.Entity("HealthInsuranceWebServer.Models.Admin", b =>
@@ -105,8 +116,7 @@ namespace HealthInsuranceWebServer.Migrations
 
                     b.HasKey("EmployeeId");
 
-                    b.HasIndex("AddressId")
-                        .IsUnique();
+                    b.HasIndex("AddressId");
 
                     b.ToTable("Employee");
                 });
@@ -170,8 +180,7 @@ namespace HealthInsuranceWebServer.Migrations
 
                     b.HasKey("HospitalId");
 
-                    b.HasIndex("AddressId")
-                        .IsUnique();
+                    b.HasIndex("AddressId");
 
                     b.HasIndex("PolicyId");
 
@@ -202,10 +211,81 @@ namespace HealthInsuranceWebServer.Migrations
 
                     b.HasKey("InsCompanyId");
 
-                    b.HasIndex("AddressId")
-                        .IsUnique();
+                    b.HasIndex("AddressId");
 
                     b.ToTable("InsuranceCompany");
+
+                    b.HasData(
+                        new
+                        {
+                            InsCompanyId = 1,
+                            AddressId = 1,
+                            InsCompanyName = "UnitedHealth Group Incorporated",
+                            Phone = "1234-5678-1011"
+                        },
+                        new
+                        {
+                            InsCompanyId = 2,
+                            AddressId = 1,
+                            InsCompanyName = "AXA S.A.",
+                            Phone = "1234-5678-1011"
+                        },
+                        new
+                        {
+                            InsCompanyId = 3,
+                            AddressId = 1,
+                            InsCompanyName = "China Life Insurance (Group) Company",
+                            Phone = "1234-5678-1011"
+                        },
+                        new
+                        {
+                            InsCompanyId = 4,
+                            AddressId = 1,
+                            InsCompanyName = "Ping An Insurance (Group) Company of China Ltd",
+                            Phone = "1234-5678-1011"
+                        },
+                        new
+                        {
+                            InsCompanyId = 5,
+                            AddressId = 1,
+                            InsCompanyName = "Allianz SE",
+                            Phone = "1234-5678-1011"
+                        },
+                        new
+                        {
+                            InsCompanyId = 6,
+                            AddressId = 1,
+                            InsCompanyName = "Anthem, Inc.",
+                            Phone = "1234-5678-1011"
+                        },
+                        new
+                        {
+                            InsCompanyId = 7,
+                            AddressId = 1,
+                            InsCompanyName = "Kaiser Foundation Group of Health Plans",
+                            Phone = "1234-5678-1011"
+                        },
+                        new
+                        {
+                            InsCompanyId = 8,
+                            AddressId = 1,
+                            InsCompanyName = "Assicurazioni Generali S.p.A",
+                            Phone = "1234-5678-1011"
+                        },
+                        new
+                        {
+                            InsCompanyId = 9,
+                            AddressId = 1,
+                            InsCompanyName = "State Farm Group",
+                            Phone = "1234-5678-1011"
+                        },
+                        new
+                        {
+                            InsCompanyId = 10,
+                            AddressId = 1,
+                            InsCompanyName = "People’s Insurance Company (Group) of China Ltd",
+                            Phone = "1234-5678-1011"
+                        });
                 });
 
             modelBuilder.Entity("HealthInsuranceWebServer.Models.Policy", b =>
@@ -248,6 +328,128 @@ namespace HealthInsuranceWebServer.Migrations
                     b.HasIndex("InsuranceCompanyInsCompanyId");
 
                     b.ToTable("Policy");
+
+                    b.HasData(
+                        new
+                        {
+                            PolicyId = 1,
+                            Amount = 3000f,
+                            Benefit = "Random Benefit",
+                            Description = "Random Description",
+                            Emi = 250f,
+                            InsCompanyId = 1,
+                            PolicyName = "Random Name",
+                            PolicyNumber = "21-00001",
+                            Retired = false
+                        },
+                        new
+                        {
+                            PolicyId = 2,
+                            Amount = 2467f,
+                            Benefit = "Random Benefit",
+                            Description = "Random Description",
+                            Emi = 123f,
+                            InsCompanyId = 1,
+                            PolicyName = "Random Name",
+                            PolicyNumber = "21-00002",
+                            Retired = false
+                        },
+                        new
+                        {
+                            PolicyId = 3,
+                            Amount = 9876f,
+                            Benefit = "Random Benefit",
+                            Description = "Random Description",
+                            Emi = 222f,
+                            InsCompanyId = 1,
+                            PolicyName = "Random Name",
+                            PolicyNumber = "21-00003",
+                            Retired = false
+                        },
+                        new
+                        {
+                            PolicyId = 4,
+                            Amount = 2345f,
+                            Benefit = "Random Benefit",
+                            Description = "Random Description",
+                            Emi = 785f,
+                            InsCompanyId = 1,
+                            PolicyName = "Random Name",
+                            PolicyNumber = "21-00004",
+                            Retired = false
+                        },
+                        new
+                        {
+                            PolicyId = 5,
+                            Amount = 9876f,
+                            Benefit = "Random Benefit",
+                            Description = "Random Description",
+                            Emi = 234f,
+                            InsCompanyId = 1,
+                            PolicyName = "Random Name",
+                            PolicyNumber = "21-00005",
+                            Retired = false
+                        },
+                        new
+                        {
+                            PolicyId = 6,
+                            Amount = 12345f,
+                            Benefit = "Random Benefit",
+                            Description = "Random Description",
+                            Emi = 111f,
+                            InsCompanyId = 1,
+                            PolicyName = "Random Name",
+                            PolicyNumber = "21-00006",
+                            Retired = false
+                        },
+                        new
+                        {
+                            PolicyId = 7,
+                            Amount = 123f,
+                            Benefit = "Random Benefit",
+                            Description = "Random Description",
+                            Emi = 222f,
+                            InsCompanyId = 1,
+                            PolicyName = "Random Name",
+                            PolicyNumber = "21-00007",
+                            Retired = false
+                        },
+                        new
+                        {
+                            PolicyId = 8,
+                            Amount = 987654f,
+                            Benefit = "Random Benefit",
+                            Description = "Random Description",
+                            Emi = 250f,
+                            InsCompanyId = 1,
+                            PolicyName = "Random Name",
+                            PolicyNumber = "21-00008",
+                            Retired = false
+                        },
+                        new
+                        {
+                            PolicyId = 9,
+                            Amount = 347f,
+                            Benefit = "Random Benefit",
+                            Description = "Random Description",
+                            Emi = 96f,
+                            InsCompanyId = 1,
+                            PolicyName = "Random Name",
+                            PolicyNumber = "21-00009",
+                            Retired = false
+                        },
+                        new
+                        {
+                            PolicyId = 10,
+                            Amount = 1000f,
+                            Benefit = "Random Benefit",
+                            Description = "Random Description",
+                            Emi = 250f,
+                            InsCompanyId = 1,
+                            PolicyName = "Random Name",
+                            PolicyNumber = "21-00010",
+                            Retired = false
+                        });
                 });
 
             modelBuilder.Entity("HealthInsuranceWebServer.Models.PolicyApproval", b =>
@@ -360,8 +562,8 @@ namespace HealthInsuranceWebServer.Migrations
             modelBuilder.Entity("HealthInsuranceWebServer.Models.Employee", b =>
                 {
                     b.HasOne("HealthInsuranceWebServer.Models.Address", "Address")
-                        .WithOne("Employee")
-                        .HasForeignKey("HealthInsuranceWebServer.Models.Employee", "AddressId")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -376,8 +578,8 @@ namespace HealthInsuranceWebServer.Migrations
             modelBuilder.Entity("HealthInsuranceWebServer.Models.Hospital", b =>
                 {
                     b.HasOne("HealthInsuranceWebServer.Models.Address", "Address")
-                        .WithOne("Hospital")
-                        .HasForeignKey("HealthInsuranceWebServer.Models.Hospital", "AddressId")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -389,8 +591,8 @@ namespace HealthInsuranceWebServer.Migrations
             modelBuilder.Entity("HealthInsuranceWebServer.Models.InsuranceCompany", b =>
                 {
                     b.HasOne("HealthInsuranceWebServer.Models.Address", "Address")
-                        .WithOne("InsuranceCompany")
-                        .HasForeignKey("HealthInsuranceWebServer.Models.InsuranceCompany", "AddressId")
+                        .WithMany()
+                        .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
