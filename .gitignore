@@ -6,7 +6,10 @@
 .pnp.js
 /Backend/obj
 /Backend/bin
-
+/Backend/.vs/HealthInsuranceWebServer/xs/UserPrefs.xml
+/Backend/appsettings.json
+/Backend/HealthInsuranceWebServer.csproj
+/Backend/obj/HealthInsuranceWebServer.csproj.nuget.dgspec.json
 
 
 # testing

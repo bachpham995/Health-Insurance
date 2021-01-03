@@ -1,9 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "wz5RfwDgmooFjWwEIFp4aO+0zZlMd9I/XFFjnU3U94lHgfOP/H4qunAl3CbD/kt7C2cjk/SG3YoM0dpNChNncw==",
+  "dgSpecHash": "DnIdZBPK3ZmAfVPVRmXCCkc+fNzmulbDsdCvgDgRqrFCfPZLtEJW33Dj2NOIvfqkxgeUAtdaAPowXxQD//Sk7g==",
   "success": true,
   "projectFilePath": "/Users/hoanghoa/Projects/HealthInsuranceMgmt/Health-Insurance/Backend/HealthInsuranceWebServer.csproj",
   "expectedPackageFiles": [
+    "/Users/hoanghoa/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/3.1.10/microsoft.aspnetcore.authentication.jwtbearer.3.1.10.nupkg.sha512",
     "/Users/hoanghoa/.nuget/packages/microsoft.aspnetcore.html.abstractions/2.2.0/microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "/Users/hoanghoa/.nuget/packages/microsoft.aspnetcore.razor/2.2.0/microsoft.aspnetcore.razor.2.2.0.nupkg.sha512",
     "/Users/hoanghoa/.nuget/packages/microsoft.aspnetcore.razor.language/3.1.0/microsoft.aspnetcore.razor.language.3.1.0.nupkg.sha512",
