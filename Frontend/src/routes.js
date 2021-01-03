@@ -80,10 +80,10 @@ const routes = [
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
-  { path: '/base/companies', exact: true, name: 'Companies', component: DataTable, props:{tableName:"InsuranceCompanies", color:"light"}},
-  { path: '/base/policies', exact: true, name: 'Policies', component : DataTable, props:{tableName:"Policies", color:"light"}},
-  { path: '/base/hospitals', exact: true, name: 'Hospitals', component : DataTable, props:{tableName:"Hospitals", color:"light"}},
-  { path: '/base/employees', exact: true, name: 'Employees', component : DataTable, props:{tableName:"Employees", color:"light"}}
+  { path: '/base/companies', exact: true, name: 'Companies', component: DataTable, props:{tableName:"Insurance Companies", tableQuery: "InsuranceCompanies",color:"light"}},
+  { path: '/base/policies', exact: true, name: 'Policies', component : DataTable, props:{tableName:"Policies", tableQuery: "Policies",color:"light"}},
+  { path: '/base/hospitals', exact: true, name: 'Hospitals', component : DataTable, props:{tableName:"Hospitals", tableQuery: "Hospitals",color:"light"}},
+  { path: '/base/employees', exact: true, name: 'Employees', component : DataTable, props:{tableName:"Employees", tableQuery: "Employees", color:"light"}}
 ];
 
 export default routes;
