@@ -311,10 +311,15 @@ const _nav = [
 
 const _admin_nav = [
   {
+    _tag: 'CSidebarNavTitle',
+    _children: ['ADMIN']
+  },
+  {
+    
     _tag: 'CSidebarNavDropdown',
-    name: 'Admin',
+    name: 'Management',
     route: '/base',
-    icon: 'cil-puzzle',
+    icon: 'cil-layers',
     _children: [
       {
         _tag: 'CSidebarNavItem',
@@ -324,7 +329,12 @@ const _admin_nav = [
         _tag: 'CSidebarNavItem',
         name: 'Policy',
         to: '/base/policies',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Employee',
+        to: '/base/employees',
       }]
   }
 ];
-export default _nav
+export default _admin_nav

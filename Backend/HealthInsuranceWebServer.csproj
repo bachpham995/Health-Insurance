@@ -17,6 +17,8 @@
     <Compile Remove="Migrations\20210102092304_UpdateDB.Designer.cs" />
     <Compile Remove="Migrations\20210102092418_UpdateDB#2.cs" />
     <Compile Remove="Migrations\20210102092418_UpdateDB#2.Designer.cs" />
+    <Compile Remove="Migrations\20210103092550_Initial.cs" />
+    <Compile Remove="Migrations\20210103092550_Initial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

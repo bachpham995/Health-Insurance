@@ -28,11 +28,18 @@ const TheContent = () => {
                   path={route.path}
                   exact={route.exact}
                   name={route.name}
-                  render={props => (
+
+                  render={route.props ?
+                    ()=>(
+                      <CFade>
+                        <route.component {...route.props} />
+                      </CFade>
+                    ):                    
+                    props => (
                     <CFade>
                       <route.component {...props} />
                     </CFade>
-                  )} />
+                  )}/>
               )
             })}
             <Redirect from="/" to="/dashboard" />

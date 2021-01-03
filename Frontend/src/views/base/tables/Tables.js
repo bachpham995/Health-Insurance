@@ -23,7 +23,7 @@ const getBadge = status => {
     default: return 'primary'
   }
 }
-const fields = ['name','registered', 'role', 'status']
+const fields = ['name','registered', 'role', 'status'];
 
 const Tables = () => {
   const [tableData, setTableData] = useState([]);
@@ -169,7 +169,7 @@ const Tables = () => {
             <CCardBody>
             <CDataTable
               items={tableData}
-              fields={Utility.getModelHeader("InsuranceCompanies")}
+              fields={Utility.TableHeader("InsuranceCompanies")}
               hover
               striped
               bordered              
@@ -201,7 +201,7 @@ const Tables = () => {
             <CCardBody>
             <CDataTable
               items={tableData}
-              fields={Utility.getModelHeader("InsuranceCompanies")}
+              fields={Utility.TableHeader("InsuranceCompanies")}
               dark
               hover
               striped

@@ -2,6 +2,8 @@ import React from 'react';
 
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 const Tables = React.lazy(() => import('./views/base/tables/Tables'));
+const Companies = React.lazy(() => import('./views/base/tables/DataTable'));
+const Policies = React.lazy(() => import('./views/base/tables/DataTable'));
 
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'));
 const Cards = React.lazy(() => import('./views/base/cards/Cards'));
@@ -38,11 +40,7 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const User = React.lazy(() => import('./views/users/User'));
 
-//New Component
-const Companies = React.lazy(() => import('./views/base/tables/Companies'));
-const Policies = React.lazy(() => import('./views/base/tables/Policies'));
-
-const routes = [
+const routes = [  
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
@@ -83,8 +81,11 @@ const routes = [
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
-  { path: '/base/companies', exact: true, name: 'Companies', component: Companies },
-  { path: '/base/policies', exact: true, name: 'Policies', component: Policies },
+  { path: '/base/companies', exact: true, name: 'Companies', component: Companies, props:{tableName:"InsuranceCompanies", color:"light"}},
+  { path: '/base/policies', exact: true, name: 'Policies', component : Policies, props:{tableName:"Policies", color:"light"}},
+  { path: '/base/employees', exact: true, name: 'Employees', component : Policies, props:{tableName:"Employees", color:"light"}}
+
+  
 ];
 
 export default routes;

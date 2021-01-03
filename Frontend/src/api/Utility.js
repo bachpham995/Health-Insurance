@@ -1,5 +1,5 @@
 export default class Utility {
-    static getModelHeader = (model) => {
+    static TableHeader = (model) => {
         switch (model) {
             case "InsuranceCompanies":
                 return ["insCompanyId", "insCompanyName", "phone"]
