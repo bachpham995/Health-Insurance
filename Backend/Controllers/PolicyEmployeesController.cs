@@ -30,7 +30,7 @@ namespace HealthInsuranceWebServer.Controllers
 
         // GET: api/PolicyEmployees/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<PolicyEmployee>> GetPolicyEmployee(string id)
+        public async Task<ActionResult<PolicyEmployee>> GetPolicyEmployee(int id)
         {
             var policyEmployee = await _context.PolicyEmployee.FindAsync(id);
 
@@ -46,9 +46,9 @@ namespace HealthInsuranceWebServer.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPolicyEmployee(string id, PolicyEmployee policyEmployee)
+        public async Task<IActionResult> PutPolicyEmployee(int id, PolicyEmployee policyEmployee)
         {
-            if (id != policyEmployee.EmployeeId)
+            if (id != policyEmployee.Id)
             {
                 return BadRequest();
             }
@@ -81,28 +81,14 @@ namespace HealthInsuranceWebServer.Controllers
         public async Task<ActionResult<PolicyEmployee>> PostPolicyEmployee(PolicyEmployee policyEmployee)
         {
             _context.PolicyEmployee.Add(policyEmployee);
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateException)
-            {
-                if (PolicyEmployeeExists(policyEmployee.EmployeeId))
-                {
-                    return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
-            }
+            await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPolicyEmployee", new { id = policyEmployee.EmployeeId }, policyEmployee);
+            return CreatedAtAction("GetPolicyEmployee", new { id = policyEmployee.Id }, policyEmployee);
         }
 
         // DELETE: api/PolicyEmployees/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<PolicyEmployee>> DeletePolicyEmployee(string id)
+        public async Task<ActionResult<PolicyEmployee>> DeletePolicyEmployee(int id)
         {
             var policyEmployee = await _context.PolicyEmployee.FindAsync(id);
             if (policyEmployee == null)
@@ -116,9 +102,9 @@ namespace HealthInsuranceWebServer.Controllers
             return policyEmployee;
         }
 
-        private bool PolicyEmployeeExists(string id)
+        private bool PolicyEmployeeExists(int id)
         {
-            return _context.PolicyEmployee.Any(e => e.EmployeeId == id);
+            return _context.PolicyEmployee.Any(e => e.Id == id);
         }
     }
 }

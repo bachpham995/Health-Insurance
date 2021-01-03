@@ -12,48 +12,48 @@ namespace HealthInsuranceWebServer.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AddressesController : ControllerBase
+    public class NotificationsController : ControllerBase
     {
         private readonly HealthInsuranceWebServerContext _context;
 
-        public AddressesController(HealthInsuranceWebServerContext context)
+        public NotificationsController(HealthInsuranceWebServerContext context)
         {
             _context = context;
         }
 
-        // GET: api/Addresses
+        // GET: api/Notifications
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Address>>> GetAddress()
+        public async Task<ActionResult<IEnumerable<Notification>>> GetNotification()
         {
-            return await _context.Address.ToListAsync();
+            return await _context.Notification.ToListAsync();
         }
 
-        // GET: api/Addresses/5
+        // GET: api/Notifications/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Address>> GetAddress(int id)
+        public async Task<ActionResult<Notification>> GetNotification(int id)
         {
-            var address = await _context.Address.FindAsync(id);
+            var notification = await _context.Notification.FindAsync(id);
 
-            if (address == null)
+            if (notification == null)
             {
                 return NotFound();
             }
 
-            return address;
+            return notification;
         }
 
-        // PUT: api/Addresses/5
+        // PUT: api/Notifications/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutAddress(int id, Address address)
+        public async Task<IActionResult> PutNotification(int id, Notification notification)
         {
-            if (id != address.AddressId)
+            if (id != notification.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(address).State = EntityState.Modified;
+            _context.Entry(notification).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +61,7 @@ namespace HealthInsuranceWebServer.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!AddressExists(id))
+                if (!NotificationExists(id))
                 {
                     return NotFound();
                 }
@@ -74,37 +74,37 @@ namespace HealthInsuranceWebServer.Controllers
             return NoContent();
         }
 
-        // POST: api/Addresses
+        // POST: api/Notifications
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Address>> PostAddress(Address address)
+        public async Task<ActionResult<Notification>> PostNotification(Notification notification)
         {
-            _context.Address.Add(address);
+            _context.Notification.Add(notification);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAddress", new { id = address.AddressId }, address);
+            return CreatedAtAction("GetNotification", new { id = notification.Id }, notification);
         }
 
-        // DELETE: api/Addresses/5
+        // DELETE: api/Notifications/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Address>> DeleteAddress(int id)
+        public async Task<ActionResult<Notification>> DeleteNotification(int id)
         {
-            var address = await _context.Address.FindAsync(id);
-            if (address == null)
+            var notification = await _context.Notification.FindAsync(id);
+            if (notification == null)
             {
                 return NotFound();
             }
 
-            _context.Address.Remove(address);
+            _context.Notification.Remove(notification);
             await _context.SaveChangesAsync();
 
-            return address;
+            return notification;
         }
 
-        private bool AddressExists(int id)
+        private bool NotificationExists(int id)
         {
-            return _context.Address.Any(e => e.AddressId == id);
+            return _context.Notification.Any(e => e.Id == id);
         }
     }
 }

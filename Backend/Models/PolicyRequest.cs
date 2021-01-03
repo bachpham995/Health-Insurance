@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel;
 
 namespace HealthInsuranceWebServer.Models
 {
@@ -11,27 +13,23 @@ namespace HealthInsuranceWebServer.Models
         [Key]
         public int RequestId { get; set; }
 
-        [Key]
+        public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
 
-        public string EmployeeId { get; set; }
-
+        public int PolicyId { get; set; }
         public Policy Policy { get; set; }
 
-        public int PolicyId { get; set; }
+        [Timestamp]
+        public byte[] RequestDate { get; set; }
 
-        public DateTime RequestDate { get; set; }
-
+        [DefaultValue("false")]
         public bool Status { get; set; }
 
+        [MaxLength(255)]
         public string Note { get; set; }
 
         public float Emi { get; set; }
 
         public float Amount { get; set; }
-
-        //public virtual PolicyApproval PolicyApproval { get; set; }
-
-        //public int ApprovalId { get; set; }
     }
 }
