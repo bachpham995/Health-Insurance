@@ -6,6 +6,10 @@ import {
   CCardBody,
   CCardHeader,
   CCollapse,
+  CDropdownToggle,
+  CDropdownMenu,
+  CDropdownItem,
+  CDropdown,
   CCol,
   CDataTable,
   CRow
@@ -64,7 +68,7 @@ const DataTable = ({ tableName, tableQuery, color }) => {
             <CCardHeader>
               <CButton size="m" color="success" className="ml-1">
                 New
-              </CButton>  
+              </CButton>
             </CCardHeader>
             <CCardBody>
               <CDataTable
@@ -72,7 +76,7 @@ const DataTable = ({ tableName, tableQuery, color }) => {
                 fields={fields}
                 hover
                 //striped
-                bordered 
+                bordered
                 dark={color !== "light"}
                 sorter
                 size="sm"
@@ -89,38 +93,19 @@ const DataTable = ({ tableName, tableQuery, color }) => {
                       </td>
                     ),
                   'show_details':
-                    (item, index) => (
-                      <td className="py-2">
-                        <CButton
-                          color="primary"
-                          variant="outline"
-                          shape="square"
-                          size="sm"
-                          onClick={() => { toggleDetails(index) }}
-                        >
-                          {details.includes(index) ? 'Hide' : 'Show'}
-                        </CButton>
-                      </td>
-                    ),
-                  'details':
-                    (item, index) => (
-                      <CCollapse show={details.includes(index)}>
-                        <CCardBody>
-                          <h4>
-                            {item.username}
-                          </h4>
-                          {/* <p className="text-muted">User since: {item.registered}</p> */}
-                          <CButton size="sm" color="warning" className="ml-1">
-                            Details
-                          </CButton>
-                          <CButton size="sm" color="info" className="ml-1">
-                            Edit
-                          </CButton>
-                          <CButton size="sm" color="danger" className="ml-1">
-                            Delete
-                            </CButton>
-                        </CCardBody>
-                      </CCollapse>
+                    (item) => (<>
+                      <CDropdown className="mt-2">
+                        <CDropdownToggle caret color="primary" size="sm">
+                          Actions
+                        </CDropdownToggle>
+                        <CDropdownMenu>
+                          <CDropdownItem width="2%">Edit</CDropdownItem>
+                          <CDropdownItem width="2%">Details</CDropdownItem>
+                          <CDropdownItem width="2%">Remove</CDropdownItem>
+                          {/* <CDropdownItem divider /> */}
+                        </CDropdownMenu>
+                      </CDropdown>
+                    </>
                     )
                 }
                 }
