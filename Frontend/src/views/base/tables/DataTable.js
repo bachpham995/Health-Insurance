@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import {
+  CBadge,
   CCard,
   CCardBody,
   CCardHeader,
@@ -10,6 +11,15 @@ import {
 import AxiosClient from "src/api/AxiosClient"
 import Utility from 'src/api/Utility'
 
+const getBadge = status => {
+  switch (status) {
+    case 'Active': return 'success'
+    case 'Inactive': return 'secondary'
+    case 'Pending': return 'warning'
+    case 'Banned': return 'danger'
+    default: return 'primary'
+  }
+}
 const DataTable = ({tableName, color}) => {
   const [fields, setFields] = useState(Utility.TableHeader(tableName));
   const [tableData, setTableData] = useState([]);
@@ -19,6 +29,7 @@ const DataTable = ({tableName, color}) => {
         const params = {};
         const response = await AxiosClient.get("/" + tableName, params);
         console.log('Fetch data successfully: ', response);
+        console.log("Data Header:", Object.keys(response[0]));
         setTableData(response);
       } catch (error) {
         console.log('Failed to fetch data list: ', error);
@@ -47,6 +58,17 @@ const DataTable = ({tableName, color}) => {
               itemsPerPage={5}
               pagination
               columnFilter
+              scopedSlots = {{
+                'status':
+                  (item)=>(
+                    <td>
+                      <CBadge color={getBadge(item.status ? "Active":"Inactive")}>
+                        {item.status ? "Active":"Inactive"}
+                      </CBadge>
+                    </td>
+                  )
+
+              }}
             />
             </CCardBody>
           </CCard>

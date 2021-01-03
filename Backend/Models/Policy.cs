@@ -42,9 +42,9 @@ namespace HealthInsuranceWebServer.Models
         public InsuranceCompany InsCompany { get; set; }
 
         public ICollection<PolicyEmployee> PolicyEmployees { get; set; }
-
-        [ForeignKey("Hospitals")]
+        
         public int HospitalId { get; set; }
+
         public Hospital Hospitals { get; set; }
 
         public ICollection<PolicyRequest> PolicyRequests { get; set; }

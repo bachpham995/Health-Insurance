@@ -19,6 +19,16 @@
     <Compile Remove="Migrations\20210102092418_UpdateDB#2.Designer.cs" />
     <Compile Remove="Migrations\20210103092550_Initial.cs" />
     <Compile Remove="Migrations\20210103092550_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20210103124251_Initial.cs" />
+    <Compile Remove="Migrations\20210103124251_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20210103124655_Initial.cs" />
+    <Compile Remove="Migrations\20210103124655_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20210103124938_Inta.cs" />
+    <Compile Remove="Migrations\20210103124938_Inta.Designer.cs" />
+    <Compile Remove="Migrations\20210103125927_init.cs" />
+    <Compile Remove="Migrations\20210103125927_init.Designer.cs" />
+    <Compile Remove="Migrations\20210103130355_init.cs" />
+    <Compile Remove="Migrations\20210103130355_init.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

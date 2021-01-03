@@ -325,11 +325,16 @@ const _admin_nav = [
         _tag: 'CSidebarNavItem',
         name: 'Company',
         to: '/base/companies',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Hospital',
+        to: '/base/hospitals',
       },{
         _tag: 'CSidebarNavItem',
         name: 'Policy',
         to: '/base/policies',
-      },
+      },      
       {
         _tag: 'CSidebarNavItem',
         name: 'Employee',
