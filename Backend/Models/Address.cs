@@ -1,32 +1,24 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HealthInsuranceWebServer.Models
 {
+    [ComplexType]
     public class Address
     {
-        [Key]
-        public int AddressId { get; set; }
-
+        [MaxLength(255)]
         public string Street { get; set; }
-
+        [MaxLength(50)]
         public string District { get; set; }
-
+        [MaxLength(50)]
         public string City { get; set; }
-
+        [MaxLength(50)]
         public string Country { get; set; }
-
+        [MaxLength(10)]
         public string PostalCode { get; set; }
-
-        //public virtual Employee Employee { get; set; }
-
-       // public string EmployeeId { get; set; }
-
-        //public virtual InsuranceCompany InsuranceCompany { get; set; }
-
-        //public int InsCompanyId { get; set; }
-
-        //public virtual Hospital Hospital { get; set; }
-
-       // public int HospitalId { get; set; }
     }
 }

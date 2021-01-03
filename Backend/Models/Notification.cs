@@ -1,35 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace HealthInsuranceWebServer.Models
 {
-    public class PolicyEmployee
+    public class Notification
     {
         [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
         public Employee Employee { get; set; }
 
-        [ForeignKey("Policy")]
-        public int PolicyId { get; set; }
-        public Policy Policy { get; set; }
+        [ForeignKey("Admin")]
+        public string AdminId { get; set; }
+        public Admin Admin { get; set; }
 
-        public int Duration { get; set; }
+        [Column(TypeName = "text")]
+        public string Description { get; set; }
 
-        public DateTime EffectiveDate { get; set; }
-
-        public DateTime ExpiredDate { get; set; }
-
-        public float Amount { get; set; }
-
-        public float Emi { get; set; }
-
+        [DataType(DataType.Date)]
+        public DateTime Date { get; set; }
         public bool Status { get; set; }
     }
 }

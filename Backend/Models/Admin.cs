@@ -4,21 +4,19 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
 
 namespace HealthInsuranceWebServer.Models
-{
-    public class Admin : IdentityUser
+{ 
+    public class Admin
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
-        [StringLength(50, MinimumLength = 2)]
+        [MaxLength(255)]
         public string Username { get; set; }
 
-        [DataType(DataType.Password)]
-        [StringLength(50, MinimumLength = 2)]
+        [MaxLength(255)]
         public string Password { get; set; }
 
-        
+        public ICollection<Notification> Notification { get; set; }
     }
 }
