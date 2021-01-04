@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import {
   CButton,
   CCard,
@@ -63,10 +63,16 @@ const Company = ({ mode }) => {
                       </CCol>
                     </CRow>
                     <CRow>
-                      <CCol xs="12">
+                      <CCol xs="6">
                         <CFormGroup>
                           <CLabel htmlFor="phone">Phone</CLabel>
                           <CInput id="phone" type="tel" placeholder="Phone Number" required />
+                        </CFormGroup>
+                      </CCol>
+                      <CCol xs="6">
+                        <CFormGroup>
+                          <CLabel htmlFor="email">Email</CLabel>
+                          <CInput id="email" type="tel" placeholder="Email address" required />
                         </CFormGroup>
                       </CCol>
                     </CRow>
@@ -112,6 +118,12 @@ const Company = ({ mode }) => {
                           <CLabel htmlFor="country">Country</CLabel>
                           <CInput id="country" type="url" placeholder="Country" required />
                         </CFormGroup>
+                      </CCol>
+                    </CRow>
+                    <CRow>
+                      <CCol xs="12">
+                        <CLabel htmlFor="image">Image</CLabel>
+                        <CInput id="image" type="file" onChange={onHandleChangeImage} placeholder="Company Image" required />
                       </CCol>
                     </CRow>
                   </CCardBody>
