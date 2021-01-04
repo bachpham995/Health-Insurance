@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HealthInsuranceWebServer.Migrations
 {
     [DbContext(typeof(HealthInsuranceWebServerContext))]
-    [Migration("20210104124342_Initial")]
-    partial class Initial
+    [Migration("20210104132425_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -108,7 +108,7 @@ namespace HealthInsuranceWebServer.Migrations
                             DoB = new DateTime(1996, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "phatltuit@gmail.com",
                             FName = "Phat",
-                            JoinDate = new DateTime(2031, 1, 4, 19, 43, 42, 381, DateTimeKind.Local).AddTicks(3340),
+                            JoinDate = new DateTime(2031, 1, 4, 20, 24, 24, 808, DateTimeKind.Local).AddTicks(1844),
                             LName = "Luu Trong",
                             Password = "123",
                             Phone = "058256332X",
@@ -123,7 +123,7 @@ namespace HealthInsuranceWebServer.Migrations
                             DoB = new DateTime(1996, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "bachpham@gmail.com",
                             FName = "Bach",
-                            JoinDate = new DateTime(2031, 1, 4, 19, 43, 42, 382, DateTimeKind.Local).AddTicks(2762),
+                            JoinDate = new DateTime(2031, 1, 4, 20, 24, 24, 810, DateTimeKind.Local).AddTicks(6437),
                             LName = "Pham Xuan",
                             Password = "123456789",
                             Phone = "012345678X",
@@ -138,7 +138,7 @@ namespace HealthInsuranceWebServer.Migrations
                             DoB = new DateTime(1996, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "nguyenvuhoanghoa@gmail.com",
                             FName = "Hoa",
-                            JoinDate = new DateTime(2031, 1, 4, 19, 43, 42, 382, DateTimeKind.Local).AddTicks(2797),
+                            JoinDate = new DateTime(2031, 1, 4, 20, 24, 24, 810, DateTimeKind.Local).AddTicks(6480),
                             LName = "Nguyen Vu Hoang",
                             Password = "123456789",
                             Phone = "01232278X",

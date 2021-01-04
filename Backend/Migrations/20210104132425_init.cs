@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HealthInsuranceWebServer.Migrations
 {
-    public partial class Initial : Migration
+    public partial class init : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -275,9 +275,9 @@ namespace HealthInsuranceWebServer.Migrations
                 columns: new[] { "EmployeeId", "Designation", "DoB", "Email", "FName", "JoinDate", "LName", "Password", "Phone", "Retired", "Status", "Username", "City", "Country", "District", "PostalCode", "Street" },
                 values: new object[,]
                 {
-                    { 1, "Senior Cleaner", new DateTime(1996, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "phatltuit@gmail.com", "Phat", new DateTime(2031, 1, 4, 19, 43, 42, 381, DateTimeKind.Local).AddTicks(3340), "Luu Trong", "123", "058256332X", false, false, "phatltuit", "Ho Chi Minh City", "Vietnam", "Hóc Môn", "", "Nguyễn Ảnh Thủ, Bà Điểm" },
-                    { 2, "Junior Cleaner", new DateTime(1996, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "bachpham@gmail.com", "Bach", new DateTime(2031, 1, 4, 19, 43, 42, 382, DateTimeKind.Local).AddTicks(2762), "Pham Xuan", "123456789", "012345678X", false, false, "bachpham", "Ho Chi Minh City", "Vietnam", "Quận 12", "", "Tân Thới Nhất" },
-                    { 3, "Junior Cleaner", new DateTime(1996, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "nguyenvuhoanghoa@gmail.com", "Hoa", new DateTime(2031, 1, 4, 19, 43, 42, 382, DateTimeKind.Local).AddTicks(2797), "Nguyen Vu Hoang", "123456789", "01232278X", false, false, "nguyenvuhoanghoa", "Ho Chi Minh City", "Vietnam", "Quận Bình Thạnh", "", "Xô Viết Nghệ Tĩnh" }
+                    { 1, "Senior Cleaner", new DateTime(1996, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "phatltuit@gmail.com", "Phat", new DateTime(2031, 1, 4, 20, 24, 24, 808, DateTimeKind.Local).AddTicks(1844), "Luu Trong", "123", "058256332X", false, false, "phatltuit", "Ho Chi Minh City", "Vietnam", "Hóc Môn", "", "Nguyễn Ảnh Thủ, Bà Điểm" },
+                    { 2, "Junior Cleaner", new DateTime(1996, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "bachpham@gmail.com", "Bach", new DateTime(2031, 1, 4, 20, 24, 24, 810, DateTimeKind.Local).AddTicks(6437), "Pham Xuan", "123456789", "012345678X", false, false, "bachpham", "Ho Chi Minh City", "Vietnam", "Quận 12", "", "Tân Thới Nhất" },
+                    { 3, "Junior Cleaner", new DateTime(1996, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified), "nguyenvuhoanghoa@gmail.com", "Hoa", new DateTime(2031, 1, 4, 20, 24, 24, 810, DateTimeKind.Local).AddTicks(6480), "Nguyen Vu Hoang", "123456789", "01232278X", false, false, "nguyenvuhoanghoa", "Ho Chi Minh City", "Vietnam", "Quận Bình Thạnh", "", "Xô Viết Nghệ Tĩnh" }
                 });
 
             migrationBuilder.InsertData(
