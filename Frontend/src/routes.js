@@ -3,6 +3,7 @@ import React from 'react';
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 const Tables = React.lazy(() => import('./views/base/tables/Tables'));
 const DataTable = React.lazy(() => import('./views/base/tables/DataTable'));
+const Company = React.lazy(()=>import('./views/custom/Company'));
 
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'));
 const Cards = React.lazy(() => import('./views/base/cards/Cards'));
@@ -39,7 +40,7 @@ const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const User = React.lazy(() => import('./views/users/User'));
 
-const routes = [  
+const routes = [
   { path: '/', exact: true, name: 'Home' },
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   { path: '/theme', name: 'Theme', component: Colors, exact: true },
@@ -80,10 +81,11 @@ const routes = [
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
-  { path: '/base/companies', exact: true, name: 'Companies', component: DataTable, props:{tableName:"Insurance Companies", tableQuery: "InsuranceCompanies",color:"light"}},
-  { path: '/base/policies', exact: true, name: 'Policies', component : DataTable, props:{tableName:"Policies", tableQuery: "Policies",color:"light"}},
-  { path: '/base/hospitals', exact: true, name: 'Hospitals', component : DataTable, props:{tableName:"Hospitals", tableQuery: "Hospitals",color:"light"}},
-  { path: '/base/employees', exact: true, name: 'Employees', component : DataTable, props:{tableName:"Employees", tableQuery: "Employees", color:"light"}}
+  { path: '/admin/companies', exact: true, name: 'Companies', component: DataTable, props:{tableName:"Insurance Companies", tableQuery: "InsuranceCompanies",color:"light"}},
+  { path: '/admin/policies', exact: true, name: 'Policies', component : DataTable, props:{tableName:"Policies", tableQuery: "Policies",color:"light"}},
+  { path: '/admin/hospitals', exact: true, name: 'Hospitals', component : DataTable, props:{tableName:"Hospitals", tableQuery: "Hospitals",color:"light"}},
+  { path: '/admin/employees', exact: true, name: 'Employees', component : DataTable, props:{tableName:"Employees", tableQuery: "Employees", color:"light"}},
+  {path: '/admin/companies/create', exact: true, name: 'New Companies', component : Company, props:{mode : "create"}}
 ];
 
 export default routes;

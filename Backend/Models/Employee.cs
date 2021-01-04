@@ -11,7 +11,7 @@ namespace HealthInsuranceWebServer.Models
     public class Employee
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required(ErrorMessage = "Employee Id can't blank")]
         public int EmployeeId { get; set; }
 

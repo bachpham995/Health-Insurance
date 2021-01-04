@@ -44,7 +44,6 @@ namespace HealthInsuranceWebServer.Models
         public ICollection<PolicyEmployee> PolicyEmployees { get; set; }
         
         public int HospitalId { get; set; }
-
         public Hospital Hospitals { get; set; }
 
         public ICollection<PolicyRequest> PolicyRequests { get; set; }

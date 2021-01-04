@@ -2,41 +2,41 @@ export default class Utility {
     static TableHeader = (model) => {
         switch (model) {
             case "InsuranceCompanies":
-                return ["insCompanyId", "insCompanyName", "phone",{
-                    key: 'show_details',
-                    label: '',
-                    _style: { width: '5%' },
-                    sorter: false,
-                    filter: false
-                  }]
+                return [{
+                  key: 'show_details',
+                  label: 'Actions',
+                  _style: { width: '5%' },
+                  sorter: false,
+                  filter: false
+                },"insCompanyId", "insCompanyName", "phone"]
 
             case "Policies":
-                return ["policyId", "policyNumber", "policyName",{
-                    key: 'show_details',
-                    label: '',
-                    _style: { width: '5%' },
-                    sorter: false,
-                    filter: false
-                  }];
+                return [{
+                  key: 'show_details',
+                  label: 'Actions',
+                  _style: { width: '5%' },
+                  sorter: false,
+                  filter: false
+                },"policyId", "policyNumber", "policyName"];
 
             case "Hospitals":
-                return ["hospitalId", "hospitalName", "phone",{
-                    key: 'show_details',
-                    label: '',
-                    _style: { width: '5%' },
-                    sorter: false,
-                    filter: false
-                  }];
+                return [{
+                  key: 'show_details',
+                  label: 'Actions',
+                  _style: { width: '5%' },
+                  sorter: false,
+                  filter: false
+                },"hospitalId", "hospitalName", "phone"];
 
             case "Employees":
-                return ["employeeId", "fName", "lName", "designation", "status",{
-                    key: 'show_details',
-                    label: '',
-                    _style: { width: '5%' },
-                    sorter: false,
-                    filter: false
-                  }];
-        
+                return [{
+                  key: 'show_details',
+                  label: 'Actions',
+                  _style: { width: '5%' },
+                  sorter: false,
+                  filter: false
+                },"employeeId", "fName", "lName", "designation", "status"];
+
             default:
                 return [];
         }

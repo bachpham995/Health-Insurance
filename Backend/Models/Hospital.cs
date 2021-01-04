@@ -11,7 +11,7 @@ namespace HealthInsuranceWebServer.Models
     public class Hospital
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int HospitalId { get; set; }
 
         [Required(ErrorMessage = "Hospital Name can't blank!")]

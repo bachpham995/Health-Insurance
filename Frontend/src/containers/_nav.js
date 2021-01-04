@@ -315,31 +315,31 @@ const _admin_nav = [
     _children: ['ADMIN']
   },
   {
-    
+
     _tag: 'CSidebarNavDropdown',
     name: 'Management',
-    route: '/base',
+    route: '/admin',
     icon: 'cil-layers',
     _children: [
       {
         _tag: 'CSidebarNavItem',
         name: 'Company',
-        to: '/base/companies',
+        to: '/admin/companies',
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Hospital',
-        to: '/base/hospitals',
+        to: '/admin/hospitals',
       },{
         _tag: 'CSidebarNavItem',
         name: 'Policy',
-        to: '/base/policies',
-      },      
+        to: '/admin/policies',
+      },
       {
         _tag: 'CSidebarNavItem',
         name: 'Employee',
-        to: '/base/employees',
+        to: '/admin/employees',
       }]
   }
 ];
-export default _admin_nav
+export default _nav
