@@ -11,7 +11,6 @@ namespace HealthInsuranceWebServer.Models
     public class Policy
     {
         [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int PolicyId { get; set; }
 
         [MaxLength(15)]
