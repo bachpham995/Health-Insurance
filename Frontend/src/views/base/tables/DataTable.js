@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { useLocation } from 'react-router-dom'
 import {
   CButton,
   CBadge,
@@ -13,11 +14,11 @@ import {
   CCol,
   CDataTable,
   CRow,
-  CWidgetIcon
+  CWidgetIcon,
+  CLink
 } from '@coreui/react'
 import AxiosClient from "src/api/AxiosClient"
 import Utility from 'src/api/Utility'
-import CIcon from '@coreui/icons-react'
 
 const getBadge = status => {
   switch (status) {
@@ -32,6 +33,7 @@ const getBadge = status => {
 const DataTable = ({ tableName, tableQuery, color }) => {
   const [fields, setFields] = useState(Utility.TableHeader(tableQuery));
   const [tableData, setTableData] = useState([]);
+  const [newRecordRoute, setNewRecordRoute] = useState(Utility.GetRecordAction(tableQuery))
 
   useEffect(() => {
     const fetchDataList = async () => {
@@ -47,6 +49,7 @@ const DataTable = ({ tableName, tableQuery, color }) => {
     }
     fetchDataList();
   }, []);
+
   return (
     <>
       <CRow>
@@ -56,8 +59,8 @@ const DataTable = ({ tableName, tableQuery, color }) => {
               <h3>{tableName}</h3>
             </CCardHeader>
             <CCardHeader>
-              <CLink >
-                <CButton size="lg" variant="outline"  color="success" className="ml-1">
+              <CLink to={Utility.Create(tableQuery)} >
+                <CButton size="lg" variant="outline" color="success" className="ml-1">
                   Add
                 </CButton>
               </CLink>
@@ -95,15 +98,22 @@ const DataTable = ({ tableName, tableQuery, color }) => {
                           Actions
                         </CDropdownToggle>
                         <CDropdownMenu placement='right'>
-                        <CButton size="sm" variant="outline"  color="info" className="ml-1">
-                          Info
-                        </CButton>
-                        <CButton size="sm" variant="outline"  color="warning" className="ml-1">
-                          Edit
-                        </CButton>
-                        <CButton size="sm" variant="outline"  color="danger" className="ml-1 mr-1">
-                          Remove
-                        </CButton>
+                          <CLink to={Utility.Read(tableQuery, item)}>
+                            <CButton size="sm" variant="outline" color="info" className="ml-1">
+                              Info
+                            </CButton>
+                          </CLink>
+                          <CLink to={Utility.Edit(tableQuery, item)}>
+                            <CButton size="sm" variant="outline" color="warning" className="ml-1">
+                                Edit
+                            </CButton>
+                          </CLink>
+                          <CLink>
+                            <CButton size="sm" variant="outline" color="danger" className="ml-1 mr-1">
+                              Remove
+                            </CButton>
+                          </CLink>
+
                         </CDropdownMenu>
                       </CDropdown>
                     </>

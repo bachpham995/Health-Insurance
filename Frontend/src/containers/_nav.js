@@ -324,22 +324,27 @@ const _admin_nav = [
       {
         _tag: 'CSidebarNavItem',
         name: 'Company',
-        to: '/admin/companies',
+        to: '/admin/companies'
       },
+      // {
+      //   _tag: 'CSidebarNavItem',
+      //   name: 'New Company',
+      //   to: '/admin/companies/create',
+      // },
       {
         _tag: 'CSidebarNavItem',
         name: 'Hospital',
-        to: '/admin/hospitals',
+        to: '/admin/hospitals'
       },{
         _tag: 'CSidebarNavItem',
         name: 'Policy',
-        to: '/admin/policies',
+        to: '/admin/policies'
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Employee',
-        to: '/admin/employees',
+        to: '/admin/employees'
       }]
   }
 ];
-export default _nav
+export default _admin_nav;
