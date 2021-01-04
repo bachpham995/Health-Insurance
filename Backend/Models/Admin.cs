@@ -10,7 +10,6 @@ namespace HealthInsuranceWebServer.Models
     public class Admin
     {
         [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.None)]
         [MaxLength(255)]
         public string Username { get; set; }
 

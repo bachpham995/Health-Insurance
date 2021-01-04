@@ -106,7 +106,7 @@ namespace HealthInsuranceWebServer.Migrations
                             DoB = new DateTime(1996, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "phatltuit@gmail.com",
                             FName = "Phat",
-                            JoinDate = new DateTime(2031, 1, 4, 14, 29, 44, 784, DateTimeKind.Local).AddTicks(5217),
+                            JoinDate = new DateTime(2031, 1, 4, 19, 43, 42, 381, DateTimeKind.Local).AddTicks(3340),
                             LName = "Luu Trong",
                             Password = "123",
                             Phone = "058256332X",
@@ -121,7 +121,7 @@ namespace HealthInsuranceWebServer.Migrations
                             DoB = new DateTime(1996, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "bachpham@gmail.com",
                             FName = "Bach",
-                            JoinDate = new DateTime(2031, 1, 4, 14, 29, 44, 787, DateTimeKind.Local).AddTicks(4091),
+                            JoinDate = new DateTime(2031, 1, 4, 19, 43, 42, 382, DateTimeKind.Local).AddTicks(2762),
                             LName = "Pham Xuan",
                             Password = "123456789",
                             Phone = "012345678X",
@@ -136,7 +136,7 @@ namespace HealthInsuranceWebServer.Migrations
                             DoB = new DateTime(1996, 5, 30, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "nguyenvuhoanghoa@gmail.com",
                             FName = "Hoa",
-                            JoinDate = new DateTime(2031, 1, 4, 14, 29, 44, 787, DateTimeKind.Local).AddTicks(4138),
+                            JoinDate = new DateTime(2031, 1, 4, 19, 43, 42, 382, DateTimeKind.Local).AddTicks(2797),
                             LName = "Nguyen Vu Hoang",
                             Password = "123456789",
                             Phone = "01232278X",
@@ -187,6 +187,10 @@ namespace HealthInsuranceWebServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("HospitalName")
                         .IsRequired()
@@ -287,10 +291,14 @@ namespace HealthInsuranceWebServer.Migrations
 
             modelBuilder.Entity("HealthInsuranceWebServer.Models.InsuranceCompany", b =>
                 {
-                    b.Property<int>("InsCompanyId")
+                    b.Property<int>("InsuranceCompanyId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(100)")
+                        .HasMaxLength(100);
 
                     b.Property<string>("Img")
                         .HasColumnType("nvarchar(255)")
@@ -312,14 +320,14 @@ namespace HealthInsuranceWebServer.Migrations
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
-                    b.HasKey("InsCompanyId");
+                    b.HasKey("InsuranceCompanyId");
 
                     b.ToTable("InsuranceCompany");
 
                     b.HasData(
                         new
                         {
-                            InsCompanyId = 1,
+                            InsuranceCompanyId = 1,
                             InsCompanyName = "Công ty Bảo Việt Nhân Thọ",
                             Phone = "028-39-101-660",
                             Retired = false,
@@ -327,7 +335,7 @@ namespace HealthInsuranceWebServer.Migrations
                         },
                         new
                         {
-                            InsCompanyId = 2,
+                            InsuranceCompanyId = 2,
                             InsCompanyName = "Công ty TNHH bảo hiểm nhân thọ Prudential",
                             Phone = "(028)-39-101-660",
                             Retired = false,
@@ -335,7 +343,7 @@ namespace HealthInsuranceWebServer.Migrations
                         },
                         new
                         {
-                            InsCompanyId = 3,
+                            InsuranceCompanyId = 3,
                             InsCompanyName = "Công ty TNHH Manulife",
                             Phone = "1234-5678-1011",
                             Retired = false,
@@ -343,7 +351,7 @@ namespace HealthInsuranceWebServer.Migrations
                         },
                         new
                         {
-                            InsCompanyId = 4,
+                            InsuranceCompanyId = 4,
                             InsCompanyName = "Công ty TNHH Bảo hiểm Nhân thọ Dai-ichi",
                             Phone = "028-3810-0888",
                             Retired = false,
@@ -351,7 +359,7 @@ namespace HealthInsuranceWebServer.Migrations
                         },
                         new
                         {
-                            InsCompanyId = 5,
+                            InsuranceCompanyId = 5,
                             InsCompanyName = "Công ty TNHH bảo hiểm nhân thọ AIA",
                             Phone = "028-3812-2777",
                             Retired = false,
@@ -359,7 +367,7 @@ namespace HealthInsuranceWebServer.Migrations
                         },
                         new
                         {
-                            InsCompanyId = 6,
+                            InsuranceCompanyId = 6,
                             InsCompanyName = "Công ty TNHH Bảo hiểm Nhân thọ Sun Life",
                             Phone = "028-629-85-888",
                             Retired = false,
@@ -367,7 +375,7 @@ namespace HealthInsuranceWebServer.Migrations
                         },
                         new
                         {
-                            InsCompanyId = 7,
+                            InsuranceCompanyId = 7,
                             InsCompanyName = "Công ty TNHH bảo hiểm nhân thọ Generali",
                             Phone = "1234-5678-1011",
                             Retired = false,
@@ -375,7 +383,7 @@ namespace HealthInsuranceWebServer.Migrations
                         },
                         new
                         {
-                            InsCompanyId = 8,
+                            InsuranceCompanyId = 8,
                             InsCompanyName = "Công ty TNHH Bảo hiểm Nhân thọ Chubb",
                             Phone = "028-3827-8989",
                             Retired = false,
@@ -383,7 +391,7 @@ namespace HealthInsuranceWebServer.Migrations
                         },
                         new
                         {
-                            InsCompanyId = 9,
+                            InsuranceCompanyId = 9,
                             InsCompanyName = "Công ty TNHH Bảo hiểm Hanwha Life",
                             Phone = "028-3914-9100",
                             Retired = false,
@@ -391,7 +399,7 @@ namespace HealthInsuranceWebServer.Migrations
                         },
                         new
                         {
-                            InsCompanyId = 10,
+                            InsuranceCompanyId = 10,
                             InsCompanyName = "Công ty TNHH bảo hiểm nhân thọ Aviva",
                             Phone = "1900-633-369",
                             Retired = false,
@@ -731,22 +739,27 @@ namespace HealthInsuranceWebServer.Migrations
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                             b1.Property<string>("City")
+                                .HasColumnName("City")
                                 .HasColumnType("nvarchar(50)")
                                 .HasMaxLength(50);
 
                             b1.Property<string>("Country")
+                                .HasColumnName("Country")
                                 .HasColumnType("nvarchar(50)")
                                 .HasMaxLength(50);
 
                             b1.Property<string>("District")
+                                .HasColumnName("District")
                                 .HasColumnType("nvarchar(50)")
                                 .HasMaxLength(50);
 
                             b1.Property<string>("PostalCode")
+                                .HasColumnName("PostalCode")
                                 .HasColumnType("nvarchar(10)")
                                 .HasMaxLength(10);
 
                             b1.Property<string>("Street")
+                                .HasColumnName("Street")
                                 .HasColumnType("nvarchar(255)")
                                 .HasMaxLength(255);
 
@@ -756,6 +769,35 @@ namespace HealthInsuranceWebServer.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("EmployeeId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    EmployeeId = 1,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Hóc Môn",
+                                    PostalCode = "",
+                                    Street = "Nguyễn Ảnh Thủ, Bà Điểm"
+                                },
+                                new
+                                {
+                                    EmployeeId = 2,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận 12",
+                                    PostalCode = "",
+                                    Street = "Tân Thới Nhất"
+                                },
+                                new
+                                {
+                                    EmployeeId = 3,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận Bình Thạnh",
+                                    PostalCode = "",
+                                    Street = "Xô Viết Nghệ Tĩnh"
+                                });
                         });
                 });
 
@@ -778,22 +820,27 @@ namespace HealthInsuranceWebServer.Migrations
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                             b1.Property<string>("City")
+                                .HasColumnName("City")
                                 .HasColumnType("nvarchar(50)")
                                 .HasMaxLength(50);
 
                             b1.Property<string>("Country")
+                                .HasColumnName("Country")
                                 .HasColumnType("nvarchar(50)")
                                 .HasMaxLength(50);
 
                             b1.Property<string>("District")
+                                .HasColumnName("District")
                                 .HasColumnType("nvarchar(50)")
                                 .HasMaxLength(50);
 
                             b1.Property<string>("PostalCode")
+                                .HasColumnName("PostalCode")
                                 .HasColumnType("nvarchar(10)")
                                 .HasMaxLength(10);
 
                             b1.Property<string>("Street")
+                                .HasColumnName("Street")
                                 .HasColumnType("nvarchar(255)")
                                 .HasMaxLength(255);
 
@@ -803,6 +850,98 @@ namespace HealthInsuranceWebServer.Migrations
 
                             b1.WithOwner()
                                 .HasForeignKey("HospitalId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    HospitalId = 1,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận Bình Thạnh",
+                                    PostalCode = "72316",
+                                    Street = "1 Nơ Trang Long"
+                                },
+                                new
+                                {
+                                    HospitalId = 2,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận 5",
+                                    PostalCode = "72709",
+                                    Street = "215 Hồng Bàng"
+                                },
+                                new
+                                {
+                                    HospitalId = 3,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận 3",
+                                    PostalCode = "72406",
+                                    Street = "Nam Kỳ Khởi Nghĩa"
+                                },
+                                new
+                                {
+                                    HospitalId = 4,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận 3",
+                                    PostalCode = "72416",
+                                    Street = "Điện Biên Phủ"
+                                },
+                                new
+                                {
+                                    HospitalId = 5,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận 3",
+                                    PostalCode = "72414",
+                                    Street = "155B Trần Quốc Thảo"
+                                },
+                                new
+                                {
+                                    HospitalId = 6,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận 3",
+                                    PostalCode = "72417",
+                                    Street = "Điện Biên Phủ"
+                                },
+                                new
+                                {
+                                    HospitalId = 7,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận 1",
+                                    PostalCode = "71007",
+                                    Street = "33 Nguyễn Du"
+                                },
+                                new
+                                {
+                                    HospitalId = 8,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận 10",
+                                    PostalCode = "72510",
+                                    Street = "Sư Vạn Hạnh"
+                                },
+                                new
+                                {
+                                    HospitalId = 9,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận Phú Nhuận",
+                                    PostalCode = "72209",
+                                    Street = "60 - 60A Phan Xích Long"
+                                },
+                                new
+                                {
+                                    HospitalId = 10,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận Gò Vấp",
+                                    PostalCode = "71411",
+                                    Street = "32/2 Thống Nhất"
+                                });
                         });
                 });
 
@@ -810,37 +949,134 @@ namespace HealthInsuranceWebServer.Migrations
                 {
                     b.OwnsOne("HealthInsuranceWebServer.Models.Address", "Address", b1 =>
                         {
-                            b1.Property<int>("InsuranceCompanyInsCompanyId")
+                            b1.Property<int>("InsuranceCompanyId")
                                 .ValueGeneratedOnAdd()
                                 .HasColumnType("int")
                                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                             b1.Property<string>("City")
+                                .HasColumnName("City")
                                 .HasColumnType("nvarchar(50)")
                                 .HasMaxLength(50);
 
                             b1.Property<string>("Country")
+                                .HasColumnName("Country")
                                 .HasColumnType("nvarchar(50)")
                                 .HasMaxLength(50);
 
                             b1.Property<string>("District")
+                                .HasColumnName("District")
                                 .HasColumnType("nvarchar(50)")
                                 .HasMaxLength(50);
 
                             b1.Property<string>("PostalCode")
+                                .HasColumnName("PostalCode")
                                 .HasColumnType("nvarchar(10)")
                                 .HasMaxLength(10);
 
                             b1.Property<string>("Street")
+                                .HasColumnName("Street")
                                 .HasColumnType("nvarchar(255)")
                                 .HasMaxLength(255);
 
-                            b1.HasKey("InsuranceCompanyInsCompanyId");
+                            b1.HasKey("InsuranceCompanyId");
 
                             b1.ToTable("InsuranceCompany");
 
                             b1.WithOwner()
-                                .HasForeignKey("InsuranceCompanyInsCompanyId");
+                                .HasForeignKey("InsuranceCompanyId");
+
+                            b1.HasData(
+                                new
+                                {
+                                    InsuranceCompanyId = 1,
+                                    City = "Ha Noi",
+                                    Country = "Vietnam",
+                                    District = "Nam Từ Liêm",
+                                    PostalCode = "12014",
+                                    Street = "Phạm Hùng"
+                                },
+                                new
+                                {
+                                    InsuranceCompanyId = 2,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = " Quận 1",
+                                    PostalCode = "71006",
+                                    Street = "Tôn Đức Thắng"
+                                },
+                                new
+                                {
+                                    InsuranceCompanyId = 3,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận 7",
+                                    PostalCode = "72911",
+                                    Street = "75 Hoàng Văn Thái"
+                                },
+                                new
+                                {
+                                    InsuranceCompanyId = 4,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận Phú Nhuận",
+                                    PostalCode = "72206",
+                                    Street = "149-151 Nguyễn Văn Trỗi"
+                                },
+                                new
+                                {
+                                    InsuranceCompanyId = 5,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận 1",
+                                    PostalCode = "71007",
+                                    Street = "67 Lê Lợi"
+                                },
+                                new
+                                {
+                                    InsuranceCompanyId = 6,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận 1",
+                                    PostalCode = "71015",
+                                    Street = "5 Công Trường Mê Linh"
+                                },
+                                new
+                                {
+                                    InsuranceCompanyId = 7,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận 1",
+                                    PostalCode = "71011",
+                                    Street = "76 Lê Lai"
+                                },
+                                new
+                                {
+                                    InsuranceCompanyId = 8,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận 1",
+                                    PostalCode = "71015",
+                                    Street = "115 Nguyễn Huệ"
+                                },
+                                new
+                                {
+                                    InsuranceCompanyId = 9,
+                                    City = "Ho Chi Minh City",
+                                    Country = "Vietnam",
+                                    District = "Quận 1",
+                                    PostalCode = "71007",
+                                    Street = "81 - 85 Hàm Nghi"
+                                },
+                                new
+                                {
+                                    InsuranceCompanyId = 10,
+                                    City = "Ha Noi",
+                                    Country = "Vietnam",
+                                    District = "Quận Đống Đa",
+                                    PostalCode = "11508",
+                                    Street = "229 Tây Sơn"
+                                });
                         });
                 });
 
