@@ -33,7 +33,6 @@ namespace HealthInsuranceWebServer.Models
 
         [DefaultValue("false")]
         public bool Retired { get; set; }
-
         public ICollection<Policy> Policies { get; set; }
     }
 }

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HealthInsuranceWebServer.Data;
 using HealthInsuranceWebServer.Models;
+using Controllers;
 
 namespace HealthInsuranceWebServer.Controllers
 {
@@ -21,18 +22,28 @@ namespace HealthInsuranceWebServer.Controllers
             _context = context;
         }
 
+        [HttpPost("{file}")]
+        [AcceptVerbs("Post")]
+        [Route("UploadImage")]
+        public async Task<IActionResult> UploadImage(IFormFile file)
+        {
+            string imageDir = "/imgs/company";
+            await new ImageUpload().UploadFile(imageDir, file);
+            return Ok(imageDir + "/" + file.FileName);
+        }
+
         // GET: api/InsuranceCompanies
         [HttpGet]
         public async Task<ActionResult<IEnumerable<InsuranceCompany>>> GetInsuranceCompany()
         {
-            return await _context.InsuranceCompany.ToListAsync();
+            return await _context.InsuranceCompany.Where(elt=>!elt.Retired).ToListAsync();
         }
 
         // GET: api/InsuranceCompanies/5
         [HttpGet("{id}")]
         public async Task<ActionResult<InsuranceCompany>> GetInsuranceCompany(int id)
         {
-            var insuranceCompany = await _context.InsuranceCompany.FindAsync(id);
+            var insuranceCompany = await _context.InsuranceCompany.Where(elt=>!elt.Retired && elt.InsuranceCompanyId == id).FirstAsync();
 
             if (insuranceCompany == null)
             {
@@ -95,10 +106,9 @@ namespace HealthInsuranceWebServer.Controllers
             {
                 return NotFound();
             }
-
-            _context.InsuranceCompany.Remove(insuranceCompany);
+            insuranceCompany.Retired = true;
+            _context.InsuranceCompany.Update(insuranceCompany);
             await _context.SaveChangesAsync();
-
             return insuranceCompany;
         }
 

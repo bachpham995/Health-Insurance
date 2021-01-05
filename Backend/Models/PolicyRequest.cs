@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
-using System.ComponentModel.DataAnnotations;
 using System.ComponentModel;
 
 namespace HealthInsuranceWebServer.Models
@@ -20,7 +19,7 @@ namespace HealthInsuranceWebServer.Models
         public Policy Policy { get; set; }
 
         [Timestamp]
-        public byte[] RequestDate { get; set; }
+        public DateTime RequestDate { get; set; }
 
         [DefaultValue("false")]
         public bool Status { get; set; }

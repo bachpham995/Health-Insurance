@@ -1,5 +1,8 @@
 export default class Utility {
-  static RCKey(record){
+  static REACT_APP_API_URL = "http://localhost:6969/api";
+  static REACT_APP_SERVER_URL = "http://localhost:6969"
+
+  static RCKey(record) {
     return record[Object.keys(record)[0]];
   }
 
@@ -13,6 +16,31 @@ export default class Utility {
 
   static Read = (model, record) => {
     return this.GetRecordAction(model) + "/read/" + this.RCKey(record);
+  }
+
+  static Delete = (model, record) => {
+    return this.GetRecordAction(model) + "/delete/" + this.RCKey(record);
+  }
+
+  static ActionDisplayName(method) {
+    let action = "";
+    switch (method) {
+      case "delete":
+        action = "DELETE";
+        break;
+
+      case "post":
+        action = "CREATE";
+        break;
+
+      case "put":
+        action = "UPDATE";
+        break;
+
+      default:
+        break;
+    }
+    return action;
   }
 
 
