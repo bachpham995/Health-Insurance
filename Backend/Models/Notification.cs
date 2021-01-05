@@ -10,7 +10,6 @@ namespace HealthInsuranceWebServer.Models
     public class Notification
     {
         [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
 
         [ForeignKey("Employee")]

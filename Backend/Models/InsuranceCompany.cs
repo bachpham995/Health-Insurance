@@ -11,8 +11,7 @@ namespace HealthInsuranceWebServer.Models
     public class InsuranceCompany
     {
         [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int InsCompanyId { get; set; }
+        public int InsuranceCompanyId { get; set; }
 
         [Required(ErrorMessage = "Name of Insurance Company can't blank!")]
         [MaxLength(255)]
@@ -20,6 +19,9 @@ namespace HealthInsuranceWebServer.Models
 
         [MaxLength(20)]
         public string Phone { get; set; }
+
+        [MaxLength(100)]
+        public string Email { get; set; }
 
         [MaxLength(255)]
         public string Url { get; set; }
