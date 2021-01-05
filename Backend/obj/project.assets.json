@@ -9033,26 +9033,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\bachp\\.nuget\\packages\\": {}
+    "/Users/hoanghoa/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\EProjectWorkSpace\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
+      "projectUniqueName": "/Users/hoanghoa/Projects/HealthInsuranceMgmt/Health-Insurance/Backend/HealthInsuranceWebServer.csproj",
       "projectName": "HealthInsuranceWebServer",
-      "projectPath": "D:\\EProjectWorkSpace\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
-      "packagesPath": "C:\\Users\\bachp\\.nuget\\packages\\",
-      "outputPath": "D:\\EProjectWorkSpace\\Health-Insurance\\Backend\\obj\\",
+      "projectPath": "/Users/hoanghoa/Projects/HealthInsuranceMgmt/Health-Insurance/Backend/HealthInsuranceWebServer.csproj",
+      "packagesPath": "/Users/hoanghoa/.nuget/packages/",
+      "outputPath": "/Users/hoanghoa/Projects/HealthInsuranceMgmt/Health-Insurance/Backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\bachp\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/hoanghoa/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -9116,7 +9114,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.101/RuntimeIdentifierGraph.json"
       }
     }
   }

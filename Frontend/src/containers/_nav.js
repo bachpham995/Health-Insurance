@@ -320,6 +320,7 @@ const _admin_nav = [
     name: 'Management',
     route: '/admin',
     icon: 'cil-layers',
+    
     _children: [
       {
         _tag: 'CSidebarNavItem',
@@ -339,7 +340,13 @@ const _admin_nav = [
         _tag: 'CSidebarNavItem',
         name: 'Employee',
         to: '/admin/employees',
-      }]
-  }
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Requests',
+        to: '/admin/requests',
+      }
+    ]}
+
 ];
-export default _nav
+export default _admin_nav

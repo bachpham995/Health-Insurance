@@ -12,12 +12,10 @@ import {
   CDropdown,
   CCol,
   CDataTable,
-  CRow,
-  CWidgetIcon
+  CRow
 } from '@coreui/react'
 import AxiosClient from "src/api/AxiosClient"
 import Utility from 'src/api/Utility'
-import CIcon from '@coreui/icons-react'
 
 const getBadge = status => {
   switch (status) {
@@ -32,6 +30,18 @@ const getBadge = status => {
 const DataTable = ({ tableName, tableQuery, color }) => {
   const [fields, setFields] = useState(Utility.TableHeader(tableQuery));
   const [tableData, setTableData] = useState([]);
+  const [details, setDetails] = useState([])
+
+  const toggleDetails = (index) => {
+    const position = details.indexOf(index)
+    let newDetails = details.slice()
+    if (position !== -1) {
+      newDetails.splice(position, 1)
+    } else {
+      newDetails = [...details, index]
+    }
+    setDetails(newDetails)
+  }
 
   useEffect(() => {
     const fetchDataList = async () => {
@@ -56,12 +66,9 @@ const DataTable = ({ tableName, tableQuery, color }) => {
               <h3>{tableName}</h3>
             </CCardHeader>
             <CCardHeader>
-              <CLink >
-                <CButton size="lg" variant="outline"  color="success" className="ml-1">
-                  Add
-                </CButton>
-              </CLink>
-
+              <CButton size="m" color="success" className="ml-1">
+                New
+              </CButton>
             </CCardHeader>
             <CCardBody>
               <CDataTable
@@ -72,13 +79,10 @@ const DataTable = ({ tableName, tableQuery, color }) => {
                 bordered
                 dark={color !== "light"}
                 sorter
-                size="lg"
-                itemsPerPage={4}
+                size="sm"
+                itemsPerPage={5}
                 pagination
                 columnFilter
-                cleaner
-                itemsPerPageSelect
-                clickableRows
                 scopedSlots={{
                   'status':
                     (item) => (
@@ -91,19 +95,14 @@ const DataTable = ({ tableName, tableQuery, color }) => {
                   'show_details':
                     (item) => (<>
                       <CDropdown className="mt-2">
-                        <CDropdownToggle variant="outline" color="primary" size="sm">
+                        <CDropdownToggle caret color="primary" size="sm">
                           Actions
                         </CDropdownToggle>
-                        <CDropdownMenu placement='right'>
-                        <CButton size="sm" variant="outline"  color="info" className="ml-1">
-                          Info
-                        </CButton>
-                        <CButton size="sm" variant="outline"  color="warning" className="ml-1">
-                          Edit
-                        </CButton>
-                        <CButton size="sm" variant="outline"  color="danger" className="ml-1 mr-1">
-                          Remove
-                        </CButton>
+                        <CDropdownMenu>
+                          <CDropdownItem width="2%">Edit</CDropdownItem>
+                          <CDropdownItem width="2%">Details</CDropdownItem>
+                          <CDropdownItem width="2%">Remove</CDropdownItem>
+                          {/* <CDropdownItem divider /> */}
                         </CDropdownMenu>
                       </CDropdown>
                     </>
