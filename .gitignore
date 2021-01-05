@@ -31,3 +31,10 @@ yarn-error.log*
 
 *.v2
 
+Backend/Migrations/HealthInsuranceWebServerContextModelSnapshot.cs
+Backend/obj/HealthInsuranceWebServer.csproj.nuget.dgspec.json
+Backend/obj/HealthInsuranceWebServer.csproj.nuget.g.props
+Backend/obj/HealthInsuranceWebServer.csproj.nuget.g.targets
+Backend/obj/project.assets.json
+Backend/obj/project.nuget.cache
+Frontend/debug.log
