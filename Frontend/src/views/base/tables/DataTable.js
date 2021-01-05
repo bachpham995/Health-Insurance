@@ -75,13 +75,10 @@ const DataTable = ({ tableName, tableQuery, color }) => {
                 bordered
                 dark={color !== "light"}
                 sorter
-                size="lg"
-                itemsPerPage={4}
+                size="sm"
+                itemsPerPage={5}
                 pagination
                 columnFilter
-                cleaner
-                itemsPerPageSelect
-                clickableRows
                 scopedSlots={{
                   'status':
                     (item) => (
@@ -94,7 +91,7 @@ const DataTable = ({ tableName, tableQuery, color }) => {
                   'show_details':
                     (item) => (<>
                       <CDropdown className="mt-2">
-                        <CDropdownToggle variant="outline" color="primary" size="sm">
+                        <CDropdownToggle caret color="primary" size="sm">
                           Actions
                         </CDropdownToggle>
                         <CDropdownMenu placement='right'>

@@ -61,7 +61,14 @@ export default class Utility {
           sorter: false,
           filter: false
         }, "employeeId", "fName", "lName", "designation", "status"];
-
+        case "PolicyRequests":
+          return [{
+              key: 'show_details',
+              label: '',
+              _style: { width: '5%' },
+              sorter: false,
+              filter: false
+          },"RequestId","EmployeeId","PolicyId","Policy","RequestDate","Status","Note","Emi","Amount"];
       default:
         return [];
     }
