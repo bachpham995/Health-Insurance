@@ -10,20 +10,15 @@ namespace HealthInsuranceWebServer.Models
     [ComplexType]
     public class Address
     {
-        [Column("Street")]
         [MaxLength(255)]
-        public virtual string Street { get; set; }
-        [Column("District")]
+        public string Street { get; set; }
         [MaxLength(50)]
-        public virtual string District { get; set; }
-        [Column("City")]
+        public string District { get; set; }
         [MaxLength(50)]
-        public virtual string City { get; set; }
-        [Column("Country")]
+        public string City { get; set; }
         [MaxLength(50)]
-        public virtual string Country { get; set; }
-        [Column("PostalCode")]
+        public string Country { get; set; }
         [MaxLength(10)]
-        public virtual string PostalCode { get; set; }
+        public string PostalCode { get; set; }
     }
 }

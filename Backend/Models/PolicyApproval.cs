@@ -11,6 +11,7 @@ namespace HealthInsuranceWebServer.Models
     public class PolicyApproval
     {
         [Key]
+        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ApprovalId { get; set; }
 
         [DataType(DataType.Date)]

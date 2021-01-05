@@ -48,7 +48,7 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpPut("{id}")]
         public async Task<IActionResult> PutInsuranceCompany(int id, InsuranceCompany insuranceCompany)
         {
-            if (id != insuranceCompany.InsuranceCompanyId)
+            if (id != insuranceCompany.InsCompanyId)
             {
                 return BadRequest();
             }
@@ -83,7 +83,7 @@ namespace HealthInsuranceWebServer.Controllers
             _context.InsuranceCompany.Add(insuranceCompany);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetInsuranceCompany", new { id = insuranceCompany.InsuranceCompanyId }, insuranceCompany);
+            return CreatedAtAction("GetInsuranceCompany", new { id = insuranceCompany.InsCompanyId }, insuranceCompany);
         }
 
         // DELETE: api/InsuranceCompanies/5
@@ -104,7 +104,7 @@ namespace HealthInsuranceWebServer.Controllers
 
         private bool InsuranceCompanyExists(int id)
         {
-            return _context.InsuranceCompany.Any(e => e.InsuranceCompanyId == id);
+            return _context.InsuranceCompany.Any(e => e.InsCompanyId == id);
         }
     }
 }
