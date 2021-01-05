@@ -11,7 +11,6 @@ namespace HealthInsuranceWebServer.Models
     public class Feedback
     {
         [Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int FeedbackId { get; set; }
 
         [Required(ErrorMessage = "Title can't blank!")]
