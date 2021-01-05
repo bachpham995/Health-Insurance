@@ -7,7 +7,9 @@
 /Backend/obj
 /Backend/bin
 /Backend/.vs/HealthInsuranceWebServer/config/applicationhost.config
-
+/Backend/appsettings.json
+/Backend/.vs/HealthInsuranceWebServer/v16/.suo
+/Backend/Migrations
 
 
 # testing
@@ -28,4 +30,4 @@ yarn-debug.log*
 yarn-error.log*
 
 *.v2
-Backend/.vs/HealthInsuranceWebServer/v16/.suo
+
