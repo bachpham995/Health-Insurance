@@ -290,7 +290,7 @@ const Employee = ({ method }) => {
                 <CCol xs="12" sm="6">
                   <CCard>
                     <CCardHeader>
-                      <h3>{"ADD NEW EMPLOYEE"}</h3>
+                      <h3>{action + " EMPLOYEE"}</h3>
                     </CCardHeader>
                     <CCardBody>
                       <fieldset disabled={readOnly.includes(method) ? "disable" : ""}>
