@@ -9,6 +9,7 @@ import {
   CDropdownToggle,
   CDropdownMenu,
   CDropdownItem,
+  CLink,
   CDropdown,
   CCol,
   CDataTable,
@@ -47,7 +48,7 @@ const ReuqestEmployees = ({ tableName, tableQuery, color }) => {
     const fetchDataList = async () => {
       try {
         const params = {};
-        const response = await AxiosClient.get('/api/' + tableQuery, params);
+        const response = await AxiosClient.get("/" + tableQuery, params);
         console.log('Fetch data successfully: ', response);
         console.log("Data Header:", Object.keys(response[0]));
         setTableData(response);
@@ -76,10 +77,21 @@ const ReuqestEmployees = ({ tableName, tableQuery, color }) => {
         'status':
           (item)=>(
             <td>
-               <CBadge color={getBadge(item.status ? "Active" : "Inactive")}>
+              <CBadge color={getBadge(item.status ? "Active" : "Inactive")}>
                    {item.status ? "Active" : "Inactive"}
-                 </CBadge>
+              </CBadge>
             </td>
+          ),
+          'button':
+          (item) => (<>
+            <CDropdown className="mt-2">
+              <CLink to={Utility.Read(tableQuery,item)} >
+                <CCol col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
+                  <CButton block color="primary">Approval</CButton>
+                </CCol>
+              </CLink>
+            </CDropdown>
+          </>
           )
       }}
     />

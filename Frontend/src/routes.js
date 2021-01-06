@@ -4,7 +4,9 @@ const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster')
 const Tables = React.lazy(() => import('./views/base/tables/Tables'));
 const DataTable = React.lazy(() => import('./views/base/tables/DataTable'));
 const Company = React.lazy(()=>import('./views/custom/Company'));
-const Request = React.lazy(()=> import('./views/base/Request/RequestEmployees'))
+const Request = React.lazy(()=> import('./views/base/Request/RequestEmployees'));
+const RequestDetails = React.lazy(()=>import("./views/base/Request/RequestDetail"))
+// const Approval = React.lazy(()=> import('./views/base/Approval/ApprovalCreate'))
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'));
 const Cards = React.lazy(() => import('./views/base/cards/Cards'));
 const Carousels = React.lazy(() => import('./views/base/carousels/Carousels'));
@@ -91,6 +93,10 @@ const routes = [
   { path: '/admin/employees', exact: true, name: 'Employees', component : DataTable, props:{tableName:"Employees", tableQuery: "Employees", color:"light"}},
   {path: '/admin/companies/create', exact: true, name: 'New Companies', component : Company, props:{mode : "create"}},
   {path:'/admin/requests', exact: true, name: 'Requests', component : Request, props:{tableName:"Requests", tableQuery: "PolicyRequests", color:"light"}},
+  {path: '/admin/requests/read/:id', exact: true, name: 'Info Request', component : RequestDetails, props:{mode : "get"}},
+  // {path:'/admin/approvals', exact: true, name: 'Approvals', component : Approval, props:{tableName:"Approvals", tableQuery: "PolicyApprovals", color:"light"}},
+
+
 
 ];
 
