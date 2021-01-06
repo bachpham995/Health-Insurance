@@ -55,6 +55,10 @@ export default class Utility {
         return '/admin/requests';
       case "PolicyApprovals":
         return '/admin/approvals';
+      case "Hospitals":
+        return '/admin/hospitals';
+      case "Employees":
+        return '/admin/employees'
     }
   }
 

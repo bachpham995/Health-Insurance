@@ -1,13 +1,14 @@
 // api/AxiosClient.js
 import axios from 'axios';
 import queryString from 'query-string';
+import Utility from './Utility';
 // Set up default config for http requests here
 
 // Please have a look at here `https://github.com/axios/axios#request-
 //config` for the full list of configs
-const REACT_APP_API_URL = "http://localhost:6969/api";
+
 const AxiosClient = axios.create({
-baseURL: REACT_APP_API_URL,
+baseURL: Utility.REACT_APP_API_URL,
 headers: {
 'content-type': 'application/json',
 },

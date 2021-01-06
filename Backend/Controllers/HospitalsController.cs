@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HealthInsuranceWebServer.Data;
 using HealthInsuranceWebServer.Models;
+using Controllers;
 
 namespace HealthInsuranceWebServer.Controllers
 {
@@ -53,7 +54,8 @@ namespace HealthInsuranceWebServer.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(hospital).State = EntityState.Modified;
+            //_context.Entry(hospital).State = EntityState.Modified;
+            _context.Update(hospital);
 
             try
             {
@@ -71,7 +73,7 @@ namespace HealthInsuranceWebServer.Controllers
                 }
             }
 
-            return NoContent();
+            return Ok(hospital);
         }
 
         // POST: api/Hospitals
@@ -96,7 +98,8 @@ namespace HealthInsuranceWebServer.Controllers
                 return NotFound();
             }
 
-            _context.Hospital.Remove(hospital);
+            hospital.Retired = false;
+            _context.Hospital.Update(hospital);
             await _context.SaveChangesAsync();
 
             return hospital;
@@ -106,5 +109,16 @@ namespace HealthInsuranceWebServer.Controllers
         {
             return _context.Hospital.Any(e => e.HospitalId == id);
         }
+
+        [HttpPost("{file}")]
+        [AcceptVerbs("Post")]
+        [Route("UploadImage")]
+        public async Task<IActionResult> UploadImage(IFormFile file)
+        {
+            string imageDir = "/imgs/hospital";
+            await new ImageUpload().UploadFile(imageDir, file);
+            return Ok(imageDir + "/" + file.FileName);
+        }
+
     }
 }

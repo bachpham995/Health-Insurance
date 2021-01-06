@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HealthInsuranceWebServer.Data;
 using HealthInsuranceWebServer.Models;
+using Controllers;
 
 namespace HealthInsuranceWebServer.Controllers
 {
@@ -52,9 +53,9 @@ namespace HealthInsuranceWebServer.Controllers
             {
                 return BadRequest();
             }
-
-            _context.Entry(employee).State = EntityState.Modified;
-
+            
+            //_context.Entry(employee).State = EntityState.Modified;            
+            _context.Update(employee);
             try
             {
                 await _context.SaveChangesAsync();
@@ -96,7 +97,8 @@ namespace HealthInsuranceWebServer.Controllers
                 return NotFound();
             }
 
-            _context.Employee.Remove(employee);
+            employee.Retired = false;            
+            _context.Employee.Update(employee);
             await _context.SaveChangesAsync();
 
             return employee;
@@ -105,6 +107,16 @@ namespace HealthInsuranceWebServer.Controllers
         private bool EmployeeExists(int id)
         {
             return _context.Employee.Any(e => e.EmployeeId == id);
+        }
+
+        [HttpPost("{file}")]
+        [AcceptVerbs("Post")]
+        [Route("UploadImage")]
+        public async Task<IActionResult> UploadImage(IFormFile file)
+        {
+            string imageDir = "/imgs/employee";
+            await new ImageUpload().UploadFile(imageDir, file);
+            return Ok(imageDir + "/" + file.FileName);
         }
     }
 }

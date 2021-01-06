@@ -53,6 +53,9 @@ namespace HealthInsuranceWebServer.Models
         [DefaultValue("true")]
         public bool Status { get; set; }
 
+        [MaxLength(255)]
+        public string Img { get; set; }
+
 
         [DefaultValue("false")]
         public bool Retired { get; set; }
