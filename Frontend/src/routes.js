@@ -1,10 +1,21 @@
 import React from 'react';
 
+// Extend
+//Custom Datatable
+const DataTable = React.lazy(() => import('./views/base/tables/DataTable'));
+//Company
+const Company = React.lazy(()=>import('./views/custom/Company'));
+//Hospital
+const Hospital = React.lazy(()=>import('./views/custom/Hospital'));
+//Employee
+const Employee = React.lazy(()=>import('./views/custom/Employee'));
+//Request
+const Request = React.lazy(()=> import('./views/base/Request/RequestEmployees'))
+
+
+//
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 const Tables = React.lazy(() => import('./views/base/tables/Tables'));
-const DataTable = React.lazy(() => import('./views/base/tables/DataTable'));
-const Company = React.lazy(()=>import('./views/custom/Company'));
-const Request = React.lazy(()=> import('./views/base/Request/RequestEmployees'))
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'));
 const Cards = React.lazy(() => import('./views/base/cards/Cards'));
 const Carousels = React.lazy(() => import('./views/base/carousels/Carousels'));
@@ -81,18 +92,30 @@ const routes = [
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
+  //Company
   { path: '/admin/companies', exact: true, name: 'Companies', component: DataTable, props:{tableName:"Insurance Companies", tableQuery: "InsuranceCompanies",color:"light"}},
-  { path: '/admin/companies/create', exact: true, name: 'New Companies', component : Company, props:{method : "post"}},
-  { path: '/admin/companies/edit/:id', exact: true, name: 'Update Companies', component : Company, props:{method : "put"}},
-  { path: '/admin/companies/read/:id', exact: true, name: 'Info Companies', component : Company, props:{method : "get"}},
-  { path: '/admin/companies/delete/:id', exact: true, name: 'Delete Companies', component : Company, props:{method : "delete"}},
+  { path: '/admin/companies/create', exact: true, name: 'New Company', component : Company, props:{method : "post"}},
+  { path: '/admin/companies/edit/:id', exact: true, name: 'Update Company', component : Company, props:{method : "put"}},
+  { path: '/admin/companies/read/:id', exact: true, name: 'Info Company', component : Company, props:{method : "get"}},
+  { path: '/admin/companies/delete/:id', exact: true, name: 'Delete Company', component : Company, props:{method : "delete"}},
+  //Policy
   { path: '/admin/policies', exact: true, name: 'Policies', component : DataTable, props:{tableName:"Policies", tableQuery: "Policies",color:"light"}},
+  //Hospital
   { path: '/admin/hospitals', exact: true, name: 'Hospitals', component : DataTable, props:{tableName:"Hospitals", tableQuery: "Hospitals",color:"light"}},
+  { path: '/admin/hospitals/create', exact: true, name: 'New Hospital', component : Hospital, props:{method : "post"}},
+  { path: '/admin/hospitals/edit/:id', exact: true, name: 'Update Hospital', component : Hospital, props:{method : "put"}},
+  { path: '/admin/hospitals/read/:id', exact: true, name: 'Info Hospital', component : Hospital, props:{method : "get"}},
+  { path: '/admin/hospitals/delete/:id', exact: true, name: 'Delete Hospital', component : Hospital, props:{method : "delete"}},
+  //Employees
   { path: '/admin/employees', exact: true, name: 'Employees', component : DataTable, props:{tableName:"Employees", tableQuery: "Employees", color:"light"}},
-  {path: '/admin/companies/create', exact: true, name: 'New Companies', component : Company, props:{mode : "create"}},
-  {path:'/admin/requests', exact: true, name: 'Requests', component : Request, props:{tableName:"Requests", tableQuery: "PolicyRequests", color:"light"}},
+  { path: '/admin/employees/create', exact: true, name: 'New Employee', component : Employee, props:{method : "post"}},
+  { path: '/admin/employees/edit/:id', exact: true, name: 'Update Employee', component : Employee, props:{method : "put"}},
+  { path: '/admin/employees/read/:id', exact: true, name: 'Info Employee', component : Employee, props:{method : "get"}},
+  { path: '/admin/employees/delete/:id', exact: true, name: 'Delete Employee', component : Employee, props:{method : "delete"}},
+
+
+  { path:'/admin/requests', exact: true, name: 'Requests', component : Request, props:{tableName:"Requests", tableQuery: "PolicyRequests", color:"light"}},
 
 ];
 
 export default routes;
- 

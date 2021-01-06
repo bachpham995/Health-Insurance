@@ -49,6 +49,12 @@ export default class Utility {
     switch (model) {
       case "InsuranceCompanies":
         return '/admin/companies';
+
+      case "Hospitals":
+        return '/admin/hospitals';
+
+      case "Employees":
+        return '/admin/employees'
     }
   }
 

@@ -64,7 +64,8 @@ namespace HealthInsuranceWebServer.Controllers
                 return BadRequest();
             }
 
-            _context.Entry(insuranceCompany).State = EntityState.Modified;
+            // _context.Entry(insuranceCompany).State = EntityState.Modified;
+            _context.InsuranceCompany.Update(insuranceCompany);
 
             try
             {
@@ -106,7 +107,7 @@ namespace HealthInsuranceWebServer.Controllers
             {
                 return NotFound();
             }
-            insuranceCompany.Retired = true;
+            insuranceCompany.Retired = true;            
             _context.InsuranceCompany.Update(insuranceCompany);
             await _context.SaveChangesAsync();
             return insuranceCompany;
