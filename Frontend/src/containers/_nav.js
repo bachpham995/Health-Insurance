@@ -327,11 +327,6 @@ const _admin_nav = [
         name: 'Company',
         to: '/admin/companies'
       },
-      // {
-      //   _tag: 'CSidebarNavItem',
-      //   name: 'New Company',
-      //   to: '/admin/companies/create',
-      // },
       {
         _tag: 'CSidebarNavItem',
         name: 'Hospital',
@@ -346,33 +341,6 @@ const _admin_nav = [
         name: 'Employee',
         to: '/admin/employees'
       }]
-  },
-  {
-    _tag: 'CSidebarNavDropdown',
-    name: 'Icons',
-    route: '/icons',
-    icon: 'cil-star',
-    _children: [
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'CoreUI Free',
-        to: '/icons/coreui-icons',
-        badge: {
-          color: 'success',
-          text: 'NEW',
-        },
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'CoreUI Flags',
-        to: '/icons/flags',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'CoreUI Brands',
-        to: '/icons/brands',
-      },
-    ],
   },
   {
     _tag: 'CSidebarNavItem',

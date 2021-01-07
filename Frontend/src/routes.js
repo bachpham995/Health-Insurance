@@ -12,6 +12,9 @@ const Employee = React.lazy(()=>import('./views/custom/Employee'));
 //Request
 const Request = React.lazy(()=> import('./views/base/Request/RequestEmployees'))
 
+//Policy
+const Policy = React.lazy(()=> import('./views/custom/Policy'))
+
 
 //
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
@@ -100,6 +103,10 @@ const routes = [
   { path: '/admin/companies/delete/:id', exact: true, name: 'Delete Company', component : Company, props:{method : "delete"}},
   //Policy
   { path: '/admin/policies', exact: true, name: 'Policies', component : DataTable, props:{tableName:"Policies", tableQuery: "Policies",color:"light"}},
+  { path: '/admin/policies/create', exact: true, name: 'New Policy', component : Policy, props:{method : "post"}},
+  { path: '/admin/policies/edit/:id', exact: true, name: 'Update Policy', component : Policy, props:{method : "put"}},
+  { path: '/admin/policies/read/:id', exact: true, name: 'Info Policy', component : Policy, props:{method : "get"}},
+  { path: '/admin/policies/delete/:id', exact: true, name: 'Delete Policy', component : Policy, props:{method : "delete"}},
   //Hospital
   { path: '/admin/hospitals', exact: true, name: 'Hospitals', component : DataTable, props:{tableName:"Hospitals", tableQuery: "Hospitals",color:"light"}},
   { path: '/admin/hospitals/create', exact: true, name: 'New Hospital', component : Hospital, props:{method : "post"}},

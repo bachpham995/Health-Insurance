@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
+      "ARUTMLTH/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "SampleDependency": "1.0.0"
+        }
+      },
+      "jQuery/2.1.1": {
+        "type": "package"
+      },
       "Microsoft.AspNetCore.Authentication.JwtBearer/3.1.10": {
         "type": "package",
         "dependencies": {
@@ -953,7 +962,7 @@
           "System.Xml.XDocument": "4.3.0"
         }
       },
-      "Newtonsoft.Json/11.0.2": {
+      "Newtonsoft.Json/12.0.3": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
@@ -1178,6 +1187,12 @@
             "assetType": "native",
             "rid": "win-x86"
           }
+        }
+      },
+      "SampleDependency/1.0.0": {
+        "type": "package",
+        "dependencies": {
+          "jQuery": "2.1.1"
         }
       },
       "SQLitePCLRaw.bundle_e_sqlite3/2.0.2": {
@@ -2836,6 +2851,61 @@
     }
   },
   "libraries": {
+    "ARUTMLTH/1.0.2": {
+      "sha512": "aHXNBzG8hKLmsD2a7cem8ZR+cRg15bu2JG2/GiZqs6e7kFDV8iKl7buR5nAWzKKSsVpw6vyMeNeAl7TW92I+bw==",
+      "type": "package",
+      "path": "arutmlth/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        ".vs/Test/DesignTimeBuild/.dtbcache.v2",
+        ".vs/Test/v16/TestStore/0/000.testlog",
+        ".vs/Test/v16/TestStore/0/testlog.manifest",
+        "Test.sln",
+        "Test/Class1.cs",
+        "Test/Test.csproj",
+        "Test/bin/Debug/netstandard2.0/ARUTAMLTH.deps.json",
+        "Test/bin/Debug/netstandard2.0/ARUTAMLTH.dll",
+        "Test/bin/Debug/netstandard2.0/ARUTAMLTH.pdb",
+        "Test/obj/Debug/netstandard2.0/.NETStandard,Version=v2.0.AssemblyAttributes.cs",
+        "Test/obj/Debug/netstandard2.0/ARUTAMLTH.dll",
+        "Test/obj/Debug/netstandard2.0/ARUTAMLTH.pdb",
+        "Test/obj/Debug/netstandard2.0/Test.AssemblyInfo.cs",
+        "Test/obj/Debug/netstandard2.0/Test.AssemblyInfoInputs.cache",
+        "Test/obj/Debug/netstandard2.0/Test.assets.cache",
+        "Test/obj/Debug/netstandard2.0/Test.csproj.CoreCompileInputs.cache",
+        "Test/obj/Debug/netstandard2.0/Test.csproj.FileListAbsolute.txt",
+        "Test/obj/Debug/netstandard2.0/Test.csprojAssemblyReference.cache",
+        "Test/obj/Test.csproj.nuget.dgspec.json",
+        "Test/obj/Test.csproj.nuget.g.props",
+        "Test/obj/Test.csproj.nuget.g.targets",
+        "Test/obj/project.assets.json",
+        "Test/obj/project.nuget.cache",
+        "arutmlth.1.0.2.nupkg.sha512",
+        "arutmlth.nuspec",
+        "nuget.exe"
+      ]
+    },
+    "jQuery/2.1.1": {
+      "sha512": "/cy0NGAGBx0W6XLqrnehQAKeJhfnZLDdPnBvlNLq/k4mraD1a7rbHBYzV5PYBaz9t5wh+VrGhPUbPztvnFAOrQ==",
+      "type": "package",
+      "path": "jquery/2.1.1",
+      "hasTools": true,
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Content/Scripts/jquery-2.1.1-vsdoc.js",
+        "Content/Scripts/jquery-2.1.1.js",
+        "Content/Scripts/jquery-2.1.1.min.js",
+        "Content/Scripts/jquery-2.1.1.min.map",
+        "Tools/common.ps1",
+        "Tools/install.ps1",
+        "Tools/jquery-2.1.1.intellisense.js",
+        "Tools/uninstall.ps1",
+        "jquery.2.1.1.nupkg.sha512",
+        "jquery.nuspec"
+      ]
+    },
     "Microsoft.AspNetCore.Authentication.JwtBearer/3.1.10": {
       "sha512": "0FwXX6sTTXBq+ZajtT9VSNNFfmzsFL7Jiy4Qj4qT5qBbUPry26V2rh8QMWn52J2+81q9u7Bm0YKfsClu22VTMA==",
       "type": "package",
@@ -4362,10 +4432,10 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Newtonsoft.Json/11.0.2": {
-      "sha512": "IvJe1pj7JHEsP8B8J8DwlMEx8UInrs/x+9oVY+oCD13jpLu4JbJU2WCIsMRn5C4yW9+DgkaO8uiVE5VHKjpmdQ==",
+    "Newtonsoft.Json/12.0.3": {
+      "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
       "type": "package",
-      "path": "newtonsoft.json/11.0.2",
+      "path": "newtonsoft.json/12.0.3",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4388,8 +4458,9 @@
         "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.11.0.2.nupkg.sha512",
-        "newtonsoft.json.nuspec"
+        "newtonsoft.json.12.0.3.nupkg.sha512",
+        "newtonsoft.json.nuspec",
+        "packageIcon.png"
       ]
     },
     "NuGet.Frameworks/4.7.0": {
@@ -4694,6 +4765,18 @@
         "runtimes/win-x86/native/sni.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
+      ]
+    },
+    "SampleDependency/1.0.0": {
+      "sha512": "rkrKnTI2KT/L+BaaB6/xZbDiqyQ702TxYp5adqgC/GYU7KBufnNArz/5KNetThpOeXmVEMg0VlFU+9/cKz0L4w==",
+      "type": "package",
+      "path": "sampledependency/1.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "content/Scripts/nugetexample.js",
+        "sampledependency.1.0.0.nupkg.sha512",
+        "sampledependency.nuspec"
       ]
     },
     "SQLitePCLRaw.bundle_e_sqlite3/2.0.2": {
@@ -9024,11 +9107,13 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
+      "ARUTMLTH >= 1.0.2",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 3.1.10",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.10",
       "Microsoft.EntityFrameworkCore.Sqlite >= 3.1.10",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.10",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.4",
+      "Newtonsoft.Json >= 12.0.3",
       "Swashbuckle.AspNetCore >= 5.6.3"
     ]
   },
@@ -9067,6 +9152,10 @@
     "frameworks": {
       "netcoreapp3.1": {
         "dependencies": {
+          "ARUTMLTH": {
+            "target": "Package",
+            "version": "[1.0.2, )"
+          },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
             "version": "[3.1.10, )"
@@ -9088,6 +9177,10 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[3.1.4, )"
+          },
+          "Newtonsoft.Json": {
+            "target": "Package",
+            "version": "[12.0.3, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",

@@ -27,14 +27,14 @@ const getBadge = status => {
 }
 
 const DataTable = ({ tableName, tableQuery, color }) => {
-  const [fields, setFields] = useState(Utility.TableHeader(tableQuery));
+  const fields = Utility.TableHeader(tableQuery);
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
     const fetchDataList = async () => {
       try {
         const response = await AxiosClient.get("/" + tableQuery);
-        console.log('Fetch data successfully: ', response);
+         console.log('Fetch data successfully: ', response);
         console.log("Data Header:", Object.keys(response[0]));
         setTableData(response);
       } catch (error) {
@@ -45,73 +45,77 @@ const DataTable = ({ tableName, tableQuery, color }) => {
   }, []);
 
   return (
-    <CRow>
-      <CCol>
-        <CCard>
-          <CCardHeader>
-            <h3>{tableName}</h3>
-          </CCardHeader>
-          <CCardHeader>
-            <CLink to={Utility.Create(tableQuery)} >
-              <CButton size="lg" color="success" className="ml-1">
-                Add
+    <>
+      <CRow>
+        <CCol >
+          <CCard>
+            <CCardHeader>
+              <h3>{tableName}</h3>
+            </CCardHeader>
+            <CCardHeader>
+              <CLink to={Utility.Create(tableQuery)} >
+                <CButton size="lg" color="success" className="ml-1">
+                  Add
                 </CButton>
-            </CLink>
-          </CCardHeader>
-          <CCardBody>
-            <CDataTable
-              items={tableData}
-              fields={fields}
-              hover
-              //striped
-              bordered
-              dark={color !== "light"}
-              sorter
-              size="sm"
-              itemsPerPage={5}
-              pagination
-              columnFilter
-              scopedSlots={{
-                'status':
-                  (item) => (
-                    <td>
-                      <CBadge color={getBadge(item.status ? "Active" : "Inactive")}>
-                        {item.status ? "Active" : "Inactive"}
-                      </CBadge>
-                    </td>
-                  ),
-                'show_details':
-                  (item) => (
-                    <CDropdown className="mt-2">
-                      <CDropdownToggle caret color="primary" size="sm">
-                        Actions
-                        </CDropdownToggle>
-                      <CDropdownMenu placement='right'>
-                        <CLink to={Utility.Read(tableQuery, item)}>
-                          <CButton size="sm" variant="outline" color="info" className="ml-1">
-                            Info
+              </CLink>
+            </CCardHeader>
+            <CCardBody>
+              <CDataTable
+                items={tableData}
+                fields={fields}
+                hover
+                bordered
+                responsive
+                dark={color !== "light"}
+                sorter
+                size="sm"
+                itemsPerPage={5}
+                pagination
+                columnFilter
+                scopedSlots={{
+                  'status':
+                    (item) => (
+                      <td>
+                        <CBadge color={getBadge(item.status ? "Active" : "Inactive")}>
+                          {item.status ? "Active" : "Inactive"}
+                        </CBadge>
+                      </td>
+                    ),
+                  'show_details':
+                    (item) => (
+                      <td>
+                        <CDropdown className="">
+                          <CDropdownToggle caret color="primary" size="sm">
+                            Actions
+                          </CDropdownToggle>
+                          <CDropdownMenu placement='right'>
+                            <CLink to={Utility.Read(tableQuery, item)}>
+                              <CButton size="sm" variant="outline" color="info" className="ml-1">
+                                Info
+                              </CButton>
+                            </CLink>
+                            <CLink to={Utility.Edit(tableQuery, item)}>
+                              <CButton size="sm" variant="outline" color="warning" className="ml-1">
+                                Edit
+                              </CButton>
+                            </CLink>
+                            <CLink to={Utility.Delete(tableQuery, item)}>
+                              <CButton size="sm" variant="outline" color="danger" className="ml-1 mr-1">
+                                Remove
                             </CButton>
-                        </CLink>
-                        <CLink to={Utility.Edit(tableQuery, item)}>
-                          <CButton size="sm" variant="outline" color="warning" className="ml-1">
-                            Edit
-                            </CButton>
-                        </CLink>
-                        <CLink to={Utility.Delete(tableQuery, item)}>
-                          <CButton size="sm" variant="outline" color="danger" className="ml-1 mr-1">
-                            Remove
-                          </CButton>
-                        </CLink>
-                      </CDropdownMenu>
-                    </CDropdown>
-                  )
+                            </CLink>
+                          </CDropdownMenu>
+                        </CDropdown>
+                      </td>
+                    )
                 }
-              }
-            />
-          </CCardBody>
-        </CCard>
-      </CCol>
-    </CRow>
+                }
+              ></CDataTable>
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
+    </>
   )
 }
 

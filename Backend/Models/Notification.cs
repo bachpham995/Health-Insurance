@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace HealthInsuranceWebServer.Models
 {
@@ -11,6 +12,8 @@ namespace HealthInsuranceWebServer.Models
     {
         [Key]
         public int Id { get; set; }
+
+        public string Title { get; set; }
 
         [ForeignKey("Employee")]
         public int EmployeeId { get; set; }
@@ -25,6 +28,9 @@ namespace HealthInsuranceWebServer.Models
 
         [DataType(DataType.Date)]
         public DateTime Date { get; set; }
+
         public bool Status { get; set; }
+    
+        public bool IsActivity { get; set; }
     }
 }

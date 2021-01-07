@@ -38,6 +38,7 @@ namespace HealthInsuranceWebServer
             services.AddDbContext<HealthInsuranceWebServerContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("HealthInsuranceWebServerContext")));
 
+
             services.AddSwaggerGen();
             services.AddCors(options =>
             {
@@ -47,6 +48,7 @@ namespace HealthInsuranceWebServer
                                       builder.WithOrigins("http://localhost:3000");
                                   });
             });
+
             services.Configure<IdentityOptions>(options =>{
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
@@ -71,7 +73,6 @@ namespace HealthInsuranceWebServer
 
                 };
             });
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
