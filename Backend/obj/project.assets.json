@@ -2,15 +2,6 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v3.1": {
-      "ARUTMLTH/1.0.2": {
-        "type": "package",
-        "dependencies": {
-          "SampleDependency": "1.0.0"
-        }
-      },
-      "jQuery/2.1.1": {
-        "type": "package"
-      },
       "Microsoft.AspNetCore.Authentication.JwtBearer/3.1.10": {
         "type": "package",
         "dependencies": {
@@ -37,6 +28,36 @@
         "runtime": {
           "lib/netstandard2.0/Microsoft.AspNetCore.Html.Abstractions.dll": {}
         }
+      },
+      "Microsoft.AspNetCore.JsonPatch/3.1.10": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.CSharp": "4.7.0",
+          "Newtonsoft.Json": "12.0.2"
+        },
+        "compile": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.dll": {}
+        }
+      },
+      "Microsoft.AspNetCore.Mvc.NewtonsoftJson/3.1.10": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.JsonPatch": "3.1.10",
+          "Newtonsoft.Json": "12.0.2",
+          "Newtonsoft.Json.Bson": "1.0.2"
+        },
+        "compile": {
+          "lib/netcoreapp3.1/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll": {}
+        },
+        "runtime": {
+          "lib/netcoreapp3.1/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll": {}
+        },
+        "frameworkReferences": [
+          "Microsoft.AspNetCore.App"
+        ]
       },
       "Microsoft.AspNetCore.Razor/2.2.0": {
         "type": "package",
@@ -962,13 +983,25 @@
           "System.Xml.XDocument": "4.3.0"
         }
       },
-      "Newtonsoft.Json/12.0.3": {
+      "Newtonsoft.Json/12.0.2": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         },
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "Newtonsoft.Json.Bson/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "Newtonsoft.Json": "12.0.1"
+        },
+        "compile": {
+          "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/Newtonsoft.Json.Bson.dll": {}
         }
       },
       "NuGet.Frameworks/4.7.0": {
@@ -1187,12 +1220,6 @@
             "assetType": "native",
             "rid": "win-x86"
           }
-        }
-      },
-      "SampleDependency/1.0.0": {
-        "type": "package",
-        "dependencies": {
-          "jQuery": "2.1.1"
         }
       },
       "SQLitePCLRaw.bundle_e_sqlite3/2.0.2": {
@@ -2851,61 +2878,6 @@
     }
   },
   "libraries": {
-    "ARUTMLTH/1.0.2": {
-      "sha512": "aHXNBzG8hKLmsD2a7cem8ZR+cRg15bu2JG2/GiZqs6e7kFDV8iKl7buR5nAWzKKSsVpw6vyMeNeAl7TW92I+bw==",
-      "type": "package",
-      "path": "arutmlth/1.0.2",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        ".vs/Test/DesignTimeBuild/.dtbcache.v2",
-        ".vs/Test/v16/TestStore/0/000.testlog",
-        ".vs/Test/v16/TestStore/0/testlog.manifest",
-        "Test.sln",
-        "Test/Class1.cs",
-        "Test/Test.csproj",
-        "Test/bin/Debug/netstandard2.0/ARUTAMLTH.deps.json",
-        "Test/bin/Debug/netstandard2.0/ARUTAMLTH.dll",
-        "Test/bin/Debug/netstandard2.0/ARUTAMLTH.pdb",
-        "Test/obj/Debug/netstandard2.0/.NETStandard,Version=v2.0.AssemblyAttributes.cs",
-        "Test/obj/Debug/netstandard2.0/ARUTAMLTH.dll",
-        "Test/obj/Debug/netstandard2.0/ARUTAMLTH.pdb",
-        "Test/obj/Debug/netstandard2.0/Test.AssemblyInfo.cs",
-        "Test/obj/Debug/netstandard2.0/Test.AssemblyInfoInputs.cache",
-        "Test/obj/Debug/netstandard2.0/Test.assets.cache",
-        "Test/obj/Debug/netstandard2.0/Test.csproj.CoreCompileInputs.cache",
-        "Test/obj/Debug/netstandard2.0/Test.csproj.FileListAbsolute.txt",
-        "Test/obj/Debug/netstandard2.0/Test.csprojAssemblyReference.cache",
-        "Test/obj/Test.csproj.nuget.dgspec.json",
-        "Test/obj/Test.csproj.nuget.g.props",
-        "Test/obj/Test.csproj.nuget.g.targets",
-        "Test/obj/project.assets.json",
-        "Test/obj/project.nuget.cache",
-        "arutmlth.1.0.2.nupkg.sha512",
-        "arutmlth.nuspec",
-        "nuget.exe"
-      ]
-    },
-    "jQuery/2.1.1": {
-      "sha512": "/cy0NGAGBx0W6XLqrnehQAKeJhfnZLDdPnBvlNLq/k4mraD1a7rbHBYzV5PYBaz9t5wh+VrGhPUbPztvnFAOrQ==",
-      "type": "package",
-      "path": "jquery/2.1.1",
-      "hasTools": true,
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "Content/Scripts/jquery-2.1.1-vsdoc.js",
-        "Content/Scripts/jquery-2.1.1.js",
-        "Content/Scripts/jquery-2.1.1.min.js",
-        "Content/Scripts/jquery-2.1.1.min.map",
-        "Tools/common.ps1",
-        "Tools/install.ps1",
-        "Tools/jquery-2.1.1.intellisense.js",
-        "Tools/uninstall.ps1",
-        "jquery.2.1.1.nupkg.sha512",
-        "jquery.nuspec"
-      ]
-    },
     "Microsoft.AspNetCore.Authentication.JwtBearer/3.1.10": {
       "sha512": "0FwXX6sTTXBq+ZajtT9VSNNFfmzsFL7Jiy4Qj4qT5qBbUPry26V2rh8QMWn52J2+81q9u7Bm0YKfsClu22VTMA==",
       "type": "package",
@@ -2932,6 +2904,36 @@
         "lib/netstandard2.0/Microsoft.AspNetCore.Html.Abstractions.xml",
         "microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
         "microsoft.aspnetcore.html.abstractions.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.JsonPatch/3.1.10": {
+      "sha512": "9YOs5Y/rkb4enn08wBWsakvK+SnhwTgpAC57k9RTmQeLB+ghpjVbqaZ96+LZi5U0RvM4bHouDzJENBxPlqJ2Tw==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.jsonpatch/3.1.10",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.dll",
+        "lib/netstandard2.0/Microsoft.AspNetCore.JsonPatch.xml",
+        "microsoft.aspnetcore.jsonpatch.3.1.10.nupkg.sha512",
+        "microsoft.aspnetcore.jsonpatch.nuspec"
+      ]
+    },
+    "Microsoft.AspNetCore.Mvc.NewtonsoftJson/3.1.10": {
+      "sha512": "LWTTDNxkUmPFjiFPUU6at1XwrYQeN90hav9Hs3o2iOz7WliWlITplPA0anArPZXeOmFYtnNglyq6LImIp5BUpw==",
+      "type": "package",
+      "path": "microsoft.aspnetcore.mvc.newtonsoftjson/3.1.10",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "Icon.png",
+        "THIRD-PARTY-NOTICES.TXT",
+        "lib/netcoreapp3.1/Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll",
+        "lib/netcoreapp3.1/Microsoft.AspNetCore.Mvc.NewtonsoftJson.xml",
+        "microsoft.aspnetcore.mvc.newtonsoftjson.3.1.10.nupkg.sha512",
+        "microsoft.aspnetcore.mvc.newtonsoftjson.nuspec"
       ]
     },
     "Microsoft.AspNetCore.Razor/2.2.0": {
@@ -4432,10 +4434,10 @@
         "netstandard.library.nuspec"
       ]
     },
-    "Newtonsoft.Json/12.0.3": {
-      "sha512": "6mgjfnRB4jKMlzHSl+VD+oUc1IebOZabkbyWj2RiTgWwYPPuaK1H97G1sHqGwPlS5npiF5Q0OrxN1wni2n5QWg==",
+    "Newtonsoft.Json/12.0.2": {
+      "sha512": "rTK0s2EKlfHsQsH6Yx2smvcTCeyoDNgCW7FEYyV01drPlh2T243PR2DiDXqtC5N4GDm4Ma/lkxfW5a/4793vbA==",
       "type": "package",
-      "path": "newtonsoft.json/12.0.3",
+      "path": "newtonsoft.json/12.0.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -4458,9 +4460,29 @@
         "lib/portable-net40+sl5+win8+wp8+wpa81/Newtonsoft.Json.xml",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.dll",
         "lib/portable-net45+win8+wp8+wpa81/Newtonsoft.Json.xml",
-        "newtonsoft.json.12.0.3.nupkg.sha512",
-        "newtonsoft.json.nuspec",
-        "packageIcon.png"
+        "newtonsoft.json.12.0.2.nupkg.sha512",
+        "newtonsoft.json.nuspec"
+      ]
+    },
+    "Newtonsoft.Json.Bson/1.0.2": {
+      "sha512": "QYFyxhaABwmq3p/21VrZNYvCg3DaEoN/wUuw5nmfAf0X3HLjgupwhkEWdgfb9nvGAUIv3osmZoD3kKl4jxEmYQ==",
+      "type": "package",
+      "path": "newtonsoft.json.bson/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE.md",
+        "lib/net45/Newtonsoft.Json.Bson.dll",
+        "lib/net45/Newtonsoft.Json.Bson.pdb",
+        "lib/net45/Newtonsoft.Json.Bson.xml",
+        "lib/netstandard1.3/Newtonsoft.Json.Bson.dll",
+        "lib/netstandard1.3/Newtonsoft.Json.Bson.pdb",
+        "lib/netstandard1.3/Newtonsoft.Json.Bson.xml",
+        "lib/netstandard2.0/Newtonsoft.Json.Bson.dll",
+        "lib/netstandard2.0/Newtonsoft.Json.Bson.pdb",
+        "lib/netstandard2.0/Newtonsoft.Json.Bson.xml",
+        "newtonsoft.json.bson.1.0.2.nupkg.sha512",
+        "newtonsoft.json.bson.nuspec"
       ]
     },
     "NuGet.Frameworks/4.7.0": {
@@ -4765,18 +4787,6 @@
         "runtimes/win-x86/native/sni.dll",
         "useSharedDesignerContext.txt",
         "version.txt"
-      ]
-    },
-    "SampleDependency/1.0.0": {
-      "sha512": "rkrKnTI2KT/L+BaaB6/xZbDiqyQ702TxYp5adqgC/GYU7KBufnNArz/5KNetThpOeXmVEMg0VlFU+9/cKz0L4w==",
-      "type": "package",
-      "path": "sampledependency/1.0.0",
-      "files": [
-        ".nupkg.metadata",
-        ".signature.p7s",
-        "content/Scripts/nugetexample.js",
-        "sampledependency.1.0.0.nupkg.sha512",
-        "sampledependency.nuspec"
       ]
     },
     "SQLitePCLRaw.bundle_e_sqlite3/2.0.2": {
@@ -9107,39 +9117,41 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "ARUTMLTH >= 1.0.2",
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 3.1.10",
+      "Microsoft.AspNetCore.Mvc.NewtonsoftJson >= 3.1.10",
       "Microsoft.EntityFrameworkCore.SqlServer >= 3.1.10",
       "Microsoft.EntityFrameworkCore.Sqlite >= 3.1.10",
       "Microsoft.EntityFrameworkCore.Tools >= 3.1.10",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 3.1.4",
-      "Newtonsoft.Json >= 12.0.3",
       "Swashbuckle.AspNetCore >= 5.6.3"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Phaluu\\.nuget\\packages\\": {}
+    "C:\\Users\\HGM\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Phaluu\\OneDrive - Capgemini\\Desktop\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
+      "projectUniqueName": "C:\\Users\\HGM\\Desktop\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
       "projectName": "HealthInsuranceWebServer",
-      "projectPath": "C:\\Users\\Phaluu\\OneDrive - Capgemini\\Desktop\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
-      "packagesPath": "C:\\Users\\Phaluu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Phaluu\\OneDrive - Capgemini\\Desktop\\Health-Insurance\\Backend\\obj\\",
+      "projectPath": "C:\\Users\\HGM\\Desktop\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
+      "packagesPath": "C:\\Users\\HGM\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\HGM\\Desktop\\Health-Insurance\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Phaluu\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\HGM\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
       ],
       "sources": {
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -9151,12 +9163,13 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
-          "ARUTMLTH": {
-            "target": "Package",
-            "version": "[1.0.2, )"
-          },
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
+            "target": "Package",
+            "version": "[3.1.10, )"
+          },
+          "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
             "target": "Package",
             "version": "[3.1.10, )"
           },
@@ -9177,10 +9190,6 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
             "target": "Package",
             "version": "[3.1.4, )"
-          },
-          "Newtonsoft.Json": {
-            "target": "Package",
-            "version": "[12.0.3, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
@@ -9205,7 +9214,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.404\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
       }
     }
   }
