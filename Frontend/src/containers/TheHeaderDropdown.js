@@ -9,7 +9,7 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 
-const TheHeaderDropdown = () => {
+const TheHeaderDropdown = ({user}) => {
   return (
     <CDropdown
       inNav
@@ -19,14 +19,14 @@ const TheHeaderDropdown = () => {
       <CDropdownToggle className="c-header-nav-link" caret={false}>
         <div className="c-avatar">
           <CImg
-            src={'avatars/6.jpg'}
+            src={user?.img}
             className="c-avatar-img"
-            alt="admin@bootstrapmaster.com"
+            alt={user?.email}
           />
         </div>
       </CDropdownToggle>
       <CDropdownMenu className="pt-0" placement="bottom-end">
-        <CDropdownItem
+        {/* <CDropdownItem
           header
           tag="div"
           color="light"
@@ -53,7 +53,7 @@ const TheHeaderDropdown = () => {
           <CIcon name="cil-comment-square" className="mfe-2" />
           Comments
           <CBadge color="warning" className="mfs-auto">42</CBadge>
-        </CDropdownItem>
+        </CDropdownItem> */}
         <CDropdownItem
           header
           tag="div"
@@ -81,8 +81,8 @@ const TheHeaderDropdown = () => {
         </CDropdownItem>
         <CDropdownItem divider />
         <CDropdownItem>
-          <CIcon name="cil-lock-locked" className="mfe-2" />
-          Lock Account
+          <CIcon name="cil-account-logout" className="mfe-2" />
+            Sign out
         </CDropdownItem>
       </CDropdownMenu>
     </CDropdown>

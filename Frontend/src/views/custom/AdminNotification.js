@@ -1,43 +1,42 @@
-import React, { useState, useEffect } from 'react';
+
 import {
   CBadge,
   CDropdown,
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
-  CDropdownDivider,
   CImg
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
-import AxiosClient from 'src/api/AxiosClient';
-
-const TheHeaderDropdownNotif = () => {
-  const [notifications, setNotifications] = useState([]);
-  const [count, setCount] = useState(0);
-
-  const FetchNotification = async (mounted) => {
-    await AxiosClient.get("/Notifications").then(res => {
-      console.log('Get data successfully: ', res);
-      // console.log("Data Header:", Object.keys(res));
-      if (mounted) {
-        setNotifications(res.filter( n => n.toUserId == 1));
-        //setCount(res.lenght);
-      }
-    }).catch(err => {
-      console.log('Failed to Get data: ', err);
-    });
-  }
-
-  useEffect(()=>{
-    setCount(notifications.filter(n => !n.status && n.type == 0).length);
-  },[notifications]);
 
 
-  useEffect(() => {
-    let mounted = true;
-    FetchNotification(mounted);
-    return () => mounted = false;
-  }, [count])
+const AdminNotification = ({ntfType, notifications, count}) => {
+//   const [notifications, setNotifications] = useState([]);
+//   const [count, setCount] = useState(0);  
+
+//   const FetchNotification = async (mounted) => {
+//     await AxiosClient.get("/Notifications").then(res => {
+//       console.log('Get data successfully: ', res);
+//       // console.log("Data Header:", Object.keys(res));
+//       if (mounted) {
+//         setNotifications(res.filter( n => n.toUserId == 1));
+//         //setCount(res.lenght);
+//       }
+//     }).catch(err => {
+//       console.log('Failed to Get data: ', err);
+//     });
+//   }
+
+//   useEffect(()=>{
+//     setCount(notifications.filter(n => !n.status && n.type == parseInt(ntfType)).length);
+//   },[notifications]);
+
+
+//   useEffect(() => {
+//     let mounted = true;
+//     FetchNotification(mounted);
+//     return () => mounted = false;
+//   }, [count])
 
   const notifyTime = (date) => {
     let now = new Date(Date.now());
@@ -67,6 +66,38 @@ const TheHeaderDropdownNotif = () => {
     return <CIcon name="cil-lightbulb" className="success"></CIcon>
   }
 
+  const ListIcon = (amount, type) => {
+    switch (type) {
+    case "0":
+        return (<><CIcon name="cil-bell" /><CBadge shape="pill" color="danger">{amount}</CBadge></>)
+        
+    case "1":
+        return (<><CIcon name="cil-list" /><CBadge shape="pill" color="warning">{amount}</CBadge></>)
+            
+    case "2":
+        return (<><CIcon name="cil-envelope-open" /><CBadge shape="pill" color="info">{amount}</CBadge></>)
+
+    default:
+        return (<><CIcon name="cil-list" /><CBadge shape="pill" color="warning">{amount}</CBadge></>)
+    }
+  }
+
+  const Title = (amount, type) => {
+    switch (type) {
+        case "0":
+            return "You have " + amount + "unchecked notifications";
+          
+        case "1":
+            return "Your recent activities";
+                
+        case "2":
+            return "You have " + amount + "unchecked feedbacks";
+
+        default:
+            return "You have " + amount + "unchecked notifications";
+    }    
+  }
+
   return (
     <CDropdown
       inNav
@@ -74,8 +105,7 @@ const TheHeaderDropdownNotif = () => {
       direction="down"
     >
       <CDropdownToggle className="c-header-nav-link" caret={false}>
-        <CIcon name="cil-bell" />
-        <CBadge shape="pill" color="danger">{count}</CBadge>
+        {ListIcon(count, ntfType)}
       </CDropdownToggle>
       <CDropdownMenu placement="bottom-end" className="pt-0">
         <CDropdownItem
@@ -84,7 +114,7 @@ const TheHeaderDropdownNotif = () => {
           className="text-center"
           color="light"
         >
-          <strong>You have {count} unchecked notifications</strong>
+          <strong>{Title(count, ntfType)}</strong>
         </CDropdownItem>
         {/* cil-user-unfollow */}
         <div className="custom-scrollbar">
@@ -116,4 +146,4 @@ const TheHeaderDropdownNotif = () => {
   )
 }
 
-export default TheHeaderDropdownNotif
+export default AdminNotification
