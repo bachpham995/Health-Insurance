@@ -27,19 +27,18 @@ namespace HealthInsuranceWebServer
         }
 
         public IConfiguration Configuration { get; }
-        
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secert"].ToString());
 
             services.AddControllers();
-            // .AddNewtonsoftJson(option => option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
- 
             services.AddDbContext<HealthInsuranceWebServerContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("HealthInsuranceWebServerContext")));
-
-
+            services.AddControllersWithViews().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
             services.AddSwaggerGen();
             services.AddCors(options =>
             {
@@ -49,8 +48,8 @@ namespace HealthInsuranceWebServer
                                       builder.WithOrigins("http://localhost:3000");
                                   });
             });
-
-            services.Configure<IdentityOptions>(options =>{
+            services.Configure<IdentityOptions>(options =>
+            {
                 options.Password.RequireDigit = false;
                 options.Password.RequireNonAlphanumeric = false;
                 options.Password.RequireUppercase = false;
@@ -61,7 +60,8 @@ namespace HealthInsuranceWebServer
                 x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 x.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(x => {
+            }).AddJwtBearer(x =>
+            {
                 x.RequireHttpsMetadata = false;
                 x.SaveToken = false;
                 x.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
@@ -83,7 +83,8 @@ namespace HealthInsuranceWebServer
             {
                 app.UseDeveloperExceptionPage();
             }
-            app.UseCors(builder => {
+            app.UseCors(builder =>
+            {
                 builder.WithOrigins(Configuration["ApplicationSettings:CLIENT_URL"].ToString())
                 .AllowAnyHeader()
                 .AllowAnyMethod();

@@ -9,6 +9,7 @@ import {
   CDropdownToggle,
   CDropdownMenu,
   CDropdownItem,
+  CLink,
   CDropdown,
   CCol,
   CDataTable,
@@ -30,24 +31,23 @@ const getBadge = status => {
 const ReuqestEmployees = ({ tableName, tableQuery, color }) => {
   const [fields, setFields] = useState(Utility.TableHeader(tableQuery));
   const [tableData, setTableData] = useState([]);
-  const [details, setDetails] = useState([])
 
-  const toggleDetails = (index) => {
-    const position = details.indexOf(index)
-    let newDetails = details.slice()
-    if (position !== -1) {
-      newDetails.splice(position, 1)
-    } else {
-      newDetails = [...details, index]
-    }
-    setDetails(newDetails)
-  }
+  // const toggleDetails = (index) => {
+  //   const position = details.indexOf(index)
+  //   let newDetails = details.slice()
+  //   if (position !== -1) {
+  //     newDetails.splice(position, 1)
+  //   } else {
+  //     newDetails = [...details, index]
+  //   }
+  //   setDetails(newDetails)
+  // }
 
   useEffect(() => {
     const fetchDataList = async () => {
       try {
         const params = {};
-        const response = await AxiosClient.get('/api/' + tableQuery, params);
+        const response = await AxiosClient.get("/" + tableQuery, params);
         console.log('Fetch data successfully: ', response);
         console.log("Data Header:", Object.keys(response[0]));
         setTableData(response);
@@ -76,10 +76,23 @@ const ReuqestEmployees = ({ tableName, tableQuery, color }) => {
         'status':
           (item)=>(
             <td>
-               <CBadge color={getBadge(item.status ? "Active" : "Inactive")}>
+              <CBadge color={getBadge(item.status ? "Active" : "Inactive")}>
                    {item.status ? "Active" : "Inactive"}
-                 </CBadge>
+              </CBadge>
             </td>
+          ),
+          'button':
+          (item) => (<>
+            <CDropdown className="mt-1">
+              <CLink to={Utility.Read(tableQuery,item)} >
+                <CCol col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
+                  <CButton color={getBadge(item.status ? "Active": "Banned")} disabled={item.status?false:true}>
+                    {item.status?"Approval":"Done"}
+                    </CButton>
+                </CCol>
+              </CLink>
+            </CDropdown>
+          </>
           )
       }}
     />

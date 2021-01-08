@@ -33,6 +33,10 @@ namespace HealthInsuranceWebServer.Controllers
         public async Task<ActionResult<PolicyRequest>> GetPolicyRequest(int id)
         {
             var policyRequest = await _context.PolicyRequest.FindAsync(id);
+            var user = await _context.Employee.FindAsync(policyRequest.EmployeeId);
+            var policy = await _context.Policy.FindAsync(policyRequest.PolicyId);
+            policyRequest.Employee = user;
+            policyRequest.Policy = policy;
 
             if (policyRequest == null)
             {

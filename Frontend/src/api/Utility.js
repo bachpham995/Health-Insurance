@@ -9,7 +9,6 @@ export default class Utility {
   static Create = (model) => {
     return this.GetRecordAction(model) + "/create";
   }
-
   static Edit = (model, record) => {
     return this.GetRecordAction(model) + "/edit/" + this.RCKey(record);
   }
@@ -44,15 +43,18 @@ export default class Utility {
   }
 
 
+  static CreateApproval = (model) => {
+    return this.GetRecordAction(model) + "/create";
+  }
 
   static GetRecordAction = (model) => {
     switch (model) {
       case "InsuranceCompanies":
         return '/admin/companies';
-
+      case "PolicyRequests":
+        return '/admin/requests';
       case "Hospitals":
         return '/admin/hospitals';
-
       case "Employees":
         return '/admin/employees';
 
@@ -103,12 +105,20 @@ export default class Utility {
         }, "employeeId", "fName", "lName", "designation", "status"];
         case "PolicyRequests":
           return [{
-              key: 'show_details',
-              label: '',
+              key: 'button',
+              label: 'Approval', 
               _style: { width: '5%' },
               sorter: false,
               filter: false
-          },"RequestId","EmployeeId","PolicyId","Policy","RequestDate","Status","Note","Emi","Amount"];
+          },"requestId","requestDate","status","note","emi","amount"];
+          case "PolicyApprovals":
+            return [{
+                key: '',
+                label: '', 
+                _style: { width: '5%' },
+                sorter: false,
+                filter: false
+            },"approvalId","approvalDate","status","reason","requestId"];
       default:
         return [];
     }
