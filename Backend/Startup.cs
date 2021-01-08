@@ -36,9 +36,8 @@ namespace HealthInsuranceWebServer
             services.AddControllers();
             services.AddDbContext<HealthInsuranceWebServerContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("HealthInsuranceWebServerContext")));
-            services.AddControllersWithViews().AddNewtonsoftJson(options =>
-                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
-);
+            
+            services.AddControllersWithViews();
             services.AddSwaggerGen();
             services.AddCors(options =>
             {

@@ -30,6 +30,6 @@ namespace HealthInsuranceWebServer.Models
 
         public float Emi { get; set; }
 
-        public float Amount { get; set; }
+        public float Amount { get; set; }       
     }
 }

@@ -86,29 +86,33 @@ namespace HealthInsuranceWebServer.Data
                );
 
             modelBuilder.Entity<Employee>().HasData(
-                 new Employee(){ EmployeeId = 1, FName = "Phat", LName="Luu Trong", Username="phatltuit", Password="123", Email ="phatltuit@gmail.com",Designation = "Senior Cleaner", Phone = "058256332X"
+                 new Employee(){ EmployeeId = 1, FName = "Phat", LName="Luu Trong", Username="phatltuit", Password="123", Email ="phatltuit@gmail.com",Designation = "Senior Cleaner", Phone = "058256332X", Role = 0
                                , JoinDate=DateTime.Now.AddYears(10), DoB = new DateTime(1996, 05,30), Img="http://localhost:6969/imgs/employee/luutrongphat.png"}
-               , new Employee(){ EmployeeId = 2, FName = "Bach", LName="Pham Xuan", Username="bachpham", Password="123456789", Email ="bachpham@gmail.com",Designation = "Junior Cleaner", Phone = "012345678X"
-                               , JoinDate=DateTime.Now.AddYears(10), DoB = new DateTime(1996, 05,30)}
-               , new Employee(){ EmployeeId = 3, FName = "Hoa", LName="Nguyen Vu Hoang", Username="nguyenvuhoanghoa", Password="123456789", Email ="nguyenvuhoanghoa@gmail.com",Designation = "Junior Cleaner", Phone = "01232278X"
-                               , JoinDate=DateTime.Now.AddYears(10), DoB = new DateTime(1996, 05,30)}
+               , new Employee(){ EmployeeId = 2, FName = "Bach", LName="Pham Xuan", Username="bachpham", Password="123456789", Email ="bachpham@gmail.com",Designation = "Junior Cleaner", Phone = "012345678X", Role = 1
+                               , JoinDate=DateTime.Now.AddYears(10), DoB = new DateTime(1996, 05,30), Img="http://localhost:6969/imgs/employee/bachpham.jpg"}
+               , new Employee(){ EmployeeId = 3, FName = "Hoa", LName="Nguyen Vu Hoang", Username="nguyenvuhoanghoa", Password="123456789", Email ="nguyenvuhoanghoa@gmail.com",Designation = "Junior Cleaner", Phone = "01232278X", Role = 1
+                               , JoinDate=DateTime.Now.AddYears(10), DoB = new DateTime(1996, 05,30), Img="http://localhost:6969/imgs/employee/hoanghoa.jpg"}
                );
+
             modelBuilder.Entity<Employee>().OwnsOne(e => e.Address).HasData(
                       new { EmployeeId = 1, Street = "Nguyễn Ảnh Thủ, Bà Điểm", District = "Hóc Môn", City = "Ho Chi Minh City", Country = "Vietnam", PostalCode = "70000"}
                     , new { EmployeeId = 2, Street = "Tân Thới Nhất", District = "Quận 12", City = "Ho Chi Minh City", Country = "Vietnam", PostalCode = "" }
                     , new { EmployeeId = 3, Street = "Xô Viết Nghệ Tĩnh", District = "Quận Bình Thạnh", City = "Ho Chi Minh City", Country = "Vietnam", PostalCode = "" }
                 );
 
-            modelBuilder.Entity<Admin>().HasData(
-               new Admin() { Username = "Admin", Password = "123456789"}
-               );
-
             modelBuilder.Entity<Notification>().HasData(
-                new Notification(){Id = 1, EmployeeId = 1, Date = DateTime.Now,Title="Policy Request", Description="A User has submit a policy request.", Status = false, IsActivity = false}
+                new Notification(){Id = 1, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddDays(-123),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 2, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddMonths(1),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 3, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-3),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 4, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddMinutes(5),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 5, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddYears(-1),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 6, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddHours(-4),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 7, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddMonths(-2),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 8, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-14),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 9, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddDays(-8),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 10, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-1),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0}
             );
         }
-
-        public DbSet<Admin> Admin { get; set; }
 
         public DbSet<Employee> Employee { get; set; }
 

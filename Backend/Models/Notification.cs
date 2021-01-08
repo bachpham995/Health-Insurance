@@ -16,12 +16,12 @@ namespace HealthInsuranceWebServer.Models
         public string Title { get; set; }
 
         [ForeignKey("Employee")]
-        public int EmployeeId { get; set; }
-        public Employee Employee { get; set; }
+        public int ToUserId { get; set; }
+        public Employee ToUser { get; set; }
 
-        [ForeignKey("Admin")]
-        public string AdminId { get; set; }
-        public Admin Admin { get; set; }
+        [ForeignKey("Employee")]
+        public int FromUserId { get; set; }
+        public Employee FromUser { get; set; }
 
         [Column(TypeName = "text")]
         public string Description { get; set; }
@@ -31,6 +31,6 @@ namespace HealthInsuranceWebServer.Models
 
         public bool Status { get; set; }
     
-        public bool IsActivity { get; set; }
+        public int Type { get; set; }
     }
 }

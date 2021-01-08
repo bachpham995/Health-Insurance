@@ -274,11 +274,10 @@ const RequestDetails = ({ method }) => {
             </CModalHeader>
             <CModalBody>
               <CRow>
-<<<<<<< Updated upstream:Frontend/src/views/Request/RequestDetail.js
                 <CCol xs="12">
                   <CFormGroup>
                     <CLabel>Resion</CLabel>
-                    <CTextarea defaultValue="Write some resion......" id="reasion" type="text" required />
+                    <CTextarea defaultValue="Write some reason......" id="reasion" type="text" required />
                   </CFormGroup>
                 </CCol>
               </CRow>
@@ -291,19 +290,6 @@ const RequestDetails = ({ method }) => {
                 onClick={() => setcheckApproval(false)}
                 color="danger">Unaccep
                     </CButton>
-=======
-              <CCol xs="12">
-                      <CFormGroup>
-                        <CLabel>Resion</CLabel>
-                        <CTextarea defaultValue={request?.emi} id="emi" type="text" />
-                      </CFormGroup>
-              </CCol>
-              </CRow>
-            </CModalBody>
-            <CModalFooter>
-              <CButton type="submit" color="primary">Approval</CButton>{' '}
-              <CButton type="submit" color="primary"></CButton>{' '}
->>>>>>> Stashed changes:Frontend/src/views/base/Request/RequestDetail.js
               <CButton
                 color="secondary"
                 onClick={toggle}

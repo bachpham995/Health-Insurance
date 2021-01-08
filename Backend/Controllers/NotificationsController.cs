@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using HealthInsuranceWebServer.Data;
 using HealthInsuranceWebServer.Models;
+using Newtonsoft.Json;
 
 namespace HealthInsuranceWebServer.Controllers
 {
@@ -25,7 +26,7 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Notification>>> GetNotification()        
         {            
-            return await _context.Notification.ToListAsync(); //.Include(n => n.Employee)
+            return await _context.Notification.Include(n=>n.FromUser).Include(n=>n.ToUser).ToListAsync();
         }
 
         // GET: api/Notifications/5

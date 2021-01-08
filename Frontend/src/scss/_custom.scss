@@ -21,6 +21,7 @@ custom-scrollbar::-webkit-scrollbar-thumb:hover {
 
 .custom-scrollbar {
   overflow: scroll;
+  max-height: 290px;
 }
 
 .message-notify{

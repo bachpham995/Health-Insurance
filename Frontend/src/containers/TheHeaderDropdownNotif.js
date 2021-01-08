@@ -20,14 +20,18 @@ const TheHeaderDropdownNotif = () => {
       console.log('Get data successfully: ', res);
       // console.log("Data Header:", Object.keys(res));
       if (mounted) {
-        setNotifications(res);
+        setNotifications(res.filter( n => n.adminId != null));
         //setCount(res.lenght);
-        setCount(notifications.filter(n => !n.status && !n.isActivity).length);
       }
     }).catch(err => {
       console.log('Failed to Get data: ', err);
     });
   }
+
+  useEffect(()=>{
+    setCount(notifications.filter(n => !n.status && !n.isActivity).length);
+  },[notifications]);
+
 
   useEffect(() => {
     let mounted = true;
@@ -43,13 +47,23 @@ const TheHeaderDropdownNotif = () => {
 
     if(diffDays < 1){
       return notifyDate.getHours() + ":" + notifyDate.getMinutes();
-    }else if(diffDays > 1 && diffDays < 7 ){
-      return notifyDate.getDay()+ " " + notifyDate.getHours() + ":" + notifyDate.getMinutes();
-    }else if(diffDays >= 7 && diffDays <= 30 ){
-      return notifyDate.getDate() + " " + notifyDate.getDay()+ " " + notifyDate.getHours() + ":" + notifyDate.getMinutes();
+    }else if(diffDays >=1 && diffDays <= 30 ){
+      return notifyDate.getDate() + "/" + notifyDate.getDay()+ "  " + notifyDate.getHours() + ":" + notifyDate.getMinutes();
     }else {
-      return notifyDate.toDateString() + " " + notifyDate.getHours() + ":" + notifyDate.getMinutes();
+      return notifyDate.toDateString() + "  " + notifyDate.getHours() + ":" + notifyDate.getMinutes();
     }
+  }
+
+  const Avatar = (notify) => {
+    if(notify.employeeId != null && notify.employee.img != null){
+      return (<><CImg
+        src={notify.employee?.img}
+        className="c-avatar-img"
+        alt={notify.employee?.username}
+      />
+      <span className="c-avatar-status bg-success"></span></>)
+    }
+    return <CIcon name="cil-lightbulb" className="success"></CIcon>
   }
 
   return (
@@ -75,14 +89,13 @@ const TheHeaderDropdownNotif = () => {
         <div className="custom-scrollbar">
           {notifications.map(notify => <CDropdownItem key={notify.id} href="#">
             <div className="message message-notify">
-              <div className="pt-3 mr-3 float-left">
+              <div className="mr-3 float-left">
                 <div className="c-avatar">
-                  <CImg
-                    src={notify.employee?.img}
-                    className="c-avatar-img"
-                    alt="admin@bootstrapmaster.com"
-                  />
-                  <span className="c-avatar-status bg-warning"></span>
+                  {
+
+                    Avatar(notify)
+                  }
+
                 </div>
               </div>
               <div>
