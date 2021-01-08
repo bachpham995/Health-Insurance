@@ -73,7 +73,7 @@ const TheHeaderDropdownNotif = () => {
         </CDropdownItem>
         {/* cil-user-unfollow */}
         <div className="custom-scrollbar">
-          {notifications.map(notify => <CDropdownItem href="#">
+          {notifications.map(notify => <CDropdownItem key={notify.id} href="#">
             <div className="message message-notify">
               <div className="pt-3 mr-3 float-left">
                 <div className="c-avatar">

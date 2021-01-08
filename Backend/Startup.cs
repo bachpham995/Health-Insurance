@@ -33,7 +33,8 @@ namespace HealthInsuranceWebServer
         {
             var key = Encoding.UTF8.GetBytes(Configuration["ApplicationSettings:JWT_Secert"].ToString());
 
-            services.AddControllers().AddNewtonsoftJson(option => option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
+            services.AddControllers();
+            // .AddNewtonsoftJson(option => option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore);
  
             services.AddDbContext<HealthInsuranceWebServerContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("HealthInsuranceWebServerContext")));

@@ -61,8 +61,9 @@ namespace HealthInsuranceWebServer.Models
         public bool Retired { get; set; }
 
         public ICollection<Feedback> Feedbacks { get; set; }
-        public ICollection<PolicyRequest> PolicyRequest { get; set; }
-        public ICollection<PolicyEmployee> PolicyEmployee { get; set; }
-        public ICollection<Notification> Notification { get; set; }
+        public ICollection<PolicyRequest> PolicyRequests { get; set; }
+        public ICollection<PolicyEmployee> PolicyEmployees { get; set; }      
+               
+        public ICollection<Notification> Notifications { get; set; }
     }
 }

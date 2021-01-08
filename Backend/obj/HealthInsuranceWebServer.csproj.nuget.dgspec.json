@@ -1,32 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "D:\\EProjectWorkSpace\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj": {}
+    "C:\\Users\\Phaluu\\OneDrive - Capgemini\\Desktop\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj": {}
   },
   "projects": {
-    "D:\\EProjectWorkSpace\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj": {
+    "C:\\Users\\Phaluu\\OneDrive - Capgemini\\Desktop\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\EProjectWorkSpace\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
+        "projectUniqueName": "C:\\Users\\Phaluu\\OneDrive - Capgemini\\Desktop\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
         "projectName": "HealthInsuranceWebServer",
-        "projectPath": "D:\\EProjectWorkSpace\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
-        "packagesPath": "C:\\Users\\bachp\\.nuget\\packages\\",
-        "outputPath": "D:\\EProjectWorkSpace\\Health-Insurance\\Backend\\obj\\",
+        "projectPath": "C:\\Users\\Phaluu\\OneDrive - Capgemini\\Desktop\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
+        "packagesPath": "C:\\Users\\Phaluu\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Phaluu\\OneDrive - Capgemini\\Desktop\\Health-Insurance\\Backend\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\bachp\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Phaluu\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Users\\Phaluu\\AppData\\Roaming\\NuGet\\Microsoft.AspNetCore.Mvc.NewtonsoftJson": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
-            "targetAlias": "netcoreapp3.1",
             "projectReferences": {}
           }
         },
@@ -38,13 +36,8 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
-          "targetAlias": "netcoreapp3.1",
           "dependencies": {
             "Microsoft.AspNetCore.Authentication.JwtBearer": {
-              "target": "Package",
-              "version": "[3.1.10, )"
-            },
-            "Microsoft.AspNetCore.Mvc.NewtonsoftJson": {
               "target": "Package",
               "version": "[3.1.10, )"
             },
@@ -89,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.100\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.404\\RuntimeIdentifierGraph.json"
         }
       }
     }

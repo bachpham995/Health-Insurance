@@ -60,7 +60,7 @@ export default class Utility {
         return '/admin/policies';
 
       default :
-        return '/admin'
+        return '/admin';
     }
   }
 
