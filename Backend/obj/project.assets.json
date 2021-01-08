@@ -9127,19 +9127,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\HGM\\.nuget\\packages\\": {}
+    "C:\\Users\\bachp\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\HGM\\Desktop\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
+      "projectUniqueName": "D:\\EProjectWorkSpace\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
       "projectName": "HealthInsuranceWebServer",
-      "projectPath": "C:\\Users\\HGM\\Desktop\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
-      "packagesPath": "C:\\Users\\HGM\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\HGM\\Desktop\\Health-Insurance\\Backend\\obj\\",
+      "projectPath": "D:\\EProjectWorkSpace\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
+      "packagesPath": "C:\\Users\\bachp\\.nuget\\packages\\",
+      "outputPath": "D:\\EProjectWorkSpace\\Health-Insurance\\Backend\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\HGM\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\bachp\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
