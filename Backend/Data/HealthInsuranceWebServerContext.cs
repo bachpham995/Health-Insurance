@@ -19,7 +19,7 @@ namespace HealthInsuranceWebServer.Data
             modelBuilder.Entity<Employee>(entity => { entity.OwnsOne(e => e.Address); });
             modelBuilder.Entity<Hospital>(entity => { entity.OwnsOne(e => e.Address); });
             modelBuilder.Entity<InsuranceCompany>(entity =>{entity.OwnsOne(e => e.Address);});
-            
+
             modelBuilder.Entity<Hospital>().HasData(
                  new Hospital() { HospitalId = 1, HospitalName = "Bệnh viện Nhân Dân Gia Định", Phone = "08-3841-2692"}
                , new Hospital() { HospitalId = 2, HospitalName = "Bệnh viện Đại học Y Dược TP HCM", Phone = "08-3855-4269"}

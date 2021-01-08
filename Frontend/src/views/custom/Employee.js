@@ -88,6 +88,7 @@ const Employee = ({ method }) => {
       "img": imageSrc,
       "email": form.email.value,
       "phone": form.phone.value,
+      "role" : 1,
       "address": {
         "street": form.street.value,
         "district": form.district.value,

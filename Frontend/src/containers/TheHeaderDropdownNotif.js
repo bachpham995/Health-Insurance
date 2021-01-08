@@ -92,7 +92,6 @@ const TheHeaderDropdownNotif = () => {
               <div className="mr-3 float-left">
                 <div className="c-avatar">
                   {
-
                     Avatar(notify)
                   }
 

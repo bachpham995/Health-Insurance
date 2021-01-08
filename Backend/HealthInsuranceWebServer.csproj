@@ -3,52 +3,51 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Migrations\20210101112317_InitialCreater.cs"/>
-    <Compile Remove="Migrations\20210101112317_InitialCreater.Designer.cs"/>
-    <Compile Remove="Migrations\20210102085305_Initial.cs"/>
-    <Compile Remove="Migrations\20210102085305_Initial.Designer.cs"/>
-    <Compile Remove="Migrations\20210102085546_Initial.cs"/>
-    <Compile Remove="Migrations\20210102085546_Initial.Designer.cs"/>
-    <Compile Remove="Migrations\20210102090224_Initial.cs"/>
-    <Compile Remove="Migrations\20210102090224_Initial.Designer.cs"/>
-    <Compile Remove="Migrations\20210102092304_UpdateDB.cs"/>
-    <Compile Remove="Migrations\20210102092304_UpdateDB.Designer.cs"/>
-    <Compile Remove="Migrations\20210102092418_UpdateDB#2.cs"/>
-    <Compile Remove="Migrations\20210102092418_UpdateDB#2.Designer.cs"/>
-    <Compile Remove="Migrations\20210103092550_Initial.cs"/>
-    <Compile Remove="Migrations\20210103092550_Initial.Designer.cs"/>
-    <Compile Remove="Migrations\20210103124251_Initial.cs"/>
-    <Compile Remove="Migrations\20210103124251_Initial.Designer.cs"/>
-    <Compile Remove="Migrations\20210103124655_Initial.cs"/>
-    <Compile Remove="Migrations\20210103124655_Initial.Designer.cs"/>
-    <Compile Remove="Migrations\20210103124938_Inta.cs"/>
-    <Compile Remove="Migrations\20210103124938_Inta.Designer.cs"/>
-    <Compile Remove="Migrations\20210103125927_init.cs"/>
-    <Compile Remove="Migrations\20210103125927_init.Designer.cs"/>
-    <Compile Remove="Migrations\20210103130355_init.cs"/>
-    <Compile Remove="Migrations\20210103130355_init.Designer.cs"/>
-    <Compile Remove="Migrations\20210103132259_init.cs"/>
-    <Compile Remove="Migrations\20210103132259_init.Designer.cs"/>
-    <Compile Remove="Migrations\20210104123408_initial.cs"/>
-    <Compile Remove="Migrations\20210104123408_initial.Designer.cs"/>
+    <Compile Remove="Migrations\20210101112317_InitialCreater.cs" />
+    <Compile Remove="Migrations\20210101112317_InitialCreater.Designer.cs" />
+    <Compile Remove="Migrations\20210102085305_Initial.cs" />
+    <Compile Remove="Migrations\20210102085305_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20210102085546_Initial.cs" />
+    <Compile Remove="Migrations\20210102085546_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20210102090224_Initial.cs" />
+    <Compile Remove="Migrations\20210102090224_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20210102092304_UpdateDB.cs" />
+    <Compile Remove="Migrations\20210102092304_UpdateDB.Designer.cs" />
+    <Compile Remove="Migrations\20210102092418_UpdateDB#2.cs" />
+    <Compile Remove="Migrations\20210102092418_UpdateDB#2.Designer.cs" />
+    <Compile Remove="Migrations\20210103092550_Initial.cs" />
+    <Compile Remove="Migrations\20210103092550_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20210103124251_Initial.cs" />
+    <Compile Remove="Migrations\20210103124251_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20210103124655_Initial.cs" />
+    <Compile Remove="Migrations\20210103124655_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20210103124938_Inta.cs" />
+    <Compile Remove="Migrations\20210103124938_Inta.Designer.cs" />
+    <Compile Remove="Migrations\20210103125927_init.cs" />
+    <Compile Remove="Migrations\20210103125927_init.Designer.cs" />
+    <Compile Remove="Migrations\20210103130355_init.cs" />
+    <Compile Remove="Migrations\20210103130355_init.Designer.cs" />
+    <Compile Remove="Migrations\20210103132259_init.cs" />
+    <Compile Remove="Migrations\20210103132259_init.Designer.cs" />
+    <Compile Remove="Migrations\20210104123408_initial.cs" />
+    <Compile Remove="Migrations\20210104123408_initial.Designer.cs" />
+    <Compile Remove="Migrations\20210108165653_init.cs" />
+    <Compile Remove="Migrations\20210108165653_init.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.10"/>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.10">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4"/>
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3"/>
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10"/>
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.3"/>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
   </ItemGroup>
   <ItemGroup>
-    <Content Remove="Properties\launchSettings.json"/>
-    <Content Remove="Properties\launchSettings.json"/>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Migrations\"/>
+    <Content Remove="Properties\launchSettings.json" />
+    <Content Remove="Properties\launchSettings.json" />
   </ItemGroup>
 </Project>

@@ -26,7 +26,7 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Notification>>> GetNotification()        
         {            
-            return await _context.Notification.Include(n=>n.FromUser).Include(n=>n.ToUser).ToListAsync();
+            return await _context.Notification.Include(n=>n.FromUser).ToListAsync();
         }
 
         // GET: api/Notifications/5
