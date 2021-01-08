@@ -20,7 +20,7 @@ const TheHeaderDropdownNotif = () => {
       console.log('Get data successfully: ', res);
       // console.log("Data Header:", Object.keys(res));
       if (mounted) {
-        setNotifications(res.filter( n => n.adminId != null));
+        setNotifications(res.filter( n => n.toUserId == 1));
         //setCount(res.lenght);
       }
     }).catch(err => {
@@ -29,7 +29,7 @@ const TheHeaderDropdownNotif = () => {
   }
 
   useEffect(()=>{
-    setCount(notifications.filter(n => !n.status && !n.isActivity).length);
+    setCount(notifications.filter(n => !n.status && n.type == 0).length);
   },[notifications]);
 
 
@@ -55,11 +55,11 @@ const TheHeaderDropdownNotif = () => {
   }
 
   const Avatar = (notify) => {
-    if(notify.employeeId != null && notify.employee.img != null){
+    if(notify.fromUserId != null && notify.fromUser.img != null){
       return (<><CImg
-        src={notify.employee?.img}
+        src={notify.fromUser?.img}
         className="c-avatar-img"
-        alt={notify.employee?.username}
+        alt={notify.fromUser?.email}
       />
       <span className="c-avatar-status bg-success"></span></>)
     }
