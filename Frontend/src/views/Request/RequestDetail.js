@@ -19,7 +19,8 @@ import {
   CDropdownToggle,
   CDropdownItem,
   CDropdownMenu,
-  CTextarea
+  CTextarea,
+  CLink
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import AxiosClient from 'src/api/AxiosClient';
@@ -28,13 +29,18 @@ import {
   useParams,
   useHistory
 } from "react-router-dom";
+// import { from } from 'core-js/fn/array';
 
 const RequestDetails = ({ method }) => {
-  const [uploadStatus, setUploadStatus] = useState(null);
   const [request, setRequest] = useState(null);
   const [employee, setEmployee] = useState(null);
   const [policy, setPolicy] = useState(null);
-  const [statusDropdown,setStatusDropdown] = useState(0);
+  const [checkApproval, setcheckApproval] = useState(null);
+  const [resion, setResion] = useState(null);
+  const [data, setData] = useState(null);
+
+  var today = new Date(),
+    date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
   const { id } = useParams();
   const readOnly = ["get"];
   const [showConfirm, setShowConfirm] = useState(false);
@@ -43,7 +49,6 @@ const RequestDetails = ({ method }) => {
   const toggle = () => {
     setShowConfirm(!showConfirm);
   }
-
   const goBack = () => {
     history.push("/admin/requests");
   }
@@ -51,7 +56,7 @@ const RequestDetails = ({ method }) => {
   useEffect(async () => {
     if (method !== "post" && request == null) {
       await AxiosClient.get("/PolicyRequests/" + id).then(res => {
-        console.log(res.employee);
+        setData(res);
         const address = res.employee.address.street +
           " ," + res.employee.address.district +
           " ," + res.employee.address.city +
@@ -66,73 +71,52 @@ const RequestDetails = ({ method }) => {
         console.log('Failed to Get data: ', err);
       });
     }
-  }, []);
-  //   const onSubmit = async (event) => {
-  //     var form = event.target;
-  //     //var formData = new FormData(form);
-  //     const data = {
-  //       "insCompanyName": form.insCompanyName.value,
-  //       "phone": form.phone.value,
-  //       "email": form.email.value,
-  //       "url": form.url.value,
-  //       "img": imageSrc,
-  //       "address": {
-  //         "street": form.street.value,
-  //         "district": form.district.value,
-  //         "city": form.city.value,
-  //         "country": form.country.value,
-  //         "postalCode": form.postalCode.value
-  //       }
-  //     }
-  // console.log(data);
-  //     switch (method) {
-  //       case "post":
-  //         await AxiosClient.post("/InsuranceCompanies", JSON.stringify(data),
-  //           {
-  //             headers: { 'content-type': 'application/json' }
-  //           }).then(res => {
-  //             goBack();
-  //           }).catch(err => {
-  //             console.log(err);
-  //           });
-  //         break;
+  }, [checkApproval]);
+  const onSubmit = async (event) => {
+    const dataApproval = {
+      "approvalDate": date,
+      "status": checkApproval ? 0 : 1,
+      "Reason": event.target.reasion.value,
+      "requestId": id,
+      "retired": 1
+    }
 
-  //       case "put":
-  //         data.insuranceCompanyId = parseInt(id);
-  //         await AxiosClient.put("/InsuranceCompanies" + "/" + id, JSON.stringify(data),
-  //           {
-  //             headers: { 'content-type': 'application/json' }
-  //           }).then(res => {
-  //             goBack();
-  //           }).catch(err => {
-  //             console.log(err);
-  //           });
-  //         break;
+    const dataRequest = {
+      "requestId": data.requestId,
+      "employeeId": data.employeeId,
+      "policyId": data.policyId,
+      "requestDate": data.requestDate,
+      "status": 0,
+      "note": data.note,
+      "emi": data.emi,
+      "amount": data.amount
+    }
+    console.log(dataRequest);
+    await AxiosClient.post("/PolicyApprovals", JSON.stringify(dataApproval)).then(res => {
+      setShowConfirm(false);
+    }).catch(err => {
+      console.log(err);
+    });;
+    await AxiosClient.put("/PolicyRequests" + "/" + id, JSON.stringify(dataRequest),
+      {
+        headers: { 'content-type': 'application/json' }
+      }
+    ).then(res => {
+      setShowConfirm(false);
+      goBack();
+    }).catch(err => {
+      console.log(err);
+    });;;
 
-  //       case "delete":
-  //         await AxiosClient.delete("/InsuranceCompanies" + "/" + id,
-  //           {}
-  //         ).then(res => {
-  //           setShowConfirm(false);
-  //           goBack();
-  //         }).catch(err => {
-  //           console.log(err);
-  //         });
-  //         break;
-
-  //       default:
-  //         break;
-
-  //     }
-  //     return true
-  //   }
+  }
   const Layout = () => {
     let action = Utility.ActionDisplayName(method);
 
     return (
       <>
-        <CForm>
-          {/* //   onSubmit={onSubmit} width="100%" wasValidated className="form-horizontal" */}
+        <CForm
+          onSubmit={onSubmit} width="100%" className="form-horizontal"
+        >
           <CRow >
             <CCol >
               <CCard>
@@ -276,7 +260,7 @@ const RequestDetails = ({ method }) => {
                   </CRow>
                 </CCardBody>
                 <CCardFooter>
-                  <CButton hidden={readOnly.includes(method) ? "hidden" : ""} onClick={toggle} type="submit" size="sm" color="primary"><CIcon name="cil-scrubber" /> Submit</CButton>
+                  <CButton hidden={readOnly.includes(method) ? "hidden" : ""} onClick={toggle} size="sm" color="primary"><CIcon name="cil-scrubber" /> Submit</CButton>
                   {/* <CButton className="ml-2" hidden={readOnly.includes(method) ? "hidden" : ""} onClick={(e) => setImageSrc(null)} type="reset" size="sm" color="danger"><CIcon name="cil-ban" />Reset</CButton> */}
                   {/* <CButton className="ml-2" onClick={toggle} hidden={method !== "delete"} type="reset" size="sm" color="danger"><CIcon name="cil-trash" />Delete</CButton> */}
                   <CButton className="ml-2" onClick={goBack} size="m" color="warning">Back</CButton>
@@ -290,44 +274,29 @@ const RequestDetails = ({ method }) => {
             </CModalHeader>
             <CModalBody>
               <CRow>
-              <CCol xs="12">
-                      <CFormGroup>
-                        <CLabel>Resion</CLabel>
-                        <CTextarea defaultValue={request?.emi} id="emi" type="text" />
-                      </CFormGroup>
-              </CCol>
-                <CCol xs="6">
-                  <CDropdown className="mt-2">
-                    <CDropdownToggle 
-                     color="info"
-                     >
-                     
-                  </CDropdownToggle>
-                    <CDropdownMenu>
-                      <CDropdownItem header>
-                        {statusDropdown?"Don't Approval":"Approval"}
-                      </CDropdownItem>
-                      <CDropdownItem
-                      value="0"
-                      >Don't Approval</CDropdownItem>
-                      <CDropdownItem divider />
-                      <CDropdownItem
-                      value="1"
-                      >Approval
-                      </CDropdownItem>
-                    </CDropdownMenu>
-                  </CDropdown>
+                <CCol xs="12">
+                  <CFormGroup>
+                    <CLabel>Resion</CLabel>
+                    <CTextarea defaultValue="Write some resion......" id="reasion" type="text" required />
+                  </CFormGroup>
                 </CCol>
               </CRow>
             </CModalBody>
             <CModalFooter>
-              <CButton type="submit" color="primary">Yes</CButton>{' '}
+              <CButton type="submit"
+                onClick={() => setcheckApproval(true)}
+                color="success">Approval</CButton>
+              <CButton type="submit"
+                onClick={() => setcheckApproval(false)}
+                color="danger">Unaccep
+                    </CButton>
               <CButton
                 color="secondary"
                 onClick={toggle}
               >Cancel</CButton>
             </CModalFooter>
           </CModal>
+
         </CForm>
       </>
     );

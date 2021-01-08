@@ -2,7 +2,7 @@
   "version": 2,
   "dgSpecHash": "50GkUIV4qut097FD6IpqhZY7Tajg/WC5PZAHJvdQUqBNilEY2NwhG6ezurPsXk4gjQ4SX9WgeJohl1KbptuO/g==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Phaluu\\OneDrive - Capgemini\\Desktop\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
+  "projectFilePath": "/Users/hoanghoa/Projects/HealthInsuranceMgmt/Health-Insurance/Backend/HealthInsuranceWebServer.csproj",
   "expectedPackageFiles": [
     "/Users/hoanghoa/.nuget/packages/microsoft.aspnetcore.authentication.jwtbearer/3.1.10/microsoft.aspnetcore.authentication.jwtbearer.3.1.10.nupkg.sha512",
     "/Users/hoanghoa/.nuget/packages/microsoft.aspnetcore.html.abstractions/2.2.0/microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",

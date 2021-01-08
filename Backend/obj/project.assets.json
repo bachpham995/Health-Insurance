@@ -9127,19 +9127,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Phaluu\\.nuget\\packages\\": {}
+    "/Users/hoanghoa/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Phaluu\\OneDrive - Capgemini\\Desktop\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
+      "projectUniqueName": "/Users/hoanghoa/Projects/HealthInsuranceMgmt/Health-Insurance/Backend/HealthInsuranceWebServer.csproj",
       "projectName": "HealthInsuranceWebServer",
-      "projectPath": "C:\\Users\\Phaluu\\OneDrive - Capgemini\\Desktop\\Health-Insurance\\Backend\\HealthInsuranceWebServer.csproj",
-      "packagesPath": "C:\\Users\\Phaluu\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Phaluu\\OneDrive - Capgemini\\Desktop\\Health-Insurance\\Backend\\obj\\",
+      "projectPath": "/Users/hoanghoa/Projects/HealthInsuranceMgmt/Health-Insurance/Backend/HealthInsuranceWebServer.csproj",
+      "packagesPath": "/Users/hoanghoa/.nuget/packages/",
+      "outputPath": "/Users/hoanghoa/Projects/HealthInsuranceMgmt/Health-Insurance/Backend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Phaluu\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/Users/hoanghoa/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp3.1"
@@ -9149,6 +9149,7 @@
       },
       "frameworks": {
         "netcoreapp3.1": {
+          "targetAlias": "netcoreapp3.1",
           "projectReferences": {}
         }
       },
@@ -9160,6 +9161,7 @@
     },
     "frameworks": {
       "netcoreapp3.1": {
+        "targetAlias": "netcoreapp3.1",
         "dependencies": {
           "Microsoft.AspNetCore.Authentication.JwtBearer": {
             "target": "Package",
@@ -9210,7 +9212,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.404\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/5.0.101/RuntimeIdentifierGraph.json"
       }
     }
   }

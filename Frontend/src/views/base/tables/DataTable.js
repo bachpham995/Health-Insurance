@@ -81,6 +81,7 @@ const DataTable = ({ tableName, tableQuery, color }) => {
                       </CBadge>
                     </td>
                   ),
+                'null':(item) => {},
                 'show_details':
                   (item) => (
                     <CDropdown className="mt-2">

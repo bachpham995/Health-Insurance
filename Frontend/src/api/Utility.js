@@ -53,8 +53,6 @@ export default class Utility {
         return '/admin/companies';
       case "PolicyRequests":
         return '/admin/requests';
-      case "PolicyApprovals":
-        return '/admin/approvals';
       case "Hospitals":
         return '/admin/hospitals';
       case "Employees":
@@ -107,6 +105,14 @@ export default class Utility {
               sorter: false,
               filter: false
           },"requestId","requestDate","status","note","emi","amount"];
+          case "PolicyApprovals":
+            return [{
+                key: '',
+                label: '', 
+                _style: { width: '5%' },
+                sorter: false,
+                filter: false
+            },"approvalId","approvalDate","status","reason","requestId"];
       default:
         return [];
     }

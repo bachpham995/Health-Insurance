@@ -350,6 +350,11 @@ const _admin_nav = [
         _tag: 'CSidebarNavItem',
         name: 'Requests',
         to: '/admin/requests',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Approval',
+        to: '/admin/approvals',
       }
     ]
   },
