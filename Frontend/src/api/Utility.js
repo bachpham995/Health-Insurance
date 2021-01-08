@@ -56,7 +56,13 @@ export default class Utility {
       case "Hospitals":
         return '/admin/hospitals';
       case "Employees":
-        return '/admin/employees'
+        return '/admin/employees';
+
+      case "Policies":
+        return '/admin/policies';
+
+      default :
+        return '/admin'
     }
   }
 

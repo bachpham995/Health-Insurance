@@ -1,1 +1,28 @@
 // Here you can add other styles
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #d6dee1;
+  border-radius: 20px;
+  border: 6px solid gray;
+  background-clip: content-box;
+}
+
+/* Handle on hover */
+custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.custom-scrollbar {
+  overflow: scroll;
+}
+
+.message-notify{
+  min-width: 400px;
+}

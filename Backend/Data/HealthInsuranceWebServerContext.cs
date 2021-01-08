@@ -87,14 +87,14 @@ namespace HealthInsuranceWebServer.Data
 
             modelBuilder.Entity<Employee>().HasData(
                  new Employee(){ EmployeeId = 1, FName = "Phat", LName="Luu Trong", Username="phatltuit", Password="123", Email ="phatltuit@gmail.com",Designation = "Senior Cleaner", Phone = "058256332X"
-                               , JoinDate=DateTime.Now.AddYears(10), DoB = new DateTime(1996, 05,30)}
+                               , JoinDate=DateTime.Now.AddYears(10), DoB = new DateTime(1996, 05,30), Img="http://localhost:6969/imgs/employee/luutrongphat.png"}
                , new Employee(){ EmployeeId = 2, FName = "Bach", LName="Pham Xuan", Username="bachpham", Password="123456789", Email ="bachpham@gmail.com",Designation = "Junior Cleaner", Phone = "012345678X"
                                , JoinDate=DateTime.Now.AddYears(10), DoB = new DateTime(1996, 05,30)}
                , new Employee(){ EmployeeId = 3, FName = "Hoa", LName="Nguyen Vu Hoang", Username="nguyenvuhoanghoa", Password="123456789", Email ="nguyenvuhoanghoa@gmail.com",Designation = "Junior Cleaner", Phone = "01232278X"
                                , JoinDate=DateTime.Now.AddYears(10), DoB = new DateTime(1996, 05,30)}
                );
             modelBuilder.Entity<Employee>().OwnsOne(e => e.Address).HasData(
-                      new { EmployeeId = 1, Street = "Nguyễn Ảnh Thủ, Bà Điểm", District = "Hóc Môn", City = "Ho Chi Minh City", Country = "Vietnam", PostalCode = "" }
+                      new { EmployeeId = 1, Street = "Nguyễn Ảnh Thủ, Bà Điểm", District = "Hóc Môn", City = "Ho Chi Minh City", Country = "Vietnam", PostalCode = "70000"}
                     , new { EmployeeId = 2, Street = "Tân Thới Nhất", District = "Quận 12", City = "Ho Chi Minh City", Country = "Vietnam", PostalCode = "" }
                     , new { EmployeeId = 3, Street = "Xô Viết Nghệ Tĩnh", District = "Quận Bình Thạnh", City = "Ho Chi Minh City", Country = "Vietnam", PostalCode = "" }
                 );
@@ -102,6 +102,10 @@ namespace HealthInsuranceWebServer.Data
             modelBuilder.Entity<Admin>().HasData(
                new Admin() { Username = "Admin", Password = "123456789"}
                );
+
+            modelBuilder.Entity<Notification>().HasData(
+                new Notification(){Id = 1, EmployeeId = 1, Date = DateTime.Now,Title="Policy Request", Description="A User has submit a policy request.", Status = false, IsActivity = false}
+            );
         }
 
         public DbSet<Admin> Admin { get; set; }

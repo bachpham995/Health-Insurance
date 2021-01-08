@@ -25,14 +25,14 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Policy>>> GetPolicy()
         {
-            return await _context.Policy.ToListAsync();
+            return await _context.Policy.Where(p => !p.Retired).ToListAsync();
         }
 
         // GET: api/Policies/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Policy>> GetPolicy(int id)
         {
-            var policy = await _context.Policy.FindAsync(id);
+            var policy = await _context.Policy.Where(p => !p.Retired && p.PolicyId == id).FirstAsync<Policy>();
 
             if (policy == null)
             {
@@ -80,6 +80,14 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpPost]
         public async Task<ActionResult<Policy>> PostPolicy(Policy policy)
         {
+            int nextId = _context.Policy.Max(p => p.PolicyId) + 1;
+            string policyNumber = DateTime.Now.Year.ToString() + "-";
+            for (int i = 0; i < 5 - nextId.ToString().Length; i++)
+            {
+                policyNumber+="0";    
+            }
+            policyNumber+=nextId;
+            policy.PolicyNumber = policyNumber;
             _context.Policy.Add(policy);
             await _context.SaveChangesAsync();
 
@@ -95,8 +103,9 @@ namespace HealthInsuranceWebServer.Controllers
             {
                 return NotFound();
             }
-
-            _context.Policy.Remove(policy);
+            
+            policy.Retired = true;
+            _context.Policy.Update(policy);
             await _context.SaveChangesAsync();
 
             return policy;

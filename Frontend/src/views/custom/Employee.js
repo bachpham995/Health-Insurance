@@ -34,7 +34,6 @@ const Employee = ({ method }) => {
   const { id } = useParams();
   const readOnly = ["get", "delete"];
   const [showConfirm, setShowConfirm] = useState(false);
-  const [switchOn, setSwitchOn] = useState(false);
   let history = useHistory();
 
   const toggle = () => {
@@ -58,7 +57,7 @@ const Employee = ({ method }) => {
         setImageSrc(Utility.REACT_APP_SERVER_URL + res);
         setUploadStatus(true);
       }).catch(err => {
-        // console.log(err);
+         console.log(err);
       });
   }
 

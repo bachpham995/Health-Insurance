@@ -738,7 +738,7 @@ const BasicForms = () => {
                   <CCol md="12">
                     <CInputGroup>
                       <CInputGroupPrepend>
-                        <CButton type="button" color="primary"><CIcon name="cil-magnifying-glass" /> Search</CButton>
+                        <CButton type="button" color="primary"><CIcon name="cil-house" /> Search</CButton>
                       </CInputGroupPrepend>
                       <CInput id="input1-group2" name="input1-group2" placeholder="Username" />
                     </CInputGroup>
