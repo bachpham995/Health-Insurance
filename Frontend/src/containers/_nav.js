@@ -340,7 +340,18 @@ const _admin_nav = [
         _tag: 'CSidebarNavItem',
         name: 'Employee',
         to: '/admin/employees'
-      }]
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Requests',
+        to: '/admin/requests',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Approval',
+        to: '/admin/approvals',
+      }
+    ]
   },
   {
     _tag: 'CSidebarNavItem',

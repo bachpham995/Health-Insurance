@@ -5,13 +5,15 @@ import React from 'react';
 const DataTable = React.lazy(() => import('./views/base/tables/DataTable'));
 //Company
 const Company = React.lazy(()=>import('./views/custom/Company'));
+
+const Approval = React.lazy(()=> import('./views/Approvals/Approval'));
 //Hospital
 const Hospital = React.lazy(()=>import('./views/custom/Hospital'));
 //Employee
 const Employee = React.lazy(()=>import('./views/custom/Employee'));
 //Request
-const Request = React.lazy(()=> import('./views/base/Request/RequestEmployees'))
-
+const Request = React.lazy(()=> import('./views/Request/Request'));
+const RequestDetails = React.lazy(()=>import("./views/Request/RequestDetail"));
 //Policy
 const Policy = React.lazy(()=> import('./views/custom/Policy'))
 
@@ -119,9 +121,12 @@ const routes = [
   { path: '/admin/employees/edit/:id', exact: true, name: 'Update Employee', component : Employee, props:{method : "put"}},
   { path: '/admin/employees/read/:id', exact: true, name: 'Info Employee', component : Employee, props:{method : "get"}},
   { path: '/admin/employees/delete/:id', exact: true, name: 'Delete Employee', component : Employee, props:{method : "delete"}},
+  //Request
+  {path:'/admin/requests', exact: true, name: 'Requests', component : Request, props:{tableName:"Requests", tableQuery: "PolicyRequests", color:"light"}},
+  {path: '/admin/requests/read/:id', exact: true, name: 'Info Request', component : RequestDetails, props:{mode : "get"}},
+  {path:'/admin/requests', exact: true, name: 'Requests', component : Request, props:{tableName:"Requests", tableQuery: "PolicyRequests", color:"light"}},
+  {path:'/admin/approvals', exact: true, name: 'Approvals', component : Approval, props:{tableName:"Approvals", tableQuery: "PolicyApprovals", color:"light"}},
 
-
-  { path:'/admin/requests', exact: true, name: 'Requests', component : Request, props:{tableName:"Requests", tableQuery: "PolicyRequests", color:"light"}},
 
 ];
 
