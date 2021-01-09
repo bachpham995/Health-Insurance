@@ -25,14 +25,14 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Feedback>>> GetFeedback()
         {
-            return await _context.Feedback.ToListAsync();
+            return await _context.Feedback.Where(f=>!f.Retired).Include(f => f.Employee).ToListAsync();
         }
 
         // GET: api/Feedbacks/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Feedback>> GetFeedback(int id)
         {
-            var feedback = await _context.Feedback.FindAsync(id);
+            var feedback = await _context.Feedback.Include(f => f.Employee).Where(f=>!f.Retired && f.EmployeeId == id).FirstAsync();
 
             if (feedback == null)
             {

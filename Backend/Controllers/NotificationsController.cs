@@ -33,7 +33,7 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Notification>> GetNotification(int id)
         {
-            var notification = await _context.Notification.FindAsync(id);
+            var notification = await _context.Notification.Include(n=>n.FromUser).Where(n => n.Id == id).FirstAsync();
 
             if (notification == null)
             {

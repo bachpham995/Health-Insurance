@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel;
 
 namespace HealthInsuranceWebServer.Models
 {
@@ -31,5 +32,8 @@ namespace HealthInsuranceWebServer.Models
         public float Emi { get; set; }
 
         public bool Status { get; set; }
+        
+        [DefaultValue("false")]
+        public bool Retired { get; set; }
     }
 }

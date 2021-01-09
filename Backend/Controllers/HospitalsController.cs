@@ -26,14 +26,14 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Hospital>>> GetHospital()
         {
-            return await _context.Hospital.ToListAsync();
+            return await _context.Hospital.Where(h=>!h.Retired).Include(h=>h.Policies).ToListAsync();
         }
 
         // GET: api/Hospitals/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Hospital>> GetHospital(int id)
         {
-            var hospital = await _context.Hospital.FindAsync(id);
+            var hospital = await _context.Hospital.Include(h=>h.Policies).Where(h=>!h.Retired && h.HospitalId == id).FirstAsync();
 
             if (hospital == null)
             {

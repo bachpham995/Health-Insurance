@@ -25,14 +25,14 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PolicyApproval>>> GetPolicyApproval()
         {
-            return await _context.PolicyApproval.ToListAsync();
+            return await _context.PolicyApproval.Include(p => p.PolicyRequest).Where(p=>!p.Retired).ToListAsync();
         }
 
         // GET: api/PolicyApprovals/5
         [HttpGet("{id}")]
         public async Task<ActionResult<PolicyApproval>> GetPolicyApproval(int id)
         {
-            var policyApproval = await _context.PolicyApproval.FindAsync(id);
+            var policyApproval = await _context.PolicyApproval.Include(p => p.PolicyRequest).Where(p=>!p.Retired && p.ApprovalId == id).FirstAsync();
 
             if (policyApproval == null)
             {

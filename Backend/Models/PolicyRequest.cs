@@ -31,5 +31,8 @@ namespace HealthInsuranceWebServer.Models
         public float Emi { get; set; }
 
         public float Amount { get; set; }       
+
+        [DefaultValue("false")]
+        public bool Retired { get; set; }
     }
 }

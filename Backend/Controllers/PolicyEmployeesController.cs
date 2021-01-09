@@ -25,14 +25,22 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PolicyEmployee>>> GetPolicyEmployee()
         {
-            return await _context.PolicyEmployee.ToListAsync();
+            return await _context.PolicyEmployee
+            .Where(pe => !pe.Retired)
+            .Include(pe => pe.Policy)
+            .Include(pe => pe.Employee)
+            .ToListAsync();
         }
 
         // GET: api/PolicyEmployees/5
         [HttpGet("{id}")]
         public async Task<ActionResult<PolicyEmployee>> GetPolicyEmployee(int id)
         {
-            var policyEmployee = await _context.PolicyEmployee.FindAsync(id);
+            var policyEmployee = await _context.PolicyEmployee
+            .Where(pe => !pe.Retired && pe.Id == id)
+            .Include(pe => pe.Policy)
+            .Include(pe => pe.Employee)
+            .FirstAsync();
 
             if (policyEmployee == null)
             {
