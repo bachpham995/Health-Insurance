@@ -204,7 +204,7 @@ const Policy = ({ method }) => {
                               <CCol md="12">
                                 <CLabel htmlFor="insCompanyId">Company</CLabel>
                                 <CInputGroup>
-                                  <CSelect custom rows="2" id="insCompanyId">
+                                  <CSelect  custom rows="2" id="insCompanyId">
                                     {
                                       listCompanies?.map(comp => (
                                         <option key={comp.insuranceCompanyId} value={comp.insuranceCompanyId}>{comp.insCompanyName}</option>

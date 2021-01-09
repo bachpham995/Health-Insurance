@@ -74,7 +74,7 @@ const RequestDetails = ({ method }) => {
   const onSubmit = async (event) => {
     const dataApproval = {
       "approvalDate": date,
-      "status": checkApproval ? 0 : 1,
+      "status": checkApproval ? 1 : 0,
       "Reason": event.target.reasion.value,
       "requestId": id,
       "retired": 1
@@ -275,8 +275,8 @@ const RequestDetails = ({ method }) => {
               <CRow>
                 <CCol xs="12">
                   <CFormGroup>
-                    <CLabel>Resion</CLabel>
-                    <CTextarea defaultValue="Write some reason......" id="reasion" type="text" required />
+                    <CLabel>Reasion</CLabel>
+                    <CTextarea defaultValue="Write some reasion......" id="reasion" type="text" required />
                   </CFormGroup>
                 </CCol>
               </CRow>

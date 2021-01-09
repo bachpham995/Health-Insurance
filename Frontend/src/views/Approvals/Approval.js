@@ -70,7 +70,13 @@ const Approvals = ({ tableName, tableQuery, color }) => {
               </CBadge>
             </td>
           ),
-      }}
+          'none': ()=>(
+            <td>
+            </td>
+          )
+      }
+     
+    }
     />
     </CCardBody>
   </CCard>
