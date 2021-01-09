@@ -37,7 +37,12 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Policy>> GetPolicy(int id)
         {
-            var policy = await _context.Policy.Where(p => !p.Retired && p.PolicyId == id).FirstAsync<Policy>();
+            var policy = await _context.Policy.Where(p => !p.Retired && p.PolicyId == id)
+            .Include(p=>p.Hospital)
+            .Include(p=>p.InsCompany)
+            .Include(p=>p.PolicyRequests)
+            .Include(p=>p.PolicyEmployees)
+            .FirstAsync<Policy>();
 
             if (policy == null)
             {

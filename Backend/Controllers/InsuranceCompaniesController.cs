@@ -43,7 +43,7 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<InsuranceCompany>> GetInsuranceCompany(int id)
         {
-            var insuranceCompany = await _context.InsuranceCompany.Where(elt=>!elt.Retired && elt.InsuranceCompanyId == id).FirstAsync();
+            var insuranceCompany = await _context.InsuranceCompany.Where(elt=>!elt.Retired && elt.InsuranceCompanyId == id).Include(c => c.Policies).FirstAsync();
 
             if (insuranceCompany == null)
             {
