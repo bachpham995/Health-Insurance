@@ -30,7 +30,5 @@ namespace HealthInsuranceWebServer.Models
         public bool Status { get; set; }
     
         public int Type { get; set; }
-
-        
     }
 }

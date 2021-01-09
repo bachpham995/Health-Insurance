@@ -109,6 +109,7 @@ const Policy = ({ method }) => {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
             setPolicy(res);
+            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Policy", "Added new Policy", 1);
             goBack();
           }).catch(err => {
             console.log(err);
@@ -123,6 +124,7 @@ const Policy = ({ method }) => {
           {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
+            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Policy", "Modified a Policy", 1);
             goBack();
           }).catch(err => {
             console.log(err);
@@ -135,6 +137,7 @@ const Policy = ({ method }) => {
           {}
         ).then(res => {
           setShowConfirm(false);
+          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Policy", "Removed new Policy", 1);
           goBack();
         }).catch(err => {
           console.log(err);

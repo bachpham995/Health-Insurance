@@ -25,10 +25,12 @@ import {
 import AdminNotification from 'src/views/custom/AdminNotification';
 import TheHeaderDropdownNotif from './TheHeaderDropdownNotif';
 import AxiosClient from 'src/api/AxiosClient';
+import Utility from 'src/api/Utility'
 
-const TheHeader = () => {
+const TheHeader = ({user}) => {
   const dispatch = useDispatch()
-  const sidebarShow = useSelector(state => state.sidebarShow)
+  const sidebarShow = useSelector(state => state.sidebarShow);
+  const [delay, setDelay] = useState(0);
 
   const toggleSidebar = () => {
     const val = [true, 'responsive'].includes(sidebarShow) ? false : 'responsive'
@@ -40,7 +42,6 @@ const TheHeader = () => {
     dispatch({ type: 'set', sidebarShow: val })
   }
 
-  const [user, setUser] = useState(null);
   const [notifications_0, setNotifications_0] = useState([]);
   const [notifications_1, setNotifications_1] = useState([]);
   const [notifications_2, setNotifications_2] = useState([]);
@@ -48,33 +49,23 @@ const TheHeader = () => {
   const [count_1, setCount_1] = useState(0);
   const [count_2, setCount_2] = useState(0);
 
-  const FetchLoginUser = async (mounted) => {
-    await AxiosClient.get("/Employees/1").then(res => {
-      console.log('Get data successfully: ', res);
-      // console.log("Data Header:", Object.keys(res));
-      if (mounted) {
-        setUser(res);
-      }
-    }).catch(err => {
-      console.log('Failed to Get data: ', err);
-    });
+  const GetNotificationsByType = (data, type) => {
+    return data.filter(n => n.toUserId == Utility.CurrentUser().id && n.type == type)
   }
-
 
   const FetchNotification = async (mounted) => {
     await AxiosClient.get("/Notifications").then(res => {
-      console.log('Get data successfully: ', res);
-      // console.log("Data Header:", Object.keys(res));
+      // console.log('Get data successfully: ', res);
+      // console.log("Data Header:", Object.keys(res[0]));
       if (mounted) {
-        setNotifications_0(res.filter(n => n.toUserId == user.employeeId && n.type == 0));
-        setNotifications_1(res.filter(n => n.toUserId == user.employeeId && n.type == 1));
-        setNotifications_2(res.filter(n => n.toUserId == user.employeeId && n.type == 2));
+        setNotifications_0(GetNotificationsByType(res, 0));
+        setNotifications_1(GetNotificationsByType(res, 1));
+        setNotifications_2(GetNotificationsByType(res, 2));
       }
     }).catch(err => {
       console.log('Failed to Get data: ', err);
     });
   }
-
 
   useEffect(() => {
     setCount_0(notifications_0.filter(n => !n.status && n.type == 0).length);
@@ -82,16 +73,17 @@ const TheHeader = () => {
     setCount_2(notifications_2.filter(n => !n.status && n.type == 2).length);
   }, [notifications_0, notifications_1, notifications_2]);
 
-  useEffect(()=>{
-    let mounted = true;    
-    FetchLoginUser(mounted)
-    return () => mounted = false;
-  },[])
+
 
   useEffect(() => {
-    let mounted = true;    
-    FetchNotification(mounted);
-    return () => mounted = false;
+    //let mounted = true;
+    //FetchNotification(mounted);
+    //return () => mounted = false;
+    const interval = setInterval(() => {
+      setDelay(5000);
+      FetchNotification(true);
+    }, delay);
+    return () => clearInterval(interval);
   }, [count_0, count_1, count_2]);
 
   return (
@@ -129,7 +121,7 @@ const TheHeader = () => {
         {/* <TheHeaderDropdownNotif/>
         <TheHeaderDropdownTasks/>
         <TheHeaderDropdownMssg/>*/}
-        <TheHeaderDropdown user={user}/>
+        <TheHeaderDropdown user={user} />
       </CHeaderNav>
 
       <CSubheader className="px-3 justify-content-between">

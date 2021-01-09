@@ -97,6 +97,7 @@ const Hospital = ({ method }) => {
           {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
+            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Hospital", "Added new Hospital", 1);
             goBack();
           }).catch(err => {
             console.log(err);
@@ -109,6 +110,7 @@ const Hospital = ({ method }) => {
           {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
+            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Hospital", "Modified a Hospital", 1);
             goBack();
           }).catch(err => {
             console.log(err);
@@ -120,6 +122,7 @@ const Hospital = ({ method }) => {
           {}
         ).then(res => {
           setShowConfirm(false);
+          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Hospital", "Removed a Hospital", 1);
           goBack();
         }).catch(err => {
           console.log(err);

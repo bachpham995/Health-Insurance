@@ -352,11 +352,32 @@ const _admin_nav = [
         to: '/admin/approvals',
       }
     ]
-  },
-  {
-    _tag: 'CSidebarNavItem',
-    name: 'Requests',
-    to: '/admin/requests',
+  },{
+    _tag: 'CSidebarNavDropdown',
+    name: 'Icons',
+    route: '/icons',
+    icon: 'cil-star',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'CoreUI Free',
+        to: '/icons/coreui-icons',
+        badge: {
+          color: 'success',
+          text: 'NEW',
+        },
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'CoreUI Flags',
+        to: '/icons/flags',
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'CoreUI Brands',
+        to: '/icons/brands',
+      },
+    ],
   }
 ];
 export default _admin_nav

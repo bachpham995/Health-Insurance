@@ -10,92 +10,79 @@ import {
 import CIcon from '@coreui/icons-react'
 
 
-const AdminNotification = ({ntfType, notifications, count}) => {
-//   const [notifications, setNotifications] = useState([]);
-//   const [count, setCount] = useState(0);  
-
-//   const FetchNotification = async (mounted) => {
-//     await AxiosClient.get("/Notifications").then(res => {
-//       console.log('Get data successfully: ', res);
-//       // console.log("Data Header:", Object.keys(res));
-//       if (mounted) {
-//         setNotifications(res.filter( n => n.toUserId == 1));
-//         //setCount(res.lenght);
-//       }
-//     }).catch(err => {
-//       console.log('Failed to Get data: ', err);
-//     });
-//   }
-
-//   useEffect(()=>{
-//     setCount(notifications.filter(n => !n.status && n.type == parseInt(ntfType)).length);
-//   },[notifications]);
-
-
-//   useEffect(() => {
-//     let mounted = true;
-//     FetchNotification(mounted);
-//     return () => mounted = false;
-//   }, [count])
+const AdminNotification = ({ ntfType, notifications, count }) => {
 
   const notifyTime = (date) => {
     let now = new Date(Date.now());
     const oneDay = 24 * 60 * 60 * 1000;
     const notifyDate = new Date(date);
     const diffDays = Math.abs((now - notifyDate) / oneDay);
-    if(now.getFullYear > notifyDate.getFullYear){
-      return notifyDate.toLocaleDateString([],{day: 'numeric', month: 'long', year : 'numeric'})+ "   " + notifyDate.toLocaleTimeString([],{ hour: '2-digit', minute: '2-digit' });
-    }else if(diffDays < 1){
-      return notifyDate.toLocaleTimeString([],{ hour: '2-digit', minute: '2-digit' });
-    }else if( diffDays >= 1 && diffDays < 7){
-      return notifyDate.toLocaleDateString([],{weekday : 'long'})+ "   " + notifyDate.toLocaleTimeString([],{ hour: '2-digit', minute: '2-digit' });
-    }else {
-      return notifyDate.toLocaleDateString([],{day: 'numeric', month: 'long'})+ "   " + notifyDate.toLocaleTimeString([],{ hour: '2-digit', minute: '2-digit' });
+    if (now.getFullYear > notifyDate.getFullYear) {
+      return notifyDate.toLocaleDateString([], { day: 'numeric', month: 'long', year: 'numeric' }) + "   " + notifyDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    } else if (diffDays < 1) {
+      return notifyDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    } else if (diffDays >= 1 && diffDays < 7) {
+      return notifyDate.toLocaleDateString([], { weekday: 'long' }) + "   " + notifyDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    } else {
+      return notifyDate.toLocaleDateString([], { day: 'numeric', month: 'long' }) + "   " + notifyDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
   }
 
   const Avatar = (notify) => {
-    if(notify.fromUserId != null && notify.fromUser.img != null){
-      return (<><CImg
-        src={notify.fromUser?.img}
-        className="c-avatar-img"
-        alt={notify.fromUser?.email}
-      />
-      <span className="c-avatar-status bg-success"></span></>)
+    switch (notify.type) {
+      case 0:
+        if (notify.fromUserId != null && notify.fromUser.img != null) {
+          return (<><CImg
+            src={notify.fromUser?.img}
+            className="c-avatar-img mt-3"
+            alt={notify.fromUser?.email}
+          />
+            <span className="c-avatar-status bg-success"></span></>)
+        }
+        return <CIcon name="cil-lightbulb" className="success"></CIcon>
+
+      case 1:
+        return <CIcon name="cil-list" className="success"></CIcon>
+
+      case 2:
+        return <CIcon name="cil-list" className="success"></CIcon>
+
+      default:
+        return <CIcon name="cil-lightbulb" className="success"></CIcon>
     }
-    return <CIcon name="cil-lightbulb" className="success"></CIcon>
+
   }
 
   const ListIcon = (amount, type) => {
     switch (type) {
-    case "0":
+      case "0":
         return (<><CIcon name="cil-bell" /><CBadge shape="pill" color="danger">{amount}</CBadge></>)
-        
-    case "1":
-        return (<><CIcon name="cil-list" /><CBadge shape="pill" color="warning">{amount}</CBadge></>)
-            
-    case "2":
+
+      case "1":
+        return (<><CIcon name="cil-list-rich" /><CBadge shape="pill" color="warning">{amount}</CBadge></>)
+
+      case "2":
         return (<><CIcon name="cil-envelope-open" /><CBadge shape="pill" color="info">{amount}</CBadge></>)
 
-    default:
+      default:
         return (<><CIcon name="cil-list" /><CBadge shape="pill" color="warning">{amount}</CBadge></>)
     }
   }
 
   const Title = (amount, type) => {
     switch (type) {
-        case "0":
-            return "You have " + amount + "unchecked notifications";
-          
-        case "1":
-            return "Your recent activities";
-                
-        case "2":
-            return "You have " + amount + "unchecked feedbacks";
+      case "0":
+        return "You have " + amount + " unchecked notifications";
 
-        default:
-            return "You have " + amount + "unchecked notifications";
-    }    
+      case "1":
+        return "Your recent activities";
+
+      case "2":
+        return "You have " + amount + " unchecked feedbacks";
+
+      default:
+        return "You have " + amount + " unchecked notifications";
+    }
   }
 
   return (
@@ -125,7 +112,6 @@ const AdminNotification = ({ntfType, notifications, count}) => {
                   {
                     Avatar(notify)
                   }
-
                 </div>
               </div>
               <div>

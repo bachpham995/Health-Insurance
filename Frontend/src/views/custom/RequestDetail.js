@@ -29,7 +29,6 @@ import {
   useParams,
   useHistory
 } from "react-router-dom";
-// import { from } from 'core-js/fn/array';
 
 const RequestDetails = ({ method }) => {
   const [request, setRequest] = useState(null);

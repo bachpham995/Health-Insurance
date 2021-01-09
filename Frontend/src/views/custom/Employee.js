@@ -104,6 +104,7 @@ const Employee = ({ method }) => {
           {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
+            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Employee", "Added a new Employee(User)", 1);
             goBack();
           }).catch(err => {
             console.log(err);
@@ -118,6 +119,7 @@ const Employee = ({ method }) => {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
             setEmployee(res.config.data)
+            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Employee", "Modified an Employee(User)", 1);
             goBack();
           }).catch(err => {
             console.log(err);
@@ -129,6 +131,7 @@ const Employee = ({ method }) => {
           {}
         ).then(res => {
           setShowConfirm(false);
+          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Employee", "Removed an Employee(User)", 1);
           goBack();
         }).catch(err => {
           console.log(err);

@@ -30,13 +30,13 @@ namespace HealthInsuranceWebServer.Controllers
             string imageDir = "/imgs/company";
             await new ImageUpload().UploadFile(imageDir, file);
             return Ok(imageDir + "/" + file.FileName);
-        }
+        }        
 
         // GET: api/InsuranceCompanies
         [HttpGet]
         public async Task<ActionResult<IEnumerable<InsuranceCompany>>> GetInsuranceCompany()
         {
-            return await _context.InsuranceCompany.Where(elt=>!elt.Retired).ToListAsync();
+            return await _context.InsuranceCompany.Where(elt=>!elt.Retired).Include(c => c.Policies).ToListAsync();
         }
 
         // GET: api/InsuranceCompanies/5

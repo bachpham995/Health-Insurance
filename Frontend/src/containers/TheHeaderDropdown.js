@@ -71,7 +71,7 @@ const TheHeaderDropdown = ({user}) => {
         </CDropdownItem>
         <CDropdownItem>
           <CIcon name="cil-credit-card" className="mfe-2" />
-          Payments
+          Language
           <CBadge color="secondary" className="mfs-auto">42</CBadge>
         </CDropdownItem>
         <CDropdownItem>

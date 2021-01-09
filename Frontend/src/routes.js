@@ -12,8 +12,8 @@ const Hospital = React.lazy(()=>import('./views/custom/Hospital'));
 //Employee
 const Employee = React.lazy(()=>import('./views/custom/Employee'));
 //Request
-const Request = React.lazy(()=> import('./views/Request/Request'));
-const RequestDetails = React.lazy(()=>import("./views/Request/RequestDetail"));
+const Request = React.lazy(()=> import('./views/custom/Request'));
+const RequestDetails = React.lazy(()=>import("./views/custom/RequestDetail"));
 //Policy
 const Policy = React.lazy(()=> import('./views/custom/Policy'))
 

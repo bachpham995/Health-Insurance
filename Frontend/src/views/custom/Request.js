@@ -28,7 +28,7 @@ const getBadge = status => {
   }
 }
 
-const ReuqestEmployees = ({ tableName, tableQuery, color }) => {
+const RequestEmployees = ({ tableName, tableQuery, color }) => {
   const [fields, setFields] = useState(Utility.TableHeader(tableQuery));
   const [tableData, setTableData] = useState([]);
 
@@ -104,4 +104,4 @@ const ReuqestEmployees = ({ tableName, tableQuery, color }) => {
   )
 }
 
-export default ReuqestEmployees
+export default RequestEmployees

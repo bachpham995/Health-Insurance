@@ -1,3 +1,5 @@
+import AxiosClient from 'src/api/AxiosClient';
+
 export default class Utility {
   static REACT_APP_API_URL = "http://localhost:6969/api";
   static REACT_APP_SERVER_URL = "http://localhost:6969"
@@ -122,5 +124,26 @@ export default class Utility {
       default:
         return [];
     }
+  }
+
+  static newNotification = async (fromId, toId, title, description, type) => {
+    let data = {
+      "title" : title,
+      "fromUserId" : fromId,
+      "toUserId" : toId,
+      "description" : description,
+      "date" : new Date(Date.now()),
+      "status" : false,
+      "type" : parseInt(type)
+    }
+
+    return await AxiosClient.post("/Notifications", JSON.stringify(data),
+    {
+      headers: { 'content-type': 'application/json' }
+    }).then(res => console.log("A Notification is created successfully")).catch(err=>console.log(err));;
+  }
+
+  static CurrentUser = () => {
+    return JSON.parse(sessionStorage.getItem("user"));
   }
 }
