@@ -50,7 +50,7 @@ const TheHeader = ({user}) => {
   const [count_2, setCount_2] = useState(0);
 
   const GetNotificationsByType = (data, type) => {
-    return data.filter(n => n.toUserId == Utility.CurrentUser().id && n.type == type)
+    return data.filter(n => n.toUserId == 1 && n.type == type)
   }
 
   const FetchNotification = async (mounted) => {
