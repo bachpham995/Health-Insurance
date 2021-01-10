@@ -112,6 +112,10 @@ namespace HealthInsuranceWebServer.Data
                 new Notification(){Id = 9, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddDays(-8),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
                 new Notification(){Id = 10, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-1),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0}
             );
+
+            modelBuilder.Entity<Feedback>().HasData(
+                new Feedback(){FeedbackId = 1, EmployeeId = 1, Title="This is the test feed back feature", Content="This is the test feed back feature", Date=DateTime.Now}
+            );
         }
 
         public DbSet<Employee> Employee { get; set; }

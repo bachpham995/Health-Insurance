@@ -22,17 +22,17 @@ const TheLayout = () => {
     });
   }
 
-  // useEffect(()=>{
-  //   let mounted = true;
-  //   FetchLoginUser(mounted)
-  //   return () => mounted = false;
-  // },[]);
+  useEffect(()=>{
+    let mounted = true;
+    FetchLoginUser(mounted)
+    return () => mounted = false;
+  },[]);
 
   return (
     <div className="c-app c-default-layout">
       <TheSidebar/>
       <div className="c-wrapper">
-        <TheHeader user={null}/>
+        <TheHeader user={user}/>
         <div className="c-body">
           <TheContent/>
         </div>

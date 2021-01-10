@@ -127,6 +127,9 @@ const routes = [
   {path:'/admin/requests', exact: true, name: 'Requests', component : Request, props:{tableName:"Requests", tableQuery: "PolicyRequests", color:"light"}},
   {path:'/admin/approvals', exact: true, name: 'Approvals', component : Approval, props:{tableName:"Approvals", tableQuery: "PolicyApprovals", color:"light"}},
 
+  //Feedback
+  {path:'/admin/feedbacks', exact: true, name: 'Feedbacks', component : DataTable, props:{tableName:"Feedbacks", tableQuery: "Feedbacks", color:"light"}}
+
 
 ];
 

@@ -35,7 +35,7 @@ const DataTable = ({ tableName, tableQuery, color }) => {
       try {
         const response = await AxiosClient.get("/" + tableQuery);
         // console.log('Fetch data successfully: ', response);
-        // console.log("Data Header:", Object.keys(response[0]));
+        console.log("Data Header:", Object.keys(response[0]));
 
         setTableData(response);
       } catch (error) {
@@ -53,8 +53,8 @@ const DataTable = ({ tableName, tableQuery, color }) => {
             <CCardHeader>
               <h3>{tableName}</h3>
             </CCardHeader>
-            <CCardHeader>
-              <CLink to={Utility.Create(tableQuery)} >
+            <CCardHeader  hidden={!Utility.shouldShowAddBtn(tableQuery)}>
+              <CLink to={Utility.Create(tableQuery)}>
                 <CButton size="lg" color="success" className="ml-1">
                   Add
                 </CButton>
@@ -108,7 +108,30 @@ const DataTable = ({ tableName, tableQuery, color }) => {
                           </CDropdownMenu>
                         </CDropdown>
                       </td>
-                    )
+                    ),
+                  'feedBackReply':
+                    (item) => (
+                      <td>
+                        <CLink to={Utility.Edit(tableQuery, item)}>
+                          <CButton size="sm" color="primary">
+                            Reply
+                          </CButton>
+                        </CLink>
+                      </td>
+                    ),
+                  'feedbackUser':
+                    (item) => (
+                      <td>
+                        {item.employee.lName + " " + item.employee.fName}
+                      </td>
+                    ),
+                  'feedbackEmail':
+                    (item) => (
+                      <td>
+                        {item.employee.email}
+                      </td>
+                    ),
+
                 }
                 }
               ></CDataTable>

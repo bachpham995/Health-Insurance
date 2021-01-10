@@ -80,7 +80,7 @@ const TheHeader = ({user}) => {
     //FetchNotification(mounted);
     //return () => mounted = false;
     const interval = setInterval(() => {
-      setDelay(5000);
+      setDelay(60000);
       FetchNotification(true);
     }, delay);
     return () => clearInterval(interval);

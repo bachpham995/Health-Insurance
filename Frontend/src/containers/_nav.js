@@ -320,39 +320,50 @@ const _admin_nav = [
     name: 'Management',
     route: '/admin',
     icon: 'cil-layers',
-
     _children: [
       {
         _tag: 'CSidebarNavItem',
         name: 'Company',
-        to: '/admin/companies'
+        to: '/admin/companies',
+
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Hospital',
-        to: '/admin/hospitals'
-      },{
+        to: '/admin/hospitals',
+
+      }, {
         _tag: 'CSidebarNavItem',
         name: 'Policy',
-        to: '/admin/policies'
+        to: '/admin/policies',
+
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Employee',
-        to: '/admin/employees'
+        to: '/admin/employees',
+
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Requests',
         to: '/admin/requests',
+
       },
       {
         _tag: 'CSidebarNavItem',
         name: 'Approval',
         to: '/admin/approvals',
+
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Feedback',
+        to: '/admin/feedbacks',
       }
     ]
-  },{
+  }
+  , {
     _tag: 'CSidebarNavDropdown',
     name: 'Icons',
     route: '/icons',

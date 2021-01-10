@@ -59,11 +59,12 @@ export default class Utility {
         return '/admin/hospitals';
       case "Employees":
         return '/admin/employees';
-
       case "Policies":
         return '/admin/policies';
+      case "Feedbacks":
+        return '/admin/feedbacks';
 
-      default :
+      default:
         return '/admin';
     }
   }
@@ -105,45 +106,78 @@ export default class Utility {
           sorter: false,
           filter: false
         }, "employeeId", "fName", "lName", "designation", "status"];
-        case "PolicyRequests":
-          return [{
-              key: 'button',
-              label: 'Approval', 
-              _style: { width: '5%' },
-              sorter: false,
-              filter: false
-          },"requestId","requestDate","status","note","emi","amount"];
-          case "PolicyApprovals":
-            return [{
-                key: '',
-                label: '', 
-                _style: { width: '5%' },
-                sorter: false,
-                filter: false
-            },"approvalId","approvalDate","status","reason","requestId"];
+      case "PolicyRequests":
+        return [{
+          key: 'button',
+          label: 'Approval',
+          _style: { width: '5%' },
+          sorter: false,
+          filter: false
+        }, "requestId", "requestDate", "status", "note", "emi", "amount"];
+      case "PolicyApprovals":
+        return [{
+          key: '',
+          label: '',
+          _style: { width: '5%' },
+          sorter: false,
+          filter: false
+        }, "approvalId", "approvalDate", "status", "reason", "requestId"];
+
+      case "Feedbacks":
+        return [{
+          key: 'feedBackReply',
+          label: 'Actions',
+          _style: { width: '5%' },
+          sorter: false,
+          filter: false
+        },'feedbackId',
+          'title',
+          'date',
+          {
+            key: 'feedbackUser',
+            label: 'User',
+            _style: { witdh : '20%'}
+          },
+          {
+            key: 'feedbackEmail',
+            label: 'Email',
+            _style: { witdh : '20%'}
+          }
+          ]
       default:
         return [];
     }
   }
 
+  static shouldShowAddBtn = (model) => {
+    switch (model) {
+      case "Feedbacks":
+        return false;
+    
+      default:
+        return true;
+    }
+  }  
+
   static newNotification = async (fromId, toId, title, description, type) => {
     let data = {
-      "title" : title,
-      "fromUserId" : fromId,
-      "toUserId" : toId,
-      "description" : description,
-      "date" : new Date(Date.now()),
-      "status" : false,
-      "type" : parseInt(type)
+      "title": title,
+      "fromUserId": fromId,
+      "toUserId": toId,
+      "description": description,
+      "date": new Date(Date.now()),
+      "status": false,
+      "type": parseInt(type)
     }
 
     return await AxiosClient.post("/Notifications", JSON.stringify(data),
-    {
-      headers: { 'content-type': 'application/json' }
-    }).then(res => console.log("A Notification is created successfully")).catch(err=>console.log(err));;
+      {
+        headers: { 'content-type': 'application/json' }
+      }).then(res => console.log("A Notification is created successfully")).catch(err => console.log(err));;
   }
 
   static CurrentUser = () => {
-    return JSON.parse(sessionStorage.getItem("user"));
+    // return JSON.parse(sessionStorage.getItem("user"));
+    return {"id" : 1};
   }
 }
