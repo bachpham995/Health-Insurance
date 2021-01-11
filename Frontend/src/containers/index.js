@@ -7,7 +7,7 @@ import TheHeaderDropdownNotif from './TheHeaderDropdownNotif'
 import TheHeaderDropdownTasks from './TheHeaderDropdownTasks'
 import TheLayout from './TheLayout'
 import TheSidebar from './TheSidebar'
-import AdminNotification from 'src/views/custom/AdminNotification';
+import Notification from 'src/views/custom/Notification';
 
 
 export {
@@ -17,7 +17,7 @@ export {
   TheHeaderDropdown,
   TheHeaderDropdownMssg,
   // TheHeaderDropdownNotif,
-  AdminNotification,
+  Notification,
   TheHeaderDropdownTasks,
   TheLayout,
   TheSidebar

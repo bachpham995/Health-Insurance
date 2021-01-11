@@ -19,6 +19,9 @@ const Policy = React.lazy(()=> import('./views/custom/Policy'));
 //Report
 const Report = React.lazy(()=> import('./views/Reports/Reports'));
 
+//Feedback
+const Feedback = React.lazy(()=> import('./views/custom/Feedback'));
+
 
 //
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
@@ -129,6 +132,12 @@ const routes = [
   {path:'/admin/requests', exact: true, name: 'Requests', component : Request, props:{tableName:"Requests", tableQuery: "PolicyRequests", color:"light"}},
   {path:'/admin/approvals', exact: true, name: 'Approvals', component : Approval, props:{tableName:"Approvals", tableQuery: "PolicyApprovals", color:"light"}},
   {path:'/admin/reports', exact: true, name: 'Reports', component : Report, props:{tableName:"Reports", tableQuery: "PolicyRequests", color:"light"}},
+
+  //Feedback
+  {path:'/admin/feedbacks', exact: true, name: 'Feedbacks', component : DataTable, props:{tableName:"Feedbacks", tableQuery: "Feedbacks", color:"light"}},
+  {path:'/admin/feedbacks/edit/:id', exact: true, name: 'Reply Feedback', component : Feedback, props:{method : "put"}},
+  {path:'/admin/feedbacks/read/:id', exact: true, name: 'Info Feedback', component : Feedback, props:{method : "get"}},
+  {path:'/admin/feedbacks/delete/:id', exact: true, name: 'Delete Feedback', component : Feedback, props:{method : "delete"}}
 ];
 
 export default routes;

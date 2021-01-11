@@ -35,7 +35,7 @@ const DataTable = ({ tableName, tableQuery, color }) => {
       try {
         const response = await AxiosClient.get("/" + tableQuery);
         // console.log('Fetch data successfully: ', response);
-        // console.log("Data Header:", Object.keys(response[0]));
+        console.log("Data Header:", Object.keys(response[0]));
 
         setTableData(response);
       } catch (error) {
@@ -53,8 +53,8 @@ const DataTable = ({ tableName, tableQuery, color }) => {
             <CCardHeader>
               <h3>{tableName}</h3>
             </CCardHeader>
-            <CCardHeader>
-              <CLink to={Utility.Create(tableQuery)} >
+            <CCardHeader hidden={!Utility.shouldShowAddBtn(tableQuery)}>
+              <CLink to={Utility.Create(tableQuery)}>
                 <CButton size="lg" color="success" className="ml-1">
                   Add
                 </CButton>
@@ -108,7 +108,47 @@ const DataTable = ({ tableName, tableQuery, color }) => {
                           </CDropdownMenu>
                         </CDropdown>
                       </td>
-                    )
+                    ),
+                  'feedBackReply':
+                    (item) => (
+                      <td>
+                        <CDropdown>
+                          <CDropdownToggle caret color="primary" size="sm">
+                            Actions
+                          </CDropdownToggle>
+                          <CDropdownMenu placement='right'>
+                            <CLink to={Utility.Read(tableQuery, item)}>
+                              <CButton size="sm" variant="outline" color="info" className="ml-1">
+                                Info
+                            </CButton>
+                            </CLink>
+                            <CLink hidden={item.response != null} to={Utility.Edit(tableQuery, item)}>
+                              <CButton size="sm" variant="outline" color="warning" className="ml-1">
+                                Reply
+                            </CButton>
+                            </CLink>
+                            <CLink to={Utility.Delete(tableQuery, item)}>
+                              <CButton size="sm" variant="outline" color="danger" className="ml-1 mr-1">
+                                Remove
+                          </CButton>
+                            </CLink>
+                          </CDropdownMenu>
+                        </CDropdown>
+                      </td>
+                    ),
+                  'feedbackUser':
+                    (item) => (
+                      <td>
+                        {item.employee.lName + " " + item.employee.fName}
+                      </td>
+                    ),
+                  'feedbackEmail':
+                    (item) => (
+                      <td>
+                        {item.employee.email}
+                      </td>
+                    ),
+
                 }
                 }
               ></CDataTable>

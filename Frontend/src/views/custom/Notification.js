@@ -10,7 +10,7 @@ import {
 import CIcon from '@coreui/icons-react'
 
 
-const AdminNotification = ({ ntfType, notifications, count }) => {
+const Notification = ({ ntfType, notifications, count }) => {
 
   const notifyTime = (date) => {
     let now = new Date(Date.now());
@@ -132,4 +132,4 @@ const AdminNotification = ({ ntfType, notifications, count }) => {
   )
 }
 
-export default AdminNotification
+export default Notification
