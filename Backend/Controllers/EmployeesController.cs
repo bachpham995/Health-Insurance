@@ -34,7 +34,7 @@ namespace HealthInsuranceWebServer.Controllers
             .ToListAsync();
         }
 
-        // GET: api/Employees/5
+        // GET: api/Employees/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(int id)
         {
@@ -55,9 +55,7 @@ namespace HealthInsuranceWebServer.Controllers
             return employee;
         }
 
-        // PUT: api/Employees/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        // PUT: api/Employees/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployee(int id, Employee employee)
         {
@@ -88,8 +86,6 @@ namespace HealthInsuranceWebServer.Controllers
         }
 
         // POST: api/Employees
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
         {
@@ -99,7 +95,7 @@ namespace HealthInsuranceWebServer.Controllers
             return CreatedAtAction("GetEmployee", new { id = employee.EmployeeId }, employee);
         }
 
-        // DELETE: api/Employees/5
+        // DELETE: api/Employees/{id}
         [HttpDelete("{id}")]
         public async Task<ActionResult<Employee>> DeleteEmployee(int id)
         {
