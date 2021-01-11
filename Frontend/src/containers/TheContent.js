@@ -42,7 +42,7 @@ const TheContent = () => {
                   )}/>
               )
             })}
-            <Redirect from="/" to="/login" />
+            <Redirect from="/" to="/dashboard" />
           </Switch>
         </Suspense>
       </CContainer>

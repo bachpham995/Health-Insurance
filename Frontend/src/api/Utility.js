@@ -51,19 +51,30 @@ export default class Utility {
 
   static GetRecordAction = (model) => {
     switch (model) {
+      case "Company":
+      case "InsuranceCompany":
       case "InsuranceCompanies":
         return '/admin/companies';
+
+      case "PolicyRequest":
       case "PolicyRequests":
         return '/admin/requests';
+
+      case "Hospital":
       case "Hospitals":
         return '/admin/hospitals';
+
+      case "Employee":
       case "Employees":
         return '/admin/employees';
+
+      case "Policy":
       case "Policies":
         return '/admin/policies';
+
+      case "Feedback":
       case "Feedbacks":
         return '/admin/feedbacks';
-
       default:
         return '/admin';
     }

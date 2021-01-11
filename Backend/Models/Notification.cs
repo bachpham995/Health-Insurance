@@ -19,7 +19,7 @@ namespace HealthInsuranceWebServer.Models
         public int FromUserId { get; set; }
         public Employee FromUser { get; set; }
 
-        public int ToUserId { get; set; }
+        public int RelatedId { get; set; }
 
         [Column(TypeName = "text")]
         public string Description { get; set; }

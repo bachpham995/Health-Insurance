@@ -101,16 +101,16 @@ namespace HealthInsuranceWebServer.Data
                 );
 
             modelBuilder.Entity<Notification>().HasData(
-                new Notification(){Id = 1, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddDays(-123),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 2, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddMonths(1),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 3, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-3),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 4, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddMinutes(5),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 5, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddYears(-1),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 6, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddHours(-4),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 7, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddMonths(-2),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 8, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-14),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 9, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddDays(-8),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 10, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-1),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0}
+                new Notification(){Id = 1, FromUserId = 2, RelatedId=1, Date = DateTime.Now.AddDays(-123),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 2, FromUserId = 3, RelatedId=1, Date = DateTime.Now.AddMonths(1),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 3, FromUserId = 3, RelatedId=1, Date = DateTime.Now.AddDays(-3),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 4, FromUserId = 2, RelatedId=1, Date = DateTime.Now.AddMinutes(5),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 5, FromUserId = 3, RelatedId=1, Date = DateTime.Now.AddYears(-1),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 6, FromUserId = 2, RelatedId=1, Date = DateTime.Now.AddHours(-4),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 7, FromUserId = 3, RelatedId=1, Date = DateTime.Now.AddMonths(-2),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 8, FromUserId = 3, RelatedId=1, Date = DateTime.Now.AddDays(-14),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 9, FromUserId = 2, RelatedId=1, Date = DateTime.Now.AddDays(-8),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+                new Notification(){Id = 10, FromUserId = 3, RelatedId=1, Date = DateTime.Now.AddDays(-1),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0}
             );
 
             modelBuilder.Entity<Feedback>().HasData(
