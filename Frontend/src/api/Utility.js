@@ -78,7 +78,11 @@ export default class Utility {
           _style: { width: '5%' },
           sorter: false,
           filter: false
-        }, "insuranceCompanyId", "insCompanyName", "phone"]
+        }, {
+          key: "insuranceCompanyId",
+          label: '#',
+          _style: { width: '5%' }
+        }, "insCompanyName", "phone"]
 
       case "Policies":
         return [{
@@ -87,7 +91,11 @@ export default class Utility {
           _style: { width: '5%' },
           sorter: false,
           filter: false
-        }, "policyId", "policyNumber", "policyName"];
+        }, {
+          key: "policyId",
+          label: '#',
+          _style: { width: '5%' }
+        }, "policyNumber", "policyName"];
 
       case "Hospitals":
         return [{
@@ -96,7 +104,11 @@ export default class Utility {
           _style: { width: '5%' },
           sorter: false,
           filter: false
-        }, "hospitalId", "hospitalName", "phone"];
+        }, {
+          key: "hospitalId",
+          label: '#',
+          _style: { width: '5%' }
+        }, "hospitalName", "phone"];
 
       case "Employees":
         return [{
@@ -105,7 +117,11 @@ export default class Utility {
           _style: { width: '5%' },
           sorter: false,
           filter: false
-        }, "employeeId", "fName", "lName", "designation", "status"];
+        }, {
+          key: "employeeId",
+          label: '#',
+          _style: { width: '5%' }
+        }, "fName", "lName", "designation", "status"];
       case "PolicyRequests":
         return [{
           key: 'button',
@@ -113,7 +129,11 @@ export default class Utility {
           _style: { width: '5%' },
           sorter: false,
           filter: false
-        }, "requestId", "requestDate", "status", "note", "emi", "amount"];
+        }, {
+          key: "requestId",
+          label: '#',
+          _style: { width: '5%' }
+        }, "requestDate", "status", "note", "emi", "amount"];
       case "PolicyApprovals":
         return [{
           key: '',
@@ -121,7 +141,11 @@ export default class Utility {
           _style: { width: '5%' },
           sorter: false,
           filter: false
-        }, "approvalId", "approvalDate", "status", "reason", "requestId"];
+        }, {
+          key: "approvalId",
+          label: '#',
+          _style: { width: '5%' }
+        }, "approvalDate", "status", "reason", "requestId"];
 
       case "Feedbacks":
         return [{
@@ -130,20 +154,24 @@ export default class Utility {
           _style: { width: '5%' },
           sorter: false,
           filter: false
-        },'feedbackId',
+        }, {
+          key: 'feedbackId',
+          label: '#',
+          _style: { width: '5%' }
+        },
           'title',
           'date',
-          {
-            key: 'feedbackUser',
-            label: 'User',
-            _style: { witdh : '20%'}
-          },
-          {
-            key: 'feedbackEmail',
-            label: 'Email',
-            _style: { witdh : '20%'}
-          }
-          ]
+        {
+          key: 'feedbackUser',
+          label: 'User',
+          _style: { witdh: '20%' }
+        },
+        {
+          key: 'feedbackEmail',
+          label: 'Email',
+          _style: { witdh: '20%' }
+        }
+        ]
       default:
         return [];
     }
@@ -153,11 +181,11 @@ export default class Utility {
     switch (model) {
       case "Feedbacks":
         return false;
-    
+
       default:
         return true;
     }
-  }  
+  }
 
   static newNotification = async (fromId, toId, title, description, type) => {
     let data = {
@@ -173,11 +201,16 @@ export default class Utility {
     return await AxiosClient.post("/Notifications", JSON.stringify(data),
       {
         headers: { 'content-type': 'application/json' }
-      }).then(res => console.log("A Notification is created successfully")).catch(err => console.log(err));;
+      }).then(res => console.log("A Notification is created successfully"))
+      .catch(err => {
+        console.log(err)
+
+      }
+      );;
   }
 
   static CurrentUser = () => {
     // return JSON.parse(sessionStorage.getItem("user"));
-    return {"id" : 1};
+    return { "id": 1 };
   }
 }

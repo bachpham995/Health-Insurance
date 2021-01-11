@@ -15,7 +15,10 @@ const Employee = React.lazy(()=>import('./views/custom/Employee'));
 const Request = React.lazy(()=> import('./views/custom/Request'));
 const RequestDetails = React.lazy(()=>import("./views/custom/RequestDetail"));
 //Policy
-const Policy = React.lazy(()=> import('./views/custom/Policy'))
+const Policy = React.lazy(()=> import('./views/custom/Policy'));
+
+//Feedback
+const Feedback = React.lazy(()=> import('./views/custom/Feedback'));
 
 
 //
@@ -128,7 +131,10 @@ const routes = [
   {path:'/admin/approvals', exact: true, name: 'Approvals', component : Approval, props:{tableName:"Approvals", tableQuery: "PolicyApprovals", color:"light"}},
 
   //Feedback
-  {path:'/admin/feedbacks', exact: true, name: 'Feedbacks', component : DataTable, props:{tableName:"Feedbacks", tableQuery: "Feedbacks", color:"light"}}
+  {path:'/admin/feedbacks', exact: true, name: 'Feedbacks', component : DataTable, props:{tableName:"Feedbacks", tableQuery: "Feedbacks", color:"light"}},
+  {path:'/admin/feedbacks/edit/:id', exact: true, name: 'Reply Feedback', component : Feedback, props:{method : "put"}},
+  {path:'/admin/feedbacks/read/:id', exact: true, name: 'Info Feedback', component : Feedback, props:{method : "get"}},
+  {path:'/admin/feedbacks/delete/:id', exact: true, name: 'Delete Feedback', component : Feedback, props:{method : "delete"}}
 
 
 ];

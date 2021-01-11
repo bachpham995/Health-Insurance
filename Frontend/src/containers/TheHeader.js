@@ -22,7 +22,7 @@ import {
   TheHeaderDropdownTasks
 } from './index'
 
-import AdminNotification from 'src/views/custom/AdminNotification';
+import Notification from 'src/views/custom/Notification';
 import TheHeaderDropdownNotif from './TheHeaderDropdownNotif';
 import AxiosClient from 'src/api/AxiosClient';
 import Utility from 'src/api/Utility'
@@ -115,9 +115,9 @@ const TheHeader = ({user}) => {
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        <AdminNotification ntfType="0" notifications={notifications_0} count={count_0} />
-        <AdminNotification ntfType="1" notifications={notifications_1} count={count_1} />
-        <AdminNotification ntfType="2" notifications={notifications_2} count={count_2} />
+        <Notification ntfType="0" notifications={notifications_0} count={count_0} />
+        <Notification ntfType="1" notifications={notifications_1} count={count_1} />
+        <Notification ntfType="2" notifications={notifications_2} count={count_2} />
         {/* <TheHeaderDropdownNotif/>
         <TheHeaderDropdownTasks/>
         <TheHeaderDropdownMssg/>*/}

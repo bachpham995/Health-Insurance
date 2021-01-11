@@ -53,7 +53,7 @@ const DataTable = ({ tableName, tableQuery, color }) => {
             <CCardHeader>
               <h3>{tableName}</h3>
             </CCardHeader>
-            <CCardHeader  hidden={!Utility.shouldShowAddBtn(tableQuery)}>
+            <CCardHeader hidden={!Utility.shouldShowAddBtn(tableQuery)}>
               <CLink to={Utility.Create(tableQuery)}>
                 <CButton size="lg" color="success" className="ml-1">
                   Add
@@ -112,11 +112,28 @@ const DataTable = ({ tableName, tableQuery, color }) => {
                   'feedBackReply':
                     (item) => (
                       <td>
-                        <CLink to={Utility.Edit(tableQuery, item)}>
-                          <CButton size="sm" color="primary">
-                            Reply
+                        <CDropdown>
+                          <CDropdownToggle caret color="primary" size="sm">
+                            Actions
+                          </CDropdownToggle>
+                          <CDropdownMenu placement='right'>
+                            <CLink to={Utility.Read(tableQuery, item)}>
+                              <CButton size="sm" variant="outline" color="info" className="ml-1">
+                                Info
+                            </CButton>
+                            </CLink>
+                            <CLink hidden={item.response != null} to={Utility.Edit(tableQuery, item)}>
+                              <CButton size="sm" variant="outline" color="warning" className="ml-1">
+                                Reply
+                            </CButton>
+                            </CLink>
+                            <CLink to={Utility.Delete(tableQuery, item)}>
+                              <CButton size="sm" variant="outline" color="danger" className="ml-1 mr-1">
+                                Remove
                           </CButton>
-                        </CLink>
+                            </CLink>
+                          </CDropdownMenu>
+                        </CDropdown>
                       </td>
                     ),
                   'feedbackUser':
