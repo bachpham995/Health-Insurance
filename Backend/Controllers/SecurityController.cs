@@ -24,12 +24,12 @@ namespace HealthInsuranceWebServer.Controllers
         }
 
         [HttpPost]
-        [Route("Authorize")]
-        public IActionResult CheckLogin(string username, string password)
+        //[Route("Authorize")]
+        public IActionResult CheckLogin(Employee e)
         {
             Employee employee = new Employee();
-            employee.Username = username;
-            employee.Password = password;
+            employee.Username = e.Username;
+            employee.Password = e.Password;
             IActionResult response = Unauthorized();
             var Employee = AuthenticateEmployee(employee);
             if (Employee != null)
@@ -46,16 +46,18 @@ namespace HealthInsuranceWebServer.Controllers
 
         private Employee AuthenticateEmployee(Employee login)
         {
-            Employee employee = null;
-            var user = _context.Employee.Where(u=>u.Username.Contains(login.Username))?.FirstOrDefault();
+            if(login.Password == null){
+                return null;
+            }
+            var user = _context.Employee.Where(u=>u.Username.Contains(login.Username))?.First();
             if(user != null)
             {
                 if (login.Username == user.Username && login.Password == user.Password)
                 {
-                    employee = new Employee { EmployeeId = user.EmployeeId, LName = user.LName, FName = user.FName, Email = user.Email, Username = user.Username, Password = user.Password };
+                    return new Employee { EmployeeId = user.EmployeeId, LName = user.LName, FName = user.FName, Email = user.Email, Username = user.Username, Password = user.Password };
                 }
             }
-            return employee;
+            return null;
         }
 
         private string GenerateJSONWebToken(Employee Employee)

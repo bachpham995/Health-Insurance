@@ -33,6 +33,12 @@ namespace HealthInsuranceWebServer
             services.AddDbContext<HealthInsuranceWebServerContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("HealthInsuranceWebServerContext")));
             
+            services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins",
+                    builder => builder.AllowAnyOrigin());
+            });
+
             services.AddControllersWithViews().AddNewtonsoftJson(option => option.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore) ;
             services.AddSwaggerGen(swagger =>
             {
@@ -69,14 +75,7 @@ namespace HealthInsuranceWebServer
                     }
                 });
             });
-            services.AddCors(options =>
-            {
-                options.AddPolicy(name: MyAllowSpecificOrigins,
-                                  builder =>
-                                  {
-                                      builder.WithOrigins("http://localhost:3000");
-                                  });
-            });
+           
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options => {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -100,7 +99,8 @@ namespace HealthInsuranceWebServer
             }
             app.UseCors(builder =>
             {
-                builder.AllowAnyHeader()
+                builder.AllowAnyOrigin()
+                .AllowAnyHeader()
                 .AllowAnyMethod();
             });
 
