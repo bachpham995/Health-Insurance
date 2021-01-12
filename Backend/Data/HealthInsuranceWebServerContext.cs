@@ -17,6 +17,7 @@ namespace HealthInsuranceWebServer.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Employee>(entity => { entity.OwnsOne(e => e.Address); });
+            modelBuilder.Entity<Employee>().HasIndex(e=>e.Username);
             modelBuilder.Entity<Hospital>(entity => { entity.OwnsOne(e => e.Address); });
             modelBuilder.Entity<InsuranceCompany>(entity =>{entity.OwnsOne(e => e.Address);});
 

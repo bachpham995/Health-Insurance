@@ -8,8 +8,16 @@ import {
   CImg
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import Common from 'src/services/Common'
+import { Route, useHistory } from 'react-router-dom'
 
 const TheHeaderDropdown = ({user}) => {
+  const historyy = useHistory()
+  const logOut = ()=>{
+    Common.removeUserSession();
+    historyy.push('/');
+  }
+
   return (
     <CDropdown
       inNav
@@ -80,7 +88,7 @@ const TheHeaderDropdown = ({user}) => {
           <CBadge color="primary" className="mfs-auto">42</CBadge>
         </CDropdownItem>
         <CDropdownItem divider />
-        <CDropdownItem>
+        <CDropdownItem onClick={logOut}>
           <CIcon name="cil-account-logout" className="mfe-2" />
             Sign out
         </CDropdownItem>

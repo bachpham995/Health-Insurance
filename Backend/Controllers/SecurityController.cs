@@ -1,9 +1,11 @@
 ﻿using HealthInsuranceWebServer.Data;
 using HealthInsuranceWebServer.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
+using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
@@ -23,9 +25,9 @@ namespace HealthInsuranceWebServer.Controllers
             _context = context;
         }
 
-        [HttpPost]
+        [HttpGet]
         //[Route("Authorize")]
-        public IActionResult CheckLogin([FromQuery]String username, [FromQuery]String password)
+        public IActionResult CheckLogin([FromQuery] String username, [FromQuery] String password)
         {
             Employee employee = new Employee();
             employee.Username = username;
@@ -35,7 +37,7 @@ namespace HealthInsuranceWebServer.Controllers
             if (Employee != null)
             {
                 var tokenStr = GenerateJSONWebToken(Employee);
-                response = Ok(new { token = tokenStr });
+                response = Ok(tokenStr);
             }
             else
             {
@@ -46,11 +48,12 @@ namespace HealthInsuranceWebServer.Controllers
 
         private Employee AuthenticateEmployee(Employee login)
         {
-            if(login.Password == null){
+            if (login.Password == null)
+            {
                 return null;
             }
-            var user = _context.Employee.FirstOrDefault(u=>u.Username.Contains(login.Username));
-            if(user != null)
+            var user = _context.Employee.FirstOrDefault(u => u.Username.Contains(login.Username));
+            if (user != null)
             {
                 if (login.Username == user.Username && login.Password == user.Password)
                 {
@@ -66,7 +69,7 @@ namespace HealthInsuranceWebServer.Controllers
             var credential = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
             var claims = new[]
             {
-                new Claim(JwtRegisteredClaimNames.Sub, Employee.LName+" "+Employee.FName),
+                new Claim(JwtRegisteredClaimNames.Sub, Employee.EmployeeId.ToString()),
                 new Claim(JwtRegisteredClaimNames.Email, Employee.Email),
                 new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
@@ -81,5 +84,18 @@ namespace HealthInsuranceWebServer.Controllers
             return encodeToken;
         }
 
+        [Authorize]
+        [HttpPost("ValidateToken")]
+        public string ValidateToken([FromQuery] String token)
+        {
+            var identity = User.Identity as ClaimsIdentity;
+            if (identity != null)
+            {
+                IEnumerable<Claim> claims = identity.Claims;
+                var id = claims.First().Value;
+                return id;
+            }
+            return null;
+        }
     }
 }

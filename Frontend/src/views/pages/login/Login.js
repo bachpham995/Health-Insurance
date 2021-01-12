@@ -12,43 +12,57 @@ import {
   CInputGroup,
   CInputGroupPrepend,
   CInputGroupText,
-  CRow
+  CRow,
+  CSpinner
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import AxiosClient from 'src/api/AxiosClient';
+import Common from 'src/services/Common';
+import {
+  useHistory
+} from "react-router-dom";
+
+const useFormInput = initialValue => {
+  const [value, setValue] = useState(initialValue);
+ 
+  const handleChange = e => {
+    setValue(e.target.value);
+  }
+  return {
+    value,
+    onChange: handleChange
+  }
+}
 
 const Login = () => {
-  const [data, setData] = useState(null)
-
-  useEffect(() => {
-    const checkLogin = async () => {
-      if (data != null) {
-        try {
-          const response = await AxiosClient.post("/Security?username=" + data.username + "&password=" + data.password, {},
-            { header: "content-type: application/json; charset=utf-8" });
-          // console.log('Fetch data successfully: ', response);
-          console.log(response);
-        } catch (error) {
-          console.log('Failed to fetch data list: ', error);
-        }
-      }
-    }
-    checkLogin();
-    return () => data = null;
-  }, [data])
+  const [loading, setLoading] = useState(false);
+  const username = useFormInput('');
+  const password = useFormInput('');
+  const [error, setError] = useState(null);
+  const history = useHistory();
 
 
-  const onLogin = (event) => {
-    var form = event.target;
-    var username = form.username.value;
-    var password = form.password.value;
+
+  const onLogin = () => {   
+    setError(null);
+    setLoading(true);    
     let data = {
-      username: username,
-      password: password
+      username: username.value,
+      password: password.value
     }
-    setData(data);
+    AxiosClient.get("/Security?username=" + data.username + "&password=" + data.password, { header: "content-type: application/json; charset=utf-8" })
+      .then(res => {
+        setLoading(false);
+        // console.log(res);
+        Common.setUserSession(res, data.username);
+        history.push("/dashboard");
+      }).catch(err => {
+        setLoading(false);
+        setError("Something went wrong. Please try again later.");
+      });
     return false;
   }
+
 
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
@@ -58,7 +72,7 @@ const Login = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
-                  <CForm onSubmit={onLogin} id="login-form">
+                  <CForm id="login-form">
                     <h1>Login</h1>
                     <p className="text-muted">Sign In to your account</p>
                     <CInputGroup className="mb-3">
@@ -67,7 +81,7 @@ const Login = () => {
                           <CIcon name="cil-user" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="text" placeholder="Username" autoComplete="username" id="username" />
+                      <CInput type="text" placeholder="Username" {...username} autoComplete="username" id="username" />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
@@ -75,11 +89,13 @@ const Login = () => {
                           <CIcon name="cil-lock-locked" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="password" placeholder="Password" autoComplete="current-password" id="password" />
+                      <CInput type="password" placeholder="Password" {...password} autoComplete="current-password" id="password" />
                     </CInputGroup>
                     <CRow>
-                      <CCol xs="6">
-                        <CButton color="primary" className="px-4" type="Submit">Login</CButton>
+                      <CCol xs="6">                        
+                        <CButton className="px-4" color="primary" type="button" onClick={onLogin} disabled={loading}>
+                          {loading ? 'Loading ...' : 'Login'}</CButton>
+                        {error && <><small style={{ color: 'red' }}>{error}</small><br /></>}<br />
                       </CCol>
                       <CCol xs="6" className="text-right">
                         <CButton color="link" className="px-0">Forgot password?</CButton>
