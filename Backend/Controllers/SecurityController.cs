@@ -25,11 +25,11 @@ namespace HealthInsuranceWebServer.Controllers
 
         [HttpPost]
         //[Route("Authorize")]
-        public IActionResult CheckLogin(Employee e)
+        public IActionResult CheckLogin([FromQuery]String username, [FromQuery]String password)
         {
             Employee employee = new Employee();
-            employee.Username = e.Username;
-            employee.Password = e.Password;
+            employee.Username = username;
+            employee.Password = password;
             IActionResult response = Unauthorized();
             var Employee = AuthenticateEmployee(employee);
             if (Employee != null)
@@ -49,7 +49,7 @@ namespace HealthInsuranceWebServer.Controllers
             if(login.Password == null){
                 return null;
             }
-            var user = _context.Employee.Where(u=>u.Username.Contains(login.Username))?.First();
+            var user = _context.Employee.FirstOrDefault(u=>u.Username.Contains(login.Username));
             if(user != null)
             {
                 if (login.Username == user.Username && login.Password == user.Password)

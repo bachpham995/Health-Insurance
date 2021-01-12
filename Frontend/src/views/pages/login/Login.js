@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import {
   CButton,
@@ -18,19 +18,38 @@ import CIcon from '@coreui/icons-react'
 import AxiosClient from 'src/api/AxiosClient';
 
 const Login = () => {
-  var checkLogin = async (username, password) => {
-    await AxiosClient.post("/Security/Authorize", JSON.stringify({
-      username: username,
-      password: password
-    })).then(res => console.log(res)).catch(err => { console.log(err); return false });
-  }
+  const [data, setData] = useState(null)
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      if (data != null) {
+        try {
+          const response = await AxiosClient.post("/Security?username=" + data.username + "&password=" + data.password, {},
+            { header: "content-type: application/json; charset=utf-8" });
+          // console.log('Fetch data successfully: ', response);
+          console.log(response);
+        } catch (error) {
+          console.log('Failed to fetch data list: ', error);
+        }
+      }
+    }
+    checkLogin();
+    return () => data = null;
+  }, [data])
+
+
   const onLogin = (event) => {
     var form = event.target;
     var username = form.username.value;
     var password = form.password.value;
-    checkLogin(username, password);
+    let data = {
+      username: username,
+      password: password
+    }
+    setData(data);
     return false;
   }
+
   return (
     <div className="c-app c-default-layout flex-row align-items-center">
       <CContainer>
@@ -39,7 +58,7 @@ const Login = () => {
             <CCardGroup>
               <CCard className="p-4">
                 <CCardBody>
-                  <CForm onSubmit={onLogin}>
+                  <CForm onSubmit={onLogin} id="login-form">
                     <h1>Login</h1>
                     <p className="text-muted">Sign In to your account</p>
                     <CInputGroup className="mb-3">

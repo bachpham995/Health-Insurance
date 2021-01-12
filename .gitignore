@@ -52,3 +52,5 @@ Backend/Migrations/20210104122339_InitialCreater.cs
 Backend/Migrations/20210104122339_InitialCreater.cs
 Backend/Migrations/20210104122339_InitialCreater.Designer.cs
 >>>>>>> Stashed changes
+Backend/.vscode/launch.json
+Backend/.vscode/tasks.json
