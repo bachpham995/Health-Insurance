@@ -55,6 +55,7 @@ const Login = () => {
         setLoading(false);
         // console.log(res);
         Common.setUserSession(res, data.username);
+        
         history.push("/dashboard");
       }).catch(err => {
         setLoading(false);

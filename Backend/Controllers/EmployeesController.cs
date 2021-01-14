@@ -55,6 +55,27 @@ namespace HealthInsuranceWebServer.Controllers
             return employee;
         }
 
+        [HttpGet]
+        [Route("User/{username}")]
+        public async Task<ActionResult<Employee>> GetUser(string username)
+        {
+            var employee = await _context.Employee
+            .Where(e=>e.Username == username)
+            .Include(e=>e.PolicyRequests)
+            .Include(e=>e.Feedbacks)
+            .Include(e=>e.Notifications)
+            .Include(e=>e.PolicyEmployees)
+            .FirstAsync();
+            
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            return employee;
+        }
+
         // PUT: api/Employees/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployee(int id, Employee employee)

@@ -35,7 +35,7 @@ function App() {
       {
         headers: { 'Authorization': `Bearer ${token}` }
       }).then(res => {
-        //setUserSession(res, response.data.user);  
+        //setUserSession(res, response.data.user);
         console.log(res);
         setAuthLoading(false);
       }).catch(error => {
@@ -45,7 +45,7 @@ function App() {
   }, []);
 
   if (authLoading && Common.getToken()) {
-    return (<div class="d-flex align-items-center">
+    return (<div className="d-flex align-items-center">
       <strong>Loading...</strong>
       <CSpinner
         color="primary"
