@@ -9,28 +9,7 @@ import {
 } from './index'
 
 
-const TheLayout = () => {
-  const [user, setUser] = useState(null);
-  const FetchLoginUser = async (mounted) => {
-    await AxiosClient.get("/Employees/User/"+Common.getUser(),{
-      headers: { "content-type" : "text/plain" }
-    }).then(res => {
-      // console.log('Get data successfully: ', res);
-      // console.log("Data Header:", Object.keys(res));
-      if (mounted) {
-        setUser(res);
-      }
-    }).catch(err => {
-      console.log('Failed to Get data: ', err);
-    });
-  }
-
-  useEffect(()=>{
-    let mounted = true;
-    FetchLoginUser(mounted)
-    return () => mounted = false;
-  },[]);
-
+const TheLayout = ({user}) => {
   return (
     <div className="c-app c-default-layout">
       <TheSidebar/>

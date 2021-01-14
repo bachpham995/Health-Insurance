@@ -320,6 +320,7 @@ const _admin_nav = [
     name: 'Management',
     route: '/admin',
     icon: 'cil-layers',
+    show: true,
     _children: [
       {
         _tag: 'CSidebarNavItem',
@@ -365,6 +366,24 @@ const _admin_nav = [
   }
   , {
     _tag: 'CSidebarNavDropdown',
+    name: 'Tools',
+    icon: 'cil-calculator',
+    _children: [{
+      _tag: 'CSidebarNavItem',
+      name: 'Upload Document',
+    },
+    {
+      _tag: 'CSidebarNavItem',
+      name: 'Mailbox',
+    },
+    {
+      _tag: 'CSidebarNavItem',
+      name: '',
+      
+    },]
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
     name: 'Icons',
     route: '/icons',
     icon: 'cil-star',
@@ -391,4 +410,4 @@ const _admin_nav = [
     ],
   }
 ];
-export default _admin_nav
+export default _nav

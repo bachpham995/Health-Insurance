@@ -57,6 +57,7 @@ const Feedback = ({ method }) => {
 
 
   const onSubmit = async (event) => {
+    event.preventDefault();
     var form = event.target;
     const data = {...feedback};
     data.response = form.response.value;
@@ -67,11 +68,11 @@ const Feedback = ({ method }) => {
           {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
-            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Feedback", "Replied a User Feedback", 1);
-            goBack();
+            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Feedback", "Replied a User Feedback", 1);            
           }).catch(err => {
             console.log(err);
           });
+        goBack();
         break;
 
       case "delete":
@@ -79,11 +80,12 @@ const Feedback = ({ method }) => {
           {}
         ).then(res => {
           setShowConfirm(false);
-          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Feedback", "Removed a User Feedback", 1);
-          goBack();
+          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Feedback", "Removed a User Feedback", 1);   
+          goBack();       
         }).catch(err => {
           console.log(err);
         });
+        
         break;
 
       default:

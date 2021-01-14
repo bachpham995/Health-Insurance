@@ -98,7 +98,7 @@ namespace HealthInsuranceWebServer.Controllers
                 return NotFound();
             }
 
-            hospital.Retired = false;
+            hospital.Retired = true;
             _context.Hospital.Update(hospital);
             await _context.SaveChangesAsync();
 

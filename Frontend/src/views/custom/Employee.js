@@ -76,6 +76,7 @@ const Employee = ({ method }) => {
 
 
   const onSubmit = async (event) => {
+    event.preventDefault();
     var form = event.target;
     const data = {
       "fName": form.fname.value,
@@ -104,12 +105,12 @@ const Employee = ({ method }) => {
           {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
-            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Employee", "Added a new Employee(User)", 1);
-            goBack();
+            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Employee", "Added a new Employee(User)", 1);            
           }).catch(err => {
             console.log(err);
           });
-        break;
+          goBack();
+          return false;
 
       case "put":
         data.employeeId = parseInt(id);
@@ -120,11 +121,12 @@ const Employee = ({ method }) => {
           }).then(res => {
             setEmployee(res.config.data)
             Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Employee", "Modified an Employee(User)", 1);
-            goBack();
+           
           }).catch(err => {
             console.log(err);
           });
-        break;
+          goBack();
+          return false;
 
       case "delete":
         await AxiosClient.delete("/Employees" + "/" + id,
@@ -136,7 +138,7 @@ const Employee = ({ method }) => {
         }).catch(err => {
           console.log(err);
         });
-        break;
+        return false;
 
       default:
         break;
