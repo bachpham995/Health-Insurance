@@ -379,7 +379,7 @@ const _admin_nav = [
     {
       _tag: 'CSidebarNavItem',
       name: '',
-      
+
     },]
   },
   {

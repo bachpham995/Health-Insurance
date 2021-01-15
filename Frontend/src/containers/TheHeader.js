@@ -87,7 +87,7 @@ const TheHeader = ({user}) => {
   }, [count_0, count_1, count_2]);
 
   return (
-    <CHeader withSubheader>
+    <CHeader withSubheader colorScheme="dark">
       <CToggler
         inHeader
         className="ml-md-3 d-lg-none"
