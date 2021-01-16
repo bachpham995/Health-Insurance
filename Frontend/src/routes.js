@@ -20,6 +20,8 @@ const Policy = React.lazy(()=> import('./views/custom/Policy'));
 //Feedback
 const Feedback = React.lazy(()=> import('./views/custom/Feedback'));
 
+//Upload Document
+const DocumentUpload = React.lazy(()=>import('./views/custom/DocumentUpload'));
 
 //
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
@@ -134,8 +136,11 @@ const routes = [
   {path:'/admin/feedbacks', exact: true, name: 'Feedbacks', component : DataTable, props:{tableName:"Feedbacks", tableQuery: "Feedbacks", color:"light"}},
   {path:'/admin/feedbacks/edit/:id', exact: true, name: 'Reply Feedback', component : Feedback, props:{method : "put"}},
   {path:'/admin/feedbacks/read/:id', exact: true, name: 'Info Feedback', component : Feedback, props:{method : "get"}},
-  {path:'/admin/feedbacks/delete/:id', exact: true, name: 'Delete Feedback', component : Feedback, props:{method : "delete"}}
+  {path:'/admin/feedbacks/delete/:id', exact: true, name: 'Delete Feedback', component : Feedback, props:{method : "delete"}},
 
+  //Tool: Upload Document
+  {path:'/admin/tool/uploadDocument', exact: true, name: 'Document Upload', component : DocumentUpload },
+  {path:'/admin/tool/documents', exact: true, name: 'Documents', component : DataTable, props:{tableName:"Documents", tableQuery: "UploadFile", color:"light"}}
 
 ];
 

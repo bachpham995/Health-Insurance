@@ -34,7 +34,7 @@ const DataTable = ({ tableName, tableQuery, color }) => {
     const fetchDataList = async () => {
       try {
         const response = await AxiosClient.get("/" + tableQuery);
-        // console.log('Fetch data successfully: ', response);
+        console.log('Fetch data successfully: ', response);
         console.log("Data Header:", Object.keys(response[0]));
 
         setTableData(response);
