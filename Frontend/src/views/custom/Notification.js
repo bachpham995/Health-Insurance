@@ -111,7 +111,7 @@ const Notification = ({ ntfType, notifications, count }) => {
         </CDropdownItem>
         {/* cil-user-unfollow */}
         <div className="custom-scrollbar">
-          {notifications.map(notify => <CDropdownItem key={notify.id} >
+          {notifications?.map(notify => <CDropdownItem key={notify.id} >
             <div className="message message-notify">
               <div className="mr-3 float-left">
                 <div className="c-avatar">

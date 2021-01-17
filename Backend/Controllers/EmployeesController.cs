@@ -29,7 +29,8 @@ namespace HealthInsuranceWebServer.Controllers
             return await _context.Employee.Where(e=>e.Role != 0)
             .Include(e=>e.PolicyRequests)
             .Include(e=>e.Feedbacks)
-            .Include(e=>e.Notifications)
+            .Include(e=>e.ToNotifications).ThenInclude(n=>n.FromUser)
+            .Include(e=>e.FromNotifications).ThenInclude(n=>n.ToUser)
             .Include(e=>e.PolicyEmployees)
             .ToListAsync();
         }
@@ -42,7 +43,8 @@ namespace HealthInsuranceWebServer.Controllers
             .Where(e=>e.EmployeeId == id)
             .Include(e=>e.PolicyRequests)
             .Include(e=>e.Feedbacks)
-            .Include(e=>e.Notifications)
+            .Include(e=>e.ToNotifications).ThenInclude(n=>n.FromUser)
+            .Include(e=>e.FromNotifications).ThenInclude(n=>n.ToUser)
             .Include(e=>e.PolicyEmployees)
             .FirstAsync();
             
@@ -63,7 +65,8 @@ namespace HealthInsuranceWebServer.Controllers
             .Where(e=>e.Username == username)
             .Include(e=>e.PolicyRequests)
             .Include(e=>e.Feedbacks)
-            .Include(e=>e.Notifications)
+            .Include(e=>e.ToNotifications).ThenInclude(n=>n.FromUser)
+            .Include(e=>e.FromNotifications).ThenInclude(n=>n.ToUser)
             .Include(e=>e.PolicyEmployees)
             .FirstAsync();
             

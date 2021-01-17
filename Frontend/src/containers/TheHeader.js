@@ -27,10 +27,18 @@ import TheHeaderDropdownNotif from './TheHeaderDropdownNotif';
 import AxiosClient from 'src/api/AxiosClient';
 import Utility from 'src/api/Utility'
 
-const TheHeader = ({user}) => {
+const TheHeader = ({ user }) => {
   const dispatch = useDispatch()
   const sidebarShow = useSelector(state => state.sidebarShow);
   const [delay, setDelay] = useState(0);
+  const [notifications_0, setNotifications_0] = useState([]);
+  const [notifications_1, setNotifications_1] = useState([]);
+  const [notifications_2, setNotifications_2] = useState([]);
+  const [count_0, setCount_0] = useState(0);
+  const [count_1, setCount_1] = useState(0);
+  const [count_2, setCount_2] = useState(0);
+
+
 
   const toggleSidebar = () => {
     const val = [true, 'responsive'].includes(sidebarShow) ? false : 'responsive'
@@ -42,52 +50,66 @@ const TheHeader = ({user}) => {
     dispatch({ type: 'set', sidebarShow: val })
   }
 
-  const [notifications_0, setNotifications_0] = useState([]);
-  const [notifications_1, setNotifications_1] = useState([]);
-  const [notifications_2, setNotifications_2] = useState([]);
-  const [count_0, setCount_0] = useState(0);
-  const [count_1, setCount_1] = useState(0);
-  const [count_2, setCount_2] = useState(0);
-
   const GetNotificationsByType = (data, type) => {
-    return data.filter(n => n.relatedId == 1 && n.type == type)
+    return data?.filter(n => n.type == type);
   }
+
+  const CountNotificationsByType = (data, type) => {
+    return data?.filter(n => !n.status && n.type == type).length;
+  }
+
+  
+  useEffect(() => {
+    let mounted = true;
+    if (mounted) {
+      //FetchNotification(mounted);
+      setNotifications_0(GetNotificationsByType(user?.toNotifications, 0));
+      setNotifications_1(GetNotificationsByType(user?.toNotifications, 1));
+      setNotifications_2(GetNotificationsByType(user?.toNotifications, 2));
+      setCount_0(CountNotificationsByType(user?.toNotifications, 0));
+      setCount_1(CountNotificationsByType(user?.toNotifications, 1));
+      setCount_2(CountNotificationsByType(user?.toNotifications, 2));
+    }
+
+    return () => mounted = false;
+  },[]);
 
   const FetchNotification = async (mounted) => {
     await AxiosClient.get("/Notifications").then(res => {
-      // console.log('Get data successfully: ', res);
+      console.log('Get data successfully: ', res);
       // console.log("Data Header:", Object.keys(res[0]));
       if (mounted) {
-        setNotifications_0(GetNotificationsByType(res, 0));
-        setNotifications_1(GetNotificationsByType(res, 1));
-        setNotifications_2(GetNotificationsByType(res, 2));
+        // setNotifications_0(GetNotificationsByType(res, 0));
+        // setNotifications_1(GetNotificationsByType(res, 1));
+        // setNotifications_2(GetNotificationsByType(res, 2));
       }
     }).catch(err => {
       console.log('Failed to Get data: ', err);
     });
   }
 
-  useEffect(() => {
-    setCount_0(notifications_0.filter(n => !n.status && n.type == 0).length);
-    setCount_1(notifications_1.filter(n => !n.status && n.type == 1).length);
-    setCount_2(notifications_2.filter(n => !n.status && n.type == 2).length);
-  }, [notifications_0, notifications_1, notifications_2]);
+  // useEffect(() => {
+  //   setCount_0(notifications_0.filter(n => !n.status && n.type == 0).length);
+  //   setCount_1(notifications_1.filter(n => !n.status && n.type == 1).length);
+  //   setCount_2(notifications_2.filter(n => !n.status && n.type == 2).length);
+  // }, [notifications_0, notifications_1, notifications_2]);
 
 
 
-  useEffect(() => {
-    //let mounted = true;
-    //FetchNotification(mounted);
-    //return () => mounted = false;
-    const interval = setInterval(() => {
-      setDelay(60000);
-      FetchNotification(true);
-    }, delay);
-    return () => clearInterval(interval);
-  }, [count_0, count_1, count_2]);
+  // useEffect(() => {
+  //   let mounted = true;
+  //   //FetchNotification(mounted);
+  //   //return () => mounted = false;
+  //   // const interval = setInterval(() => {
+  //   //   setDelay(60000);
+  //     FetchNotification(true);
+  //   // }, delay);
+  //   // return () => clearInterval(interval);
+  //   return () => mounted = false;
+  // }, [count_0, count_1, count_2]);
 
   return (
-    <CHeader withSubheader>
+    <CHeader withSubheader colorScheme="dark">
       <CToggler
         inHeader
         className="ml-md-3 d-lg-none"

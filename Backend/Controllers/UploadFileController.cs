@@ -18,37 +18,55 @@ namespace HealthInsuranceWebServer.Controllers
     {
         private static readonly string FileUploadPath = Directory.GetCurrentDirectory();
         private static readonly string DOC_DIRECTORY = "/documents";
-        public UploadFileController(){}
+        public UploadFileController() { }
 
         [HttpPost]
         // [Route("UploadFile/")]
-        public async Task<IActionResult> UploadFile(IFormFile file){            
-            try{
+        public async Task<IActionResult> UploadFile(IFormFile file)
+        {
+            try
+            {
+
                 string uploads = Path.Combine(FileUploadPath, @"wwwroot" + DOC_DIRECTORY);
-                if (file.Length > 0) {
+                if (!Directory.Exists(uploads))
+                {
+                    Directory.CreateDirectory(uploads);
+                }
+
+                if (file.Length > 0)
+                {
                     string filePath = Path.Combine(uploads, file.FileName);
-                    using (Stream fileStream = new FileStream(filePath, FileMode.Create)) {
+                    using (Stream fileStream = new FileStream(filePath, FileMode.Create))
+                    {
                         await file.CopyToAsync(fileStream);
                     }
                 }
-            }catch(Exception e){
-                return NotFound(e.ToString());
+            }
+            catch (Exception e)
+            {
+                return NoContent();
             }
             return Ok();
         }
-		
-		
-		
+
+
+
 
         [HttpGet]
-        public IActionResult GetDocuments(){
-            var files = Directory.GetFiles(Path.Combine(FileUploadPath, @"wwwroot" + DOC_DIRECTORY));
+        public IActionResult GetDocuments()
+        {
+            string uploads = Path.Combine(FileUploadPath, @"wwwroot" + DOC_DIRECTORY);
+            if (!Directory.Exists(uploads))
+            {
+                Directory.CreateDirectory(uploads);
+            }
+            var files = Directory.GetFiles(uploads);
             List<Object> listFile = new List<Object>();
             foreach (var file in files)
             {
                 var fileInfo = new FileInfo(file);
                 listFile.Add(
-                    new {FileName = fileInfo.Name, Type = fileInfo.Extension, CreateTime = fileInfo.CreationTime});   
+                    new { FileName = fileInfo.Name, Type = fileInfo.Extension, CreateTime = fileInfo.CreationTime });
             }
 
             return Ok(listFile);

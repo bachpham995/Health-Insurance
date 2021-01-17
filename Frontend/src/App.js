@@ -19,18 +19,20 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
 
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
-  const [user, setUser] = useState(null); 
-  const FetchLoginUser = async () => {
-    await AxiosClient.get("/Employees/User/"+Common.getUser(),{
-      headers: { "content-type" : "text/plain" }
+  const [user, setUser] = useState(null);
+  const FetchLoginUser = async (mounted) => {
+    await AxiosClient.get("/Employees/User/" + Common.getUser(), {
+      headers: { "content-type": "text/plain" }
     }).then(res => {
       // console.log('Get data successfully: ', res);
-      // console.log("Data Header:", Object.keys(res));      
-      setUser(res);
+      // console.log("Data Header:", Object.keys(res));       
+      if(mounted){
+        setUser(res);
+      }
     }).catch(err => {
       console.log('Failed to Get data: ', err);
     });
-  } 
+  }
 
   useEffect(() => {
     const token = Common.getToken();
@@ -38,18 +40,20 @@ function App() {
       return;
     }
 
+    let mounted = true;
     AxiosClient.post("/Security/ValidateToken?token=" + Common.getToken(), {},
       {
         headers: { 'Authorization': `Bearer ${token}` }
-      }).then(res => {
-        //setUserSession(res, response.data.user);         
-        console.log(res);                 
-        FetchLoginUser();
-        setAuthLoading(false);
+      }).then(res => {        
+          //setUserSession(res, response.data.user);         
+          // console.log(res);
+          FetchLoginUser(mounted);
+          setAuthLoading(false);
       }).catch(error => {
         Common.removeUserSession();
         setAuthLoading(false);
       });
+    return () => mounted = false;
   }, []);
 
 
@@ -74,7 +78,7 @@ function App() {
             <Route path="/" name="Home" render={props => <TheLayout {...props} />} /> */}
           <PublicRoute exact name="Login" path="/login" component={Login} />
           <PublicRoute exact name="Register" path="/register" component={Register} />
-          <PrivateRoute path="/" name="Home" component={()=><TheLayout user={user}/>} />
+          <PrivateRoute path="/" name="Home" component={() => <TheLayout user={user} />} />
         </Switch>
       </React.Suspense>
     </BrowserRouter>

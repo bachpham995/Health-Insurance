@@ -57,7 +57,6 @@ const Feedback = ({ method }) => {
 
 
   const onSubmit = async (event) => {
-    event.preventDefault();
     var form = event.target;
     const data = {...feedback};
     data.response = form.response.value;

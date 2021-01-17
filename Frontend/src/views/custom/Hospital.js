@@ -75,7 +75,6 @@ const Hospital = ({ method }) => {
 
 
   const onSubmit = async (event) => {
-    event.preventDefault();
     var form = event.target;
     const data = {
       "hospitalName": form.hospitalName.value,

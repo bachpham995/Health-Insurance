@@ -82,6 +82,9 @@ export default class Utility {
 
   static TableHeader = (model) => {
     switch (model) {
+      case "UploadFile":
+        return ["fileName", "type", "createTime"];
+
       case "InsuranceCompanies":
         return [{
           key: 'show_details',
@@ -191,6 +194,7 @@ export default class Utility {
   static shouldShowAddBtn = (model) => {
     switch (model) {
       case "Feedbacks":
+      case "UploadFile":
         return false;
 
       default:

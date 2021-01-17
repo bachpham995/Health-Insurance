@@ -69,6 +69,7 @@ namespace HealthInsuranceWebServer.Models
         
         public ICollection<PolicyEmployee> PolicyEmployees { get; set; }      
                
-        public ICollection<Notification> Notifications { get; set; }
+        public ICollection<Notification> FromNotifications { get; set; }
+        public ICollection<Notification> ToNotifications { get; set; }
     }
 }

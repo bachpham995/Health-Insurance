@@ -15,11 +15,13 @@ namespace HealthInsuranceWebServer.Models
 
         public string Title { get; set; }
 
-        [ForeignKey("Employee")]
-        public int FromUserId { get; set; }
+        [ForeignKey("FromUser"), Column(Order = 0)]
+        public int? FromUserId { get; set; }
         public Employee FromUser { get; set; }
 
-        public int RelatedId { get; set; }
+        [ForeignKey("ToUser"), Column(Order = 1)]
+        public int? ToUserId { get; set; }
+        public Employee ToUser { get; set; }
 
         [Column(TypeName = "text")]
         public string Description { get; set; }

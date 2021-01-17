@@ -26,7 +26,8 @@ import {
   cibStripe,
   cibPaypal,
   cibGooglePay,
-  cibCcAmex
+  cibCcAmex,
+  cibGmail
 } from '@coreui/icons'
 import {
   cifUs,
@@ -130,7 +131,13 @@ import {
   cilWarning,
   cilAccountLogout,
   cilSwapHorizontal,
-  cilSwapVertical
+  cilSwapVertical,
+  cilFolder,
+  cilCloudUpload,
+  cilStorage,
+  cilBuilding,
+  cilHospital,
+  cilArrowThickLeft
 } from '@coreui/icons'
 
 export const icons = Object.assign({}, {
@@ -138,6 +145,12 @@ export const icons = Object.assign({}, {
   logo,
   logoNegative
 }, {
+  cilArrowThickLeft,
+  cilHospital,
+  cilBuilding,
+  cilStorage,
+  cilCloudUpload,
+  cilFolder,
   cilSwapHorizontal,
   cilSwapVertical,
   cilAlignCenter,
@@ -240,6 +253,7 @@ export const icons = Object.assign({}, {
   cifEs,
   cifPl
 }, {
+  cibGmail,
   cibSkype,
   cibFacebook,
   cibTwitter,
