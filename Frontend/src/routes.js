@@ -1,28 +1,27 @@
 import React from 'react';
-import profile from './views/pages/profile/profile';
 
 // Extend
 //Custom Datatable
 const DataTable = React.lazy(() => import('./views/base/tables/DataTable'));
 //Company
-const Company = React.lazy(() => import('./views/custom/Company'));
+const Company = React.lazy(()=>import('./views/custom/Company'));
 
-const Approval = React.lazy(() => import('./views/Approvals/Approval'));
+const Approval = React.lazy(()=> import('./views/Approvals/Approval'));
 //Hospital
-const Hospital = React.lazy(() => import('./views/custom/Hospital'));
+const Hospital = React.lazy(()=>import('./views/custom/Hospital'));
 //Employee
-const Employee = React.lazy(() => import('./views/custom/Employee'));
+const Employee = React.lazy(()=>import('./views/custom/Employee'));
 //Request
-const Request = React.lazy(() => import('./views/custom/Request'));
-const RequestDetails = React.lazy(() => import("./views/custom/RequestDetail"));
+const Request = React.lazy(()=> import('./views/custom/Request'));
+const RequestDetails = React.lazy(()=>import("./views/custom/RequestDetail"));
 //Policy
-const Policy = React.lazy(() => import('./views/custom/Policy'));
+const Policy = React.lazy(()=> import('./views/custom/Policy'));
 
 //Feedback
-const Feedback = React.lazy(() => import('./views/custom/Feedback'));
+const Feedback = React.lazy(()=> import('./views/custom/Feedback'));
 
 //Upload Document
-const DocumentUpload = React.lazy(() => import('./views/custom/DocumentUpload'));
+const DocumentUpload = React.lazy(()=>import('./views/custom/DocumentUpload'));
 
 //
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
@@ -101,48 +100,48 @@ const routes = [
   { path: '/notifications/modals', name: 'Modals', component: Modals },
   { path: '/notifications/toaster', name: 'Toaster', component: Toaster },
   { path: '/widgets', name: 'Widgets', component: Widgets },
-  { path: '/users', exact: true, name: 'Users', component: Users },
+  { path: '/users', exact: true,  name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
   //Company
-  { path: '/admin/companies', exact: true, name: 'Companies', component: DataTable, props: { tableName: "Insurance Companies", tableQuery: "InsuranceCompanies", color: "light" } },
-  { path: '/admin/companies/create', exact: true, name: 'New Company', component: Company, props: { method: "post" } },
-  { path: '/admin/companies/edit/:id', exact: true, name: 'Update Company', component: Company, props: { method: "put" } },
-  { path: '/admin/companies/read/:id', exact: true, name: 'Info Company', component: Company, props: { method: "get" } },
-  { path: '/admin/companies/delete/:id', exact: true, name: 'Delete Company', component: Company, props: { method: "delete" } },
+  { path: '/admin/companies', exact: true, name: 'Companies', component: DataTable, props:{tableName:"Insurance Companies", tableQuery: "InsuranceCompanies",color:"light"}},
+  { path: '/admin/companies/create', exact: true, name: 'New Company', component : Company, props:{method : "post"}},
+  { path: '/admin/companies/edit/:id', exact: true, name: 'Update Company', component : Company, props:{method : "put"}},
+  { path: '/admin/companies/read/:id', exact: true, name: 'Info Company', component : Company, props:{method : "get"}},
+  { path: '/admin/companies/delete/:id', exact: true, name: 'Delete Company', component : Company, props:{method : "delete"}},
   //Policy
-  { path: '/admin/policies', exact: true, name: 'Policies', component: DataTable, props: { tableName: "Policies", tableQuery: "Policies", color: "light" } },
-  { path: '/admin/policies/create', exact: true, name: 'New Policy', component: Policy, props: { method: "post" } },
-  { path: '/admin/policies/edit/:id', exact: true, name: 'Update Policy', component: Policy, props: { method: "put" } },
-  { path: '/admin/policies/read/:id', exact: true, name: 'Info Policy', component: Policy, props: { method: "get" } },
-  { path: '/admin/policies/delete/:id', exact: true, name: 'Delete Policy', component: Policy, props: { method: "delete" } },
+  { path: '/admin/policies', exact: true, name: 'Policies', component : DataTable, props:{tableName:"Policies", tableQuery: "Policies",color:"light"}},
+  { path: '/admin/policies/create', exact: true, name: 'New Policy', component : Policy, props:{method : "post"}},
+  { path: '/admin/policies/edit/:id', exact: true, name: 'Update Policy', component : Policy, props:{method : "put"}},
+  { path: '/admin/policies/read/:id', exact: true, name: 'Info Policy', component : Policy, props:{method : "get"}},
+  { path: '/admin/policies/delete/:id', exact: true, name: 'Delete Policy', component : Policy, props:{method : "delete"}},
   //Hospital
-  { path: '/admin/hospitals', exact: true, name: 'Hospitals', component: DataTable, props: { tableName: "Hospitals", tableQuery: "Hospitals", color: "light" } },
-  { path: '/admin/hospitals/create', exact: true, name: 'New Hospital', component: Hospital, props: { method: "post" } },
-  { path: '/admin/hospitals/edit/:id', exact: true, name: 'Update Hospital', component: Hospital, props: { method: "put" } },
-  { path: '/admin/hospitals/read/:id', exact: true, name: 'Info Hospital', component: Hospital, props: { method: "get" } },
-  { path: '/admin/hospitals/delete/:id', exact: true, name: 'Delete Hospital', component: Hospital, props: { method: "delete" } },
+  { path: '/admin/hospitals', exact: true, name: 'Hospitals', component : DataTable, props:{tableName:"Hospitals", tableQuery: "Hospitals",color:"light"}},
+  { path: '/admin/hospitals/create', exact: true, name: 'New Hospital', component : Hospital, props:{method : "post"}},
+  { path: '/admin/hospitals/edit/:id', exact: true, name: 'Update Hospital', component : Hospital, props:{method : "put"}},
+  { path: '/admin/hospitals/read/:id', exact: true, name: 'Info Hospital', component : Hospital, props:{method : "get"}},
+  { path: '/admin/hospitals/delete/:id', exact: true, name: 'Delete Hospital', component : Hospital, props:{method : "delete"}},
   //Employees
-  { path: '/admin/employees', exact: true, name: 'Employees', component: DataTable, props: { tableName: "Employees", tableQuery: "Employees", color: "light" } },
-  { path: '/admin/employees/create', exact: true, name: 'New Employee', component: Employee, props: { method: "post" } },
-  { path: '/admin/employees/edit/:id', exact: true, name: 'Update Employee', component: Employee, props: { method: "put" } },
-  { path: '/admin/employees/read/:id', exact: true, name: 'Info Employee', component: Employee, props: { method: "get" } },
-  { path: '/admin/employees/delete/:id', exact: true, name: 'Delete Employee', component: Employee, props: { method: "delete" } },
+  { path: '/admin/employees', exact: true, name: 'Employees', component : DataTable, props:{tableName:"Employees", tableQuery: "Employees", color:"light"}},
+  { path: '/admin/employees/create', exact: true, name: 'New Employee', component : Employee, props:{method : "post"}},
+  { path: '/admin/employees/edit/:id', exact: true, name: 'Update Employee', component : Employee, props:{method : "put"}},
+  { path: '/admin/employees/read/:id', exact: true, name: 'Info Employee', component : Employee, props:{method : "get"}},
+  { path: '/admin/employees/delete/:id', exact: true, name: 'Delete Employee', component : Employee, props:{method : "delete"}},
   //Request
-  { path: '/admin/requests', exact: true, name: 'Requests', component: Request, props: { tableName: "Requests", tableQuery: "PolicyRequests", color: "light" } },
-  { path: '/admin/requests/read/:id', exact: true, name: 'Info Request', component: RequestDetails, props: { mode: "get" } },
-  { path: '/admin/requests', exact: true, name: 'Requests', component: Request, props: { tableName: "Requests", tableQuery: "PolicyRequests", color: "light" } },
-  { path: '/admin/approvals', exact: true, name: 'Approvals', component: Approval, props: { tableName: "Approvals", tableQuery: "PolicyApprovals", color: "light" } },
+  {path:'/admin/requests', exact: true, name: 'Requests', component : Request, props:{tableName:"Requests", tableQuery: "PolicyRequests", color:"light"}},
+  {path: '/admin/requests/read/:id', exact: true, name: 'Info Request', component : RequestDetails, props:{mode : "get"}},
+  {path:'/admin/requests', exact: true, name: 'Requests', component : Request, props:{tableName:"Requests", tableQuery: "PolicyRequests", color:"light"}},
+  {path:'/admin/approvals', exact: true, name: 'Approvals', component : Approval, props:{tableName:"Approvals", tableQuery: "PolicyApprovals", color:"light"}},
 
   //Feedback
-  { path: '/admin/feedbacks', exact: true, name: 'Feedbacks', component: DataTable, props: { tableName: "Feedbacks", tableQuery: "Feedbacks", color: "light" } },
-  { path: '/admin/feedbacks/edit/:id', exact: true, name: 'Reply Feedback', component: Feedback, props: { method: "put" } },
-  { path: '/admin/feedbacks/read/:id', exact: true, name: 'Info Feedback', component: Feedback, props: { method: "get" } },
-  { path: '/admin/feedbacks/delete/:id', exact: true, name: 'Delete Feedback', component: Feedback, props: { method: "delete" } },
+  {path:'/admin/feedbacks', exact: true, name: 'Feedbacks', component : DataTable, props:{tableName:"Feedbacks", tableQuery: "Feedbacks", color:"light"}},
+  {path:'/admin/feedbacks/edit/:id', exact: true, name: 'Reply Feedback', component : Feedback, props:{method : "put"}},
+  {path:'/admin/feedbacks/read/:id', exact: true, name: 'Info Feedback', component : Feedback, props:{method : "get"}},
+  {path:'/admin/feedbacks/delete/:id', exact: true, name: 'Delete Feedback', component : Feedback, props:{method : "delete"}},
 
   //Tool: Upload Document
-  { path: '/admin/tool/uploadDocument', exact: true, name: 'Document Upload', component: DocumentUpload },
-  { path: '/admin/tool/documents', exact: true, name: 'Documents', component: DataTable, props: { tableName: "Documents", tableQuery: "UploadFile", color: "light" } }
-  , { path: '/profile', exact: true, name: 'Profile', component: profile }
+  {path:'/admin/tool/uploadDocument', exact: true, name: 'Document Upload', component : DocumentUpload },
+  {path:'/admin/tool/documents', exact: true, name: 'Documents', component : DataTable, props:{tableName:"Documents", tableQuery: "UploadFile", color:"light"}}
+
 ];
 
 export default routes;
