@@ -1,5 +1,5 @@
 import React from 'react';
-import profile from './views/pages/profile/profile';
+import Profile from './views/custom/Profile';
 
 // Extend
 //Custom Datatable
@@ -142,7 +142,7 @@ const routes = [
   //Tool: Upload Document
   { path: '/admin/tool/uploadDocument', exact: true, name: 'Document Upload', component: DocumentUpload },
   { path: '/admin/tool/documents', exact: true, name: 'Documents', component: DataTable, props: { tableName: "Documents", tableQuery: "UploadFile", color: "light" } }
-  , { path: '/profile', exact: true, name: 'Profile', component: profile }
+  , { path: '/profile', exact: true, name: 'Profile', component: Profile }
 ];
 
 export default routes;
