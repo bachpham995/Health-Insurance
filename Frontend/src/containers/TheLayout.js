@@ -9,16 +9,16 @@ import {
 } from './index'
 
 
-const TheLayout = ({user}) => {
+const TheLayout = ({ user }) => {
   return (
     <div className="c-app c-default-layout">
-      <TheSidebar/>
+      <TheSidebar user={user} />
       <div className="c-wrapper">
-        <TheHeader user={user}/>
+        <TheHeader user={user} />
         <div className="c-body">
-          <TheContent/>
+          <TheContent />
         </div>
-        <TheFooter/>
+        <TheFooter />
       </div>
     </div>
   )
