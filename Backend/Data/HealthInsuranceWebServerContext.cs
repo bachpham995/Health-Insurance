@@ -77,15 +77,15 @@ namespace HealthInsuranceWebServer.Data
 
             modelBuilder.Entity<Policy>().HasData(
                new Policy() { PolicyId = 1, InsCompanyId = 1, Amount = 3000, Emi = 250, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00001", HospitalId = 1 },
-               new Policy() { PolicyId = 2, InsCompanyId = 1, Amount = 2467, Emi = 123, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00002", HospitalId = 2 },
-               new Policy() { PolicyId = 3, InsCompanyId = 1, Amount = 9876, Emi = 222, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00003", HospitalId = 3 },
-               new Policy() { PolicyId = 4, InsCompanyId = 1, Amount = 2345, Emi = 785, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00004", HospitalId = 4 },
-               new Policy() { PolicyId = 5, InsCompanyId = 1, Amount = 9876, Emi = 234, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00005", HospitalId = 5 },
-               new Policy() { PolicyId = 6, InsCompanyId = 1, Amount = 12345, Emi = 111, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00006", HospitalId = 6 },
-               new Policy() { PolicyId = 7, InsCompanyId = 1, Amount = 123, Emi = 222, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00007", HospitalId = 7 },
-               new Policy() { PolicyId = 8, InsCompanyId = 1, Amount = 987654, Emi = 250, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00008", HospitalId = 8 },
-               new Policy() { PolicyId = 9, InsCompanyId = 1, Amount = 347, Emi = 96, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00009", HospitalId = 9 },
-               new Policy() { PolicyId = 10, InsCompanyId = 1, Amount = 1000, Emi = 250, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00010", HospitalId = 10 }
+               new Policy() { PolicyId = 2, InsCompanyId = 2, Amount = 2467, Emi = 123, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00002", HospitalId = 2 },
+               new Policy() { PolicyId = 3, InsCompanyId = 3, Amount = 9876, Emi = 222, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00003", HospitalId = 3 },
+               new Policy() { PolicyId = 4, InsCompanyId = 4, Amount = 2345, Emi = 785, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00004", HospitalId = 4 },
+               new Policy() { PolicyId = 5, InsCompanyId = 5, Amount = 9876, Emi = 234, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00005", HospitalId = 5 },
+               new Policy() { PolicyId = 6, InsCompanyId = 6, Amount = 12345, Emi = 111, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00006", HospitalId = 6 },
+               new Policy() { PolicyId = 7, InsCompanyId = 7, Amount = 123, Emi = 222, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00007", HospitalId = 7 },
+               new Policy() { PolicyId = 8, InsCompanyId = 8, Amount = 987654, Emi = 250, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00008", HospitalId = 8 },
+               new Policy() { PolicyId = 9, InsCompanyId = 9, Amount = 347, Emi = 96, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00009", HospitalId = 9 },
+               new Policy() { PolicyId = 10, InsCompanyId = 10, Amount = 1000, Emi = 250, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00010", HospitalId = 10 }
                );
 
             modelBuilder.Entity<Employee>().HasData(

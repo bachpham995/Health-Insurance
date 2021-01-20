@@ -26,6 +26,8 @@ const DocumentUpload = React.lazy(() => import('./views/custom/DocumentUpload'))
 
 //Policy Search
 const PolicySearch = React.lazy(() => import('./views/custom/PolicySearch'));
+//Policy Request
+const PolicyRequest = React.lazy(() => import('./views/custom/PolicyRequest'));
 
 
 
@@ -111,6 +113,8 @@ const routes = [
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
   //Search
   {path: '/user/policySearch', exact: true, name: 'Policy Search', component: PolicySearch},
+  //Request A Policy
+  {path: '/user/policyRequest', exact: true, name: 'Policy Request', component: PolicyRequest},
 
   //Company
   { path: '/admin/companies', exact: true, name: 'Companies', component: DataTable, props: { tableName: "Insurance Companies", tableQuery: "InsuranceCompanies", color: "light" } },

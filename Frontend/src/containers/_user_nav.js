@@ -47,7 +47,8 @@ const _user_nav = [
       },
       {
         _tag: 'CSidebarNavItem',
-        name: <div className=""><CIcon className="mr-3" name='cil-indent-increase'/>Request a Policy</div>
+        name: <div className=""><CIcon className="mr-3" name='cil-indent-increase'/>Request a Policy</div>,
+        to: "/user/policyRequest"
       }
     ]
   },
