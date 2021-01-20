@@ -29,12 +29,13 @@ namespace HealthInsuranceWebServer.Controllers
             return await _context.Employee.Where(e=>e.Role != 0)
             .Include(e=>e.PolicyRequests)
             .Include(e=>e.Feedbacks)
-            .Include(e=>e.Notifications)
+            .Include(e=>e.ToNotifications).ThenInclude(n=>n.FromUser)
+            .Include(e=>e.FromNotifications).ThenInclude(n=>n.ToUser)
             .Include(e=>e.PolicyEmployees)
             .ToListAsync();
         }
 
-        // GET: api/Employees/5
+        // GET: api/Employees/{id}
         [HttpGet("{id}")]
         public async Task<ActionResult<Employee>> GetEmployee(int id)
         {
@@ -42,7 +43,8 @@ namespace HealthInsuranceWebServer.Controllers
             .Where(e=>e.EmployeeId == id)
             .Include(e=>e.PolicyRequests)
             .Include(e=>e.Feedbacks)
-            .Include(e=>e.Notifications)
+            .Include(e=>e.ToNotifications).ThenInclude(n=>n.FromUser)
+            .Include(e=>e.FromNotifications).ThenInclude(n=>n.ToUser)
             .Include(e=>e.PolicyEmployees)
             .FirstAsync();
             
@@ -55,9 +57,29 @@ namespace HealthInsuranceWebServer.Controllers
             return employee;
         }
 
-        // PUT: api/Employees/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
+        [HttpGet]
+        [Route("User/{username}")]
+        public async Task<ActionResult<Employee>> GetUser(string username)
+        {
+            var employee = await _context.Employee
+            .Where(e=>e.Username == username)
+            .Include(e=>e.PolicyRequests)
+            .Include(e=>e.Feedbacks)
+            .Include(e=>e.ToNotifications).ThenInclude(n=>n.FromUser)
+            .Include(e=>e.FromNotifications).ThenInclude(n=>n.ToUser)
+            .Include(e=>e.PolicyEmployees)
+            .FirstAsync();
+            
+
+            if (employee == null)
+            {
+                return NotFound();
+            }
+
+            return employee;
+        }
+
+        // PUT: api/Employees/{id}
         [HttpPut("{id}")]
         public async Task<IActionResult> PutEmployee(int id, Employee employee)
         {
@@ -88,8 +110,6 @@ namespace HealthInsuranceWebServer.Controllers
         }
 
         // POST: api/Employees
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Employee>> PostEmployee(Employee employee)
         {
@@ -99,9 +119,7 @@ namespace HealthInsuranceWebServer.Controllers
             return CreatedAtAction("GetEmployee", new { id = employee.EmployeeId }, employee);
         }
 
-
-
-        // DELETE: api/Employees/5
+        // DELETE: api/Employees/{id}
         [HttpDelete("{id}")]
         public async Task<ActionResult<Employee>> DeleteEmployee(int id)
         {

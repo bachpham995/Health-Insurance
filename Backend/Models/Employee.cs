@@ -60,6 +60,7 @@ namespace HealthInsuranceWebServer.Models
         [DefaultValue("false")]
         public bool Retired { get; set; }
 
+        [DefaultValue(1)]
         public int Role { get; set; }
 
         public ICollection<Feedback> Feedbacks { get; set; }
@@ -68,6 +69,7 @@ namespace HealthInsuranceWebServer.Models
         
         public ICollection<PolicyEmployee> PolicyEmployees { get; set; }      
                
-        public ICollection<Notification> Notifications { get; set; }
+        public ICollection<Notification> FromNotifications { get; set; }
+        public ICollection<Notification> ToNotifications { get; set; }
     }
 }

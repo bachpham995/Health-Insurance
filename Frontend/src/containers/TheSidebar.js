@@ -15,16 +15,16 @@ import {
 import CIcon from '@coreui/icons-react'
 
 // sidebar nav config
-import navigation from './_nav'
+import admin_nav from './_nav'
+import user_nav from './_user_nav'
 
-const TheSidebar = () => {
+const TheSidebar = ({ user }) => {
   const dispatch = useDispatch()
   const show = useSelector(state => state.sidebarShow)
-
   return (
     <CSidebar
       show={show}
-      onShowChange={(val) => dispatch({type: 'set', sidebarShow: val })}
+      onShowChange={(val) => dispatch({ type: 'set', sidebarShow: val })}
     >
       <CSidebarBrand className="d-md-down-none" to="/">
         <CIcon
@@ -39,9 +39,8 @@ const TheSidebar = () => {
         />
       </CSidebarBrand>
       <CSidebarNav>
-
         <CCreateElement
-          items={navigation}
+          items={user?.role == 0 ? admin_nav : user_nav}
           components={{
             CSidebarNavDivider,
             CSidebarNavDropdown,
@@ -50,7 +49,7 @@ const TheSidebar = () => {
           }}
         />
       </CSidebarNav>
-      <CSidebarMinimizer className="c-d-md-down-none"/>
+      <CSidebarMinimizer className="c-d-md-down-none" />
     </CSidebar>
   )
 }

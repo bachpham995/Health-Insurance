@@ -38,17 +38,11 @@ Backend/obj/HealthInsuranceWebServer.csproj.nuget.g.targets
 Backend/obj/project.assets.json
 Backend/obj/project.nuget.cache
 Frontend/debug.log
-<<<<<<< Updated upstream
-Backend/Migrations/20210104122339_InitialCreater.cs
-Backend/Migrations/20210104122339_InitialCreater.Designer.cs
-Backend/Migrations/20210104132425_init.cs
-Backend/Migrations/20210104132425_init.Designer.cs
-*.cs
-Backend/Migrations/HealthInsuranceWebServerContextModelSnapshot.cs
-=======
 Backend/Migrations/20210104122339_InitialCreater.Designer.cs
 Backend/Migrations/20210104122339_InitialCreater.cs
 Backend/Migrations/20210104122339_InitialCreater.cs
 Backend/Migrations/20210104122339_InitialCreater.cs
 Backend/Migrations/20210104122339_InitialCreater.Designer.cs
->>>>>>> Stashed changes
+
+Backend/.vscode/launch.json
+Backend/.vscode/tasks.json

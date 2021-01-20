@@ -1,5 +1,5 @@
-import React from 'react'
-import CIcon from '@coreui/icons-react'
+import React from 'react';
+import CIcon from '@coreui/icons-react';
 
 const _nav = [
   {
@@ -318,41 +318,39 @@ const _admin_nav = [
 
     _tag: 'CSidebarNavDropdown',
     name: 'Management',
-    route: '/admin',
     icon: 'cil-layers',
     _children: [
       {
         _tag: 'CSidebarNavItem',
-        name: 'Company',
+        name: <div className=""><CIcon className="mr-3" name="cil-building"/>Company</div>,
         to: '/admin/companies',
 
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Hospital',
+        name: <div className=""><CIcon className="mr-3" name="cil-hospital"/>Hospital</div>,
         to: '/admin/hospitals',
 
       }, {
         _tag: 'CSidebarNavItem',
-        name: 'Policy',
+        name: <div className=""><CIcon className="mr-3" name="cil-spreadsheet"/>Policy</div>,
         to: '/admin/policies',
-
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Employee',
+        name: <div className=""><CIcon className="mr-3" name="cil-user"/>Employee</div>,
         to: '/admin/employees',
 
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Requests',
+        name: <div className=""><CIcon className="mr-3" name="cil-swap-vertical"/>Request</div>,
         to: '/admin/requests',
 
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Approval',
+        name: <div className=""><CIcon className="mr-3" name="cil-check"/>Approval</div>,
         to: '/admin/approvals',
       },
       {
@@ -363,12 +361,47 @@ const _admin_nav = [
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Feedback',
+        name: <div className=""><CIcon className="mr-3" name="cil-envelope-letter"/>Feedback</div>,
         to: '/admin/feedbacks',
       }
     ]
   }
   , {
+    _tag: 'CSidebarNavDropdown',
+    name: 'Utility',
+    icon: 'cil-calculator',
+    _children: [
+      {
+        _tag: 'CSidebarNavDropdown',
+        name: <div className=""><CIcon className="mr-3" name="cil-folder"/>Document</div>,
+        _children: [
+          {
+            _tag: 'CSidebarNavItem',
+            name: <div className=""><CIcon className="mr-3 ml-3" name="cil-storage"/>List</div>,
+            to: '/admin/tool/documents'
+          },
+          {
+            _tag: 'CSidebarNavItem',
+            name: <div className=""><CIcon className="mr-3 ml-3" name="cil-cloud-upload"/>Upload</div>,
+            to: '/admin/tool/uploadDocument'
+          }
+        ]
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: <div className=""><CIcon className="mr-3" name="cib-gmail"/>Email</div>,
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: <div className=""><CIcon className="mr-3" name="cil-calendar"/>Calendar</div>,
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: '',
+
+      },]
+  },
+  {
     _tag: 'CSidebarNavDropdown',
     name: 'Icons',
     route: '/icons',

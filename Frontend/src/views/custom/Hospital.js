@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import {
   CButton,
   CCard,
@@ -98,12 +98,11 @@ const Hospital = ({ method }) => {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
             Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Hospital", "Added new Hospital", 1);
-            goBack();
           }).catch(err => {
             console.log(err);
           });
-        break;
-
+        goBack();
+        return false;
       case "put":
         data.hospitalId = parseInt(id);
         await AxiosClient.put("/Hospitals" + "/" + id, JSON.stringify(data),
@@ -111,23 +110,23 @@ const Hospital = ({ method }) => {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
             Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Hospital", "Modified a Hospital", 1);
-            goBack();
           }).catch(err => {
             console.log(err);
           });
-        break;
+        goBack();
+        return false;
 
       case "delete":
         await AxiosClient.delete("/Hospitals" + "/" + id,
           {}
         ).then(res => {
           setShowConfirm(false);
-          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Hospital", "Removed a Hospital", 1);
-          goBack();
+          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Hospital", "Removed a Hospital", 1);     
+          goBack();     
         }).catch(err => {
           console.log(err);
-        });
-        break;
+        });        
+        return false;
 
       default:
         break;

@@ -26,14 +26,20 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Notification>>> GetNotification()        
         {            
-            return await _context.Notification.Include(n=>n.FromUser).ToListAsync();
+            return await _context.Notification
+            .Include(n=>n.FromUser)
+            .Include(n=>n.ToUser)
+            .ToListAsync();
         }
 
         // GET: api/Notifications/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Notification>> GetNotification(int id)
         {
-            var notification = await _context.Notification.Include(n=>n.FromUser).Where(n => n.Id == id).FirstAsync();
+            var notification = await _context.Notification
+            .Include(n=>n.FromUser)
+            .Include(n=>n.ToUser)
+            .Where(n => n.Id == id).FirstAsync();
 
             if (notification == null)
             {

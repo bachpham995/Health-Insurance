@@ -5,18 +5,24 @@ import {
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
-  CImg
+  CImg,
+  CLink
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
+import { useHistory } from "react-router-dom";
+import Utility from 'src/api/Utility'
 
 
 const Notification = ({ ntfType, notifications, count }) => {
+  let history = useHistory();
 
   const notifyTime = (date) => {
     let now = new Date(Date.now());
     const oneDay = 24 * 60 * 60 * 1000;
     const notifyDate = new Date(date);
     const diffDays = Math.abs((now - notifyDate) / oneDay);
+
+
     if (now.getFullYear > notifyDate.getFullYear) {
       return notifyDate.toLocaleDateString([], { day: 'numeric', month: 'long', year: 'numeric' }) + "   " + notifyDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     } else if (diffDays < 1) {
@@ -105,7 +111,7 @@ const Notification = ({ ntfType, notifications, count }) => {
         </CDropdownItem>
         {/* cil-user-unfollow */}
         <div className="custom-scrollbar">
-          {notifications.map(notify => <CDropdownItem key={notify.id} href="#">
+          {notifications?.map(notify => <CDropdownItem key={notify.id} >
             <div className="message message-notify">
               <div className="mr-3 float-left">
                 <div className="c-avatar">

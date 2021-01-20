@@ -51,18 +51,30 @@ export default class Utility {
 
   static GetRecordAction = (model) => {
     switch (model) {
+      case "Company":
+      case "InsuranceCompany":
       case "InsuranceCompanies":
         return '/admin/companies';
+
+      case "PolicyRequest":
       case "PolicyRequests":
         return '/admin/requests';
       case "Reports":
         return '/admin/reports';
+
+      case "Hospital":
       case "Hospitals":
         return '/admin/hospitals';
+
+      case "Employee":
       case "Employees":
         return '/admin/employees';
+
+      case "Policy":
       case "Policies":
         return '/admin/policies';
+
+      case "Feedback":
       case "Feedbacks":
         return '/admin/feedbacks';
       default:
@@ -72,6 +84,9 @@ export default class Utility {
 
   static TableHeader = (model) => {
     switch (model) {
+      case "UploadFile":
+        return ["fileName", "type", "createTime"];
+
       case "InsuranceCompanies":
         return [{
           key: 'show_details',
@@ -151,6 +166,7 @@ export default class Utility {
   static shouldShowAddBtn = (model) => {
     switch (model) {
       case "Feedbacks":
+      case "UploadFile":
         return false;
 
       default:

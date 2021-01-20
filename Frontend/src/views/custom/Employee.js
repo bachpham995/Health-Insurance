@@ -57,7 +57,7 @@ const Employee = ({ method }) => {
         setImageSrc(Utility.REACT_APP_SERVER_URL + res);
         setUploadStatus(true);
       }).catch(err => {
-         console.log(err);
+        console.log(err);
       });
   }
 
@@ -88,7 +88,7 @@ const Employee = ({ method }) => {
       "img": imageSrc,
       "email": form.email.value,
       "phone": form.phone.value,
-      "role" : 1,
+      "role": 1,
       "address": {
         "street": form.street.value,
         "district": form.district.value,
@@ -105,11 +105,11 @@ const Employee = ({ method }) => {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
             Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Employee", "Added a new Employee(User)", 1);
-            goBack();
           }).catch(err => {
             console.log(err);
           });
-        break;
+        goBack();
+        return false;
 
       case "put":
         data.employeeId = parseInt(id);
@@ -120,11 +120,12 @@ const Employee = ({ method }) => {
           }).then(res => {
             setEmployee(res.config.data)
             Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Employee", "Modified an Employee(User)", 1);
-            goBack();
+
           }).catch(err => {
             console.log(err);
           });
-        break;
+        goBack();
+        return false;
 
       case "delete":
         await AxiosClient.delete("/Employees" + "/" + id,
@@ -136,7 +137,7 @@ const Employee = ({ method }) => {
         }).catch(err => {
           console.log(err);
         });
-        break;
+        return false;
 
       default:
         break;
@@ -343,7 +344,7 @@ const Employee = ({ method }) => {
                           <CCol xs="6">
                             <CFormGroup>
                               <CLabel htmlFor="dob">Date of Birth</CLabel>
-                              <CInput defaultValue={employee?.doB} pattern="dd-mm-yyyy"  id="dob" type="datetime-local" placeholder="Birthday of Employee" required />
+                              <CInput defaultValue={employee?.doB} pattern="dd-mm-yyyy" id="dob" type="datetime-local" placeholder="Birthday of Employee" required />
                             </CFormGroup>
                           </CCol>
                           <CCol xs="6">
@@ -365,13 +366,13 @@ const Employee = ({ method }) => {
                           <CCol xs="6">
                             <CFormGroup>
                               <CLabel htmlFor="district">District</CLabel>
-                              <CInput defaultValue={employee?.address?.district}  id="district" type="text" placeholder="District" required />
+                              <CInput defaultValue={employee?.address?.district} id="district" type="text" placeholder="District" required />
                             </CFormGroup>
                           </CCol>
                           <CCol xs="6">
                             <CFormGroup>
                               <CLabel htmlFor="city">City</CLabel>
-                              <CInput defaultValue={employee?.address?.city}  id="city" type="text" placeholder="City" required />
+                              <CInput defaultValue={employee?.address?.city} id="city" type="text" placeholder="City" required />
                             </CFormGroup>
                           </CCol>
                         </CRow>
@@ -379,24 +380,24 @@ const Employee = ({ method }) => {
                           <CCol xs="6">
                             <CFormGroup>
                               <CLabel htmlFor="postalCode">Postal Code</CLabel>
-                              <CInput defaultValue={employee?.address?.postalCode}  id="postalCode" type="text" placeholder="Postal" required />
+                              <CInput defaultValue={employee?.address?.postalCode} id="postalCode" type="text" placeholder="Postal" required />
                             </CFormGroup>
                           </CCol>
                           <CCol xs="6">
                             <CFormGroup>
                               <CLabel htmlFor="country">Country</CLabel>
-                              <CInput defaultValue={employee?.address?.country}  id="country" type="text" placeholder="Country" required />
+                              <CInput defaultValue={employee?.address?.country} id="country" type="text" placeholder="Country" required />
                             </CFormGroup>
                           </CCol>
                         </CRow>
                         <CRow>
-                        <CCol xs="12">
-                          <CRow className="ml-1">
-                            Active
-                            {employee?.status ? (<CSwitch id="status" className="ml-2" shape={'pill'} color={'primary'} labelOn={'\u2713'} labelOff={'\u2715'} defaultChecked/>):(<CSwitch id="status" className="ml-2" shape={'pill'} color={'primary'} labelOn={'\u2713'} labelOff={'\u2715'}/>)}
-                          </CRow>
+                          <CCol xs="12">
+                            <CRow className="ml-1">
+                              Active
+                            {employee?.status ? (<CSwitch id="status" className="ml-2" shape={'pill'} color={'primary'} labelOn={'\u2713'} labelOff={'\u2715'} defaultChecked />) : (<CSwitch id="status" className="ml-2" shape={'pill'} color={'primary'} labelOn={'\u2713'} labelOff={'\u2715'} />)}
+                            </CRow>
 
-                        </CCol>
+                          </CCol>
                         </CRow>
                       </fieldset>
                     </CCardBody>

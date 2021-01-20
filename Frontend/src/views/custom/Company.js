@@ -92,17 +92,18 @@ const Company = ({ method }) => {
     }
     // console.log(data);
     switch (method) {
+
       case "post":
         await AxiosClient.post("/InsuranceCompanies", JSON.stringify(data),
           {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
             Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Company", "Added new Insurance Company", 1);
-            goBack();
           }).catch(err => {
             console.log(err);
           });
-        break;
+        goBack();
+        return false;
 
       case "put":
         data.insuranceCompanyId = parseInt(id);
@@ -111,11 +112,11 @@ const Company = ({ method }) => {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
             Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Company", "Modified an Insurance Company", 1);
-            goBack();
           }).catch(err => {
             console.log(err);
           });
-        break;
+        goBack();
+        return false;
 
       case "delete":
         await AxiosClient.delete("/InsuranceCompanies" + "/" + id,
@@ -127,7 +128,7 @@ const Company = ({ method }) => {
         }).catch(err => {
           console.log(err);
         });
-        break;
+        return false;
 
       default:
         break;

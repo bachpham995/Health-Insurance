@@ -110,11 +110,12 @@ const Policy = ({ method }) => {
           }).then(res => {
             setPolicy(res);
             Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Policy", "Added new Policy", 1);
-            goBack();
+
           }).catch(err => {
             console.log(err);
-            goBack();
+
           });
+        goBack();
         return false;
 
       case "put":
@@ -125,12 +126,11 @@ const Policy = ({ method }) => {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
             Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Policy", "Modified a Policy", 1);
-            goBack();
           }).catch(err => {
             console.log(err);
-            goBack();
           });
-        break;
+        goBack();
+        return false;
 
       case "delete":
         await AxiosClient.delete("/Policies" + "/" + id,
@@ -141,15 +141,14 @@ const Policy = ({ method }) => {
           goBack();
         }).catch(err => {
           console.log(err);
-          goBack();
         });
-        break;
+        return false;
 
       default:
         break;
 
     }
-    return false;
+
   }
   const Layout = () => {
     let action = Utility.ActionDisplayName(method);
