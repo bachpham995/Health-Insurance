@@ -14,11 +14,55 @@ namespace HealthInsuranceWebServer.Controllers
     [ApiController]
     public class PoliciesController : ControllerBase
     {
-        private readonly HealthInsuranceWebServerContext _context;        
+        private readonly HealthInsuranceWebServerContext _context;
 
         public PoliciesController(HealthInsuranceWebServerContext context)
         {
             _context = context;
+        }
+
+        [HttpPost("Search")]
+        public async Task<ActionResult<IEnumerable<Policy>>> Search([FromForm]string policyNumber, [FromForm]string policyName,
+         [FromForm]string companyName, [FromForm]string hospitalName,
+         [FromForm]float minEmi = 0, [FromForm]float maxEmi = 0,
+         [FromForm]float minAmount = 0, [FromForm]float maxAmount = 0)
+        {
+            var query = _context.Policy.Include(p => p.InsCompany).Include(p => p.Hospital).AsQueryable();
+
+            if (policyNumber != null)
+            {
+                query = query.Where(p => p.PolicyNumber.Contains(policyNumber));
+            }
+
+            if (policyName != null)
+            {
+                query = query.Where(p => p.PolicyName.Contains(policyName));
+            }
+
+            if (companyName != null)
+            {
+                query = query.Where(p => p.InsCompany.InsCompanyName.Contains(companyName));
+            }
+
+            if (hospitalName != null)
+            {
+                query = query.Where(p => p.Hospital.HospitalName.Contains(hospitalName));
+            }
+
+            if (minEmi >= 0 && minEmi < maxEmi){                
+                query = query.Where(p => Math.Round(p.Emi) <= Math.Round(maxEmi) && Math.Round(p.Emi) >= Math.Round(minEmi));
+            }else if (minEmi >= 0 && maxEmi == 0){
+                query = query.Where(p => Math.Round(p.Emi) >= Math.Round(minEmi));
+            }
+
+            if (minAmount >= 0 && minAmount < maxAmount){                
+                query = query.Where(p => Math.Round(p.Amount) <= Math.Round(maxAmount) && Math.Round(p.Amount) >= Math.Round(minAmount));
+            }else if (minAmount >= 0 && maxAmount == 0){
+                query = query.Where(p => Math.Round(p.Amount) >= Math.Round(minAmount));
+            }
+
+            return await query.ToListAsync();
+
         }
 
         // GET: api/Policies
@@ -26,10 +70,10 @@ namespace HealthInsuranceWebServer.Controllers
         public async Task<ActionResult<IEnumerable<Policy>>> GetPolicy()
         {
             return await _context.Policy.Where(p => !p.Retired)
-            .Include(p=>p.Hospital)
-            .Include(p=>p.InsCompany)
-            .Include(p=>p.PolicyRequests)
-            .Include(p=>p.PolicyEmployees)
+            .Include(p => p.Hospital)
+            .Include(p => p.InsCompany)
+            .Include(p => p.PolicyRequests)
+            .Include(p => p.PolicyEmployees)
             .ToListAsync();
         }
 
@@ -38,10 +82,10 @@ namespace HealthInsuranceWebServer.Controllers
         public async Task<ActionResult<Policy>> GetPolicy(int id)
         {
             var policy = await _context.Policy.Where(p => !p.Retired && p.PolicyId == id)
-            .Include(p=>p.Hospital)
-            .Include(p=>p.InsCompany)
-            .Include(p=>p.PolicyRequests)
-            .Include(p=>p.PolicyEmployees)
+            .Include(p => p.Hospital)
+            .Include(p => p.InsCompany)
+            .Include(p => p.PolicyRequests)
+            .Include(p => p.PolicyEmployees)
             .FirstAsync<Policy>();
 
             if (policy == null)
@@ -91,12 +135,14 @@ namespace HealthInsuranceWebServer.Controllers
         public async Task<ActionResult<Policy>> PostPolicy(Policy policy)
         {
             int nextId = _context.Policy.Max(p => p.PolicyId) + 1;
-            string policyNumber = DateTime.Now.Year.ToString() + "-";
+            string month = DateTime.Now.Month.ToString().Length == 1?("0"+DateTime.Now.Month.ToString()):DateTime.Now.Month.ToString();
+            string day = DateTime.Now.Date.ToString().Length == 1?("0"+DateTime.Now.Date.ToString()):DateTime.Now.Date.ToString();
+            string policyNumber = DateTime.Now.Year.ToString() + "-" + month + day;
             for (int i = 0; i < 5 - nextId.ToString().Length; i++)
             {
-                policyNumber+="0";    
+                policyNumber += "0";
             }
-            policyNumber+=nextId;
+            policyNumber += nextId;
             policy.PolicyNumber = policyNumber;
             _context.Policy.Add(policy);
             await _context.SaveChangesAsync();
@@ -113,7 +159,7 @@ namespace HealthInsuranceWebServer.Controllers
             {
                 return NotFound();
             }
-            
+
             policy.Retired = true;
             _context.Policy.Update(policy);
             await _context.SaveChangesAsync();

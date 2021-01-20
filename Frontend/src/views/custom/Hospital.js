@@ -91,6 +91,7 @@ const Hospital = ({ method }) => {
       }
     }
     // console.log(data);
+    event.preventDefault();
     switch (method) {
       case "post":
         await AxiosClient.post("/Hospitals", JSON.stringify(data),
@@ -102,7 +103,7 @@ const Hospital = ({ method }) => {
             console.log(err);
           });
         goBack();
-        return false;
+        break;
       case "put":
         data.hospitalId = parseInt(id);
         await AxiosClient.put("/Hospitals" + "/" + id, JSON.stringify(data),
@@ -113,20 +114,21 @@ const Hospital = ({ method }) => {
           }).catch(err => {
             console.log(err);
           });
-        goBack();
-        return false;
+          goBack();
+          break;
 
       case "delete":
         await AxiosClient.delete("/Hospitals" + "/" + id,
           {}
         ).then(res => {
           setShowConfirm(false);
-          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Hospital", "Removed a Hospital", 1);     
-          goBack();     
+          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Hospital", "Removed a Hospital", 1);
+
         }).catch(err => {
           console.log(err);
-        });        
-        return false;
+        });
+        goBack();
+        break;
 
       default:
         break;

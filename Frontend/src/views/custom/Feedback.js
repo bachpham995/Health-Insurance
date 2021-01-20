@@ -61,13 +61,14 @@ const Feedback = ({ method }) => {
     const data = {...feedback};
     data.response = form.response.value;
     // console.log(data);
+    event.preventDefault();
     switch (method) {
       case "put":
         await AxiosClient.put("/Feedbacks" + "/" + id, JSON.stringify(data),
           {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
-            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Feedback", "Replied a User Feedback", 1);            
+            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Feedback", "Replied a User Feedback", 1);
           }).catch(err => {
             console.log(err);
           });
@@ -79,12 +80,11 @@ const Feedback = ({ method }) => {
           {}
         ).then(res => {
           setShowConfirm(false);
-          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Feedback", "Removed a User Feedback", 1);   
-          goBack();       
+          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Feedback", "Removed a User Feedback", 1);
         }).catch(err => {
           console.log(err);
         });
-        
+        goBack()
         break;
 
       default:

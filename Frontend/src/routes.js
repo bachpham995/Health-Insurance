@@ -24,7 +24,11 @@ const Feedback = React.lazy(() => import('./views/custom/Feedback'));
 //Upload Document
 const DocumentUpload = React.lazy(() => import('./views/custom/DocumentUpload'));
 
-//
+//Policy Search
+const PolicySearch = React.lazy(() => import('./views/custom/PolicySearch'));
+
+
+
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 const Tables = React.lazy(() => import('./views/base/tables/Tables'));
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'));
@@ -105,6 +109,9 @@ const routes = [
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/users', exact: true, name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
+  //Search
+  {path: '/user/policySearch', exact: true, name: 'Policy Search', component: PolicySearch},
+
   //Company
   { path: '/admin/companies', exact: true, name: 'Companies', component: DataTable, props: { tableName: "Insurance Companies", tableQuery: "InsuranceCompanies", color: "light" } },
   { path: '/admin/companies/create', exact: true, name: 'New Company', component: Company, props: { method: "post" } },

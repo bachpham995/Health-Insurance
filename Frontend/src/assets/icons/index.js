@@ -137,7 +137,8 @@ import {
   cilStorage,
   cilBuilding,
   cilHospital,
-  cilArrowThickLeft
+  cilArrowThickLeft,
+  cilSearch
 } from '@coreui/icons'
 
 export const icons = Object.assign({}, {
@@ -244,7 +245,9 @@ export const icons = Object.assign({}, {
   cilX,
   cilXCircle,
   cilWarning,
-  cilAccountLogout
+  cilAccountLogout,
+  cilSearch,
+  cilDollar
 }, {
   cifUs,
   cifBr,

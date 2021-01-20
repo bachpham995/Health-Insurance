@@ -90,7 +90,8 @@ const RequestDetails = ({ method }) => {
       "emi": data.emi,
       "amount": data.amount
     }
-    console.log(dataRequest);
+    // console.log(dataRequest);
+    event.preventDefault();
     await AxiosClient.post("/PolicyApprovals", JSON.stringify(dataApproval)).then(res => {
       setShowConfirm(false);
     }).catch(err => {
@@ -102,10 +103,10 @@ const RequestDetails = ({ method }) => {
       }
     ).then(res => {
       setShowConfirm(false);
-      goBack();
     }).catch(err => {
       console.log(err);
-    });;;
+    });
+    goBack();
 
   }
   const Layout = () => {

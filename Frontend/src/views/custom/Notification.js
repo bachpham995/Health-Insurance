@@ -13,7 +13,7 @@ import { useHistory } from "react-router-dom";
 import Utility from 'src/api/Utility'
 
 
-const Notification = ({ ntfType, notifications, count }) => {
+const Notification = ({ user, ntfType, notifications, count }) => {
   let history = useHistory();
 
   const notifyTime = (date) => {
@@ -23,7 +23,7 @@ const Notification = ({ ntfType, notifications, count }) => {
     const diffDays = Math.abs((now - notifyDate) / oneDay);
 
 
-    if (now.getFullYear > notifyDate.getFullYear) {
+    if (now.getFullYear() > notifyDate.getFullYear()) {
       return notifyDate.toLocaleDateString([], { day: 'numeric', month: 'long', year: 'numeric' }) + "   " + notifyDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     } else if (diffDays < 1) {
       return notifyDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
@@ -91,6 +91,24 @@ const Notification = ({ ntfType, notifications, count }) => {
     }
   }
 
+  const IsAdmin = () => {
+    return user?.role == 0;
+  }
+
+  const getPrefix = () => {
+    if (IsAdmin)
+      return '/admin/';
+    return '/user/';
+  }
+
+  const navigate = (event, notify) => {
+    if (notify.relatedType != null) {
+      event.preventDefault();
+      let pushURL = getPrefix() + notify.relatedType + (notify.relatedType == "feedbacks"?"/edit/":"/read/") + notify.relatedId;
+      history.push(pushURL);
+    }
+  }
+
   return (
     <CDropdown
       inNav
@@ -111,7 +129,7 @@ const Notification = ({ ntfType, notifications, count }) => {
         </CDropdownItem>
         {/* cil-user-unfollow */}
         <div className="custom-scrollbar">
-          {notifications?.map(notify => <CDropdownItem key={notify.id} >
+          {notifications?.map(notify => <CDropdownItem key={notify.id} onClick={(event)=>navigate(event, notify)}>
             <div className="message message-notify">
               <div className="mr-3 float-left">
                 <div className="c-avatar">
