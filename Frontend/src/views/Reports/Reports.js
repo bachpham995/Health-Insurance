@@ -16,12 +16,14 @@ import {
     CInputGroup,
     CSelect,
     CLabel,
-    CFormGroup
-
+    CIcon,
+    CInput,
+    CForm
 } from '@coreui/react'
 import AxiosClient from "src/api/AxiosClient"
 import Utility from 'src/api/Utility'
-
+import DatePicker from 'react-date-picker'
+// import Moment from 'react-moment';
 const getBadge = status => {
     switch (status) {
         case 'Active': return 'success'
@@ -36,21 +38,61 @@ const Reports = ({ tableName, tableQuery, color }) => {
     const fields = Utility.TableHeader(tableQuery);
     const [tableData, setTableData] = useState([]);
     const [listCompany, setListCompany] = useState([]);
+    const [tableSetDateDate, setTableSetDateData] = useState([]);
     const [companySelect, setCompanySelect] = useState(null);
+    const [startDate, setStartDate] = useState(null);
+    const [endDate, setEndDate] = useState(null);
+
+    const setDate = (e) => {
+        const datasSearchDate = [];
+        if (startDate != null && endDate != null) {
+            tableSetDateDate.map((item) => {
+                let date = new Date(item.requestDate);
+                let startDateCV = new Date(startDate);
+                let endDateCV = new Date(endDate);
+                const oneDay = 24 * 60 * 60 * 1000;
+                const diffDays1 = Math.abs((date - startDateCV) / oneDay);
+                const diffDays2 = Math.abs((date - endDateCV) / oneDay);
+                if (diffDays1 > 0 && diffDays2 < 1) {
+
+                    datasSearchDate.push(item);
+                }
+            });
+            setTableSetDateData(datasSearchDate);
+        }
+        // setStartDate(0);
+        // setEndDate(0);
+    }
 
     useEffect(() => {
         const fetchDataList = async () => {
+            // console.log(tableName)
+            // console.log(tableQuery)
             try {
-                if (companySelect = null) {
-                    const response = await AxiosClient.get("/" + tableQuery);
-                    console.log('Fetch data successfully: ', response);
-                    console.log("Data Header:", Object.keys(response[0]));
-                    setTableData(response);
+                const request = [];
+                const datasSearchCompany = [];
+                const response = await (await AxiosClient.get("/Policies"));
+                console.log(response)
+                response.map((item) => {
+                    item.policyRequests.map((requestItem) => {
+                        request.push(requestItem);
+                    })
+                });
+                if (companySelect == null) {
+                    setTableData(request);
+                } else {
+                    response.map((item) => {
+                        if (item.insCompanyId == companySelect) {
+                            item.policyRequests.map((requestItem) => {
+                                datasSearchCompany.push(requestItem);
+                            })
+                        }
+                    });
+                    setTableData(datasSearchCompany);
                 }
-                const response = await AxiosClient.get("/Policiess");
-                    console.log('Fetch data successfully: ', response);
-                    console.log("Data Header:", Object.keys(response[0]));
-                    setTableData(response);
+                if (startDate == null && endDate == null) {
+                    setTableSetDateData(request);
+                }
             } catch (error) {
                 console.log('Failed to fetch data list: ', error);
             }
@@ -58,17 +100,15 @@ const Reports = ({ tableName, tableQuery, color }) => {
         const fetchCompanys = async () => {
             try {
                 const response = await AxiosClient.get("/InsuranceCompanies");
-                console.log('Fetch data successfully: ', response);
-                console.log("Data Header:", Object.keys(response[0]));
+                console.log(response);
                 setListCompany(response);
             } catch (error) {
                 console.log(error);
             }
         }
-
         fetchDataList();
         fetchCompanys();
-    }, []);
+    }, [companySelect], [startDate], [endDate]);
 
     return (
         <>
@@ -76,25 +116,25 @@ const Reports = ({ tableName, tableQuery, color }) => {
                 <CCol >
                     <CCard>
                         <CCardHeader>
-                            <h3>{tableName}</h3>
+                            <h3>{tableName} by Company</h3>
                         </CCardHeader>
                         <CCardHeader>
-                            <CCol xl="3">
+                            <CCol xl="5">
                                 <CLabel htmlFor="insCompanyId">Choise Company</CLabel>
                                 <CInputGroup>
                                     <CSelect
-                                        // disabled={readOnly.includes("get") ? "disable" : ""}
+                                        onChange={(e) => setCompanySelect(e.target.value)}
                                         custom rows="2" id="insCompanyId"
                                     >
                                         {
                                             listCompany?.map(comp => (
-                                                <option key={comp.insuranceCompanyId} value={comp.insuranceCompanyId}>{comp.insCompanyName}</option>
+                                                <option key={comp.insuranceCompanyId} value={comp.insuranceCompanyId} >{comp.insCompanyName}</option>
                                             ))
                                         }
                                     </CSelect>
-                                    {/* <CInputGroupAppend>
-                                            <CButton size="sm" color="success">Details</CButton>
-                                        </CInputGroupAppend> */}
+                                    <CInputGroupAppend>
+                                        <CButton size="sm" color="primary" onClick={() => setCompanySelect(null)}>Reset</CButton>
+                                    </CInputGroupAppend>
                                 </CInputGroup>
                             </CCol>
                         </CCardHeader>
@@ -102,15 +142,9 @@ const Reports = ({ tableName, tableQuery, color }) => {
                             <CDataTable
                                 items={tableData}
                                 fields={fields}
-                                hover
-                                bordered
-                                responsive
-                                dark={color !== "light"}
-                                sorter
-                                size="sm"
+                                striped
                                 itemsPerPage={5}
                                 pagination
-                                columnFilter
                                 scopedSlots={{
                                     'status':
                                         (item) => (
@@ -120,39 +154,99 @@ const Reports = ({ tableName, tableQuery, color }) => {
                                                 </CBadge>
                                             </td>
                                         ),
-                                    'show_details':
+                                    'button':
+                                        (item) => (<>
+                                            <CDropdown className="mt-1">
+                                                <CLink to={Utility.Read(tableQuery, item)} >
+                                                    <CCol col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
+                                                        <CButton color={getBadge(item.status ? "Active" : "Banned")} disabled={item.status ? false : true}>
+                                                            {"Print"}
+                                                        </CButton>
+                                                    </CCol>
+                                                </CLink>
+                                            </CDropdown>
+                                        </>
+                                        )
+                                }}
+                            >
+                            </CDataTable>
+                        </CCardBody>
+                    </CCard>
+                    <CCard>
+                        <CCardHeader>
+                            <h3>{tableName} by Date </h3>
+                        </CCardHeader>
+                        <CCardHeader>
+                            <CCol xl="5">
+                                <CLabel>Choose the time period</CLabel>
+                                <CInputGroup>
+                                    <DatePicker
+                                        isClearable
+                                        showTimeSelect
+                                        timeFormat="HH:mm"
+                                        timeIntervals={15}
+                                        timeCaption="time"
+                                        dateFormat="dd-MM-yyyy H:mm"
+                                        autoComplete="Off"
+                                        maxDate={new Date()}
+                                        onChange={setStartDate}
+                                        value={startDate} required
+                                    />
+                                    <CLabel>To</CLabel>
+                                    <DatePicker
+                                        isClearable
+                                        showTimeSelect
+                                        maxDate={new Date()}
+                                        timeFormat="HH:mm"
+                                        timeIntervals={15}
+                                        timeCaption="time"
+                                        dateFormat="dd-MM-yyyy H:mm"
+                                        autoComplete="Off"
+                                        onChange={setEndDate}
+                                        value={endDate} required
+                                    />
+                                    <CInputGroupAppend>
+                                        <CButton size="sm" color="success" onClick={(e) => setDate(null)}>Select</CButton>
+                                    </CInputGroupAppend>
+                                </CInputGroup>
+                            </CCol>
+                        </CCardHeader>
+                        <CCardBody>
+                            <CDataTable
+                                items={tableSetDateDate}
+                                fields={fields}
+                                striped
+                                itemsPerPage={5}
+                                pagination
+                                scopedSlots={{
+                                    'status':
                                         (item) => (
                                             <td>
-                                                <CDropdown className="">
-                                                    <CDropdownToggle caret color="primary" size="sm">
-                                                        Actions
-                          </CDropdownToggle>
-                                                    <CDropdownMenu placement='right'>
-                                                        <CLink to={Utility.Read(tableQuery, item)}>
-                                                            <CButton size="sm" variant="outline" color="info" className="ml-1">
-                                                                Info
-                              </CButton>
-                                                        </CLink>
-                                                        <CLink to={Utility.Edit(tableQuery, item)}>
-                                                            <CButton size="sm" variant="outline" color="warning" className="ml-1">
-                                                                Edit
-                              </CButton>
-                                                        </CLink>
-                                                        <CLink to={Utility.Delete(tableQuery, item)}>
-                                                            <CButton size="sm" variant="outline" color="danger" className="ml-1 mr-1">
-                                                                Remove
-                            </CButton>
-                                                        </CLink>
-                                                    </CDropdownMenu>
-                                                </CDropdown>
+                                                <CBadge color={getBadge(item.status ? "Active" : "Inactive")}>
+                                                    {item.status ? "Active" : "Inactive"}
+                                                </CBadge>
                                             </td>
+                                        ),
+                                    'button':
+                                        (item) => (<>
+                                            <CDropdown className="mt-1">
+                                                <CLink to={Utility.Read(tableQuery, item)} >
+                                                    <CCol col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
+                                                        <CButton color={getBadge(item.status ? "Active" : "Banned")} disabled={item.status ? false : true}>
+                                                            {"Print"}
+                                                        </CButton>
+                                                    </CCol>
+                                                </CLink>
+                                            </CDropdown>
+                                        </>
                                         )
-                                }
-                                }
-                            ></CDataTable>
+                                }}
+                            >
+                            </CDataTable>
                         </CCardBody>
                     </CCard>
                 </CCol>
+
             </CRow>
         </>
     )

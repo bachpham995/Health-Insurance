@@ -55,16 +55,16 @@ export default class Utility {
         return '/admin/companies';
       case "PolicyRequests":
         return '/admin/requests';
+      case "Reports":
+        return '/admin/reports';
       case "Hospitals":
         return '/admin/hospitals';
       case "Employees":
         return '/admin/employees';
       case "Policies":
         return '/admin/policies';
-      default :
       case "Feedbacks":
         return '/admin/feedbacks';
-
       default:
         return '/admin';
     }
@@ -119,22 +119,30 @@ export default class Utility {
           sorter: false,
           filter: false
         }, "employeeId", "fName", "lName", "designation", "status"];
-        case "PolicyRequests":
-          return [{
-              key: 'button',
-              label: 'Approval', 
-              _style: { width: '5%' },
-              sorter: false,
-              filter: false
-          },"requestId","requestDate","status","note","emi","amount"];
-          case "PolicyApprovals":
-            return [{
-                key: 'none',
-                label: '', 
-                _style: { width: '5%' },
-                sorter: false,
-                filter: false
-            },"approvalId","approvalDate","status","reason","requestId"];
+      case "PolicyRequests":
+        return [{
+          key: 'button',
+          label: 'Approval',
+          _style: { width: '5%' },
+          sorter: false,
+          filter: false
+        }, "requestId", "requestDate", "status", "note", "emi", "amount"];
+      case "Reports":
+        return [{
+          key: 'button',
+          label: 'Print',
+          _style: { width: '5%' },
+          sorter: false,
+          filter: false
+        }, "requestId", "requestDate", "status", "note", "emi", "amount"];
+      case "PolicyApprovals":
+        return [{
+          key: 'none',
+          label: '',
+          _style: { width: '5%' },
+          sorter: false,
+          filter: false
+        }, "approvalId", "approvalDate", "status", "reason", "requestId"];
       default:
         return [];
     }

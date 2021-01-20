@@ -59,7 +59,7 @@ const ReuqestEmployees = ({ tableName, tableQuery, color }) => {
   }, []);
   return (
     <>
-      <CRow>
+<CRow>
   <CCol>
   <CCard>
     <CCardHeader>
