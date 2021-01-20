@@ -1,5 +1,5 @@
 import React from 'react';
-import Profile from './views/custom/Profile';
+
 
 // Extend
 //Custom Datatable
@@ -61,6 +61,8 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const User = React.lazy(() => import('./views/users/User'));
+const Mailbox = React.lazy(() => import('./views/custom/Mailbox'));
+const Profile = React.lazy(() => import('./views/custom/Profile'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -143,6 +145,7 @@ const routes = [
   { path: '/admin/tool/uploadDocument', exact: true, name: 'Document Upload', component: DocumentUpload },
   { path: '/admin/tool/documents', exact: true, name: 'Documents', component: DataTable, props: { tableName: "Documents", tableQuery: "UploadFile", color: "light" } }
   , { path: '/profile', exact: true, name: 'Profile', component: Profile }
+  , { path: '/admin/mail', exact: true, name: 'Admin Mail', component: Mailbox }
 ];
 
 export default routes;
