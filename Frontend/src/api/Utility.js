@@ -146,6 +146,7 @@ export default class Utility {
           label: '#',
           _style: { width: '5%' }
         }, "requestDate", "status", "emi", "amount"];
+
       case "PolicyApprovals":
         return [{
           key: 'button',
@@ -153,15 +154,7 @@ export default class Utility {
           _style: { width: '5%' },
           sorter: false,
           filter: false
-        }, "requestId", "requestDate", "status", "note", "emi", "amount"];
-      case "PolicyApprovals":
-        return [{
-          key: 'none',
-          label: '',
-          _style: { width: '5%' },
-          sorter: false,
-          filter: false
-        }, "approvalId", "approvalDate", "status", "reason", "requestId"];
+        }, "approvalId", "approvalDate", "status", "reason"];
       default:
         return [];
     }

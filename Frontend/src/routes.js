@@ -151,6 +151,7 @@ const routes = [
   //Request
   { path: '/admin/requests', exact: true, name: 'Requests', component: Request, props: { tableName: "Requests", tableQuery: "PolicyRequests", color: "light" } },
   { path: '/admin/requests/read/:id', exact: true, name: 'Info Request', component: RequestDetails, props: { mode: "get" } },
+  //Approvals
   { path: '/admin/approvals', exact: true, name: 'Approvals', component: Approval, props: { tableName: "Approvals", tableQuery: "PolicyApprovals", color: "light" } },
   //Report
   {path:'/admin/reports', exact: true, name: 'Reports', component : Report, props:{tableName:"Reports", tableQuery: "Reports", color:"light"}},

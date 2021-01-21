@@ -65,8 +65,8 @@ const Approvals = ({ tableName, tableQuery, color }) => {
         'status':
           (item)=>(
             <td>
-              <CBadge color={getBadge(item.status ? "Active" : "Inactive")}>
-                   {item.status ? "Approval" : "Unaccep"}
+              <CBadge color={getBadge(item.status? "Active" : "Banned")}>
+                   {item.status ? "Approved" : "Rejected"}
               </CBadge>
             </td>
           ),
