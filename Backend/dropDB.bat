@@ -1,6 +1,4 @@
-dotnet-ef database drop
-
-y
+dotnet-ef database drop -f
 
 dotnet-ef migrations remove
 

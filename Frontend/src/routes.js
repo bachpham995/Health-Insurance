@@ -1,5 +1,5 @@
 import React from 'react';
-import Profile from './views/custom/Profile';
+
 
 // Extend
 //Custom Datatable
@@ -27,7 +27,13 @@ const Feedback = React.lazy(() => import('./views/custom/Feedback'));
 //Upload Document
 const DocumentUpload = React.lazy(() => import('./views/custom/DocumentUpload'));
 
-//
+//Policy Search
+const PolicySearch = React.lazy(() => import('./views/custom/PolicySearch'));
+//Policy Request
+const PolicyRequest = React.lazy(() => import('./views/custom/PolicyRequest'));
+
+
+
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
 const Tables = React.lazy(() => import('./views/base/tables/Tables'));
 const Breadcrumbs = React.lazy(() => import('./views/base/breadcrumbs/Breadcrumbs'));
@@ -64,6 +70,8 @@ const Typography = React.lazy(() => import('./views/theme/typography/Typography'
 const Widgets = React.lazy(() => import('./views/widgets/Widgets'));
 const Users = React.lazy(() => import('./views/users/Users'));
 const User = React.lazy(() => import('./views/users/User'));
+const Mailbox = React.lazy(() => import('./views/custom/Mailbox'));
+const Profile = React.lazy(() => import('./views/custom/Profile'));
 
 const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -106,6 +114,11 @@ const routes = [
   { path: '/widgets', name: 'Widgets', component: Widgets },
   { path: '/users', exact: true, name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
+  //Search
+  {path: '/user/policySearch', exact: true, name: 'Policy Search', component: PolicySearch},
+  //Request A Policy
+  {path: '/user/policyRequest', exact: true, name: 'Policy Request', component: PolicyRequest},
+
   //Company
   { path: '/admin/companies', exact: true, name: 'Companies', component: DataTable, props: { tableName: "Insurance Companies", tableQuery: "InsuranceCompanies", color: "light" } },
   { path: '/admin/companies/create', exact: true, name: 'New Company', component: Company, props: { method: "post" } },
@@ -148,6 +161,7 @@ const routes = [
   { path: '/admin/tool/uploadDocument', exact: true, name: 'Document Upload', component: DocumentUpload },
   { path: '/admin/tool/documents', exact: true, name: 'Documents', component: DataTable, props: { tableName: "Documents", tableQuery: "UploadFile", color: "light" } }
   , { path: '/profile', exact: true, name: 'Profile', component: Profile }
+  , { path: '/admin/mail', exact: true, name: 'Admin Mail', component: Mailbox }
 ];
 
 export default routes;

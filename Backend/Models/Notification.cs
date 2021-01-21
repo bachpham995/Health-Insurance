@@ -32,5 +32,9 @@ namespace HealthInsuranceWebServer.Models
         public bool Status { get; set; }
     
         public int Type { get; set; }
+
+        public int RelatedId { get; set;  }
+
+        public string RelatedType { get; set; }
     }
 }

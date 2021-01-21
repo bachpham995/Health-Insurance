@@ -51,14 +51,18 @@ const TheHeader = ({ user }) => {
   }
 
   const GetNotificationsByType = (data, type) => {
-    return data?.filter(n => n.type == type);
+    return data?.filter(n => n.type == type).sort(function compare(a, b) {
+      var dateA = new Date(a.date);
+      var dateB = new Date(b.date);
+      return dateB - dateA;
+    });
   }
 
   const CountNotificationsByType = (data, type) => {
     return data?.filter(n => !n.status && n.type == type).length;
   }
 
-  
+
   useEffect(() => {
     let mounted = true;
     if (mounted) {
@@ -73,40 +77,6 @@ const TheHeader = ({ user }) => {
 
     return () => mounted = false;
   },[]);
-
-  const FetchNotification = async (mounted) => {
-    await AxiosClient.get("/Notifications").then(res => {
-      console.log('Get data successfully: ', res);
-      // console.log("Data Header:", Object.keys(res[0]));
-      if (mounted) {
-        // setNotifications_0(GetNotificationsByType(res, 0));
-        // setNotifications_1(GetNotificationsByType(res, 1));
-        // setNotifications_2(GetNotificationsByType(res, 2));
-      }
-    }).catch(err => {
-      console.log('Failed to Get data: ', err);
-    });
-  }
-
-  // useEffect(() => {
-  //   setCount_0(notifications_0.filter(n => !n.status && n.type == 0).length);
-  //   setCount_1(notifications_1.filter(n => !n.status && n.type == 1).length);
-  //   setCount_2(notifications_2.filter(n => !n.status && n.type == 2).length);
-  // }, [notifications_0, notifications_1, notifications_2]);
-
-
-
-  // useEffect(() => {
-  //   let mounted = true;
-  //   //FetchNotification(mounted);
-  //   //return () => mounted = false;
-  //   // const interval = setInterval(() => {
-  //   //   setDelay(60000);
-  //     FetchNotification(true);
-  //   // }, delay);
-  //   // return () => clearInterval(interval);
-  //   return () => mounted = false;
-  // }, [count_0, count_1, count_2]);
 
   return (
     <CHeader withSubheader colorScheme="dark">
@@ -137,9 +107,9 @@ const TheHeader = ({ user }) => {
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        <Notification ntfType="0" notifications={notifications_0} count={count_0} />
-        <Notification ntfType="1" notifications={notifications_1} count={count_1} />
-        <Notification ntfType="2" notifications={notifications_2} count={count_2} />
+        <Notification user={user} ntfType="0" notifications={notifications_0} count={count_0} />
+        <Notification user={user} ntfType="1" notifications={notifications_1} count={count_1} />
+        <Notification user={user} ntfType="2" notifications={notifications_2} count={count_2} />
         {/* <TheHeaderDropdownNotif/>
         <TheHeaderDropdownTasks/>
         <TheHeaderDropdownMssg/>*/}

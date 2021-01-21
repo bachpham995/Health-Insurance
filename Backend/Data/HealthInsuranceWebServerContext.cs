@@ -78,24 +78,24 @@ namespace HealthInsuranceWebServer.Data
 
             modelBuilder.Entity<Policy>().HasData(
                new Policy() { PolicyId = 1, InsCompanyId = 1, Amount = 3000, Emi = 250, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00001", HospitalId = 1 },
-               new Policy() { PolicyId = 2, InsCompanyId = 1, Amount = 2467, Emi = 123, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00002", HospitalId = 2 },
-               new Policy() { PolicyId = 3, InsCompanyId = 1, Amount = 9876, Emi = 222, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00003", HospitalId = 3 },
-               new Policy() { PolicyId = 4, InsCompanyId = 1, Amount = 2345, Emi = 785, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00004", HospitalId = 4 },
-               new Policy() { PolicyId = 5, InsCompanyId = 1, Amount = 9876, Emi = 234, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00005", HospitalId = 5 },
-               new Policy() { PolicyId = 6, InsCompanyId = 1, Amount = 12345, Emi = 111, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00006", HospitalId = 6 },
-               new Policy() { PolicyId = 7, InsCompanyId = 1, Amount = 123, Emi = 222, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00007", HospitalId = 7 },
-               new Policy() { PolicyId = 8, InsCompanyId = 1, Amount = 987654, Emi = 250, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00008", HospitalId = 8 },
-               new Policy() { PolicyId = 9, InsCompanyId = 1, Amount = 347, Emi = 96, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00009", HospitalId = 9 },
-               new Policy() { PolicyId = 10, InsCompanyId = 1, Amount = 1000, Emi = 250, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00010", HospitalId = 10 }
+               new Policy() { PolicyId = 2, InsCompanyId = 2, Amount = 2467, Emi = 123, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00002", HospitalId = 2 },
+               new Policy() { PolicyId = 3, InsCompanyId = 3, Amount = 9876, Emi = 222, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00003", HospitalId = 3 },
+               new Policy() { PolicyId = 4, InsCompanyId = 4, Amount = 2345, Emi = 785, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00004", HospitalId = 4 },
+               new Policy() { PolicyId = 5, InsCompanyId = 5, Amount = 9876, Emi = 234, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00005", HospitalId = 5 },
+               new Policy() { PolicyId = 6, InsCompanyId = 6, Amount = 12345, Emi = 111, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00006", HospitalId = 6 },
+               new Policy() { PolicyId = 7, InsCompanyId = 7, Amount = 123, Emi = 222, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00007", HospitalId = 7 },
+               new Policy() { PolicyId = 8, InsCompanyId = 8, Amount = 987654, Emi = 250, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00008", HospitalId = 8 },
+               new Policy() { PolicyId = 9, InsCompanyId = 9, Amount = 347, Emi = 96, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00009", HospitalId = 9 },
+               new Policy() { PolicyId = 10, InsCompanyId = 10, Amount = 1000, Emi = 250, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00010", HospitalId = 10 }
                );
 
             modelBuilder.Entity<Employee>().HasData(
-                 new Employee(){ EmployeeId = 1, FName = "Phat", LName="Luu Trong", Username="phatltuit", Password="123", Email ="phatltuit@gmail.com",Designation = "Senior Cleaner", Phone = "058256332X", Role = 0
-                               , JoinDate=DateTime.Now.AddYears(10), DoB = new DateTime(1996, 05,30), Img="http://localhost:6969/imgs/employee/luutrongphat.png"}
-               , new Employee(){ EmployeeId = 2, FName = "Bach", LName="Pham Xuan", Username="bachpham", Password="123456789", Email ="bachpham@gmail.com",Designation = "Junior Cleaner", Phone = "012345678X", Role = 1
-                               , JoinDate=DateTime.Now.AddYears(10), DoB = new DateTime(1996, 05,30), Img="http://localhost:6969/imgs/employee/bachpham.jpg"}
-               , new Employee(){ EmployeeId = 3, FName = "Hoa", LName="Nguyen Vu Hoang", Username="nguyenvuhoanghoa", Password="123456789", Email ="nguyenvuhoanghoa@gmail.com",Designation = "Junior Cleaner", Phone = "01232278X", Role = 1
-                               , JoinDate=DateTime.Now.AddYears(10), DoB = new DateTime(1996, 05,30), Img="http://localhost:6969/imgs/employee/hoanghoa.jpg"}
+                 new Employee(){ EmployeeId = 1, FName = "Phat", LName="Luu Trong", Username="admin", Password="123", Email ="phatltuit@gmail.com",Designation = "Admin", Phone = "058256332X", Role = 0
+                               , JoinDate=DateTime.Now.AddYears(-10), DoB = new DateTime(1996, 05,30), Img="http://localhost:6969/imgs/employee/luutrongphat.png"}
+               , new Employee(){ EmployeeId = 2, FName = "Bach", LName="Pham Xuan", Username="bachpham", Password="123", Email ="bachpham@gmail.com",Designation = "Senior SE", Phone = "012345678X", Role = 1
+                               , JoinDate=DateTime.Now.AddYears(-5), DoB = new DateTime(1996, 05,30), Img="http://localhost:6969/imgs/employee/bachpham.jpg"}
+               , new Employee(){ EmployeeId = 3, FName = "Hoa", LName="Nguyen Vu Hoang", Username="hoanghoa", Password="123", Email ="nguyenvuhoanghoa@gmail.com",Designation = "Junior SE", Phone = "01232278X", Role = 1
+                               , JoinDate=DateTime.Now.AddYears(-2), DoB = new DateTime(1996, 05,30), Img="http://localhost:6969/imgs/employee/hoanghoa.jpg"}
                );
 
             modelBuilder.Entity<Employee>().OwnsOne(e => e.Address).HasData(
@@ -104,21 +104,26 @@ namespace HealthInsuranceWebServer.Data
                     , new { EmployeeId = 3, Street = "Xô Viết Nghệ Tĩnh", District = "Quận Bình Thạnh", City = "Ho Chi Minh City", Country = "Vietnam", PostalCode = "" }
                 );
 
-            modelBuilder.Entity<Notification>().HasData(
-                new Notification(){Id = 1, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddDays(-123),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 2, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddMonths(1),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+            modelBuilder.Entity<Notification>().HasData(//only 2 type: => 0 request, 1 feedback
+                new Notification(){Id = 1, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddDays(-123),Title="Policy Request", Description="A User has submit a feedback.", Status = false, Type = 0, RelatedId = 4, RelatedType = "feedbacks"},
+                new Notification(){Id = 2, FromUserId = 3, ToUserId=1, Date = DateTime.Now,              Title="Feedback", Description="A User has submit a feedback.", Status = false, Type = 0, RelatedId = 1, RelatedType = "feedbacks"},
                 new Notification(){Id = 3, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-3),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
                 new Notification(){Id = 4, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddMinutes(5),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
                 new Notification(){Id = 5, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddYears(-1),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
                 new Notification(){Id = 6, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddHours(-4),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
                 new Notification(){Id = 7, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddMonths(-2),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 8, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-14),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 9, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddDays(-8),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 10, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-1),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0}
+                new Notification(){Id = 8, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-14),Title="Policy Request", Description="A User has submit a feedback.", Status = false, Type = 0, RelatedId = 2, RelatedType = "feedbacks"},
+                new Notification(){Id = 9, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddDays(-8),Title="Policy Request", Description="A User has submit a feedback.", Status = false, Type = 0, RelatedId = 5, RelatedType = "feedbacks"},
+                new Notification(){Id = 10, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-1),Title="Policy Request", Description="A User has submit a feedback.", Status = false, Type = 0, RelatedId = 3, RelatedType = "feedbacks"}
             );
 
             modelBuilder.Entity<Feedback>().HasData(
-                new Feedback(){FeedbackId = 1, EmployeeId = 1, Title="This is the test feed back feature", Content="This is the test feed back feature", Date=DateTime.Now}
+                new Feedback(){FeedbackId = 1, EmployeeId = 3, Title="This is the test feed back feature", Content="This is the test feed back feature", Date=DateTime.Now.AddDays(-15)},
+                new Feedback(){FeedbackId = 2, EmployeeId = 3, Title="This is the test feed back feature", Content="This is the test feed back feature", Date=DateTime.Now.AddDays(-1)},
+                new Feedback(){FeedbackId = 3, EmployeeId = 3, Title="This is the test feed back feature", Content="This is the test feed back feature", Date=DateTime.Now.AddDays(-5)},
+                new Feedback(){FeedbackId = 4, EmployeeId = 2, Title="This is the test feed back feature", Content="This is the test feed back feature", Date=DateTime.Now},
+                new Feedback(){FeedbackId = 5, EmployeeId = 2, Title="This is the test feed back feature", Content="This is the test feed back feature", Date=DateTime.Now.AddDays(-2)}
+                
             );
         }
 

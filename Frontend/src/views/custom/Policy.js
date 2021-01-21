@@ -67,8 +67,8 @@ const Policy = ({ method }) => {
     const fetchCompanies = async () => {
       try {
         const response = await AxiosClient.get("/" + "InsuranceCompanies");
-        console.log('Fetch data successfully: ', response);
-        console.log("Data Header:", Object.keys(response[0]));
+        // console.log('Fetch data successfully: ', response);
+        // console.log("Data Header:", Object.keys(response[0]));
         setListCompanies(response);
       } catch (error) {
         console.log('Failed to fetch data list: ', error);
@@ -78,8 +78,8 @@ const Policy = ({ method }) => {
     const fetchHospitals = async () => {
       try {
         const response = await AxiosClient.get("/" + "Hospitals");
-        console.log('Fetch data successfully: ', response);
-        console.log("Data Header:", Object.keys(response[0]));
+        // console.log('Fetch data successfully: ', response);
+        // console.log("Data Header:", Object.keys(response[0]));
         setListHospital(response);
       } catch (error) {
         console.log('Failed to fetch data list: ', error);
@@ -101,7 +101,8 @@ const Policy = ({ method }) => {
       "insCompanyId": parseInt(form.insCompanyId.value),
       "hospitalId": parseInt(form.hospitalId.value)
     }
-    console.log(data);
+    // console.log(data);
+    event.preventDefault();
     switch (method) {
       case "post":
         await AxiosClient.post("/Policies", JSON.stringify(data),
@@ -115,8 +116,8 @@ const Policy = ({ method }) => {
             console.log(err);
 
           });
-        goBack();
-        return false;
+          goBack();
+          break;
 
       case "put":
         data.policyId = parseInt(id);
@@ -129,8 +130,8 @@ const Policy = ({ method }) => {
           }).catch(err => {
             console.log(err);
           });
-        goBack();
-        return false;
+          goBack();
+          break;
 
       case "delete":
         await AxiosClient.delete("/Policies" + "/" + id,
@@ -138,11 +139,11 @@ const Policy = ({ method }) => {
         ).then(res => {
           setShowConfirm(false);
           Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Policy", "Removed new Policy", 1);
-          goBack();
         }).catch(err => {
           console.log(err);
         });
-        return false;
+        goBack();
+        break;
 
       default:
         break;

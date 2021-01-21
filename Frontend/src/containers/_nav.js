@@ -429,4 +429,4 @@ const _admin_nav = [
     ],
   }
 ];
-export default _admin_nav
+export default _nav

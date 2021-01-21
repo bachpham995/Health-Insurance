@@ -32,7 +32,7 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Feedback>> GetFeedback(int id)
         {
-            var feedback = await _context.Feedback.Include(f => f.Employee).Where(f=>!f.Retired && f.EmployeeId == id).FirstAsync();
+            var feedback = await _context.Feedback.Where(f=>!f.Retired && f.FeedbackId == id).Include(f => f.Employee).FirstAsync();
 
             if (feedback == null)
             {

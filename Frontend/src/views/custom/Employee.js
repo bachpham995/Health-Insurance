@@ -98,6 +98,7 @@ const Employee = ({ method }) => {
       }
     }
     // console.log(data);
+    event.preventDefault();
     switch (method) {
       case "post":
         await AxiosClient.post("/Employees", JSON.stringify(data),
@@ -108,8 +109,8 @@ const Employee = ({ method }) => {
           }).catch(err => {
             console.log(err);
           });
-        goBack();
-        return false;
+          goBack();
+          break;
 
       case "put":
         data.employeeId = parseInt(id);
@@ -124,8 +125,8 @@ const Employee = ({ method }) => {
           }).catch(err => {
             console.log(err);
           });
-        goBack();
-        return false;
+          goBack();
+          break;
 
       case "delete":
         await AxiosClient.delete("/Employees" + "/" + id,
@@ -133,11 +134,11 @@ const Employee = ({ method }) => {
         ).then(res => {
           setShowConfirm(false);
           Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Employee", "Removed an Employee(User)", 1);
-          goBack();
         }).catch(err => {
           console.log(err);
         });
-        return false;
+        goBack();
+        break;
 
       default:
         break;

@@ -18,7 +18,6 @@ namespace HealthInsuranceWebServer.Models
         public int PolicyId { get; set; }
         public Policy Policy { get; set; }
 
-        [Timestamp]
         [DisplayFormat(DataFormatString = "{yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? RequestDate { get; set; }
 
