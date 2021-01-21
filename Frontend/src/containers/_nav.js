@@ -355,9 +355,8 @@ const _admin_nav = [
       },
       {
         _tag: 'CSidebarNavItem',
-        name: 'Report',
+        name: <div className=""><CIcon className="mr-3" name="cil-print"/>Report</div>,
         to: '/admin/reports',
-
       },
       {
         _tag: 'CSidebarNavItem',

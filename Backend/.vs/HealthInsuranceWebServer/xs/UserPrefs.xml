@@ -1,32 +1,21 @@
 ﻿<Properties StartupConfiguration="{089D3F93-7E1D-4DAF-9500-5E4A74AC4ED7}|Default" NuGet.AddPackagesDialog.IncludePrerelease="True">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Models/PolicyRequest.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Controllers/SecurityController.cs">
     <Files>
-      <File FileName="Controllers/EmployeesController.cs" Line="136" Column="2" />
-      <File FileName="Models/PolicyRequest.cs" Line="38" Column="2" />
-      <File FileName="Startup.cs" />
-      <File FileName="Properties/serviceDependencies.json" />
-      <File FileName="Controllers/PolicyRequestsController.cs" />
-      <File FileName="Data/HealthInsuranceWebServerContext.cs" />
-      <File FileName="Models/Address.cs" />
-      <File FileName="Models/Employee.cs" />
-      <File FileName="Models/Feedback.cs" />
-      <File FileName="Models/Hospital.cs" />
-      <File FileName="Models/InsuranceCompany.cs" />
-      <File FileName="Models/Notification.cs" />
-      <File FileName="Models/Policy.cs" />
-      <File FileName="Models/PolicyApproval.cs" />
-      <File FileName="Models/PolicyEmployee.cs" />
+      <File FileName="Data/HealthInsuranceWebServerContext.cs" Line="130" Column="1" />
+      <File FileName="Models/PolicyRequest.cs" Line="17" Column="1" />
+      <File FileName="dropDB.bat" Line="11" Column="13" />
+      <File FileName="Controllers/SecurityController.cs" Line="50" Column="10" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="HealthInsuranceWebServer" expanded="True">
             <Node name="HealthInsuranceWebServer" expanded="True">
-              <Node name="Controllers" expanded="True" />
-              <Node name="Data" expanded="True" />
-              <Node name="Models" expanded="True">
-                <Node name="PolicyRequest.cs" selected="True" />
+              <Node name="Controllers" expanded="True">
+                <Node name="SecurityController.cs" selected="True" />
               </Node>
+              <Node name="Data" expanded="True" />
+              <Node name="Models" expanded="True" />
             </Node>
           </Node>
         </State>

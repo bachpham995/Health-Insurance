@@ -125,8 +125,12 @@ namespace HealthInsuranceWebServer.Data
                 new Feedback(){FeedbackId = 5, EmployeeId = 2, Title="This is the test feed back feature", Content="This is the test feed back feature", Date=DateTime.Now.AddDays(-2)}
                 
             );
+            modelBuilder.Entity<PolicyRequest>().HasData(
+                new PolicyRequest() { RequestId = 1, EmployeeId = 3, PolicyId = 4,RequestDate = DateTime.Now,Status=true,Note="Please accep for me huhu",Emi=200,Amount=400,Retired=false},
+                new PolicyRequest() { RequestId = 2, EmployeeId = 1, PolicyId = 1, RequestDate = DateTime.Now, Status = true, Note = "Please accep for me huhu bobo", Emi = 500, Amount = 800, Retired = false },
+                new PolicyRequest() { RequestId = 3, EmployeeId = 2, PolicyId = 2, RequestDate = DateTime.Now, Status = true, Note = "Please accep for me huhu bubu", Emi = 700, Amount = 1000, Retired = false }
+            );
         }
-
         public DbSet<Employee> Employee { get; set; }
 
         public DbSet<Feedback> Feedback { get; set; }

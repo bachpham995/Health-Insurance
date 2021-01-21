@@ -16,10 +16,10 @@ import {
     CInputGroup,
     CSelect,
     CLabel,
-    CIcon,
     CInput,
     CForm
 } from '@coreui/react'
+import CIcon from '@coreui/icons-react'
 import AxiosClient from "src/api/AxiosClient"
 import Utility from 'src/api/Utility'
 import DatePicker from 'react-date-picker'
@@ -158,11 +158,9 @@ const Reports = ({ tableName, tableQuery, color }) => {
                                         (item) => (<>
                                             <CDropdown className="mt-1">
                                                 <CLink to={Utility.Read(tableQuery, item)} >
-                                                    <CCol col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                                                        <CButton color={getBadge(item.status ? "Active" : "Banned")} disabled={item.status ? false : true}>
-                                                            {"Print"}
-                                                        </CButton>
-                                                    </CCol>
+                                                    <CButton color={getBadge(item.status ? "Active" : "Banned")} disabled={item.status ? false : true}>
+                                                        <CIcon name="cil-print" /> Print
+                                                    </CButton>
                                                 </CLink>
                                             </CDropdown>
                                         </>
@@ -232,9 +230,9 @@ const Reports = ({ tableName, tableQuery, color }) => {
                                             <CDropdown className="mt-1">
                                                 <CLink to={Utility.Read(tableQuery, item)} >
                                                     <CCol col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                                                        <CButton color={getBadge(item.status ? "Active" : "Banned")} disabled={item.status ? false : true}>
-                                                            {"Print"}
-                                                        </CButton>
+                                                    <CButton color={getBadge(item.status ? "Active" : "Banned")} disabled={item.status ? false : true}>
+                                                        <CIcon name="cil-print" /> Print
+                                                    </CButton> 
                                                     </CCol>
                                                 </CLink>
                                             </CDropdown>

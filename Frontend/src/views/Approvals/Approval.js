@@ -75,7 +75,6 @@ const Approvals = ({ tableName, tableQuery, color }) => {
             </td>
           )
       }
-     
     }
     />
     </CCardBody>
