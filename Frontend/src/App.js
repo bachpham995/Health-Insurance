@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, } from 'react';
+import React, { Component, useState, useEffect, useContext} from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import './scss/style.scss';
 import PrivateRoute from './views/routes/PrivateRoute';
@@ -20,14 +20,16 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
   const [user, setUser] = useState(null);
+
   const FetchLoginUser = async (mounted) => {
     await AxiosClient.get("/Employees/User/" + Common.getUser(), {
       headers: { "content-type": "text/plain" }
     }).then(res => {
       // console.log('Get data successfully: ', res);
-      // console.log("Data Header:", Object.keys(res));       
+      // console.log("Data Header:", Object.keys(res));
       if(mounted){
         setUser(res);
+
       }
     }).catch(err => {
       console.log('Failed to Get data: ', err);
@@ -44,8 +46,8 @@ function App() {
     AxiosClient.post("/Security/ValidateToken?token=" + Common.getToken(), {},
       {
         headers: { 'Authorization': `Bearer ${token}` }
-      }).then(res => {        
-          //setUserSession(res, response.data.user);         
+      }).then(res => {
+          //setUserSession(res, response.data.user);
           // console.log(res);
           FetchLoginUser(mounted);
           setAuthLoading(false);
@@ -71,6 +73,7 @@ function App() {
     <BrowserRouter>
       <React.Suspense fallback={authLoading}>
         <Switch>
+          {/* <div id="userId">{user?.employeeId}</div> */}
           {/* <Route exact path="/login" name="Login Page" render={props => <Login {...props} />} />
             <Route exact path="/register" name="Register Page" render={props => <Register {...props} />} />
             <Route exact path="/404" name="Page 404" render={props => <Page404 {...props} />} />

@@ -71,13 +71,14 @@ const RequestDetails = ({ method }) => {
       });
     }
   }, [checkApproval]);
+
   const onSubmit = async (event) => {
     const dataApproval = {
       "approvalDate": date,
-      "status": checkApproval ? 1 : 0,
+      "status": checkApproval,
       "Reason": event.target.reasion.value,
       "requestId": id,
-      "retired": 1
+      "retired": false
     }
 
     const dataRequest = {
@@ -85,7 +86,7 @@ const RequestDetails = ({ method }) => {
       "employeeId": data.employeeId,
       "policyId": data.policyId,
       "requestDate": data.requestDate,
-      "status": 0,
+      "status": checkApproval ? 1 : 2,
       "note": data.note,
       "emi": data.emi,
       "amount": data.amount
@@ -118,6 +119,59 @@ const RequestDetails = ({ method }) => {
           onSubmit={onSubmit} width="100%" className="form-horizontal"
         >
           <CRow >
+            <CCol >
+              <CCard>
+                <CCardHeader>
+                  <CLabel>
+                    <h3>{action + "Request Details"}</h3>
+                  </CLabel>
+                </CCardHeader>
+                <CCardBody>
+                  <CRow>
+                    <CCol xs="6">
+                      <CFormGroup>
+                        <CLabel>Request Id</CLabel>
+                        <CInput defaultValue={request?.requestId} id="requestId" type="text" readOnly />
+                      </CFormGroup>
+                    </CCol>
+                    <CCol xs="6">
+                      <CLabel>Request Date</CLabel>
+                      <CInput defaultValue={request?.requestDate} id="requestDate" type="text" readOnly />
+                    </CCol>
+                  </CRow>
+                  <CRow>
+                    <CCol xs="6">
+                      <CFormGroup>
+                        <CLabel>Status</CLabel>
+                        <CInput defaultValue={request?.status} id="status" type="text" readOnly />
+                      </CFormGroup>
+                    </CCol>
+                    <CCol xs="6">
+                      <CLabel>Note</CLabel>
+                      <CInput defaultValue={request?.note} id="note" type="text" readOnly />
+                    </CCol>
+                  </CRow>
+                  <CRow>
+                    <CCol xs="6">
+                      <CFormGroup>
+                        <CLabel>Emi</CLabel>
+                        <CInput defaultValue={request?.emi} id="emi" type="text" readOnly />
+                      </CFormGroup>
+                    </CCol>
+                    <CCol xs="6">
+                      <CLabel>Amount</CLabel>
+                      <CInput defaultValue={request?.amount} id="amount" type="text" readOnly />
+                    </CCol>
+                  </CRow>
+                </CCardBody>
+                <CCardFooter>
+                  <CButton hidden={readOnly.includes(method) ? "hidden" : ""} onClick={toggle} size="sm" color="primary"><CIcon name="cil-scrubber" />Perform</CButton>
+                  {/* <CButton className="ml-2" hidden={readOnly.includes(method) ? "hidden" : ""} onClick={(e) => setImageSrc(null)} type="reset" size="sm" color="danger"><CIcon name="cil-ban" />Reset</CButton> */}
+                  {/* <CButton className="ml-2" onClick={toggle} hidden={method !== "delete"} type="reset" size="sm" color="danger"><CIcon name="cil-trash" />Delete</CButton> */}
+                  <CButton className="ml-2" onClick={goBack} size="m" color="warning">Back</CButton>
+                </CCardFooter>
+              </CCard>
+            </CCol>
             <CCol >
               <CCard>
                 <CCardHeader>
@@ -214,59 +268,6 @@ const RequestDetails = ({ method }) => {
 
               </CCard>
             </CCol>
-            <CCol >
-              <CCard>
-                <CCardHeader>
-                  <CLabel>
-                    <h3>{action + "Request Details"}</h3>
-                  </CLabel>
-                </CCardHeader>
-                <CCardBody>
-                  <CRow>
-                    <CCol xs="6">
-                      <CFormGroup>
-                        <CLabel>Request Id</CLabel>
-                        <CInput defaultValue={request?.requestId} id="requestId" type="text" readOnly />
-                      </CFormGroup>
-                    </CCol>
-                    <CCol xs="6">
-                      <CLabel>Request Date</CLabel>
-                      <CInput defaultValue={request?.requestDate} id="requestDate" type="text" readOnly />
-                    </CCol>
-                  </CRow>
-                  <CRow>
-                    <CCol xs="6">
-                      <CFormGroup>
-                        <CLabel>Status</CLabel>
-                        <CInput defaultValue={request?.status} id="status" type="text" readOnly />
-                      </CFormGroup>
-                    </CCol>
-                    <CCol xs="6">
-                      <CLabel>Note</CLabel>
-                      <CInput defaultValue={request?.note} id="note" type="text" readOnly />
-                    </CCol>
-                  </CRow>
-                  <CRow>
-                    <CCol xs="6">
-                      <CFormGroup>
-                        <CLabel>Emi</CLabel>
-                        <CInput defaultValue={request?.emi} id="emi" type="text" readOnly />
-                      </CFormGroup>
-                    </CCol>
-                    <CCol xs="6">
-                      <CLabel>Amount</CLabel>
-                      <CInput defaultValue={request?.amount} id="amount" type="text" readOnly />
-                    </CCol>
-                  </CRow>
-                </CCardBody>
-                <CCardFooter>
-                  <CButton hidden={readOnly.includes(method) ? "hidden" : ""} onClick={toggle} size="sm" color="primary"><CIcon name="cil-scrubber" /> Submit</CButton>
-                  {/* <CButton className="ml-2" hidden={readOnly.includes(method) ? "hidden" : ""} onClick={(e) => setImageSrc(null)} type="reset" size="sm" color="danger"><CIcon name="cil-ban" />Reset</CButton> */}
-                  {/* <CButton className="ml-2" onClick={toggle} hidden={method !== "delete"} type="reset" size="sm" color="danger"><CIcon name="cil-trash" />Delete</CButton> */}
-                  <CButton className="ml-2" onClick={goBack} size="m" color="warning">Back</CButton>
-                </CCardFooter>
-              </CCard>
-            </CCol>
           </CRow>
           <CModal show={showConfirm} onClose={toggle}>
             <CModalHeader closeButton>
@@ -276,8 +277,8 @@ const RequestDetails = ({ method }) => {
               <CRow>
                 <CCol xs="12">
                   <CFormGroup>
-                    <CLabel>Reasion</CLabel>
-                    <CTextarea defaultValue="Write some reasion......" id="reasion" type="text" required />
+                    <CLabel>Reason</CLabel>
+                    <CTextarea defaultValue="Write some reason......" id="reasion" type="text" required />
                   </CFormGroup>
                 </CCol>
               </CRow>
@@ -285,10 +286,10 @@ const RequestDetails = ({ method }) => {
             <CModalFooter>
               <CButton type="submit"
                 onClick={() => setcheckApproval(true)}
-                color="success">Approval</CButton>
+                color="success">Approve</CButton>
               <CButton type="submit"
                 onClick={() => setcheckApproval(false)}
-                color="danger">Unaccep
+                color="danger">Reject
                     </CButton>
               <CButton
                 color="secondary"

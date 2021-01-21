@@ -5,10 +5,6 @@ import {
   CCard,
   CCardBody,
   CCardHeader,
-  CCollapse,
-  CDropdownToggle,
-  CDropdownMenu,
-  CDropdownItem,
   CLink,
   CDropdown,
   CCol,
@@ -64,8 +60,8 @@ const RequestEmployees = ({ tableName, tableQuery, color }) => {
         'status':
           (item)=>(
             <td>
-              <CBadge color={getBadge(item.status ? "Active" : "Inactive")}>
-                   {item.status ? "Active" : "Inactive"}
+              <CBadge color={getBadge(item.status == 0? "Pending":(item.status == 1? "Active" : "Banned"))}>
+                {item.status == 0? "Requesting":(item.status == 1? "Approved" : "Rejected")}
               </CBadge>
             </td>
           ),
@@ -74,9 +70,9 @@ const RequestEmployees = ({ tableName, tableQuery, color }) => {
             <CDropdown className="mt-1">
               <CLink to={Utility.Read(tableQuery,item)} >
                 <CCol col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                  <CButton color={getBadge(item.status ? "Active": "Banned")} disabled={item.status?false:true}>
-                    {item.status?"Approval":"Done"}
-                    </CButton>
+                  <CButton color={getBadge(item.status == 0 ? "Active": "Banned")} disabled={item.status == 0?false:true}>
+                    Check
+                  </CButton>
                 </CCol>
               </CLink>
             </CDropdown>

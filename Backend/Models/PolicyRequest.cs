@@ -21,8 +21,8 @@ namespace HealthInsuranceWebServer.Models
         [DisplayFormat(DataFormatString = "{yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime? RequestDate { get; set; }
 
-        [DefaultValue("false")]
-        public bool Status { get; set; }
+        [DefaultValue("0")]
+        public int Status { get; set; }
 
         [MaxLength(255)]
         public string Note { get; set; }

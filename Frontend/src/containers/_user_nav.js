@@ -43,7 +43,8 @@ const _user_nav = [
     _children: [
       {
         _tag: 'CSidebarNavItem',
-        name: <div className=""><CIcon className="mr-3" name='cil-storage'/>My Requests</div>
+        name: <div className=""><CIcon className="mr-3" name='cil-storage'/>My Requests</div>,
+        to: "/user/policyRequestList"
       },
       {
         _tag: 'CSidebarNavItem',

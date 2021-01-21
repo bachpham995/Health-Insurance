@@ -29,8 +29,11 @@ const DocumentUpload = React.lazy(() => import('./views/custom/DocumentUpload'))
 
 //Policy Search
 const PolicySearch = React.lazy(() => import('./views/custom/PolicySearch'));
-//Policy Request
+//Policy Request of User
 const PolicyRequest = React.lazy(() => import('./views/custom/PolicyRequest'));
+//Policy Request List of User
+const PolicyRequestList = React.lazy(() => import('./views/custom/UserPolicyRequests'));
+
 
 
 
@@ -118,6 +121,8 @@ const routes = [
   {path: '/user/policySearch', exact: true, name: 'Policy Search', component: PolicySearch},
   //Request A Policy
   {path: '/user/policyRequest', exact: true, name: 'Policy Request', component: PolicyRequest},
+  //Request List
+  {path: '/user/policyRequestList', exact: true, name: 'Policy Request List', component: PolicyRequestList},
 
   //Company
   { path: '/admin/companies', exact: true, name: 'Companies', component: DataTable, props: { tableName: "Insurance Companies", tableQuery: "InsuranceCompanies", color: "light" } },
@@ -146,7 +151,6 @@ const routes = [
   //Request
   { path: '/admin/requests', exact: true, name: 'Requests', component: Request, props: { tableName: "Requests", tableQuery: "PolicyRequests", color: "light" } },
   { path: '/admin/requests/read/:id', exact: true, name: 'Info Request', component: RequestDetails, props: { mode: "get" } },
-  { path: '/admin/requests', exact: true, name: 'Requests', component: Request, props: { tableName: "Requests", tableQuery: "PolicyRequests", color: "light" } },
   { path: '/admin/approvals', exact: true, name: 'Approvals', component: Approval, props: { tableName: "Approvals", tableQuery: "PolicyApprovals", color: "light" } },
   //Report
   {path:'/admin/reports', exact: true, name: 'Reports', component : Report, props:{tableName:"Reports", tableQuery: "Reports", color:"light"}},

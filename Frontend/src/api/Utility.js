@@ -141,8 +141,12 @@ export default class Utility {
           _style: { width: '5%' },
           sorter: false,
           filter: false
-        }, "requestId", "requestDate", "status", "note", "emi", "amount"];
-      case "Reports":
+        }, {
+          key: "requestId",
+          label: '#',
+          _style: { width: '5%' }
+        }, "requestDate", "status", "emi", "amount"];
+      case "PolicyApprovals":
         return [{
           key: 'button',
           label: 'Print',
