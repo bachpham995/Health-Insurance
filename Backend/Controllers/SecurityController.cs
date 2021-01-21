@@ -37,7 +37,7 @@ namespace HealthInsuranceWebServer.Controllers
             if (Employee != null)
             {
                 var tokenStr = GenerateJSONWebToken(Employee);
-                response = Ok(new {role = Employee.Role ,token = tokenStr});
+                response = Ok(new {id = Employee.EmployeeId, userName = Employee.Username , role = Employee.Role ,token = tokenStr});
             }
             else
             {

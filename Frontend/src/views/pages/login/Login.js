@@ -61,15 +61,13 @@ const Login = () => {
       .then(res => {
         setLoading(false);
         // console.log(res);
-        //history.push("/dashboard");
-        if (res.role == 0) {
-          Common.setUserSession(res.token, data.username);
-          // history.push("/dashboard");
-          form.action = "/dashboard";
-          form.method = "get";
-          form.onsubmit = true;
-          form.submit();
-        }
+        //history.push("/dashboard");        
+        Common.setUserSession(res.token, {id : res.id, role : res.role,userName : res.userName});
+        // history.push("/dashboard");
+        form.action = "/dashboard";
+        form.method = "get";
+        form.onsubmit = true;
+        form.submit();
       }).catch(err => {
         setLoading(false);
         setError("Something went wrong. Please try again later.");

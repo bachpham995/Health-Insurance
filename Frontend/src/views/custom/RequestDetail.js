@@ -269,8 +269,8 @@ const RequestDetails = ({ method }) => {
               </CCard>
             </CCol>
           </CRow>
-          <CModal show={showConfirm} onClose={toggle}>
-            <CModalHeader closeButton>
+          <CModal show={showConfirm} onClose={toggle} closeOnBackdrop={false}>
+            <CModalHeader>
               <h3>Approval Confirm</h3>
             </CModalHeader>
             <CModalBody>

@@ -389,6 +389,7 @@ const _admin_nav = [
       {
         _tag: 'CSidebarNavItem',
         name: <div className=""><CIcon className="mr-3" name="cib-gmail"/>Email</div>,
+        to:'/admin/mail'
       },
       {
         _tag: 'CSidebarNavItem',

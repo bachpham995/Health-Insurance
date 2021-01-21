@@ -62,13 +62,12 @@ namespace HealthInsuranceWebServer.Controllers
         public async Task<ActionResult<Employee>> GetUser(string username)
         {
             var employee = await _context.Employee
-            .Where(e=>e.Username == username)
             .Include(e=>e.PolicyRequests)
             .Include(e=>e.Feedbacks)
             .Include(e=>e.ToNotifications).ThenInclude(n=>n.FromUser)
             .Include(e=>e.FromNotifications).ThenInclude(n=>n.ToUser)
-            .Include(e=>e.PolicyEmployees)
-            .FirstAsync();
+            .Include(e=>e.PolicyEmployees)            
+            .FirstAsync(e=>e.Username == username);
             
 
             if (employee == null)

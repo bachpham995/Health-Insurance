@@ -29,6 +29,8 @@ const DocumentUpload = React.lazy(() => import('./views/custom/DocumentUpload'))
 
 //Policy Search
 const PolicySearch = React.lazy(() => import('./views/custom/PolicySearch'));
+//User Policies
+const PolicyEmployee = React.lazy(() => import('./views/custom/PolicyEmployee'))
 //Policy Request of User
 const PolicyRequest = React.lazy(() => import('./views/custom/PolicyRequest'));
 //Policy Request List of User
@@ -119,6 +121,8 @@ const routes = [
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
   //Search
   {path: '/user/policySearch', exact: true, name: 'Policy Search', component: PolicySearch},
+  //User Policies
+  {path: '/user/policyEmployees', exact: true, name: 'My Policies', component: PolicyEmployee},
   //Request A Policy
   {path: '/user/policyRequest', exact: true, name: 'Policy Request', component: PolicyRequest},
   //Request List
@@ -166,7 +170,7 @@ const routes = [
   { path: '/admin/tool/uploadDocument', exact: true, name: 'Document Upload', component: DocumentUpload },
   { path: '/admin/tool/documents', exact: true, name: 'Documents', component: DataTable, props: { tableName: "Documents", tableQuery: "UploadFile", color: "light" } }
   , { path: '/profile', exact: true, name: 'Profile', component: Profile }
-  , { path: '/admin/mail', exact: true, name: 'Admin Mail', component: Mailbox }
+  , { path: '/admin/mail', exact: true, name: 'GMail', component: Mailbox }
 ];
 
 export default routes;

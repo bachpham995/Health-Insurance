@@ -151,10 +151,22 @@ export default class Utility {
         return [{
           key: 'button',
           label: 'Print',
-          _style: { width: '5%' },
+          //_style: { width: '5%' },
           sorter: false,
           filter: false
-        }, "approvalId", "approvalDate", "status", "reason"];
+        }, {
+          key: 'policyRequest',
+          label: "User",
+         // _style: { width: '15%' }
+        }, {
+          key: "approvalDate",
+          label: "Approved Date",
+         // _style: { width: '15%' }
+        },{
+          key: "status",
+          label: "Status",
+         // _style: { width: '10%' }
+        } , "reason"];
       default:
         return [];
     }

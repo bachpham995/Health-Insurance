@@ -25,14 +25,14 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<PolicyApproval>>> GetPolicyApproval()
         {
-            return await _context.PolicyApproval.Include(p => p.PolicyRequest).Where(p=>!p.Retired).ToListAsync();
+            return await _context.PolicyApproval.Include(p => p.PolicyRequest).ThenInclude(pr => pr.Employee).Where(p => !p.Retired).ToListAsync();
         }
 
         // GET: api/PolicyApprovals/5
         [HttpGet("{id}")]
         public async Task<ActionResult<PolicyApproval>> GetPolicyApproval(int id)
         {
-            var policyApproval = await _context.PolicyApproval.Include(p => p.PolicyRequest).Where(p=>!p.Retired && p.ApprovalId == id).FirstAsync();
+            var policyApproval = await _context.PolicyApproval.Include(p => p.PolicyRequest).ThenInclude(pr => pr.Employee).Where(p => !p.Retired && p.ApprovalId == id).FirstAsync();
 
             if (policyApproval == null)
             {
@@ -80,9 +80,28 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpPost]
         public async Task<ActionResult<PolicyApproval>> PostPolicyApproval(PolicyApproval policyApproval)
         {
-            _context.PolicyApproval.Add(policyApproval);
-            await _context.SaveChangesAsync();
+            if (policyApproval.Status)
+            {
+                var policyRequest = _context.PolicyRequest.Find(policyApproval.RequestId);
+                var policyRequestDuration = (int)policyRequest.Amount / (int)policyRequest.Emi;
+                var policyEmployee = new PolicyEmployee()
+                {
+                    Emi = policyRequest.Emi,
+                    Amount = policyRequest.Amount,
+                    Duration = policyRequestDuration,
+                    EmployeeId = policyRequest.EmployeeId,
+                    PolicyId = policyRequest.PolicyId,
+                    EffectiveDate = DateTime.Now,
+                    ExpiredDate = DateTime.Now.AddMonths(policyRequestDuration),
+                    Retired = false,
+                    Status = true
+                };
+                 _context.PolicyEmployee.Add(policyEmployee);
+            }
 
+            _context.PolicyApproval.Add(policyApproval);
+
+            await _context.SaveChangesAsync();
             return CreatedAtAction("GetPolicyApproval", new { id = policyApproval.ApprovalId }, policyApproval);
         }
 

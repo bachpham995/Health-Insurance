@@ -29,6 +29,10 @@ const Mailbox = () => {
     const toggle = () => {
         setModal(!modal);
     }
+
+    const getEmails = () => {
+        
+    }
     return (
         <>
             <CContainer >

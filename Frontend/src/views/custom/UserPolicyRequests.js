@@ -18,6 +18,7 @@ import {
 } from '@coreui/react'
 import AxiosClient from "src/api/AxiosClient"
 import Utility from 'src/api/Utility'
+import Common from 'src/services/Common'
 
 const getBadge = status => {
   switch (status) {
@@ -35,15 +36,14 @@ const UserPolicyRequests = () => {
 
   useEffect(() => {
     const fetchDataList = async () => {
-      try {
-        const params = {};
-        const response = await AxiosClient.get("/PolicyRequests", params);
-        console.log('Fetch data successfully: ', response);
-        console.log("Data Header:", Object.keys(response[0]));
-        setTableData(response);
-      } catch (error) {
-        console.log('Failed to fetch data list: ', error);
-      }
+      const params = {};
+      await AxiosClient.get("/PolicyRequests/UserRequests/" + Common.getUser().id, params).then(res => {
+        // console.log('Fetch data successfully: ', res);
+        // console.log("Data Header:", Object.keys(res[0]));
+        setTableData(res);
+      }).catch(err => {
+        console.log(err);
+      });
     }
     fetchDataList();
   }, []);
@@ -65,15 +65,15 @@ const UserPolicyRequests = () => {
                 scopedSlots={{
                   'status':
                     (item) => (
-                      <CCol>
-                        <CBadge color={getBadge(item.status == 0? "Pending":(item.status == 1? "Active" : "Banned"))}>
-                          {item.status == 0? "Requesting":(item.status == 1? "Approved" : "Rejected")}
+                      <td>
+                        <CBadge color={getBadge(item.status == 0 ? "Pending" : (item.status == 1 ? "Active" : "Banned"))}>
+                          {item.status == 0 ? "Requesting" : (item.status == 1 ? "Approved" : "Rejected")}
                         </CBadge>
-                      </CCol>
+                      </td>
                     ),
                   'button':
-                    (item) => (<>
-                      <CCol>
+                    (item) => (
+                      <td>
                         <CDropdown className="mt-1">
                           <CLink>
                             <CCol col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
@@ -83,9 +83,7 @@ const UserPolicyRequests = () => {
                             </CCol>
                           </CLink>
                         </CDropdown>
-                      </CCol>
-                    </>
-                    )
+                      </td>)                
                 }}
               />
             </CCardBody>

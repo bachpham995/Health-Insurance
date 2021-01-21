@@ -34,7 +34,8 @@ const _user_nav = [
   {
     _tag: 'CSidebarNavItem',
     name: 'My Policies',
-    icon: 'cil-spreadsheet'
+    icon: 'cil-spreadsheet',
+    to: "/user/policyEmployees"
   }
   , {
     _tag: 'CSidebarNavDropdown',

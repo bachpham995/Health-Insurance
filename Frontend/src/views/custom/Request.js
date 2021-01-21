@@ -9,7 +9,8 @@ import {
   CDropdown,
   CCol,
   CDataTable,
-  CRow
+  CRow,
+  CCardTitle
 } from '@coreui/react'
 import AxiosClient from "src/api/AxiosClient"
 import Utility from 'src/api/Utility'
@@ -32,9 +33,11 @@ const RequestEmployees = ({ tableName, tableQuery, color }) => {
       try {
         const params = {};
         const response = await AxiosClient.get("/" + tableQuery, params);
-        console.log('Fetch data successfully: ', response);
-        console.log("Data Header:", Object.keys(response[0]));
-        setTableData(response);
+        // console.log('Fetch data successfully: ', response);
+        // console.log("Data Header:", Object.keys(response[0]));
+        setTableData(response.sort(function(x,y){
+          return (x === y)? 0 : x? -1 : 1;
+        }));
       } catch (error) {
         console.log('Failed to fetch data list: ', error);
       }
@@ -47,7 +50,7 @@ const RequestEmployees = ({ tableName, tableQuery, color }) => {
   <CCol>
   <CCard>
     <CCardHeader>
-     {tableName}
+     <CCardTitle>{tableName}</CCardTitle>
     </CCardHeader>
     <CCardBody>
     <CDataTable
@@ -66,7 +69,7 @@ const RequestEmployees = ({ tableName, tableQuery, color }) => {
             </td>
           ),
           'button':
-          (item) => (<>
+          (item) => (<td>
             <CDropdown className="mt-1">
               <CLink to={Utility.Read(tableQuery,item)} >
                 <CCol col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
@@ -76,7 +79,7 @@ const RequestEmployees = ({ tableName, tableQuery, color }) => {
                 </CCol>
               </CLink>
             </CDropdown>
-          </>
+            </td>
           )
       }}
     />

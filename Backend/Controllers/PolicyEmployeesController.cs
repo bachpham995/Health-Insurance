@@ -28,6 +28,9 @@ namespace HealthInsuranceWebServer.Controllers
             return await _context.PolicyEmployee
             .Where(pe => !pe.Retired)
             .Include(pe => pe.Policy)
+            .ThenInclude(p => p.InsCompany)
+            .Include(pe => pe.Policy)
+            .ThenInclude(p => p.Hospital)
             .Include(pe => pe.Employee)
             .ToListAsync();
         }
