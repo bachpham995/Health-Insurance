@@ -76,7 +76,6 @@ const Company = ({ method }) => {
 
   const onSubmit = async (event) => {
     var form = event.target;
-    //var formData = new FormData(form);
     const data = {
       "insCompanyName": form.insCompanyName.value,
       "phone": form.phone.value,

@@ -31,18 +31,6 @@ const getBadge = status => {
 const RequestEmployees = ({ tableName, tableQuery, color }) => {
   const [fields, setFields] = useState(Utility.TableHeader(tableQuery));
   const [tableData, setTableData] = useState([]);
-
-  // const toggleDetails = (index) => {
-  //   const position = details.indexOf(index)
-  //   let newDetails = details.slice()
-  //   if (position !== -1) {
-  //     newDetails.splice(position, 1)
-  //   } else {
-  //     newDetails = [...details, index]
-  //   }
-  //   setDetails(newDetails)
-  // }
-
   useEffect(() => {
     const fetchDataList = async () => {
       try {

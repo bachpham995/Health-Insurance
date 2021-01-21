@@ -24,6 +24,9 @@ custom-scrollbar::-webkit-scrollbar-thumb:hover {
   overflow-x: hidden;
   max-height: 290px;
 }
+.custom-sb-hight {
+  min-height: 100px;
+}
 
 .message-notify{
   min-width: 400px;

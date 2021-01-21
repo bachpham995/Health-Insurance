@@ -5,9 +5,9 @@ import React from 'react';
 //Custom Datatable
 const DataTable = React.lazy(() => import('./views/base/tables/DataTable'));
 //Company
-const Company = React.lazy(() => import('./views/custom/Company'));
-
-const Approval = React.lazy(() => import('./views/Approvals/Approval'));
+const Company = React.lazy(()=>import('./views/custom/Company'));
+//Approval
+const Approval = React.lazy(()=> import('./views/Approvals/Approval'));
 //Hospital
 const Hospital = React.lazy(() => import('./views/custom/Hospital'));
 //Employee
@@ -16,7 +16,10 @@ const Employee = React.lazy(() => import('./views/custom/Employee'));
 const Request = React.lazy(() => import('./views/custom/Request'));
 const RequestDetails = React.lazy(() => import("./views/custom/RequestDetail"));
 //Policy
-const Policy = React.lazy(() => import('./views/custom/Policy'));
+const Policy = React.lazy(()=> import('./views/custom/Policy'));
+//Report
+const Report = React.lazy(()=> import('./views/Reports/Reports'));
+const ReportDetail = React.lazy(()=> import('./views/Reports/PrintReport'));
 
 //Feedback
 const Feedback = React.lazy(() => import('./views/custom/Feedback'));
@@ -145,13 +148,15 @@ const routes = [
   { path: '/admin/requests/read/:id', exact: true, name: 'Info Request', component: RequestDetails, props: { mode: "get" } },
   { path: '/admin/requests', exact: true, name: 'Requests', component: Request, props: { tableName: "Requests", tableQuery: "PolicyRequests", color: "light" } },
   { path: '/admin/approvals', exact: true, name: 'Approvals', component: Approval, props: { tableName: "Approvals", tableQuery: "PolicyApprovals", color: "light" } },
+  //Report
+  {path:'/admin/reports', exact: true, name: 'Reports', component : Report, props:{tableName:"Reports", tableQuery: "Reports", color:"light"}},
+  {path:'/admin/reports/read/:id', exact: true, name: 'Info Report', component : ReportDetail, props:{mode : "get"}},
 
   //Feedback
   { path: '/admin/feedbacks', exact: true, name: 'Feedbacks', component: DataTable, props: { tableName: "Feedbacks", tableQuery: "Feedbacks", color: "light" } },
   { path: '/admin/feedbacks/edit/:id', exact: true, name: 'Reply Feedback', component: Feedback, props: { method: "put" } },
   { path: '/admin/feedbacks/read/:id', exact: true, name: 'Info Feedback', component: Feedback, props: { method: "get" } },
   { path: '/admin/feedbacks/delete/:id', exact: true, name: 'Delete Feedback', component: Feedback, props: { method: "delete" } },
-
   //Tool: Upload Document
   { path: '/admin/tool/uploadDocument', exact: true, name: 'Document Upload', component: DocumentUpload },
   { path: '/admin/tool/documents', exact: true, name: 'Documents', component: DataTable, props: { tableName: "Documents", tableQuery: "UploadFile", color: "light" } }

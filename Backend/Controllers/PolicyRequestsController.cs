@@ -49,7 +49,7 @@ namespace HealthInsuranceWebServer.Controllers
 
             return policyRequest;
         }
-
+        //Get Policyrequest using Company id
         // PUT: api/PolicyRequests/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -114,5 +114,6 @@ namespace HealthInsuranceWebServer.Controllers
         {
             return _context.PolicyRequest.Any(e => e.RequestId == id);
         }
+
     }
 }

@@ -59,6 +59,8 @@ export default class Utility {
       case "PolicyRequest":
       case "PolicyRequests":
         return '/admin/requests';
+      case "Reports":
+        return '/admin/reports';
 
       case "Hospital":
       case "Hospitals":
@@ -131,11 +133,7 @@ export default class Utility {
           _style: { width: '5%' },
           sorter: false,
           filter: false
-        }, {
-          key: "employeeId",
-          label: '#',
-          _style: { width: '5%' }
-        }, "fName", "lName", "designation", "status"];
+        }, "employeeId", "fName", "lName", "designation", "status"];
       case "PolicyRequests":
         return [{
           key: 'button',
@@ -143,49 +141,23 @@ export default class Utility {
           _style: { width: '5%' },
           sorter: false,
           filter: false
-        }, {
-          key: "requestId",
-          label: '#',
-          _style: { width: '5%' }
-        }, "requestDate", "status", "note", "emi", "amount"];
+        }, "requestId", "requestDate", "status", "note", "emi", "amount"];
+      case "Reports":
+        return [{
+          key: 'button',
+          label: 'Print',
+          _style: { width: '5%' },
+          sorter: false,
+          filter: false
+        }, "requestId", "requestDate", "status", "note", "emi", "amount"];
       case "PolicyApprovals":
         return [{
-          key: '',
+          key: 'none',
           label: '',
           _style: { width: '5%' },
           sorter: false,
           filter: false
-        }, {
-          key: "approvalId",
-          label: '#',
-          _style: { width: '5%' }
-        }, "approvalDate", "status", "reason", "requestId"];
-
-      case "Feedbacks":
-        return [{
-          key: 'feedBackReply',
-          label: 'Actions',
-          _style: { width: '5%' },
-          sorter: false,
-          filter: false
-        }, {
-          key: 'feedbackId',
-          label: '#',
-          _style: { width: '5%' }
-        },
-          'title',
-          'date',
-        {
-          key: 'feedbackUser',
-          label: 'User',
-          _style: { witdh: '20%' }
-        },
-        {
-          key: 'feedbackEmail',
-          label: 'Email',
-          _style: { witdh: '20%' }
-        }
-        ]
+        }, "approvalId", "approvalDate", "status", "reason", "requestId"];
       default:
         return [];
     }

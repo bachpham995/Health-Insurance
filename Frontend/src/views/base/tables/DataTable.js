@@ -43,7 +43,7 @@ const DataTable = ({ tableName, tableQuery, color }) => {
     }
     fetchDataList();
   }, []);
-
+  
   return (
     <>
       <CRow>

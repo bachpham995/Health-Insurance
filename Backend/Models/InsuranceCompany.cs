@@ -19,7 +19,7 @@ namespace HealthInsuranceWebServer.Models
 
         [MaxLength(20)]
         public string Phone { get; set; }
-
+         
         [MaxLength(100)]
         public string Email { get; set; }
 
