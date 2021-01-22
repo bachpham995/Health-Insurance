@@ -36,5 +36,6 @@ namespace HealthInsuranceWebServer.Models
         public int RelatedId { get; set;  }
 
         public string RelatedType { get; set; }
+
     }
 }

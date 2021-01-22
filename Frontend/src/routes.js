@@ -169,8 +169,8 @@ const routes = [
   //Tool: Upload Document
   { path: '/admin/tool/uploadDocument', exact: true, name: 'Document Upload', component: DocumentUpload },
   { path: '/admin/tool/documents', exact: true, name: 'Documents', component: DataTable, props: { tableName: "Documents", tableQuery: "UploadFile", color: "light" } }
-  , { path: '/profile', exact: true, name: 'Profile', component: Profile }
-  , { path: '/admin/mail', exact: true, name: 'GMail', component: Mailbox }
+  , { path: '/setting/profile', exact: true, name: 'Profile', component: Profile }
+  , { path: '/admin/mail', exact: true, name: 'Gmail', component: Mailbox }
 ];
 
 export default routes;

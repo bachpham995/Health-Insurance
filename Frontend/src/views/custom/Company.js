@@ -100,7 +100,7 @@ const Company = ({ method }) => {
           {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
-            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Company", "Added new Insurance Company", 1);
+            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Company", "Added new Insurance Company", 1, res.insuranceCompanyId, "companies");
           }).catch(err => {
             console.log(err);
           });
@@ -113,7 +113,9 @@ const Company = ({ method }) => {
           {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
-            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Company", "Modified an Insurance Company", 1);
+
+            console.log(res)
+             Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Company", "Modified an Insurance Company", 1, data.insuranceCompanyId, "companies" );
           }).catch(err => {
             console.log(err);
           });
@@ -125,7 +127,7 @@ const Company = ({ method }) => {
           {}
         ).then(res => {
           setShowConfirm(false);
-          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Company", "Removed an Insurance Company", 1);
+          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Company", "Removed an Insurance Company", 1, data.insuranceCompanyId, "companies" );
           goBack();
         }).catch(err => {
           console.log(err);

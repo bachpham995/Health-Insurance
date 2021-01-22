@@ -104,18 +104,18 @@ namespace HealthInsuranceWebServer.Data
                     , new { EmployeeId = 3, Street = "Xô Viết Nghệ Tĩnh", District = "Quận Bình Thạnh", City = "Ho Chi Minh City", Country = "Vietnam", PostalCode = "" }
                 );
 
-            modelBuilder.Entity<Notification>().HasData(//only 2 type: => 0 request, 1 feedback
-                new Notification(){Id = 1, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddDays(-123),Title="Policy Request", Description="A User has submit a feedback.", Status = false, Type = 0, RelatedId = 4, RelatedType = "feedbacks"},
-                new Notification(){Id = 2, FromUserId = 3, ToUserId=1, Date = DateTime.Now,              Title="Feedback", Description="A User has submit a feedback.", Status = false, Type = 0, RelatedId = 1, RelatedType = "feedbacks"},
-                new Notification(){Id = 3, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-3),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 4, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddMinutes(5),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 5, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddYears(-1),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 6, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddHours(-4),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 7, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddMonths(-2),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
-                new Notification(){Id = 8, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-14),Title="Policy Request", Description="A User has submit a feedback.", Status = false, Type = 0, RelatedId = 2, RelatedType = "feedbacks"},
-                new Notification(){Id = 9, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddDays(-8),Title="Policy Request", Description="A User has submit a feedback.", Status = false, Type = 0, RelatedId = 5, RelatedType = "feedbacks"},
-                new Notification(){Id = 10, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-1),Title="Policy Request", Description="A User has submit a feedback.", Status = false, Type = 0, RelatedId = 3, RelatedType = "feedbacks"}
-            );
+            // modelBuilder.Entity<Notification>().HasData(//only 2 type: => 0 request, 1 feedback
+            //     new Notification(){Id = 1, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddDays(-123),Title="Policy Request", Description="A User has submit a feedback.", Status = false, Type = 0, RelatedId = 4, RelatedType = "feedbacks"},
+            //     new Notification(){Id = 2, FromUserId = 3, ToUserId=1, Date = DateTime.Now,              Title="Feedback", Description="A User has submit a feedback.", Status = false, Type = 0, RelatedId = 1, RelatedType = "feedbacks"},
+            //     new Notification(){Id = 3, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-3),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+            //     new Notification(){Id = 4, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddMinutes(5),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+            //     new Notification(){Id = 5, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddYears(-1),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+            //     new Notification(){Id = 6, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddHours(-4),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+            //     new Notification(){Id = 7, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddMonths(-2),Title="Policy Request", Description="A User has submit a policy request.", Status = false, Type = 0},
+            //     new Notification(){Id = 8, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-14),Title="Policy Request", Description="A User has submit a feedback.", Status = false, Type = 0, RelatedId = 2, RelatedType = "feedbacks"},
+            //     new Notification(){Id = 9, FromUserId = 2, ToUserId=1, Date = DateTime.Now.AddDays(-8),Title="Policy Request", Description="A User has submit a feedback.", Status = false, Type = 0, RelatedId = 5, RelatedType = "feedbacks"},
+            //     new Notification(){Id = 10, FromUserId = 3, ToUserId=1, Date = DateTime.Now.AddDays(-1),Title="Policy Request", Description="A User has submit a feedback.", Status = false, Type = 0, RelatedId = 3, RelatedType = "feedbacks"}
+            // );
 
             modelBuilder.Entity<Feedback>().HasData(
                 new Feedback(){FeedbackId = 1, EmployeeId = 3, Title="This is the test feed back feature", Content="This is the test feed back feature", Date=DateTime.Now.AddDays(-15)},

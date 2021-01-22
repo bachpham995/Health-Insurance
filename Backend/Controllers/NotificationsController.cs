@@ -113,5 +113,19 @@ namespace HealthInsuranceWebServer.Controllers
         {
             return _context.Notification.Any(e => e.Id == id);
         }
+
+        public static Notification newNotification(String title, int fromId, int toId, String desc, int type, int relatedId, String relatedType, bool isAdminNotify){
+            return new Notification(){
+                Title = title,
+                FromUserId = fromId,
+                ToUserId = toId,
+                Description = desc,
+                Type = type,
+                RelatedId = relatedId,
+                RelatedType = relatedType,
+                Date = DateTime.Now,
+                Status = true
+            };
+        }
     }
 }

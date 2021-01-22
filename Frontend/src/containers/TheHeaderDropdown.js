@@ -5,17 +5,23 @@ import {
   CDropdownItem,
   CDropdownMenu,
   CDropdownToggle,
-  CImg
+  CImg,
+  CLink,
+  CNavLink
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import Common from 'src/services/Common'
-import { Route, useHistory } from 'react-router-dom'
+import { Link, Route, useHistory } from 'react-router-dom'
 
 const TheHeaderDropdown = ({user}) => {
-  const historyy = useHistory()
+  const history = useHistory()
   const logOut = ()=>{
     Common.removeUserSession();
-    historyy.push('/');
+    history.push('/');
+  }
+
+  const profile = () => {
+    history.push("/setting/profile");
   }
 
   return (
@@ -42,7 +48,7 @@ const TheHeaderDropdown = ({user}) => {
         >
           <strong>Settings</strong>
         </CDropdownItem>
-        <CDropdownItem>
+        <CDropdownItem onClick={profile}>
           <CIcon name="cil-user" className="mfe-2" />Profile
         </CDropdownItem>
         <CDropdownItem>
@@ -52,7 +58,7 @@ const TheHeaderDropdown = ({user}) => {
         <CDropdownItem>
           <CIcon name="cil-swap-horizontal" className="mfe-2" />
           Employee Site
-        </CDropdownItem>        
+        </CDropdownItem>
         <CDropdownItem divider />
         <CDropdownItem onClick={logOut}>
           <CIcon name="cil-account-logout" className="mfe-2" />

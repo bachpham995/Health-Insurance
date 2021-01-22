@@ -43,7 +43,8 @@ namespace HealthInsuranceWebServer.Controllers
                 }
             }
             catch (Exception e)
-            {
+            {   
+                Console.WriteLine(e.StackTrace);
                 return NoContent();
             }
             return Ok();

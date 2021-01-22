@@ -23,6 +23,7 @@ import React, { useState, useEffect, useRef, forwardRef } from 'react'
 import AxiosClient from 'src/api/AxiosClient';
 import Utility from 'src/api/Utility';
 import { useHistory } from 'react-router-dom'
+import Common from 'src/services/Common';
 
 const DocumentUpload = () => {
   const history = useHistory();
@@ -49,8 +50,8 @@ const DocumentUpload = () => {
     }
   }
 
-  const UploadFile = async (event) => { 
-    setSuccess(null);   
+  const UploadFile = async (event) => {
+    setSuccess(null);
     event.preventDefault();
     if (valid) {
       setUploading(true);
@@ -60,14 +61,15 @@ const DocumentUpload = () => {
       await AxiosClient.post("/UploadFile", formData,
         {
           headers: { 'content-type': 'application/json', 'accept': '*/*' }
-        }).then(res => {          
+        }).then(res => {
           // console.log(res);
           setUploading(false);
           setMessage("Upload file to server successfully!");
-          setSuccess(true);          
+          setSuccess(true);
+          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "New Document", "Up load a new Document to server.", 1, 0,"");
           event.target.reset();
           return false;
-        }).catch(err => {          
+        }).catch(err => {
           // console.log(err);
           setUploading(false);
           setMessage("Could not upload the file to server!");
@@ -76,7 +78,7 @@ const DocumentUpload = () => {
           return false;
         });
     }
-    
+
   }
 
   return (

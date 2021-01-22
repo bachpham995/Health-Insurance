@@ -68,7 +68,7 @@ const Feedback = ({ method }) => {
           {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
-            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Feedback", "Replied a User Feedback", 1);
+            Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Feedback", "Replied a User Feedback", 1, id, "feedbacks");
           }).catch(err => {
             console.log(err);
           });
@@ -80,7 +80,7 @@ const Feedback = ({ method }) => {
           {}
         ).then(res => {
           setShowConfirm(false);
-          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Feedback", "Removed a User Feedback", 1);
+          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Feedback", "Removed a User Feedback", 1, id, "feedbacks");
         }).catch(err => {
           console.log(err);
         });

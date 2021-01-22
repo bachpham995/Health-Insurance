@@ -26,6 +26,7 @@ import {
   useParams,
   useHistory
 } from "react-router-dom";
+import Common from 'src/services/Common';
 
 const Employee = ({ method }) => {
   const [imageSrc, setImageSrc] = useState("");
@@ -78,6 +79,7 @@ const Employee = ({ method }) => {
   const onSubmit = async (event) => {
     var form = event.target;
     const data = {
+      "employeeId" : parseInt(Common.getUser().id),
       "fName": form.fname.value,
       "lName": form.lname.value,
       "username": form.username.value,

@@ -1,4 +1,5 @@
 import AxiosClient from 'src/api/AxiosClient';
+import Common from 'src/services/Common';
 
 export default class Utility {
   static REACT_APP_API_URL = "http://localhost:6969/api";
@@ -183,15 +184,17 @@ export default class Utility {
     }
   }
 
-  static newNotification = async (fromId, toId, title, description, type) => {
+  static newNotification = async (fromId, toId, title, description, type,relatedId, relatedType) => {
     let data = {
       "title": title,
-      "fromUserId": fromId,
-      "toUserId": toId,
-      "description": description,
-      "date": new Date(Date.now()),
-      "status": false,
-      "type": parseInt(type)
+      "fromUserId" : parseInt(fromId),
+      "toUserId" : parseInt(toId),
+      "description" : description,
+      "date" : new Date(Date.now()),
+      "status" : false,
+      "type" : parseInt(type),
+      "relatedId" : parseInt(relatedId),
+      "relatedType" : relatedType
     }
 
     return await AxiosClient.post("/Notifications", JSON.stringify(data),
@@ -207,6 +210,6 @@ export default class Utility {
 
   static CurrentUser = () => {
     // return JSON.parse(sessionStorage.getItem("user"));
-    return { "id": 1 };
+    return Common.getUser();
   }
 }
