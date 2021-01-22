@@ -119,9 +119,9 @@ custom-scrollbar::-webkit-scrollbar-thumb:hover {
 }
 
 /* Make the image responsive */
-// .image-upload img {
-//   // height: auto;
-// }
+.image-upload img {
+   height: auto;
+}
 
 /* Style the button and place it in the middle of the container/image */
 .image-upload .btn {
