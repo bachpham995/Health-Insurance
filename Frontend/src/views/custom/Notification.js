@@ -102,7 +102,7 @@ const Notification = ({ user, ntfType, notifications, count }) => {
   }
 
   const navigate = (event, notify) => {
-    if (notify.relatedType != null) {
+    if (notify.relatedType != null && notify.relatedType != "") {
       event.preventDefault();
       let pushURL = getPrefix() + notify.relatedType + (notify.relatedType == "feedbacks"?"/edit/":"/read/") + notify.relatedId;
       history.push(pushURL);

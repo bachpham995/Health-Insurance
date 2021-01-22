@@ -48,6 +48,12 @@ const Login = () => {
   const [error, setError] = useState(null);
   const history = useHistory();
 
+  const onEnterKey = (event) => {
+    if(event.keyCode === 13) {
+      onLogin(event);
+    }
+  }
+
   const onLogin = (event) => {
     var form = event.target.form;
     setError(null);
@@ -61,7 +67,7 @@ const Login = () => {
       .then(res => {
         setLoading(false);
         // console.log(res);
-        //history.push("/dashboard");        
+        //history.push("/dashboard");
         Common.setUserSession(res.token, {id : res.id, role : res.role,userName : res.userName});
         // history.push("/dashboard");
         form.action = "/dashboard";
@@ -93,7 +99,7 @@ const Login = () => {
                           <CIcon name="cil-user" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="text" placeholder="Username" {...username} autoComplete="username" id="username" />
+                      <CInput type="text" placeholder="Username" {...username} autoComplete="username" id="username" onKeyUp={onEnterKey}/>
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
@@ -101,11 +107,11 @@ const Login = () => {
                           <CIcon name="cil-lock-locked" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="password" placeholder="Password" {...password} autoComplete="current-password" id="password" />
+                      <CInput type="password" placeholder="Password" {...password} autoComplete="current-password" id="password" onKeyUp={onEnterKey}/>
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">
-                        <CButton className="dark-color px-4" color="" onClick={onLogin} type="button" disabled={loading}>
+                        <CButton className="dark-color px-4" onClick={onLogin} type="button" disabled={loading}>
                           Login</CButton>
                       </CCol>
                       <CCol xs="6" className="text-right">

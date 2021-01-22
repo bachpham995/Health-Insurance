@@ -10,11 +10,18 @@ import {
   CInput,
   CForm,
   CFormGroup,
-  CLabel
+  CLabel,
+  CModalBody,
+  CModalFooter,
+  CModal,
+  CModalHeader
 } from '@coreui/react'
 import Common from 'src/services/Common';
 import AxiosClient from 'src/api/AxiosClient';
 import Utility from 'src/api/Utility';
+import CIcon from '@coreui/icons-react';
+import { useHistory } from 'react-router-dom';
+
 
 
 const Profile = () => {
@@ -22,6 +29,8 @@ const Profile = () => {
   const [user, setUser] = useState(null);
   const [isEdit, setIsEdit] = useState(false);
   const [img, setImg] = useState(null);
+  const [show, setShow] = useState(false);
+  const history = useHistory();
 
   const toggle = () => {
     setIsEdit(!isEdit);
@@ -80,7 +89,7 @@ const Profile = () => {
       "email": form.email.value,
       "phone": form.phone.value,
       "joinDate" : user.joinDate,
-      "role": Common.getUser().role,
+      "role" : user.role,
       "address": {
         "street": form.street.value,
         "district": form.district.value,
@@ -96,11 +105,21 @@ const Profile = () => {
         // console.log(res.config.data);
         setUser(JSON.parse(res.config.data));
         toggle();
-        //Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "User", "Updated Profile", 1, Utility.CurrentUser().id, "" );
+        Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "User", "Updated Profile", 1, Utility.CurrentUser().id, "");
+        setShow(true);
       }).catch(err => {
         console.log(err);
       });
     return;
+  }
+
+  const finish = () => {
+    Common.removeUserSession();
+    history.push("/login");
+  }
+
+  const toggleConfirm = () => {
+    setShow(!show);
   }
 
 
@@ -334,7 +353,16 @@ const Profile = () => {
           </CCol>
         </CRow>
       </CForm>
-    </CContainer >
+      <CModal show={show} onClose={toggleConfirm} size='sm' closeOnBackdrop={false}>
+        <CModalHeader><CIcon name="cil-check-circle"/>Result</CModalHeader>
+        <CModalBody>
+          You will be signed out from the System. <br></br>Please sign in again !
+        </CModalBody>
+        <CModalFooter>
+          <CButton className="mr-1" onClick={finish} color="success">OK</CButton>
+        </CModalFooter>
+      </CModal>
+    </CContainer>
   )
 }
 

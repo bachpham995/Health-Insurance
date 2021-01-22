@@ -43,7 +43,7 @@ const DataTable = ({ tableName, tableQuery, color }) => {
     }
     fetchDataList();
   }, []);
-  
+
   return (
     <>
       <CRow>
@@ -68,7 +68,7 @@ const DataTable = ({ tableName, tableQuery, color }) => {
                 responsive
                 dark={color !== "light"}
                 sorter
-                size="sm"
+                size="xl"
                 itemsPerPage={5}
                 pagination
                 columnFilter
