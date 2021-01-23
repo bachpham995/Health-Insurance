@@ -135,6 +135,7 @@ export default class Utility {
           sorter: false,
           filter: false
         }, "employeeId", "fName", "lName", "designation", "status"];
+
       case "PolicyRequests":
         return [{
           key: 'button',
@@ -168,6 +169,9 @@ export default class Utility {
           label: "Status",
          // _style: { width: '10%' }
         } , "reason"];
+
+      case "Feedbacks":
+        return ["feedBackReply", "feedbackId", "title", "date", "feedbackUser", "feedbackEmail"];
       default:
         return [];
     }
