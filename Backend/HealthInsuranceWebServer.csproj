@@ -33,6 +33,10 @@
     <Compile Remove="Migrations\20210104123408_initial.Designer.cs" />
     <Compile Remove="Migrations\20210108165653_init.cs" />
     <Compile Remove="Migrations\20210108165653_init.Designer.cs" />
+    <Compile Remove="Migrations\20210120131530_Initial.cs" />
+    <Compile Remove="Migrations\20210120131530_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20210121152204_Initial.cs" />
+    <Compile Remove="Migrations\20210121152204_Initial.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.10" />
@@ -42,6 +46,7 @@
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
+    <PackageReference Include="NETCore.MailKit" Version="2.0.3" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.10" />

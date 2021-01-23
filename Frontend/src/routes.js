@@ -1,13 +1,15 @@
 import React from 'react';
+import ChangePassword from './views/pages/forgetpassword/ChangePassword';
+import ForgetMail from './views/pages/forgetpassword/ForgetMail';
 
 
 // Extend
 //Custom Datatable
 const DataTable = React.lazy(() => import('./views/base/tables/DataTable'));
 //Company
-const Company = React.lazy(()=>import('./views/custom/Company'));
+const Company = React.lazy(() => import('./views/custom/Company'));
 //Approval
-const Approval = React.lazy(()=> import('./views/Approvals/Approval'));
+const Approval = React.lazy(() => import('./views/Approvals/Approval'));
 //Hospital
 const Hospital = React.lazy(() => import('./views/custom/Hospital'));
 //Employee
@@ -16,10 +18,10 @@ const Employee = React.lazy(() => import('./views/custom/Employee'));
 const Request = React.lazy(() => import('./views/custom/Request'));
 const RequestDetails = React.lazy(() => import("./views/custom/RequestDetail"));
 //Policy
-const Policy = React.lazy(()=> import('./views/custom/Policy'));
+const Policy = React.lazy(() => import('./views/custom/Policy'));
 //Report
-const Report = React.lazy(()=> import('./views/Reports/Reports'));
-const ReportDetail = React.lazy(()=> import('./views/Reports/PrintReport'));
+const Report = React.lazy(() => import('./views/Reports/Reports'));
+const ReportDetail = React.lazy(() => import('./views/Reports/PrintReport'));
 
 //Feedback
 const Feedback = React.lazy(() => import('./views/custom/Feedback'));
@@ -120,13 +122,13 @@ const routes = [
   { path: '/users', exact: true, name: 'Users', component: Users },
   { path: '/users/:id', exact: true, name: 'User Details', component: User },
   //Search
-  {path: '/user/policySearch', exact: true, name: 'Policy Search', component: PolicySearch},
+  { path: '/user/policySearch', exact: true, name: 'Policy Search', component: PolicySearch },
   //User Policies
-  {path: '/user/policyEmployees', exact: true, name: 'My Policies', component: PolicyEmployee},
+  { path: '/user/policyEmployees', exact: true, name: 'My Policies', component: PolicyEmployee },
   //Request A Policy
-  {path: '/user/policyRequest', exact: true, name: 'Policy Request', component: PolicyRequest},
+  { path: '/user/policyRequest', exact: true, name: 'Policy Request', component: PolicyRequest },
   //Request List
-  {path: '/user/policyRequestList', exact: true, name: 'Policy Request List', component: PolicyRequestList},
+  { path: '/user/policyRequestList', exact: true, name: 'Policy Request List', component: PolicyRequestList },
 
   //Company
   { path: '/admin/companies', exact: true, name: 'Companies', component: DataTable, props: { tableName: "Insurance Companies", tableQuery: "InsuranceCompanies", color: "light" } },
@@ -158,8 +160,8 @@ const routes = [
   //Approvals
   { path: '/admin/approvals', exact: true, name: 'Approvals', component: Approval, props: { tableName: "Approvals", tableQuery: "PolicyApprovals", color: "light" } },
   //Report
-  {path:'/admin/reports', exact: true, name: 'Reports', component : Report, props:{tableName:"Reports", tableQuery: "Reports", color:"light"}},
-  {path:'/admin/reports/read/:id', exact: true, name: 'Info Report', component : ReportDetail, props:{mode : "get"}},
+  { path: '/admin/reports', exact: true, name: 'Reports', component: Report, props: { tableName: "Reports", tableQuery: "Reports", color: "light" } },
+  { path: '/admin/reports/read/:id', exact: true, name: 'Info Report', component: ReportDetail, props: { mode: "get" } },
 
   //Feedback
   { path: '/admin/feedbacks', exact: true, name: 'Feedbacks', component: DataTable, props: { tableName: "Feedbacks", tableQuery: "Feedbacks", color: "light" } },
@@ -171,6 +173,8 @@ const routes = [
   { path: '/admin/tool/documents', exact: true, name: 'Documents', component: DataTable, props: { tableName: "Documents", tableQuery: "UploadFile", color: "light" } }
   , { path: '/setting/profile', exact: true, name: 'Profile', component: Profile }
   , { path: '/admin/mail', exact: true, name: 'Gmail', component: Mailbox }
+  , { path: '/forgetpassword', exact: true, name: 'Admin Mail', component: ForgetMail }
+  , { path: '/changepassword', exact: true, name: 'Admin Mail', component: ChangePassword }
 ];
 
 export default routes;
