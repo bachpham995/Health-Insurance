@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.OpenApi.Models;
+using HealthInsuranceWebServer.Email;
 
 namespace HealthInsuranceWebServer
 {
@@ -28,6 +29,12 @@ namespace HealthInsuranceWebServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            var emailConfig = Configuration
+                .GetSection("EmailConfiguration")
+                .Get<EmailConfiguration>();
+            services.AddSingleton(emailConfig);
+            services.AddScoped<MailSender>();
+
             services.AddControllers();
             services.AddDbContext<HealthInsuranceWebServerContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("HealthInsuranceWebServerContext")));

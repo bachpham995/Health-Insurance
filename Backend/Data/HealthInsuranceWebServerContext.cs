@@ -92,7 +92,7 @@ namespace HealthInsuranceWebServer.Data
             modelBuilder.Entity<Employee>().HasData(
                  new Employee(){ EmployeeId = 1, FName = "Phat", LName="Luu Trong", Username="admin", Password="123", Email ="phatltuit@gmail.com",Designation = "Admin", Phone = "058256332X", Role = 0
                                , JoinDate=DateTime.Now.AddYears(-10), DoB = new DateTime(1996, 05,30), Img="http://localhost:6969/imgs/employee/luutrongphat.png"}
-               , new Employee(){ EmployeeId = 2, FName = "Bach", LName="Pham Xuan", Username="bachpham", Password="123", Email ="bachpham@gmail.com",Designation = "Senior SE", Phone = "012345678X", Role = 1
+               , new Employee(){ EmployeeId = 2, FName = "Bach", LName="Pham Xuan", Username="bachpham", Password="123", Email ="bachpham995@gmail.com",Designation = "Senior SE", Phone = "012345678X", Role = 1
                                , JoinDate=DateTime.Now.AddYears(-5), DoB = new DateTime(1996, 05,30), Img="http://localhost:6969/imgs/employee/bachpham.jpg"}
                , new Employee(){ EmployeeId = 3, FName = "Hoa", LName="Nguyen Vu Hoang", Username="hoanghoa", Password="123", Email ="nguyenvuhoanghoa@gmail.com",Designation = "Junior SE", Phone = "01232278X", Role = 1
                                , JoinDate=DateTime.Now.AddYears(-2), DoB = new DateTime(1996, 05,30), Img="http://localhost:6969/imgs/employee/hoanghoa.jpg"}
