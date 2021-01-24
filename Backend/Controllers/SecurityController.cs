@@ -57,12 +57,13 @@ namespace HealthInsuranceWebServer.Controllers
             {
                 return null;
             }
-            var user = _context.Employee.FirstOrDefault(u => u.Username.Contains(login.Username));
+            var user = _context.Employee.FirstOrDefault(u => u.Username == login.Username);
             if (user != null)
             {
                 if (login.Username == user.Username && login.Password == user.Password)
                 {
-                    return new Employee { EmployeeId = user.EmployeeId, LName = user.LName, FName = user.FName, Email = user.Email, Username = user.Username, Password = user.Password };
+                    // return new Employee { EmployeeId = user.EmployeeId, LName = user.LName, FName = user.FName, Email = user.Email, Username = user.Username, Password = user.Password };
+                    return user;
                 }
             }
             return null;
