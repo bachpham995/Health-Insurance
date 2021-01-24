@@ -88,7 +88,6 @@ namespace HealthInsuranceWebServer.Data
                new Policy() { PolicyId = 9, InsCompanyId = 9, Amount = 347, Emi = 96, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00009", HospitalId = 9 },
                new Policy() { PolicyId = 10, InsCompanyId = 10, Amount = 1000, Emi = 250, Benefit = "Random Benefit", Description = "Random Description", PolicyName = "Random Name", PolicyNumber = "21-00010", HospitalId = 10 }
                );
-
             modelBuilder.Entity<Employee>().HasData(
                  new Employee(){ EmployeeId = 1, FName = "Phat", LName="Luu Trong", Username="admin", Password="123", Email ="phatltuit@gmail.com",Designation = "Admin", Phone = "058256332X", Role = 0
                                , JoinDate=DateTime.Now.AddYears(-10), DoB = new DateTime(1996, 05,30), Img="http://localhost:6969/imgs/employee/luutrongphat.png"}

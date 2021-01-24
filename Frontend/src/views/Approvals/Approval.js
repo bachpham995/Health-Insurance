@@ -39,8 +39,6 @@ const Approvals = ({ tableName, tableQuery, color }) => {
       try {
         const params = {};
         const response = await AxiosClient.get("/" + tableQuery, params);
-        // console.log('Fetch data successfully: ', response);
-        // console.log("Data Header:", Object.keys(response[0]));
         setTableData(response);
       } catch (error) {
         console.log('Failed to fetch data list: ', error);

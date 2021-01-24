@@ -3,6 +3,7 @@ import ChangePassword from './views/pages/forgetpassword/ChangePassword';
 import ForgetMail from './views/pages/forgetpassword/ForgetMail';
 
 
+//-------------------------------- Admin -------------------------------------//
 // Extend
 //Custom Datatable
 const DataTable = React.lazy(() => import('./views/base/tables/DataTable'));
@@ -22,12 +23,16 @@ const Policy = React.lazy(() => import('./views/custom/Policy'));
 //Report
 const Report = React.lazy(() => import('./views/Reports/Reports'));
 const ReportDetail = React.lazy(() => import('./views/Reports/PrintReport'));
+const ReportEmployeeDetail = React.lazy(() => import('./views/Reports/PrintReportEmployees'))
 
 //Feedback
 const Feedback = React.lazy(() => import('./views/custom/Feedback'));
 
 //Upload Document
 const DocumentUpload = React.lazy(() => import('./views/custom/DocumentUpload'));
+
+
+//-------------------------------- User -------------------------------------//
 
 //Policy Search
 const PolicySearch = React.lazy(() => import('./views/custom/PolicySearch'));
@@ -37,8 +42,12 @@ const PolicyEmployee = React.lazy(() => import('./views/custom/PolicyEmployee'))
 const PolicyRequest = React.lazy(() => import('./views/custom/PolicyRequest'));
 //Policy Request List of User
 const PolicyRequestList = React.lazy(() => import('./views/custom/UserPolicyRequests'));
-
-
+//Company Search 
+const CompanySearch = React.lazy(() => import('./views/custom/CompanySearch'));
+//Hospital Search
+const HospitalSearch = React.lazy(() => import('./views/custom/HospitalSearch'));
+//User FeedBack 
+const UserFeedBack = React.lazy(() => import('./views/custom/CreateFeedBack'));
 
 
 const Toaster = React.lazy(() => import('./views/notifications/toaster/Toaster'));
@@ -124,12 +133,15 @@ export const routes = [
 
   //Search
   { path: '/user/policySearch', exact: true, name: 'Policy Search', component: PolicySearch },
+  { path: '/user/companySearch', exact: true, name: 'Company Search', component: CompanySearch },
+  { path: '/user/hospitalSearch', exact: true, name: 'Hospital Search', component: HospitalSearch },
   //User Policies
   { path: '/user/policyEmployees', exact: true, name: 'My Policies', component: PolicyEmployee },
   //Request A Policy
   { path: '/user/policyRequest', exact: true, name: 'Policy Request', component: PolicyRequest },
   //Request List
   { path: '/user/policyRequestList', exact: true, name: 'Policy Request List', component: PolicyRequestList },
+
 
   //Company
   { path: '/admin/companies', exact: true, name: 'Companies', component: DataTable, props: { tableName: "Insurance Companies", tableQuery: "InsuranceCompanies", color: "light" } },
@@ -163,6 +175,7 @@ export const routes = [
   //Report
   { path: '/admin/reports', exact: true, name: 'Reports', component: Report, props: { tableName: "Reports", tableQuery: "Reports", color: "light" } },
   { path: '/admin/reports/read/:id', exact: true, name: 'Info Report', component: ReportDetail, props: { mode: "get" } },
+  { path: '/admin/reportEmployee/read/:id', exact: true, name: 'Info ReportEmployee', component: ReportEmployeeDetail, props: { mode: "get" } },
 
   //Feedback
   { path: '/admin/feedbacks', exact: true, name: 'Feedbacks', component: DataTable, props: { tableName: "Feedbacks", tableQuery: "Feedbacks", color: "light" } },
@@ -235,6 +248,9 @@ export const _user_routes = [
   { path: '/user/policyRequest', exact: true, name: 'Policy Request', component: PolicyRequest },
   //Request List
   { path: '/user/policyRequestList', exact: true, name: 'Policy Request List', component: PolicyRequestList },
+  //Feedback of User
+  { path: '/user/feedBacks', exact: true, name: 'FeedBacks List', component: DataTable, props: { tableName: "My FeedBack", tableQuery: "FeedBackUser", color: "light" } },
+  { path: '/user/feedBacks/create', exact: true, name: 'New FeedBack', component: UserFeedBack, props: { method: "post" } },
 ];
 
 

@@ -21,7 +21,6 @@ namespace HealthInsuranceWebServer.Controllers
         {
             _context = context;
         }
-
         // GET: api/Hospitals
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Hospital>>> GetHospital()
@@ -74,6 +73,53 @@ namespace HealthInsuranceWebServer.Controllers
             }
 
             return Ok(hospital);
+        }
+        //api/Hospital/Search
+        [HttpPost("Search")]
+        public async Task<ActionResult<IEnumerable<Hospital>>> Search([FromForm] string hospitalName, [FromForm] string hospitalPhone,
+        [FromForm] string hospitalDistrict, [FromForm] string hospitalStreet,
+        [FromForm] String city, [FromForm] String hospitalCountry,
+        [FromForm] String postalCode,String hospitalEmail)
+        {
+            var query = _context.Hospital.Include(ar => ar.Address).AsQueryable();
+
+            if (hospitalName != null)
+            {
+                query = query.Where(h => h.HospitalName.Contains(hospitalName));
+            }
+            if (hospitalEmail != null)
+            {
+                query = query.Where(c => c.Email.Contains(hospitalEmail));
+            }
+
+            if (hospitalPhone != null)
+            {
+                query = query.Where(h => h.Phone.Contains(hospitalPhone));
+            }
+
+            if (hospitalDistrict != null)
+            {
+                query = query.Where(h => h.Address.District.Contains(hospitalDistrict));
+            }
+
+            if (hospitalStreet != null)
+            {
+                query = query.Where(h => h.Address.Street.Contains(hospitalStreet));
+            }
+
+            if (city != null)
+            {
+                query = query.Where(h => h.Address.City.Contains(city));
+            }
+            if (hospitalCountry != null)
+            {
+                query = query.Where(h => h.Address.Country.Contains(hospitalCountry));
+            }
+            if (postalCode != null)
+            {
+                query = query.Where(h => h.Address.PostalCode.Contains(postalCode));
+            }
+            return await query.ToListAsync();
         }
 
         // POST: api/Hospitals
