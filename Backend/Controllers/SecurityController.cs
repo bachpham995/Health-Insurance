@@ -103,39 +103,40 @@ namespace HealthInsuranceWebServer.Controllers
             return null;
         }
 
-        [HttpGet("SendEmail/{email}")]
-        public IActionResult ForgetPassword(string email)
+        [HttpGet("ForgetEmail")]
+        public IActionResult ForgetPassword([FromQuery]string email)
         {
             if (email == null)
             {
                 return NotFound();
             }
-            var user = _context.Employee.Where(emp => emp.Email.Contains(email)).First();
+            var user = _context.Employee.Where(emp => emp.Email.Contains(email)).FirstOrDefault();
             if (user == null)
             {
                 return NotFound();
             }
-            var token = GenerateJSONWebToken(user);
-            var encodedToken = Encoding.UTF8.GetBytes(token);
+            var data = user.EmployeeId + "|" + user.Email;
+            var encodedToken = Encoding.UTF8.GetBytes(data);
             var validToken = WebEncoders.Base64UrlEncode(encodedToken);
-            var url = $"http://localhost:6969/api/Security/ChangePassword/{validToken}";
+            var url = $"http://localhost:3000/changepassword/{validToken}";
 
             var message = new Message(new string[] { email }, "Reset Password", "<h1>Follow the intructions to reset your password</h1>" + $"<p>To reset your password <a href='{url}'>Click Here</a></p>");
             _sendMail.SendEmail(message);
             return Ok();
         }
 
-        [HttpGet("ChangePassword/{token}")]
-        public IActionResult ChangePassword(string token)
+        [HttpPost("ChangePassword")]
+        public IActionResult ChangePassword([FromForm]string token, [FromForm]string password)
         {
-            var identity = User.Identity as ClaimsIdentity;
-            if (identity != null)
-            {
-                IEnumerable<Claim> claims = identity.Claims;
-                var id = claims.First().Value;
-                return Ok(id);
-            }
-            return NotFound();
-        }
+            var data = WebEncoders.Base64UrlDecode(token);
+            string stringToken = Encoding.UTF8.GetString(data);
+            string[] baseData = stringToken.Split("|");
+            var user = _context.Employee.Find(Int32.Parse(baseData[0]));
+            user.Password = password;
+            _context.Employee.Update(user);
+            _context.SaveChanges();
+
+            return Ok();
+        } 
     }
 }
