@@ -1,4 +1,4 @@
-import React, { Component, useState, useEffect, useContext} from 'react';
+import React, { Component, useState, useEffect, useContext } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import './scss/style.scss';
 import PrivateRoute from './views/routes/PrivateRoute';
@@ -16,6 +16,8 @@ const Login = React.lazy(() => import('./views/pages/login/Login'));
 const Register = React.lazy(() => import('./views/pages/register/Register'));
 const Page404 = React.lazy(() => import('./views/pages/page404/Page404'));
 const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
+const ForgetPassword = React.lazy(() => import('./views/pages/forgetpassword/ForgetMail'));
+const ChangePassword = React.lazy(() => import('./views/pages/forgetpassword/ChangePassword'));
 
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
@@ -28,7 +30,7 @@ function App() {
     }).then(res => {
       // console.log('Get data successfully: ', res);
       // console.log("Data Header:", Object.keys(res));
-      if(mounted){
+      if (mounted) {
         setUser(res);
       }
     }).catch(err => {
@@ -47,10 +49,10 @@ function App() {
       {
         headers: { 'Authorization': `Bearer ${token}` }
       }).then(res => {
-          //setUserSession(res, response.data.user);
-          // console.log(res);
-          FetchLoginUser(mounted);
-          setAuthLoading(false);
+        //setUserSession(res, response.data.user);
+        // console.log(res);
+        FetchLoginUser(mounted);
+        setAuthLoading(false);
       }).catch(error => {
         Common.removeUserSession();
         setAuthLoading(false);
@@ -80,7 +82,8 @@ function App() {
             <Route exact path="/500" name="Page 500" render={props => <Page500 {...props} />} />
             <Route path="/" name="Home" render={props => <TheLayout {...props} />} /> */}
           <PublicRoute exact name="Login" path="/login" component={Login} />
-          <PublicRoute exact name="Register" path="/register" component={Register} />
+          <PublicRoute exact name="Forget Password" path="/forgetpassword" component={ForgetPassword} />
+          <PublicRoute exact name="Change Password" path="/changepassword/:token" component={ChangePassword} />
           <PrivateRoute path="/" name="Home" component={() => <TheLayout user={user} />} />
         </Switch>
       </React.Suspense>

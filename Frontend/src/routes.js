@@ -1,6 +1,4 @@
 import React from 'react';
-import ChangePassword from './views/pages/forgetpassword/ChangePassword';
-import ForgetMail from './views/pages/forgetpassword/ForgetMail';
 
 
 //-------------------------------- Admin -------------------------------------//
@@ -186,9 +184,7 @@ export const routes = [
   { path: '/admin/tool/uploadDocument', exact: true, name: 'Document Upload', component: DocumentUpload },
   { path: '/admin/tool/documents', exact: true, name: 'Documents', component: DataTable, props: { tableName: "Documents", tableQuery: "UploadFile", color: "light" } },
   { path: '/setting/profile', exact: true, name: 'Profile', component: Profile },
-  { path: '/admin/mail', exact: true, name: 'Gmail', component: Mailbox },
-  { path: '/forgetpassword', exact: true, name: 'Admin Mail', component: ForgetMail },
-  { path: '/changepassword', exact: true, name: 'Admin Mail', component: ChangePassword }
+  { path: '/admin/mail', exact: true, name: 'Gmail', component: Mailbox }
 ];
 
 export const _admin_routes = [
