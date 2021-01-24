@@ -18,7 +18,7 @@ import {
   CModalFooter,
   CFormGroup,
   CLabel,
-  CTextarea  
+  CTextarea
 } from '@coreui/react'
 import AxiosClient from "src/api/AxiosClient";
 import Utility from 'src/api/Utility';
@@ -38,10 +38,15 @@ const DataTable = ({ tableName, tableQuery, color }) => {
   const [tableData, setTableData] = useState([]);
 
   const [showConfirm, setShowConfirm] = useState(false);
-  const [itemSelecte,setItemSelecte] = useState();
-  const toggle = (item) => {
+  const [itemSelect, setItemSelect] = useState(null);
+
+  const chooseItem = (item) => {
     setShowConfirm(!showConfirm);
-    setItemSelecte(item);
+    setItemSelect(item);
+  }
+
+  const toggle = () => {
+    setShowConfirm(!showConfirm);
   }
 
   useEffect(() => {
@@ -57,7 +62,7 @@ const DataTable = ({ tableName, tableQuery, color }) => {
       }
     }
     fetchDataList();
-  }, [itemSelecte]);
+  }, []);
   return (
     <>
       <CRow>
@@ -69,7 +74,7 @@ const DataTable = ({ tableName, tableQuery, color }) => {
             <CCardHeader hidden={!Utility.shouldShowAddBtn(tableQuery)}>
               <CLink to={Utility.Create(tableQuery)}>
                 <CButton size="lg" color="success" className="ml-1">
-                  {tableQuery != "FeedBackUser"?"Add":"Add new feedback"}
+                  Add
                 </CButton>
               </CLink>
             </CCardHeader>
@@ -165,30 +170,9 @@ const DataTable = ({ tableName, tableQuery, color }) => {
                   'showReplyButton':
                     (item) => (
                       <td>
-                        <CButton onClick={() => toggle(item)} size="sm" variant="outline" disabled={item.response != null?false:true} color={getBadge(item.response != null ? "Active" : "Inactive")} className="ml-1">
+                        <CButton onClick={() => chooseItem(item)} size="sm" variant="outline" disabled={item.response != null ? false : true} color={getBadge(item.response != null ? "Active" : "Inactive")} className="ml-1">
                           {item.response != null ? "Feedback" : "Waiting"}
                         </CButton>
-                        <CModal centered show={showConfirm} onClose={toggle} backdrop={false} closeOnBackdrop={false}>
-                          <CModalHeader>
-                            <h3>Reply from Admin</h3>
-                          </CModalHeader>
-                          <CModalBody>
-                            <CRow>
-                              <CCol xs="12">
-                                <CFormGroup>
-                                  <CLabel>Content</CLabel>
-                                  <CTextarea defaultValue={itemSelecte?.response} style={{height:"150px",marginTop:"20px",resize:"none"}}  type="text"  readOnly  />
-                                </CFormGroup>
-                              </CCol>
-                            </CRow>
-                          </CModalBody>
-                          <CModalFooter>
-                            <CButton
-                              color="danger"
-                              onClick={toggle}
-                            >Cancel</CButton>
-                          </CModalFooter>
-                        </CModal>
                       </td>
                     ),
                   'feedbackEmail':
@@ -203,6 +187,27 @@ const DataTable = ({ tableName, tableQuery, color }) => {
             </CCardBody>
           </CCard>
         </CCol>
+        <CModal centered show={showConfirm} onClose={toggle} backdrop={false} closeOnBackdrop={false}>
+          <CModalHeader>
+            <h3>Reply from Admin</h3>
+          </CModalHeader>
+          <CModalBody>
+            <CRow>
+              <CCol xs="12">
+                <CFormGroup>
+                  <CLabel>Content</CLabel>
+                  <CTextarea defaultValue={itemSelect?.response} style={{ height: "150px", marginTop: "20px", resize: "none" }} type="text" readOnly />
+                </CFormGroup>
+              </CCol>
+            </CRow>
+          </CModalBody>
+          <CModalFooter>
+            <CButton
+              color="primary"
+              onClick={toggle}
+            >OK</CButton>
+          </CModalFooter>
+        </CModal>
       </CRow>
     </>
   )

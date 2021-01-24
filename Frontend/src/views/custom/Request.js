@@ -10,7 +10,9 @@ import {
   CCol,
   CDataTable,
   CRow,
-  CCardTitle
+  CCardTitle,
+  CDropdownToggle,
+  CDropdownMenu
 } from '@coreui/react'
 import AxiosClient from "src/api/AxiosClient"
 import Utility from 'src/api/Utility'
@@ -45,47 +47,47 @@ const RequestEmployees = ({ tableName, tableQuery, color }) => {
   return (
     <>
       <CRow>
-  <CCol>
-  <CCard>
-    <CCardHeader>
-     <CCardTitle>{tableName}</CCardTitle>
-    </CCardHeader>
-    <CCardBody>
-    <CDataTable
-      class="table table-bordered"
-      items={tableData}
-      fields={fields}
-      striped
-      itemsPerPage={5}
-      pagination
-      scopedSlots = {{
-        'status':
-          (item)=>(
-            <td>
-              <CBadge color={getBadge(item.status == 0? "Pending":(item.status == 1? "Active" : "Banned"))}>
-                {item.status == 0? "Requesting":(item.status == 1? "Approved" : "Rejected")}
-              </CBadge>
-            </td>
-          ),
-          'button':
-          (item) => (<td>
-            <CDropdown className="mt-1">
-              <CLink to={Utility.Read(tableQuery,item)} >
-                <CCol col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                  <CButton color={getBadge(item.status == 0 ? "Active": "Banned")} disabled={item.status == 0?false:true}>
-                    Check
-                  </CButton>
-                </CCol>
-              </CLink>
-            </CDropdown>
-            </td>
-          )
-      }}
-    />
-    </CCardBody>
-  </CCard>
-</CCol>
-</CRow>
+        <CCol>
+          <CCard>
+            <CCardHeader>
+              <CCardTitle>{tableName}</CCardTitle>
+            </CCardHeader>
+            <CCardBody>
+              <CDataTable
+                items={tableData}
+                fields={fields}
+                striped
+                itemsPerPage={5}
+                pagination
+                scopedSlots={{
+                  'status':
+                    (item) => (
+                      <td>
+                        <CBadge color={getBadge(item.status == 0 ? "Pending" : (item.status == 1 ? "Active" : "Banned"))}>
+                          {item.status == 0 ? "Requesting" : (item.status == 1 ? "Approved" : "Rejected")}
+                        </CBadge>
+                      </td>
+                    ),
+                  'button':
+                    (item) => (<td>
+                      <CLink className="mr-1" to={Utility.Edit(tableQuery, item)} >
+                        <CButton color={getBadge(item.status == 0 ? "Active" : "Banned")} disabled={item.status == 0 ? false : true}>
+                          Check
+                        </CButton>
+                      </CLink>
+                      <CLink to={Utility.Read(tableQuery, item)} >
+                        <CButton color="primary">
+                          Detail
+                        </CButton>
+                      </CLink>
+                    </td>
+                    )
+                }}
+              />
+            </CCardBody>
+          </CCard>
+        </CCol>
+      </CRow>
     </>
   )
 }

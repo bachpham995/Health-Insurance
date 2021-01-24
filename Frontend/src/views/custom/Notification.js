@@ -37,7 +37,7 @@ const Notification = ({ user, ntfType, notifications, count }) => {
   const Avatar = (notify) => {
     switch (notify.type) {
       case 0:
-        if (notify.fromUserId != null && notify.fromUser.img != null) {
+        if (notify?.fromUserId != null && notify?.fromUser?.img != null) {
           return (<><CImg
             src={notify.fromUser?.img}
             className="c-avatar-img mt-3"

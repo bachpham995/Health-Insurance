@@ -1,11 +1,23 @@
-import React, { Component, useState, useEffect, useContext} from 'react';
+import React, { Component, useState, useEffect, useContext } from 'react';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import './scss/style.scss';
 import PrivateRoute from './views/routes/PrivateRoute';
 import PublicRoute from './views/routes/PublicRoute';
 import Common from 'src/services/Common';
 import AxiosClient from 'src/api/AxiosClient'
-import { CSpinner } from '@coreui/react';
+import {
+  CSpinner
+  , CRow
+  , CImg,
+  CToast,
+  CToaster,
+  CToastBody,
+  CToastHeader,
+  CModal,
+  CModalHeader,
+  CModalBody,
+  CProgress
+} from '@coreui/react';
 
 
 // Containers
@@ -20,7 +32,6 @@ const Page500 = React.lazy(() => import('./views/pages/page500/Page500'));
 function App() {
   const [authLoading, setAuthLoading] = useState(true);
   const [user, setUser] = useState(null);
-
   const FetchLoginUser = async (mounted) => {
     let user = Common.getUser();
     await AxiosClient.get("/Employees/User/" + user.userName, {
@@ -28,7 +39,7 @@ function App() {
     }).then(res => {
       // console.log('Get data successfully: ', res);
       // console.log("Data Header:", Object.keys(res));
-      if(mounted){
+      if (mounted) {
         setUser(res);
       }
     }).catch(err => {
@@ -36,21 +47,23 @@ function App() {
     });
   }
 
-  useEffect(() => {
+  useEffect(async () => {
     const token = Common.getToken();
     if (!token) {
       return;
     }
 
     let mounted = true;
-    AxiosClient.post("/Security/ValidateToken?token=" + Common.getToken(), {},
+
+    await AxiosClient.post("/Security/ValidateToken?token=" + Common.getToken(), {},
       {
         headers: { 'Authorization': `Bearer ${token}` }
       }).then(res => {
-          //setUserSession(res, response.data.user);
-          // console.log(res);
-          FetchLoginUser(mounted);
-          setAuthLoading(false);
+        //setUserSession(res, response.data.user);
+        // console.log(res);
+        FetchLoginUser(mounted);
+        // setAuthLoading(false);
+        setAuthLoading(false);
       }).catch(error => {
         Common.removeUserSession();
         setAuthLoading(false);
@@ -58,15 +71,24 @@ function App() {
     return () => mounted = false;
   }, []);
 
-
   if (authLoading && Common.getToken()) {
-    return (<div className="d-flex align-items-center">
-      <strong>Loading...</strong>
-      <CSpinner
-        color="primary"
-        style={{ width: '4rem', height: '4rem' }}
-      />
-    </div>)
+    // return (<div className="d-flex align-items-center">
+    //   <strong>Loading...</strong>
+    //   <CSpinner
+    //     color="primary"
+    //     style={{ width: '4rem', height: '4rem' }}
+    //   />
+    // </div>)
+    return (<CRow className="custom-container">
+      <CImg className="custom-background" src="https://coolbackgrounds.io/images/backgrounds/index/ranger-4df6c1b6.png" />
+      <CModal show={authLoading} centered size="sm" closeOnBackdrop={false}>
+        <CModalBody>
+          <b className="loading-font">Loading</b>
+          <CSpinner color="primary" style={{ width: '4rem', height: '4rem' }}></CSpinner>
+
+        </CModalBody>
+      </CModal>
+    </CRow>)
   }
 
   return (

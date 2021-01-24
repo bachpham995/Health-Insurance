@@ -32,7 +32,8 @@ import CIcon from '@coreui/icons-react'
 import { useState, useEffect } from "react";
 import AxiosClient from 'src/api/AxiosClient';
 import Common from "src/services/Common";
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
+import Utility from "src/api/Utility";
 
 
 const PolicyRequest = () => {
@@ -42,6 +43,7 @@ const PolicyRequest = () => {
   const [success, setSuccess] = useState(false);
   const [show, setShow] = useState(false);
   const history = useHistory();
+  const { id } = useParams();
 
   const getPolicies = async (mounted) => {
     await AxiosClient.get("/Policies").then(res => {
@@ -70,7 +72,7 @@ const PolicyRequest = () => {
 
   const requestPolicy = async (event) => {
     let form = event.target
-    let requestUser = document.getElementById("userId").innerHTML;
+    let requestUser = Common.getUser().id;
     let policyRequest = {
       employeeId: parseInt(requestUser),
       policyId: parseInt(form.r_policy.value),
@@ -89,10 +91,12 @@ const PolicyRequest = () => {
         headers: { "content-type": "application/json; charset=utf-8" }
       }).then(res => {
         setSuccess(true);
-        setShow(true)
+        setShow(true);
+        Utility.newNotification(requestUser, requestUser, "Request A new Policy","You 'd requested a new policy", 1, res.policyId, "");
+        Utility.newNotification(requestUser, -1, "New Policy Request","A User has submitted a new Policy Request", 0, res.policyId, "policies");
       }).catch(err => {
         setSuccess(false);
-        setShow(true)
+        setShow(true);
         console.log(err);
       })
     return;
@@ -103,6 +107,14 @@ const PolicyRequest = () => {
     getPolicies(mounted);
     return () => mounted = false;
   }, []);
+
+  useEffect(()=>{
+    if( id!= null && policies != null){
+      let value = policies.filter(p => p.policyId == parseInt(id))[0];
+      setPolicy(value);
+      console.log("set poilcy");
+    }
+  },[policies]);
 
   const choosePolicy = (event) => {
     let value = policies.filter(p => p.policyId == parseInt(event.target.value))[0];
@@ -145,7 +157,7 @@ const PolicyRequest = () => {
                       <CCol xs="4">
                         <CFormGroup>
                           <CLabel htmlFor="r_policy">Select Policy</CLabel>
-                          <CSelect id="r_policy" onChange={choosePolicy}>
+                          <CSelect id="r_policy" onChange={choosePolicy} value={policy?.policyId}>
                             <option value={0} key={0}></option>
                             {
                               policies?.map(policy => <option value={policy.policyId} key={policy.policyId}>
@@ -375,7 +387,7 @@ const PolicyRequest = () => {
               </CCardBody>
               <CCardFooter>
                 <CButton size="sm" onClick={validate} type="submit" color="primary">Request</CButton>
-                <CButton className="ml-2" type="reset" size="sm" color="danger">Cancel</CButton>
+                <CButton className="ml-2" onClick={finish} size="sm" color="danger">Cancel</CButton>
               </CCardFooter>
             </CCard>
           </CCol>

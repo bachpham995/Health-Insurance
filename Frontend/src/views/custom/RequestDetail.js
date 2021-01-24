@@ -29,6 +29,7 @@ import {
   useParams,
   useHistory
 } from "react-router-dom";
+import Common from 'src/services/Common';
 
 const RequestDetails = ({ method }) => {
   const [request, setRequest] = useState(null);
@@ -93,8 +94,11 @@ const RequestDetails = ({ method }) => {
     }
     // console.log(dataRequest);
     event.preventDefault();
+    let status = checkApproval?"Approve":"Reject";
     await AxiosClient.post("/PolicyApprovals", JSON.stringify(dataApproval)).then(res => {
       setShowConfirm(false);
+      Utility.newNotification(Common.getUser().id, Common.getUser().id, "Policy Request", "You have " + status + " a policy request", 1, data.requestId,"requests");
+      Utility.newNotification(Common.getUser().id, data.employeeId, "Policy Request", "The Admin has taken action on your request", 0, data.requestId, "");
     }).catch(err => {
       console.log(err);
     });;
@@ -165,7 +169,9 @@ const RequestDetails = ({ method }) => {
                   </CRow>
                 </CCardBody>
                 <CCardFooter>
-                  <CButton hidden={readOnly.includes(method) ? "hidden" : ""} onClick={toggle} size="sm" color="primary"><CIcon name="cil-scrubber" />Perform</CButton>
+                  <CButton hidden={method === "get"} onClick={toggle} size="sm" color="primary"><CIcon name="cil-scrubber" />Perform</CButton>
+                  {/* <CButton className="ml-2" hidden={readOnly.includes(method) ? "hidden" : ""} onClick={(e) => setImageSrc(null)} type="reset" size="sm" color="danger"><CIcon name="cil-ban" />Reset</CButton> */}
+                  {/* <CButton className="ml-2" onClick={toggle} hidden={method !== "delete"} type="reset" size="sm" color="danger"><CIcon name="cil-trash" />Delete</CButton> */}
                   <CButton className="ml-2" onClick={goBack} size="m" color="warning">Back</CButton>
                 </CCardFooter>
               </CCard>

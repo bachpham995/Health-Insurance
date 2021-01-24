@@ -87,6 +87,9 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpPost]
         public async Task<ActionResult<Notification>> PostNotification(Notification notification)
         {
+            if(notification.ToUserId < 0){
+                notification.ToUserId = _context.Employee.FirstOrDefault(e => e.Role == 0).EmployeeId;
+            }
             _context.Notification.Add(notification);
             await _context.SaveChangesAsync();
 

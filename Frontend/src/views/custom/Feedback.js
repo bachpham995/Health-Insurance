@@ -69,6 +69,7 @@ const Feedback = ({ method }) => {
             headers: { 'content-type': 'application/json' }
           }).then(res => {
             Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Feedback", "Replied a User Feedback", 1, id, "feedbacks");
+            Utility.newNotification(Utility.CurrentUser().id, feedback.employeeId, "Feedback", "Your Feedback has been replied", 0, id, "");
           }).catch(err => {
             console.log(err);
           });

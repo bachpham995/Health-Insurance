@@ -142,7 +142,7 @@ export default class Utility {
         return [{
           key: 'button',
           label: 'Approval',
-          _style: { width: '5%' },
+          _style: { width: '15%' },
           sorter: false,
           filter: false
         }, {
@@ -211,6 +211,7 @@ export default class Utility {
 
   static shouldShowAddBtn = (model) => {
     switch (model) {
+      case "FeedBackUser":
       case "Feedbacks":
       case "UploadFile":
         return false;
@@ -241,7 +242,7 @@ export default class Utility {
         console.log(err)
 
       }
-      );;
+      );
   }
 
   static CurrentUser = () => {

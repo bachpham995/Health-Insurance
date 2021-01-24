@@ -14,7 +14,9 @@ import {
 import CIcon from '@coreui/icons-react'
 
 // routes config
-import routes from '../routes'
+import routes from '../routes';
+import { _user_routes } from '../routes';
+import { _admin_routes } from '../routes';
 
 import {
   TheHeaderDropdown,
@@ -26,6 +28,7 @@ import Notification from 'src/views/custom/Notification';
 import TheHeaderDropdownNotif from './TheHeaderDropdownNotif';
 import AxiosClient from 'src/api/AxiosClient';
 import Utility from 'src/api/Utility'
+import Common from 'src/services/Common';
 
 const TheHeader = ({ user }) => {
   const dispatch = useDispatch()
@@ -38,7 +41,16 @@ const TheHeader = ({ user }) => {
   const [count_1, setCount_1] = useState(0);
   const [count_2, setCount_2] = useState(0);
 
-
+  const getRoute = () => {
+    if (Common.getToken() != null) {
+      if (Common.getUser().role === 0) {
+        return _admin_routes;
+      } else {
+        return _user_routes;
+      }
+    }
+    return routes;
+  }
 
   const toggleSidebar = () => {
     const val = [true, 'responsive'].includes(sidebarShow) ? false : 'responsive'
@@ -68,10 +80,10 @@ const TheHeader = ({ user }) => {
     if (mounted) {
       //FetchNotification(mounted);
       setNotifications_0(GetNotificationsByType(user?.toNotifications, 0));
-      setNotifications_1(GetNotificationsByType(user?.toNotifications, 1));
+      setNotifications_1(GetNotificationsByType(user?.fromNotifications, 1));
       setNotifications_2(GetNotificationsByType(user?.toNotifications, 2));
       setCount_0(CountNotificationsByType(user?.toNotifications, 0));
-      setCount_1(CountNotificationsByType(user?.toNotifications, 1));
+      setCount_1(CountNotificationsByType(user?.fromNotifications, 1));
       setCount_2(CountNotificationsByType(user?.toNotifications, 2));
     }
 
@@ -119,7 +131,7 @@ const TheHeader = ({ user }) => {
       <CSubheader className="px-3 justify-content-between">
         <CBreadcrumbRouter
           className="border-0 c-subheader-nav m-0 px-0 px-md-3"
-          routes={routes}
+          routes={getRoute()}
         />
         <div className="d-md-down-none mfe-2 c-subheader-nav">
           <CLink className="c-subheader-nav-link" href="#">

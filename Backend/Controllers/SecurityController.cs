@@ -62,7 +62,6 @@ namespace HealthInsuranceWebServer.Controllers
             {
                 if (login.Username == user.Username && login.Password == user.Password)
                 {
-                    // return new Employee { EmployeeId = user.EmployeeId, LName = user.LName, FName = user.FName, Email = user.Email, Username = user.Username, Password = user.Password };
                     return user;
                 }
             }

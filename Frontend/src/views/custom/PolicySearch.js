@@ -39,6 +39,7 @@ import CIcon from '@coreui/icons-react';
 import React, { useState, useEffect, useRef, forwardRef } from 'react';
 import AxiosClient from 'src/api/AxiosClient';
 import Utility from 'src/api/Utility';
+import { useHistory } from 'react-router-dom';
 
 const PolicySearch = () => {
   const [listCompanies, setListCompanies] = useState([]);
@@ -60,6 +61,7 @@ const PolicySearch = () => {
     _style: { width: '5%' }
   }, "policyNumber", "policyName", "emi", "amount"];
   const [confirm, setConfirm] = useState(false);
+  const history = useHistory();
 
   const fetchCompanies = async (mounted) => {
     try {
@@ -165,6 +167,10 @@ const PolicySearch = () => {
     let district = obj?.address?.district != null ? obj.address.district + ", " : "";
     let city = obj?.address?.city != null ? obj.address.city + ", " : "";
     return street + district + city + country;
+  }
+
+  const finish = () => {
+    history.push("/user/policyRequest/"+selectRecord.policyId);
   }
 
   return (
@@ -483,10 +489,10 @@ const PolicySearch = () => {
           <CModal show={confirm}  onClose={toggleConfirm} closeOnBackdrop={false} backdrop={false}>
                 <CModalHeader>Confirm</CModalHeader>
                   <CModalBody>
-                    Are you sure ?
+                    Are you sure to request this Policy ?
                   </CModalBody>
                 <CModalFooter>
-                  <CButton className="mr-1" color="primary">Yes</CButton>
+                  <CButton className="mr-1" onClick={finish} color="primary">Yes</CButton>
                   <CButton
                     color="secondary"
                     onClick={toggleConfirm}

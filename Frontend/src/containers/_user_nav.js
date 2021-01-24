@@ -92,6 +92,6 @@ const _user_nav = [
       },
     ],
   }
-  
+
 ];
 export default _user_nav

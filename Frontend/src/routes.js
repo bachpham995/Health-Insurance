@@ -42,11 +42,11 @@ const PolicyEmployee = React.lazy(() => import('./views/custom/PolicyEmployee'))
 const PolicyRequest = React.lazy(() => import('./views/custom/PolicyRequest'));
 //Policy Request List of User
 const PolicyRequestList = React.lazy(() => import('./views/custom/UserPolicyRequests'));
-//Company Search 
+//Company Search
 const CompanySearch = React.lazy(() => import('./views/custom/CompanySearch'));
 //Hospital Search
 const HospitalSearch = React.lazy(() => import('./views/custom/HospitalSearch'));
-//User FeedBack 
+//User FeedBack
 const UserFeedBack = React.lazy(() => import('./views/custom/CreateFeedBack'));
 
 
@@ -133,8 +133,7 @@ export const routes = [
 
   //Search
   { path: '/user/policySearch', exact: true, name: 'Policy Search', component: PolicySearch },
-  { path: '/user/companySearch', exact: true, name: 'Company Search', component: CompanySearch },
-  { path: '/user/hospitalSearch', exact: true, name: 'Hospital Search', component: HospitalSearch },
+
   //User Policies
   { path: '/user/policyEmployees', exact: true, name: 'My Policies', component: PolicyEmployee },
   //Request A Policy
@@ -192,6 +191,7 @@ export const routes = [
 ];
 
 export const _admin_routes = [
+  { path: '/', exact: true, name: 'Admin' },
   //Dashboard
   { path: '/dashboard', name: 'Dashboard', component: Dashboard },
   //Company
@@ -220,7 +220,8 @@ export const _admin_routes = [
   { path: '/admin/employees/delete/:id', exact: true, name: 'Delete Employee', component: Employee, props: { method: "delete" } },
   //Request
   { path: '/admin/requests', exact: true, name: 'Requests', component: Request, props: { tableName: "Requests", tableQuery: "PolicyRequests", color: "light" } },
-  { path: '/admin/requests/read/:id', exact: true, name: 'Info Request', component: RequestDetails, props: { mode: "get" } },
+  { path: '/admin/requests/read/:id', exact: true, name: 'Info Request', component: RequestDetails, props: { method: "get" } },
+  { path: '/admin/requests/edit/:id', exact: true, name: 'Info Request', component: RequestDetails, props: { method: "put" } },
   //Approvals
   { path: '/admin/approvals', exact: true, name: 'Approvals', component: Approval, props: { tableName: "Approvals", tableQuery: "PolicyApprovals", color: "light" } },
   //Report
@@ -240,17 +241,27 @@ export const _admin_routes = [
 ];
 
 export const _user_routes = [
+  { path: '/', exact: true, name: 'User' },
   //Search
   { path: '/user/policySearch', exact: true, name: 'Policy Search', component: PolicySearch },
+
+  { path: '/user/companySearch', exact: true, name: 'Company Search', component: CompanySearch },
+
+  { path: '/user/hospitalSearch', exact: true, name: 'Hospital Search', component: HospitalSearch },
+
   //User Policies
   { path: '/user/policyEmployees', exact: true, name: 'My Policies', component: PolicyEmployee },
   //Request A Policy
   { path: '/user/policyRequest', exact: true, name: 'Policy Request', component: PolicyRequest },
+
+  { path: '/user/policyRequest/:id', exact: true, name: 'Policy Request', component: PolicyRequest},
   //Request List
   { path: '/user/policyRequestList', exact: true, name: 'Policy Request List', component: PolicyRequestList },
   //Feedback of User
-  { path: '/user/feedBacks', exact: true, name: 'FeedBacks List', component: DataTable, props: { tableName: "My FeedBack", tableQuery: "FeedBackUser", color: "light" } },
+  { path: '/user/feedBacks', exact: true, name: 'FeedBacks List', component: DataTable, props: { tableName: "My Feedbacks", tableQuery: "FeedBackUser", color: "light" } },
   { path: '/user/feedBacks/create', exact: true, name: 'New FeedBack', component: UserFeedBack, props: { method: "post" } },
+  //Profile
+  { path: '/setting/profile', exact: true, name: 'Profile', component: Profile },
 ];
 
 
