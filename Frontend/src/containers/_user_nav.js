@@ -20,14 +20,13 @@ const _user_nav = [
       {
         _tag: 'CSidebarNavItem',
         name: <div className=""><CIcon className="mr-3" name="cil-building" />Company</div>,
-        // to: '/admin/companySearch',
+        to: '/user/companySearch',
 
       },
       {
         _tag: 'CSidebarNavItem',
         name: <div className=""><CIcon className="mr-3" name="cil-hospital" />Hospital</div>,
-        // to: '/user/hospitalSearch',
-
+        to: '/user/hospitalSearch',
       }
     ]
   },
@@ -56,6 +55,18 @@ const _user_nav = [
   },
   {
     _tag: 'CSidebarNavDropdown',
+    name: 'FeedBack',
+    icon: 'cil-star',
+    _children: [
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'My FeedBack',
+        to: '/user/feedBacks'
+      }
+    ],
+  },
+  {
+    _tag: 'CSidebarNavDropdown',
     name: 'Icons',
     route: '/icons',
     icon: 'cil-star',
@@ -81,5 +92,6 @@ const _user_nav = [
       },
     ],
   }
+  
 ];
 export default _user_nav

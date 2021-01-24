@@ -166,8 +166,6 @@ const RequestDetails = ({ method }) => {
                 </CCardBody>
                 <CCardFooter>
                   <CButton hidden={readOnly.includes(method) ? "hidden" : ""} onClick={toggle} size="sm" color="primary"><CIcon name="cil-scrubber" />Perform</CButton>
-                  {/* <CButton className="ml-2" hidden={readOnly.includes(method) ? "hidden" : ""} onClick={(e) => setImageSrc(null)} type="reset" size="sm" color="danger"><CIcon name="cil-ban" />Reset</CButton> */}
-                  {/* <CButton className="ml-2" onClick={toggle} hidden={method !== "delete"} type="reset" size="sm" color="danger"><CIcon name="cil-trash" />Delete</CButton> */}
                   <CButton className="ml-2" onClick={goBack} size="m" color="warning">Back</CButton>
                 </CCardFooter>
               </CCard>
@@ -265,7 +263,6 @@ const RequestDetails = ({ method }) => {
                     </CRow>
                   </fieldset>
                 </CCardBody>
-
               </CCard>
             </CCol>
           </CRow>
@@ -297,7 +294,6 @@ const RequestDetails = ({ method }) => {
               >Cancel</CButton>
             </CModalFooter>
           </CModal>
-
         </CForm>
       </>
     );

@@ -36,7 +36,7 @@ const TheContent = () => {
       <CContainer fluid>
         <Suspense fallback={loading}>
           <Switch>
-            {getRoute().map((route, idx) => {
+            {getRoute()?.map((route, idx) => {
               return route.component && (
                 <Route
                   key={idx}

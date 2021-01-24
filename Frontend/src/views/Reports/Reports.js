@@ -24,15 +24,7 @@ import AxiosClient from "src/api/AxiosClient"
 import Utility from 'src/api/Utility'
 import DatePicker from 'react-date-picker'
 // import Moment from 'react-moment';
-const getBadge = status => {
-    switch (status) {
-        case 'Active': return 'success'
-        case 'Inactive': return 'secondary'
-        case 'Pending': return 'warning'
-        case 'Banned': return 'danger'
-        default: return 'primary'
-    }
-}
+
 
 const Reports = ({ tableName, tableQuery, color }) => {
     const fields = Utility.TableHeader(tableQuery);
@@ -60,26 +52,24 @@ const Reports = ({ tableName, tableQuery, color }) => {
             });
             setTableSetDateData(datasSearchDate);
         }
-        // setStartDate(0);
-        // setEndDate(0);
     }
 
     useEffect(() => {
         const fetchDataList = async () => {
-            // console.log(tableName)
-            // console.log(tableQuery)
             try {
                 const request = [];
                 const datasSearchCompany = [];
-                const response = await (await AxiosClient.get("/Policies"));
-                console.log(response)
+                const response = await AxiosClient.get("/Policies");
                 response.map((item) => {
                     item.policyRequests.map((requestItem) => {
+                        console.log(requestItem);
                         request.push(requestItem);
+
                     })
                 });
                 if (companySelect == null) {
                     setTableData(request);
+                    console.log(tableData);
                 } else {
                     response.map((item) => {
                         if (item.insCompanyId == companySelect) {
@@ -109,6 +99,30 @@ const Reports = ({ tableName, tableQuery, color }) => {
         fetchDataList();
         fetchCompanys();
     }, [companySelect], [startDate], [endDate]);
+
+
+    // 1 Requesting , 2 Approval , 3 Recheck
+    const checkInput = (statusCode) => {
+        console.log(statusCode);
+        var outPutString = "";
+        if (statusCode == 0) {
+            outPutString = "Requesting";
+        }
+        if (statusCode == 1) {
+            outPutString = "Approval";
+        }
+        if (statusCode == 2) {
+            outPutString = "Recheck";
+        }
+        return outPutString;
+    }
+    const getBadge = (status) => {
+        switch (status) {
+            case 0: return 'warning'
+            case 1: return 'success'
+            case 2: return 'danger'
+        }
+    }
 
     return (
         <>
@@ -149,8 +163,8 @@ const Reports = ({ tableName, tableQuery, color }) => {
                                     'status':
                                         (item) => (
                                             <td>
-                                                <CBadge color={getBadge(item.status ? "Active" : "Inactive")}>
-                                                    {item.status ? "Active" : "Inactive"}
+                                                <CBadge color={getBadge(item.status)}>
+                                                    {checkInput(item.status)}
                                                 </CBadge>
                                             </td>
                                         ),
@@ -158,8 +172,8 @@ const Reports = ({ tableName, tableQuery, color }) => {
                                         (item) => (<>
                                             <CDropdown className="mt-1">
                                                 <CLink to={Utility.Read(tableQuery, item)} >
-                                                    <CButton color={getBadge(item.status ? "Active" : "Banned")} disabled={item.status ? false : true}>
-                                                        <CIcon name="cil-print" /> Print
+                                                    <CButton color={"primary"} disabled={item.status ? false : true}>
+                                                        <CIcon name="cil-print" />
                                                     </CButton>
                                                 </CLink>
                                             </CDropdown>
@@ -220,8 +234,8 @@ const Reports = ({ tableName, tableQuery, color }) => {
                                     'status':
                                         (item) => (
                                             <td>
-                                                <CBadge color={getBadge(item.status ? "Active" : "Inactive")}>
-                                                    {item.status ? "Active" : "Inactive"}
+                                                <CBadge color={getBadge(item.status)}>
+                                                    {checkInput(item.status)}
                                                 </CBadge>
                                             </td>
                                         ),
@@ -230,9 +244,9 @@ const Reports = ({ tableName, tableQuery, color }) => {
                                             <CDropdown className="mt-1">
                                                 <CLink to={Utility.Read(tableQuery, item)} >
                                                     <CCol col="6" sm="4" md="2" xl className="mb-3 mb-xl-0">
-                                                    <CButton color={getBadge(item.status ? "Active" : "Banned")} disabled={item.status ? false : true}>
-                                                        <CIcon name="cil-print" /> Print
-                                                    </CButton> 
+                                                        <CButton color={"primary"} disabled={item.status ? false : true}>
+                                                            <CIcon name="cil-print" />
+                                                        </CButton>
                                                     </CCol>
                                                 </CLink>
                                             </CDropdown>

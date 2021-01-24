@@ -11,11 +11,18 @@ import {
   CCol,
   CDataTable,
   CRow,
-  CLink
+  CLink,
+  CModal,
+  CModalHeader,
+  CModalBody,
+  CModalFooter,
+  CFormGroup,
+  CLabel,
+  CTextarea  
 } from '@coreui/react'
-import AxiosClient from "src/api/AxiosClient"
-import Utility from 'src/api/Utility'
-
+import AxiosClient from "src/api/AxiosClient";
+import Utility from 'src/api/Utility';
+import Common from 'src/services/Common';
 const getBadge = status => {
   switch (status) {
     case 'Active': return 'success'
@@ -30,20 +37,27 @@ const DataTable = ({ tableName, tableQuery, color }) => {
   const fields = Utility.TableHeader(tableQuery);
   const [tableData, setTableData] = useState([]);
 
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [itemSelecte,setItemSelecte] = useState();
+  const toggle = (item) => {
+    setShowConfirm(!showConfirm);
+    setItemSelecte(item);
+  }
+
   useEffect(() => {
     const fetchDataList = async () => {
       try {
-        const response = await AxiosClient.get("/" + tableQuery);
-        // console.log('Fetch data successfully: ', response);
-         console.log("Data Header:", Object.keys(response[0]));
+        const response = tableQuery != "FeedBackUser" ? await AxiosClient.get("/" + tableQuery)
+          : await AxiosClient.get("/Feedbacks/User/" + Common.getUser().id);
+        console.log('Fetch data successfully: ', response);
+        // console.log("Data Header:", Object.keys(response[0]));
         setTableData(response);
       } catch (error) {
         console.log('Failed to fetch data list: ', error);
       }
     }
     fetchDataList();
-  }, []);
-
+  }, [itemSelecte]);
   return (
     <>
       <CRow>
@@ -55,7 +69,7 @@ const DataTable = ({ tableName, tableQuery, color }) => {
             <CCardHeader hidden={!Utility.shouldShowAddBtn(tableQuery)}>
               <CLink to={Utility.Create(tableQuery)}>
                 <CButton size="lg" color="success" className="ml-1">
-                  Add
+                  {tableQuery != "FeedBackUser"?"Add":"Add new feedback"}
                 </CButton>
               </CLink>
             </CCardHeader>
@@ -104,6 +118,13 @@ const DataTable = ({ tableName, tableQuery, color }) => {
                                 Remove
                             </CButton>
                             </CLink>
+
+                            <CLink to={Utility.Read("ReportEmployee", item)} hidden={tableQuery == "Employees" ? false : true} >
+                              <CButton size="sm" variant="outline" color="primary" className="ml-1 mr-1">
+                                Print
+                            </CButton>
+
+                            </CLink>
                           </CDropdownMenu>
                         </CDropdown>
                       </td>
@@ -141,13 +162,41 @@ const DataTable = ({ tableName, tableQuery, color }) => {
                         {item.employee.lName + " " + item.employee.fName}
                       </td>
                     ),
+                  'showReplyButton':
+                    (item) => (
+                      <td>
+                        <CButton onClick={() => toggle(item)} size="sm" variant="outline" disabled={item.response != null?false:true} color={getBadge(item.response != null ? "Active" : "Inactive")} className="ml-1">
+                          {item.response != null ? "Feedback" : "Waiting"}
+                        </CButton>
+                        <CModal centered show={showConfirm} onClose={toggle} backdrop={false} closeOnBackdrop={false}>
+                          <CModalHeader>
+                            <h3>Reply from Admin</h3>
+                          </CModalHeader>
+                          <CModalBody>
+                            <CRow>
+                              <CCol xs="12">
+                                <CFormGroup>
+                                  <CLabel>Content</CLabel>
+                                  <CTextarea defaultValue={itemSelecte?.response} style={{height:"150px",marginTop:"20px",resize:"none"}}  type="text"  readOnly  />
+                                </CFormGroup>
+                              </CCol>
+                            </CRow>
+                          </CModalBody>
+                          <CModalFooter>
+                            <CButton
+                              color="danger"
+                              onClick={toggle}
+                            >Cancel</CButton>
+                          </CModalFooter>
+                        </CModal>
+                      </td>
+                    ),
                   'feedbackEmail':
                     (item) => (
                       <td>
                         {item.employee.email}
                       </td>
                     ),
-
                 }
                 }
               ></CDataTable>

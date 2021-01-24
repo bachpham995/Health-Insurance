@@ -144,7 +144,7 @@ const Profile = () => {
     GetUser(mounted);
     return () => mounted = false;
   }, []);
-
+  
   return (
     <CContainer>
       <CForm onSubmit={UpdateUser}>

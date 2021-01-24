@@ -62,7 +62,8 @@ export default class Utility {
         return '/admin/requests';
       case "Reports":
         return '/admin/reports';
-
+      case "ReportEmployee":
+        return '/admin/reportEmployee';
       case "Hospital":
       case "Hospitals":
         return '/admin/hospitals';
@@ -78,6 +79,9 @@ export default class Utility {
       case "Feedback":
       case "Feedbacks":
         return '/admin/feedbacks';
+
+      case "FeedBackUser":
+        return '/user/feedBacks';
       default:
         return '/admin';
     }
@@ -87,7 +91,6 @@ export default class Utility {
     switch (model) {
       case "UploadFile":
         return ["fileName", "type", "createTime"];
-
       case "InsuranceCompanies":
         return [{
           key: 'show_details',
@@ -135,7 +138,6 @@ export default class Utility {
           sorter: false,
           filter: false
         }, "employeeId", "fName", "lName", "designation", "status"];
-
       case "PolicyRequests":
         return [{
           key: 'button',
@@ -148,30 +150,60 @@ export default class Utility {
           label: '#',
           _style: { width: '5%' }
         }, "requestDate", "status", "emi", "amount"];
-
-      case "PolicyApprovals":
+      case "Reports":
         return [{
           key: 'button',
           label: 'Print',
-          //_style: { width: '5%' },
+          _style: { width: '5%' },
           sorter: false,
           filter: false
         }, {
-          key: 'policyRequest',
-          label: "User",
-         // _style: { width: '15%' }
-        }, {
-          key: "approvalDate",
-          label: "Approved Date",
-         // _style: { width: '15%' }
-        },{
-          key: "status",
-          label: "Status",
-         // _style: { width: '10%' }
-        } , "reason"];
-
+          key: "requestId",
+          label: '#',
+          _style: { width: '5%' }
+        }, "requestDate", "status", "emi", "amount"];
+      case "Feedback":
       case "Feedbacks":
         return ["feedBackReply", "feedbackId", "title", "date", "feedbackUser", "feedbackEmail"];
+      case "FeedBackUser":
+        return [
+          {
+            key: "feedbackId",
+            label: '#',
+            _style: { width: '5%' },
+            sorter: false,
+            filter: false
+          }, "title", "content", "date",
+          {
+            key: "showReplyButton",
+            label: 'Show',
+            _style: { width: '5%' },
+            sorter: false,
+            filter: false
+          }
+        ];
+      case "PolicyApprovals":
+        return [
+          //   {
+          //   key: 'button',
+          //   label: 'Print',
+          //   //_style: { width: '5%' },
+          //   sorter: false,
+          //   filter: false
+          // }
+          , {
+            key: 'policyRequest',
+            label: "User",
+            // _style: { width: '15%' }
+          }, {
+            key: "approvalDate",
+            label: "Approved Date",
+            // _style: { width: '15%' }
+          }, {
+            key: "status",
+            label: "Status",
+            // _style: { width: '10%' }
+          }, "reason"];
       default:
         return [];
     }
@@ -188,17 +220,17 @@ export default class Utility {
     }
   }
 
-  static newNotification = async (fromId, toId, title, description, type,relatedId, relatedType) => {
+  static newNotification = async (fromId, toId, title, description, type, relatedId, relatedType) => {
     let data = {
       "title": title,
-      "fromUserId" : parseInt(fromId),
-      "toUserId" : parseInt(toId),
-      "description" : description,
-      "date" : new Date(Date.now()),
-      "status" : false,
-      "type" : parseInt(type),
-      "relatedId" : parseInt(relatedId),
-      "relatedType" : relatedType
+      "fromUserId": parseInt(fromId),
+      "toUserId": parseInt(toId),
+      "description": description,
+      "date": new Date(Date.now()),
+      "status": false,
+      "type": parseInt(type),
+      "relatedId": parseInt(relatedId),
+      "relatedType": relatedType
     }
 
     return await AxiosClient.post("/Notifications", JSON.stringify(data),

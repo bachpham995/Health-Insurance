@@ -33,8 +33,6 @@ const RequestEmployees = ({ tableName, tableQuery, color }) => {
       try {
         const params = {};
         const response = await AxiosClient.get("/" + tableQuery, params);
-        // console.log('Fetch data successfully: ', response);
-        // console.log("Data Header:", Object.keys(response[0]));
         setTableData(response.sort(function(x,y){
           return (x === y)? 0 : x? -1 : 1;
         }));
@@ -54,6 +52,7 @@ const RequestEmployees = ({ tableName, tableQuery, color }) => {
     </CCardHeader>
     <CCardBody>
     <CDataTable
+      class="table table-bordered"
       items={tableData}
       fields={fields}
       striped
