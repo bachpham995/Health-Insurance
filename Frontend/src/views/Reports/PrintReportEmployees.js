@@ -28,7 +28,6 @@ const ReportEmployeeDetails = () => {
     const [policies, setPolicies] = useState([]);
     const { id } = useParams();
 
-
     const getUser = useCallback(async () => {
         const res = await AxiosClient.get("/Employees/" + id, {
                 headers: { "content-type": "text/plain" }
@@ -56,7 +55,6 @@ const ReportEmployeeDetails = () => {
     const goBack = () => {
         history.push("/admin/employees");
     }
-
     useEffect(() => {
         getUser();
     }, [getUser]);
