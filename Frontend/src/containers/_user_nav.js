@@ -62,6 +62,11 @@ const _user_nav = [
         _tag: 'CSidebarNavItem',
         name: 'My FeedBack',
         to: '/user/feedBacks'
+      },
+      {
+        _tag: 'CSidebarNavItem',
+        name: 'Add FeedBack',
+        to: '/user/feedBacks/create'
       }
     ],
   },

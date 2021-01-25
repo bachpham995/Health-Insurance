@@ -60,6 +60,10 @@ export default class Utility {
       case "PolicyRequest":
       case "PolicyRequests":
         return '/admin/requests';
+      
+      case "PolicyRequestUser":
+        return '/user/policyRequest';
+
       case "Reports":
         return '/admin/reports';
       case "ReportEmployee":
@@ -71,7 +75,7 @@ export default class Utility {
       case "Employee":
       case "Employees":
         return '/admin/employees';
-
+      
       case "Policy":
       case "Policies":
         return '/admin/policies';
@@ -145,7 +149,15 @@ export default class Utility {
           _style: { width: '15%' },
           sorter: false,
           filter: false
-        }, {
+        },
+        // {
+        //   key: 'button',
+        //   label: 'Details',
+        //   _style: { width: '11%' },
+        //   sorter: false,
+        //   filter: false
+        // },
+         {
           key: "requestId",
           label: '#',
           _style: { width: '5%' }

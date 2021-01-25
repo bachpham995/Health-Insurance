@@ -169,10 +169,6 @@ export const routes = [
   { path: '/admin/requests/read/:id', exact: true, name: 'Info Request', component: RequestDetails, props: { mode: "get" } },
   //Approvals
   { path: '/admin/approvals', exact: true, name: 'Approvals', component: Approval, props: { tableName: "Approvals", tableQuery: "PolicyApprovals", color: "light" } },
-  //Report
-  { path: '/admin/reports', exact: true, name: 'Reports', component: Report, props: { tableName: "Reports", tableQuery: "Reports", color: "light" } },
-  { path: '/admin/reports/read/:id', exact: true, name: 'Info Report', component: ReportDetail, props: { mode: "get" } },
-  { path: '/admin/reportEmployee/read/:id', exact: true, name: 'Info ReportEmployee', component: ReportEmployeeDetail, props: { mode: "get" } },
 
   //Feedback
   { path: '/admin/feedbacks', exact: true, name: 'Feedbacks', component: DataTable, props: { tableName: "Feedbacks", tableQuery: "Feedbacks", color: "light" } },
@@ -234,6 +230,10 @@ export const _admin_routes = [
   { path: '/admin/tool/documents', exact: true, name: 'Documents', component: DataTable, props: { tableName: "Documents", tableQuery: "UploadFile", color: "light" } },
   { path: '/setting/profile', exact: true, name: 'Profile', component: Profile },
   { path: '/admin/mail', exact: true, name: 'Gmail', component: Mailbox },
+  //Report
+  { path: '/admin/reports', exact: true, name: 'Reports', component: Report, props: { tableName: "Reports", tableQuery: "Reports", color: "light" } },
+  { path: '/admin/reports/read/:id', exact: true, name: 'Info Report', component: ReportDetail, props: { mode: "get" } },
+  { path: '/admin/reportEmployee/read/:id', exact: true, name: 'Info ReportEmployee', component: ReportEmployeeDetail, props: { mode: "get" } },
 ];
 
 export const _user_routes = [
@@ -249,8 +249,7 @@ export const _user_routes = [
   { path: '/user/policyEmployees', exact: true, name: 'My Policies', component: PolicyEmployee },
   //Request A Policy
   { path: '/user/policyRequest', exact: true, name: 'Policy Request', component: PolicyRequest },
-
-  { path: '/user/policyRequest/:id', exact: true, name: 'Policy Request', component: PolicyRequest},
+  { path: '/user/policyRequest/read/:id', exact: true, name: 'Policy Request', component: PolicyRequest,props:{method:"get"}},
   //Request List
   { path: '/user/policyRequestList', exact: true, name: 'Policy Request List', component: PolicyRequestList },
   //Feedback of User
