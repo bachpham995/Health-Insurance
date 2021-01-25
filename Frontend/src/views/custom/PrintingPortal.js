@@ -35,7 +35,7 @@ const PrintingPortal = ({ employee, requestData, onPrintCancelled,tableQuery,img
     const [query,setQuery] = useState(null);
     useEffect(() => {
         if (employee) {
-            console.log(tableQuery);
+            console.log(requestData);
             setQuery(tableQuery);
             const printingPortalWindow = window.open(
                 '',
@@ -72,7 +72,7 @@ const PrintingPortal = ({ employee, requestData, onPrintCancelled,tableQuery,img
         
         tableQuery != "Employee"?
         <ReportSkeleton data={employee} requestData={requestData} />:
-        <ReportEmployeeSkeleton user={employee} policy={requestData} img={img}/>,
+        <ReportEmployeeSkeleton user={employee} policies={requestData} img={img}/>,
         containerEl
     );
 };

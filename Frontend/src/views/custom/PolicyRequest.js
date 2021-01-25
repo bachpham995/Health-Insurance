@@ -22,7 +22,7 @@ import {
   CInputGroup,
   CInputGroupAppend,
   CTextarea,
-  CImg,CModal,
+  CImg, CModal,
   CModalBody,
   CModalHeader,
   CModalFooter,
@@ -45,6 +45,10 @@ const PolicyRequest = () => {
   const history = useHistory();
   const { id } = useParams();
 
+  // const { id } = useParams();
+
+
+
   const getPolicies = async (mounted) => {
     await AxiosClient.get("/Policies").then(res => {
       //console.log('Policies: ', res);
@@ -54,7 +58,18 @@ const PolicyRequest = () => {
       }
     }).catch(err => {
       console.log(err);
-    })
+    });
+  }
+  const getPolicyById = async (mounted) => {
+    await AxiosClient.get("/Policies/" + id).then(res => {
+      console.log('Policies: ', res);
+      // console.log("Data Header:", Object.keys(response[0]));
+      if (mounted) {
+        setPolicies(res);
+      }
+    }).catch(err => {
+      console.log(err);
+    });
   }
   const validate = (event) => {
     let form = event.target.form;
@@ -77,7 +92,7 @@ const PolicyRequest = () => {
       employeeId: parseInt(requestUser),
       policyId: parseInt(form.r_policy.value),
       requestDate: new Date(Date.now()).toDateString(),
-      amount: parseFloat(form.r_amount.value),
+      amount:parseFloat(form.r_amount.value),
       emi: parseFloat(form.r_emi.value),
       employee: null,
       policy: null,
@@ -85,7 +100,9 @@ const PolicyRequest = () => {
       note: "",
       retired: false
     }
+    // console.log(policyRequest)
     event.preventDefault();
+
     await AxiosClient.post("/PolicyRequests", JSON.stringify(policyRequest),
       {
         headers: { "content-type": "application/json; charset=utf-8" }
@@ -104,22 +121,35 @@ const PolicyRequest = () => {
 
   useEffect(() => {
     let mounted = true;
-    getPolicies(mounted);
+    if (id != null) {
+      getPolicyById(mounted);
+    } else {
+      getPolicies(mounted);
+    }
     return () => mounted = false;
   }, []);
 
-  useEffect(()=>{
-    if( id!= null && policies != null){
-      let value = policies.filter(p => p.policyId == parseInt(id))[0];
-      setPolicy(value);
-      console.log("set poilcy");
-    }
-  },[policies]);
+  // useEffect(()=>{
+  //   if( id!= null && policies != null){
+  //     let value = policies.filter(p => p.policyId == parseInt(id))[0];
+  //     setPolicy(value);
+  //     console.log("set poilcy");
+  //   }
+  // },[policies]);
 
   const choosePolicy = (event) => {
-    let value = policies.filter(p => p.policyId == parseInt(event.target.value))[0];
-    setPolicy(value);
+    if(id != null){
+      setPolicy(event);
+    }else{
+      let value = policies.filter(p => p.policyId == parseInt(event.target.value))[0];
+      setPolicy(value);
+    }
+    
+    
   }
+
+
+
 
   const onChangeAmount = (event) => {
     let emi = parseFloat(event.target.value) / parseInt(event.target.form.r_duration.value);
@@ -157,26 +187,29 @@ const PolicyRequest = () => {
                       <CCol xs="4">
                         <CFormGroup>
                           <CLabel htmlFor="r_policy">Select Policy</CLabel>
-                          <CSelect id="r_policy" onChange={choosePolicy} value={policy?.policyId}>
+                          <CInput type="text" hidden={id != null?false:true} value= {policies?.policyNumber + " " + policies?.policyName} readOnly />
+                          <CSelect hidden={id != null?true:false} id="r_policy" onChange={choosePolicy}>
                             <option value={0} key={0}></option>
                             {
+                              id == null?
                               policies?.map(policy => <option value={policy.policyId} key={policy.policyId}>
-                                {policy.policyNumber + " " + policy.policyName}
+                              {policy.policyNumber + " " + policy.policyName}
                               </option>)
+                              :""
                             }
                           </CSelect>
                         </CFormGroup>
                       </CCol>
-                      <CCol xs="3">
+                      <CCol xs="3" hidden={id != null?true:false}>
                         <CFormGroup>
                           <CLabel htmlFor="r_amount">Request Amount</CLabel>
                           <CInputGroup>
-                            <CInput id="r_amount" onChange={onChangeAmount} type="number" />
+                            <CInput defaultValue={0} id="r_amount" onChange={onChangeAmount} type="number" />
                             <CInputGroupAppend><CButton size="sm" color="dark"><CIcon name="cil-dollar" /></CButton></CInputGroupAppend>
                           </CInputGroup>
                         </CFormGroup>
                       </CCol>
-                      <CCol xs="2">
+                      <CCol xs="2" hidden={id != null?true:false}>
                         <CFormGroup >
                           <CLabel htmlFor="r_duration">Duration</CLabel>
                           <CSelect onChange={onChangeEmi} id="r_duration">
@@ -185,7 +218,7 @@ const PolicyRequest = () => {
                           </CSelect>
                         </CFormGroup>
                       </CCol>
-                      <CCol xs="3">
+                      <CCol xs="3" hidden={id != null?true:false}>
                         <CFormGroup>
                           <CLabel htmlFor="r_emi">Request Emi</CLabel>
                           <CInputGroup>
@@ -221,23 +254,23 @@ const PolicyRequest = () => {
                         <CCol xs="6">
                           <CFormGroup>
                             <CLabel htmlFor="number">Policy Number</CLabel>
-                            <CInput readOnly value={policy?.policyNumber || ''} className="form-control-warning" id="number" />
+                            <CInput readOnly value={id == null ?policy?.policyNumber || '':policies?.policyNumber || ''} className="form-control-warning" id="number" />
                           </CFormGroup>
                           <CFormGroup>
                             <CLabel htmlFor="name">Policy Name</CLabel>
-                            <CInput readOnly value={policy?.policyName || ''} className="form-control-warning" id="name" />
+                            <CInput readOnly value={id == null ?policy?.policyName || '':policies?.policyName || ''} className="form-control-warning" id="name" />
                           </CFormGroup>
                           <CFormGroup>
                             <CLabel htmlFor="amount">Policy Emi</CLabel>
                             <CInputGroup>
-                              <CInput readOnly value={policy?.emi || ''} id="amount" type="number" />
+                              <CInput readOnly value={id == null ?policy?.emi || '':policies?.emi || ''} id="amount" type="number" />
                               <CInputGroupAppend><CButton size="sm" color="dark"><CIcon name="cil-dollar" /></CButton></CInputGroupAppend>
                             </CInputGroup>
                           </CFormGroup>
                           <CFormGroup>
                             <CLabel htmlFor="amount">Policy Amount</CLabel>
                             <CInputGroup>
-                              <CInput readOnly value={policy?.amount || ''} id="amount" type="number" />
+                              <CInput readOnly value={id == null?policy?.amount || '':policies?.amount || ''} id="amount" type="number" />
                               <CInputGroupAppend><CButton size="sm" color="dark"><CIcon name="cil-dollar" /></CButton></CInputGroupAppend>
                             </CInputGroup>
                           </CFormGroup>
@@ -245,11 +278,11 @@ const PolicyRequest = () => {
                         <CCol xs="6">
                           <CFormGroup>
                             <CLabel htmlFor="description">Description</CLabel>
-                            <CTextarea readOnly value={policy?.description || ''} rows="5" id="description" type="text"></CTextarea>
+                            <CTextarea readOnly value={id == null ?policy?.description || '':policies?.description || ''} rows="5" id="description" type="text"></CTextarea>
                           </CFormGroup>
                           <CFormGroup>
                             <CLabel htmlFor="benefit">Benefit</CLabel>
-                            <CTextarea readOnly value={policy?.benefit || ''} rows="5" id="benefit" type="text"></CTextarea>
+                            <CTextarea readOnly value={id == null?policy?.benefit || '':policies.benefit || ''} rows="5" id="benefit" type="text"></CTextarea>
                           </CFormGroup>
                         </CCol>
                       </CRow>
@@ -259,49 +292,49 @@ const PolicyRequest = () => {
                         <CCol xs="6">
                           <CFormGroup>
                             <CLabel htmlFor="company">Insurance Company</CLabel>
-                            <CInput readOnly value={policy?.insCompany?.insCompanyName || ''} id="company" />
+                            <CInput readOnly value={id == null ?policy?.insCompany?.insCompanyName || '':policies?.insCompany?.insCompanyName || ''} id="company" />
                           </CFormGroup>
                           <CFormGroup>
                             <CLabel htmlFor="companyWeb">Website</CLabel>
-                            <CInput readOnly value={policy?.insCompany?.url || ''} id="companyWeb" />
+                            <CInput readOnly value={id == null ?policy?.insCompany?.url || '':policies?.insCompany?.url || ''} id="companyWeb" />
                           </CFormGroup>
                           <CRow>
                             <CCol xs="6">
                               <CFormGroup>
                                 <CLabel htmlFor="companyEmail">Email</CLabel>
-                                <CInput readOnly value={policy?.insCompany?.email || ''} id="companyEmail" />
+                                <CInput readOnly value={id == null?policy?.insCompany?.email || '':policies?.insCompany?.email || ''} id="companyEmail" />
                               </CFormGroup>
                             </CCol>
                             <CCol xs="6">
                               <CFormGroup>
                                 <CLabel htmlFor="companyPhone">Phone</CLabel>
-                                <CInput readOnly value={policy?.insCompany?.phone || ''} id="companyPhone" />
+                                <CInput readOnly value={id == null?policy?.insCompany?.phone || '':policies?.insCompany?.phone || ''} id="companyPhone" />
                               </CFormGroup>
                             </CCol>
                           </CRow>
                           <CFormGroup>
                             <CLabel htmlFor="companyStr">Street</CLabel>
-                            <CInput readOnly value={policy?.insCompany?.address?.street || ''} id="companyStr" />
+                            <CInput readOnly value={id == null?policy?.insCompany?.address?.street || '':policies?.insCompany?.address?.street || ''} id="companyStr" />
                           </CFormGroup>
                           <CRow>
                             <CCol xs="6">
                               <CFormGroup>
                                 <CLabel htmlFor="companyDist">District</CLabel>
-                                <CInput readOnly value={policy?.insCompany?.address?.district || ''} id="companyDist" />
+                                <CInput readOnly value={id == null?policy?.insCompany?.address?.district || '':policies?.insCompany?.address?.district || ''} id="companyDist" />
                               </CFormGroup>
                               <CFormGroup>
                                 <CLabel htmlFor="companyPost">Postal Code</CLabel>
-                                <CInput readOnly value={policy?.insCompany?.address?.postalCode || ''} id="companyPost" />
+                                <CInput readOnly value={id == null?policy?.insCompany?.address?.postalCode || '':policies?.insCompany?.address?.postalCode || ''} id="companyPost" />
                               </CFormGroup>
                             </CCol>
                             <CCol xs="6">
                               <CFormGroup>
                                 <CLabel htmlFor="companyCity">City</CLabel>
-                                <CInput readOnly value={policy?.insCompany?.address?.city || ''} id="companyCity" />
+                                <CInput readOnly value={id == null?policy?.insCompany?.address?.city || '':policies?.insCompany?.address?.city || ''} id="companyCity" />
                               </CFormGroup>
                               <CFormGroup>
                                 <CLabel htmlFor="companyCountry">Country</CLabel>
-                                <CInput readOnly value={policy?.insCompany?.address?.country || ''} id="companyCountry" />
+                                <CInput readOnly value={id == null?policy?.insCompany?.address?.country || '':policies?.insCompany?.address?.country || ''} id="companyCountry" />
                               </CFormGroup>
                             </CCol>
                           </CRow>
@@ -312,7 +345,7 @@ const PolicyRequest = () => {
                           </CRow>
                           <CRow>
                             <CFormGroup>
-                              <CImg thumbnail id="companyPhoto" src={policy?.insCompany?.img} />
+                              <CImg thumbnail id="companyPhoto" src={id == null?policy?.insCompany?.img || '':policies?.insCompany?.img || ''}  />
                             </CFormGroup>
                           </CRow>
                         </CCol>
@@ -323,49 +356,49 @@ const PolicyRequest = () => {
                         <CCol xs="6">
                           <CFormGroup>
                             <CLabel htmlFor="hospital">Hospital</CLabel>
-                            <CInput readOnly value={policy?.hospital?.hospitalName || ''} id="hospital" />
+                            <CInput readOnly value={id == null?policy?.hospital?.hospitalName || '':policies?.hospital?.hospitalName || ''} id="hospital" />
                           </CFormGroup>
                           <CFormGroup>
                             <CLabel htmlFor="hospitalWeb">Website</CLabel>
-                            <CInput readOnly value={policy?.hospital?.url || ''} id="hospitalWeb" />
+                            <CInput readOnly value={id == null?policy?.hospital?.url || '':policies?.hospital?.url || ''} id="hospitalWeb" />
                           </CFormGroup>
                           <CRow>
                             <CCol xs="6">
                               <CFormGroup>
                                 <CLabel htmlFor="hospitalEmail">Email</CLabel>
-                                <CInput readOnly value={policy?.hospital?.email || ''} id="hospitalEmail" />
+                                <CInput readOnly value={id == null?policy?.hospital?.email || '':policies?.hospital?.email || ''} id="hospitalEmail" />
                               </CFormGroup>
                             </CCol>
                             <CCol xs="6">
                               <CFormGroup>
                                 <CLabel htmlFor="hospitalPhone">Phone</CLabel>
-                                <CInput readOnly value={policy?.hospital?.phone || ''} id="hospitalPhone" />
+                                <CInput readOnly value={id == null?policy?.hospital?.phone || '':policies?.hospital?.phone  || '' } id="hospitalPhone" />
                               </CFormGroup>
                             </CCol>
                           </CRow>
                           <CFormGroup>
                             <CLabel htmlFor="hospitalStr">Street</CLabel>
-                            <CInput readOnly value={policy?.hospital?.address?.street || ''} id="hospitalStr" />
+                            <CInput readOnly value={id == null?policy?.hospital?.address?.street || '':policies?.hospital?.address?.street  || ''} id="hospitalStr" />
                           </CFormGroup>
                           <CRow>
                             <CCol xs="6">
                               <CFormGroup>
                                 <CLabel htmlFor="hospitalDist">District</CLabel>
-                                <CInput readOnly value={policy?.hospital?.address?.district || ''} id="hospitalDist" />
+                                <CInput readOnly value={id == null?policy?.hospital?.address?.district || '':policies?.hospital?.address?.district  || ''} id="hospitalDist" />
                               </CFormGroup>
                               <CFormGroup>
                                 <CLabel htmlFor="hospitalPost">Postal Code</CLabel>
-                                <CInput readOnly value={policy?.hospital?.address?.postalCode || ''} id="hospitalPost" />
+                                <CInput readOnly value={id == null?policy?.hospital?.address?.postalCode || '':policies?.hospital?.address?.postalCode  || ''}id="hospitalPost" />
                               </CFormGroup>
                             </CCol>
                             <CCol xs="6">
                               <CFormGroup>
                                 <CLabel htmlFor="hospitalCity">City</CLabel>
-                                <CInput readOnly value={policy?.hospital?.address?.city || ''} id="hospitalCity" />
+                                <CInput readOnly value={id == null?policy?.hospital?.address?.city || '':policies?.hospital?.address?.city  || ''} id="hospitalCity" />
                               </CFormGroup>
                               <CFormGroup>
                                 <CLabel htmlFor="hospitalCountry">Country</CLabel>
-                                <CInput readOnly value={policy?.hospital?.address?.country || ''} id="hospitalCountry" />
+                                <CInput readOnly value={id == null?policy?.hospital?.address?.country || '':policies?.hospital?.address?.country  || ''} id="hospitalCountry" />
                               </CFormGroup>
                             </CCol>
                           </CRow>
@@ -376,7 +409,7 @@ const PolicyRequest = () => {
                           </CRow>
                           <CRow>
                             <CFormGroup>
-                              <CImg thumbnail id="hospitalPhoto" src={policy?.hospital?.img} />
+                              <CImg thumbnail id="hospitalPhoto" src={id == null?policy?.hospital?.img || '':policies?.hospital?.img  || ''} />
                             </CFormGroup>
                           </CRow>
                         </CCol>
@@ -386,20 +419,20 @@ const PolicyRequest = () => {
                 </CTabs>
               </CCardBody>
               <CCardFooter>
-                <CButton size="sm" onClick={validate} type="submit" color="primary">Request</CButton>
-                <CButton className="ml-2" onClick={finish} size="sm" color="danger">Cancel</CButton>
+                <CButton hidden={id != null?true:false} size="sm" onClick={validate} type="submit" color="primary">Request</CButton>
+                <CButton className="ml-2" onClick={()=> finish()}type="reset" size="sm" color="danger">Cancel</CButton>
               </CCardFooter>
             </CCard>
           </CCol>
         </CRow>
       </CForm>
-      <CModal show={show} color={success?"success":"danger"} onClose={toggle} size='sm' closeOnBackdrop={false}>
-        <CModalHeader>{success?(<CIcon name="cil-check-circle"/>):(<CIcon name="cil-x-circle"/>)}Result</CModalHeader>
+      <CModal show={show} color={success ? "success" : "danger"} onClose={toggle} size='sm' closeOnBackdrop={false}>
+        <CModalHeader>{success ? (<CIcon name="cil-check-circle" />) : (<CIcon name="cil-x-circle" />)}Result</CModalHeader>
         <CModalBody>
-          {success ? (<p>Request was submitted successfully.<br/>Please wait for Admin to approval.</p>) : <p>Something went wrong :( <br/>Please contact your admin for the details.</p> }
+          {success ? (<p>Request was submitted successfully.<br />Please wait for Admin to approval.</p>) : <p>Something went wrong :( <br />Please contact your admin for the details.</p>}
         </CModalBody>
         <CModalFooter>
-          <CButton className="mr-1" onClick={finish} color={success?"success":"danger"}>OK</CButton>
+          <CButton className="mr-1" onClick={finish} color={success ? "success" : "danger"}>OK</CButton>
         </CModalFooter>
       </CModal>
     </CContainer>
