@@ -26,7 +26,7 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Employee>>> GetEmployee()
         {
-            return await _context.Employee.Where(e=>e.Role != 0)
+            return await _context.Employee.Where(e=>e.Role != 0 && !e.Retired)
             .Include(e=>e.PolicyRequests)
             .Include(e=>e.Feedbacks)
             .Include(e=>e.ToNotifications).ThenInclude(n=>n.FromUser)
@@ -40,13 +40,13 @@ namespace HealthInsuranceWebServer.Controllers
         public async Task<ActionResult<Employee>> GetEmployee(int id)
         {
             var employee = await _context.Employee
-            .Where(e=>e.EmployeeId == id)
+            .Where(e=>e.EmployeeId == id && !e.Retired)
             .Include(e=>e.PolicyRequests)
             .Include(e=>e.Feedbacks)
             .Include(e=>e.ToNotifications).ThenInclude(n=>n.FromUser)
             .Include(e=>e.FromNotifications).ThenInclude(n=>n.ToUser)
             .Include(e=>e.PolicyEmployees)
-            .FirstAsync();
+            .FirstOrDefaultAsync();
             
 
             if (employee == null)
@@ -67,7 +67,7 @@ namespace HealthInsuranceWebServer.Controllers
             .Include(e=>e.ToNotifications).ThenInclude(n=>n.FromUser)
             .Include(e=>e.FromNotifications).ThenInclude(n=>n.ToUser)
             .Include(e=>e.PolicyEmployees)            
-            .FirstAsync(e=>e.Username == username);
+            .FirstOrDefaultAsync(e=>e.Username == username  && !e.Retired);
             
 
             if (employee == null)
@@ -128,7 +128,7 @@ namespace HealthInsuranceWebServer.Controllers
                 return NotFound();
             }
 
-            employee.Retired = false;            
+            employee.Retired = true;            
             _context.Employee.Update(employee);
             await _context.SaveChangesAsync();
 

@@ -39,7 +39,7 @@ namespace HealthInsuranceWebServer.Controllers
             var notification = await _context.Notification
             .Include(n=>n.FromUser)
             .Include(n=>n.ToUser)
-            .Where(n => n.Id == id).FirstAsync();
+            .Where(n => n.Id == id).FirstOrDefaultAsync();
 
             if (notification == null)
             {

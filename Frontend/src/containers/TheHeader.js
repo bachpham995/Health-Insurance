@@ -52,6 +52,23 @@ const TheHeader = ({ user }) => {
     return routes;
   }
 
+  const FetchNotification = async (mounted) => {
+    await AxiosClient.get("/Notifications").then(res => {
+      if (mounted) {
+        let notifications = res?.filter(n => n.toUserId == Common.getUser().id);
+        let activities = res?.filter(n => n.fromUserId == Common.getUser().id);
+        setNotifications_0(GetNotificationsByType(notifications, 0));
+        setNotifications_1(GetNotificationsByType(activities, 1));
+        // setNotifications_2(GetNotificationsByType(user?.toNotifications, 2));
+        setCount_0(CountNotificationsByType(notifications, 0));
+        setCount_1(CountNotificationsByType(activities, 1));
+        // setCount_2(CountNotificationsByType(user?.toNotifications, 2));
+      }
+    }).catch(err => {
+      console.log('Failed to Get data: ', err);
+    });
+  }
+
   const toggleSidebar = () => {
     const val = [true, 'responsive'].includes(sidebarShow) ? false : 'responsive'
     dispatch({ type: 'set', sidebarShow: val })
@@ -74,21 +91,14 @@ const TheHeader = ({ user }) => {
     return data?.filter(n => !n.status && n.type == type).length;
   }
 
-
   useEffect(() => {
     let mounted = true;
-    if (mounted) {
-      //FetchNotification(mounted);
-      setNotifications_0(GetNotificationsByType(user?.toNotifications, 0));
-      setNotifications_1(GetNotificationsByType(user?.fromNotifications, 1));
-      setNotifications_2(GetNotificationsByType(user?.toNotifications, 2));
-      setCount_0(CountNotificationsByType(user?.toNotifications, 0));
-      setCount_1(CountNotificationsByType(user?.fromNotifications, 1));
-      setCount_2(CountNotificationsByType(user?.toNotifications, 2));
-    }
+    let interval = setInterval(() => {
+      FetchNotification(mounted);
+    }, 3000);
 
-    return () => mounted = false;
-  },[]);
+    return () => {clearInterval(interval); mounted = false};
+  }, []);
 
   return (
     <CHeader withSubheader colorScheme="dark">

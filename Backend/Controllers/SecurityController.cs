@@ -46,7 +46,7 @@ namespace HealthInsuranceWebServer.Controllers
             }
             else
             {
-                response = NotFound();
+                response = NoContent();
             }
             return response;
         }
@@ -60,7 +60,7 @@ namespace HealthInsuranceWebServer.Controllers
             var user = _context.Employee.FirstOrDefault(u => u.Username == login.Username);
             if (user != null)
             {
-                if (login.Username == user.Username && login.Password == user.Password)
+                if (login.Username == user.Username && login.Password == user.Password && !user.Retired)
                 {
                     return user;
                 }

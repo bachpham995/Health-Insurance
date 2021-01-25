@@ -54,7 +54,7 @@ const DataTable = ({ tableName, tableQuery, color }) => {
       try {
         const response = tableQuery != "FeedBackUser" ? await AxiosClient.get("/" + tableQuery)
           : await AxiosClient.get("/Feedbacks/User/" + Common.getUser().id);
-        console.log('Fetch data successfully: ', response);
+        // console.log('Fetch data successfully: ', response);
         // console.log("Data Header:", Object.keys(response[0]));
         setTableData(response);
       } catch (error) {

@@ -123,7 +123,6 @@ const Hospital = ({ method }) => {
         ).then(res => {
           setShowConfirm(false);
           Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Hospital", "Removed a Hospital", 1, id, "hospitals");
-
         }).catch(err => {
           console.log(err);
         });

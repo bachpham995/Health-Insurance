@@ -86,7 +86,7 @@ namespace HealthInsuranceWebServer.Controllers
             .Include(p => p.InsCompany)
             .Include(p => p.PolicyRequests)
             .Include(p => p.PolicyEmployees)
-            .FirstAsync<Policy>();
+            .FirstOrDefaultAsync<Policy>();
 
             if (policy == null)
             {

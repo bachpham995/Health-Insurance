@@ -237,10 +237,10 @@ export default class Utility {
     return await AxiosClient.post("/Notifications", JSON.stringify(data),
       {
         headers: { 'content-type': 'application/json' }
-      }).then(res => console.log("A Notification is created successfully"))
-      .catch(err => {
+      }).then(res =>{}
+        // console.log("A Notification is created successfully")
+      ).catch(err => {
         console.log(err)
-
       }
       );
   }

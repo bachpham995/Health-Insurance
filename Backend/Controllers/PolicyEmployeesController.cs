@@ -43,7 +43,7 @@ namespace HealthInsuranceWebServer.Controllers
             .Where(pe => !pe.Retired && pe.Id == id)
             .Include(pe => pe.Policy)
             .Include(pe => pe.Employee)
-            .FirstAsync();
+            .FirstOrDefaultAsync();
 
             if (policyEmployee == null)
             {

@@ -32,7 +32,7 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<PolicyApproval>> GetPolicyApproval(int id)
         {
-            var policyApproval = await _context.PolicyApproval.Include(p => p.PolicyRequest).ThenInclude(pr => pr.Employee).Where(p => !p.Retired && p.ApprovalId == id).FirstAsync();
+            var policyApproval = await _context.PolicyApproval.Include(p => p.PolicyRequest).ThenInclude(pr => pr.Employee).Where(p => !p.Retired && p.ApprovalId == id).FirstOrDefaultAsync();
 
             if (policyApproval == null)
             {

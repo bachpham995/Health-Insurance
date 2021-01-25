@@ -28,6 +28,7 @@ import {
   useHistory
 } from "react-router-dom";
 import login from "src/assets/bg/login.jpg";
+import Utility from 'src/api/Utility';
 
 const useFormInput = initialValue => {
   const [value, setValue] = useState(initialValue);
@@ -49,7 +50,7 @@ const Login = () => {
   const history = useHistory();
 
   const onEnterKey = (event) => {
-    if(event.keyCode === 13) {
+    if (event.keyCode === 13) {
       onLogin(event);
     }
   }
@@ -65,15 +66,21 @@ const Login = () => {
 
     AxiosClient.get("/Security?username=" + data.username + "&password=" + data.password, { header: "content-type: application/json; charset=utf-8" })
       .then(res => {
-        setLoading(false);
-        // console.log(res);
-        //history.push("/dashboard");
-        Common.setUserSession(res.token, {id : res.id, role : res.role,userName : res.userName});
-        // history.push("/dashboard");
-        form.action = "/dashboard";
-        form.method = "get";
-        form.onsubmit = true;
-        form.submit();
+        if (res?.status == 204) {
+          setLoading(false);
+          setError("Wrong username or password. Please try again later.");
+        } else {
+          setLoading(false);
+          // console.log(res);
+          //history.push("/dashboard");
+          Common.setUserSession(res.token, { id: res.id, role: res.role, userName: res.userName });
+          // history.push("/dashboard");
+          form.action = "/dashboard";
+          form.method = "get";
+          form.onsubmit = true;
+          form.submit();
+          Utility.newNotification(res.id, res.id, "Login", "Log in success !", res.id, 1, "");
+        }
       }).catch(err => {
         setLoading(false);
         setError("Something went wrong. Please try again later.");
@@ -99,7 +106,7 @@ const Login = () => {
                           <CIcon name="cil-user" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="text" placeholder="Username" {...username} autoComplete="username" id="username" onKeyUp={onEnterKey}/>
+                      <CInput type="text" placeholder="Username" {...username} autoComplete="username" id="username" onKeyUp={onEnterKey} />
                     </CInputGroup>
                     <CInputGroup className="mb-4">
                       <CInputGroupPrepend>
@@ -107,7 +114,7 @@ const Login = () => {
                           <CIcon name="cil-lock-locked" />
                         </CInputGroupText>
                       </CInputGroupPrepend>
-                      <CInput type="password" placeholder="Password" {...password} autoComplete="current-password" id="password" onKeyUp={onEnterKey}/>
+                      <CInput type="password" placeholder="Password" {...password} autoComplete="current-password" id="password" onKeyUp={onEnterKey} />
                     </CInputGroup>
                     <CRow>
                       <CCol xs="6">

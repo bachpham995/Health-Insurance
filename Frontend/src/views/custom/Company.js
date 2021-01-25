@@ -115,7 +115,7 @@ const Company = ({ method }) => {
           }).then(res => {
 
             console.log(res)
-             Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Company", "Modified an Insurance Company", 1, data.insuranceCompanyId, "companies" );
+             Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Company", "Modified an Insurance Company", 1, id, "companies" );
           }).catch(err => {
             console.log(err);
           });
@@ -123,11 +123,12 @@ const Company = ({ method }) => {
         break;
 
       case "delete":
+        data.insuranceCompanyId = parseInt(id);
         await AxiosClient.delete("/InsuranceCompanies" + "/" + id,
           {}
         ).then(res => {
           setShowConfirm(false);
-          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Company", "Removed an Insurance Company", 1, data.insuranceCompanyId, "companies" );
+          Utility.newNotification(Utility.CurrentUser().id, Utility.CurrentUser().id, "Company", "Removed an Insurance Company", 1,id, "companies" );
           goBack();
         }).catch(err => {
           console.log(err);
