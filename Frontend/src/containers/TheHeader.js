@@ -97,7 +97,7 @@ const TheHeader = ({ user }) => {
       FetchNotification(mounted);
     }, 3000);
 
-    return () => {clearInterval(interval); mounted = false};
+    return () => { clearInterval(interval); mounted = false };
   }, []);
 
   return (
@@ -113,7 +113,7 @@ const TheHeader = ({ user }) => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <CIcon name="logo" height="48" alt="Logo" />
+        <img src="%PUBLIC_URL%/logoFinal.png" />
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">

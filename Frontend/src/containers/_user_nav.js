@@ -43,12 +43,12 @@ const _user_nav = [
     _children: [
       {
         _tag: 'CSidebarNavItem',
-        name: <div className=""><CIcon className="mr-3" name='cil-storage'/>My Requests</div>,
+        name: <div className=""><CIcon className="mr-3" name='cil-storage' />My Requests</div>,
         to: "/user/policyRequestList"
       },
       {
         _tag: 'CSidebarNavItem',
-        name: <div className=""><CIcon className="mr-3" name='cil-indent-increase'/>Request a Policy</div>,
+        name: <div className=""><CIcon className="mr-3" name='cil-indent-increase' />Request a Policy</div>,
         to: "/user/policyRequest"
       }
     ]
@@ -68,33 +68,6 @@ const _user_nav = [
         name: 'Add FeedBack',
         to: '/user/feedBacks/create'
       }
-    ],
-  },
-  {
-    _tag: 'CSidebarNavDropdown',
-    name: 'Icons',
-    route: '/icons',
-    icon: 'cil-star',
-    _children: [
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'CoreUI Free',
-        to: '/icons/coreui-icons',
-        badge: {
-          color: 'success',
-          text: 'NEW',
-        },
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'CoreUI Flags',
-        to: '/icons/flags',
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'CoreUI Brands',
-        to: '/icons/brands',
-      },
     ],
   }
 
