@@ -111,7 +111,7 @@ const ReportEmployeeSkeleton = ({ user, policies, img }) => {
                         <CCol>
                             <h4 className="text-center" >POLICY</h4>
                             <div  hidden={policies?.length != 0 ? false : true}>
-                                {console.log(policies)}
+                                {/* {console.log(policies)} */}
                                 <table className="table table-bordered ">
                                     <thead>
                                         <tr>
