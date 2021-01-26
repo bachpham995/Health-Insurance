@@ -86,6 +86,7 @@ const Users = React.lazy(() => import('./views/users/Users'));
 const User = React.lazy(() => import('./views/users/User'));
 const Mailbox = React.lazy(() => import('./views/custom/Mailbox'));
 const Profile = React.lazy(() => import('./views/custom/Profile'));
+const ContactUs = React.lazy(() => import('./views/custom/ContactUs'));
 
 export const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -249,7 +250,7 @@ export const _user_routes = [
   { path: '/user/policyEmployees', exact: true, name: 'My Policies', component: PolicyEmployee },
   //Request A Policy
   { path: '/user/policyRequest', exact: true, name: 'Policy Request', component: PolicyRequest },
-  { path: '/user/policyRequest/read/:id', exact: true, name: 'Policy Request', component: PolicyRequest,props:{method:"get"}},
+  { path: '/user/policyRequest/read/:id', exact: true, name: 'Policy Request', component: PolicyRequest, props: { method: "get" } },
   //Request List
   { path: '/user/policyRequestList', exact: true, name: 'Policy Request List', component: PolicyRequestList },
   //Feedback of User
@@ -257,6 +258,7 @@ export const _user_routes = [
   { path: '/user/feedBacks/create', exact: true, name: 'New FeedBack', component: UserFeedBack, props: { method: "post" } },
   //Profile
   { path: '/setting/profile', exact: true, name: 'Profile', component: Profile },
+  { path: '/user/contactus', exact: true, name: 'Contact Us', component: ContactUs },
 ];
 
 

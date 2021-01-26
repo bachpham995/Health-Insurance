@@ -39,6 +39,8 @@
     <Compile Remove="Migrations\20210121152204_Initial.Designer.cs" />
     <Compile Remove="Migrations\20210122121231_Initial.cs" />
     <Compile Remove="Migrations\20210122121231_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20210124044338_Initial.cs" />
+    <Compile Remove="Migrations\20210124044338_Initial.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.10" />
