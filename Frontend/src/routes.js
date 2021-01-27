@@ -231,7 +231,6 @@ export const _admin_routes = [
   { path: '/admin/tool/uploadDocument', exact: true, name: 'Document Upload', component: DocumentUpload },
   { path: '/admin/tool/documents', exact: true, name: 'Documents', component: DataTable, props: { tableName: "Documents", tableQuery: "UploadFile", color: "light" } },
   { path: '/setting/profile', exact: true, name: 'Profile', component: Profile },
-  { path: '/admin/mail', exact: true, name: 'Gmail', component: Mailbox },
   //Report
   { path: '/admin/reports', exact: true, name: 'Reports', component: Report, props: { tableName: "Reports", tableQuery: "Reports", color: "light" } },
   { path: '/admin/reports/read/:id', exact: true, name: 'Info Report', component: ReportDetail, props: { mode: "get" } },

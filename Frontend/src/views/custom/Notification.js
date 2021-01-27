@@ -11,6 +11,7 @@ import {
 import CIcon from '@coreui/icons-react'
 import { useHistory } from "react-router-dom";
 import Utility from 'src/api/Utility'
+import AxiosClient from 'src/api/AxiosClient';
 
 
 const Notification = ({ user, ntfType, notifications, count }) => {
@@ -34,9 +35,23 @@ const Notification = ({ user, ntfType, notifications, count }) => {
     }
   }
 
+  const CheckNotify = (event, notify) => {
+    notify.status = true;
+    AxiosClient.put("/Notifications/"+notify.id, JSON.stringify(notify),
+      {
+        headers: { 'content-type': 'application/json' }
+      }).then(res => { }
+        // console.log("A Notification is created successfully")
+      ).catch(err => {
+        console.log(err.response);
+      }
+    );
+  }
+
   const Avatar = (notify) => {
     switch (notify.type) {
       case 0:
+      case 2:
         if (notify?.fromUserId != null && notify?.fromUser?.img != null) {
           return (<><CImg
             src={notify.fromUser?.img}
@@ -48,9 +63,6 @@ const Notification = ({ user, ntfType, notifications, count }) => {
         return <CIcon name="cil-lightbulb" className="success"></CIcon>
 
       case 1:
-        return <CIcon name="cil-list" className="success"></CIcon>
-
-      case 2:
         return <CIcon name="cil-list" className="success"></CIcon>
 
       default:
@@ -104,7 +116,7 @@ const Notification = ({ user, ntfType, notifications, count }) => {
   const navigate = (event, notify) => {
     if (notify.relatedType != null && notify.relatedType != "") {
       event.preventDefault();
-      let pushURL = getPrefix() + notify.relatedType + (notify.relatedType == "feedbacks"?"/edit/":"/read/") + notify.relatedId;
+      let pushURL = getPrefix() + notify.relatedType + (notify.relatedType == "feedbacks" ? "/edit/" : "/read/") + notify.relatedId;
       history.push(pushURL);
     }
   }
@@ -127,9 +139,8 @@ const Notification = ({ user, ntfType, notifications, count }) => {
         >
           <strong>{Title(count, ntfType)}</strong>
         </CDropdownItem>
-        {/* cil-user-unfollow */}
         <div className="custom-scrollbar">
-          {notifications?.map(notify => <CDropdownItem key={notify.id} onClick={(event)=>navigate(event, notify)}>
+          {notifications?.map(notify => <CDropdownItem key={notify.id} onClick={(event) => navigate(event, notify)}>
             <div className="message message-notify">
               <div className="mr-3 float-left">
                 <div className="c-avatar">

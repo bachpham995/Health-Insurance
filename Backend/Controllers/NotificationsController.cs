@@ -8,6 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using HealthInsuranceWebServer.Data;
 using HealthInsuranceWebServer.Models;
 using Newtonsoft.Json;
+using MailKit.Net.Imap;
+using MailKit.Net.Pop3;
+using MimeKit;
+using Email;
+using System.Security.Authentication;
 
 namespace HealthInsuranceWebServer.Controllers
 {
@@ -24,11 +29,11 @@ namespace HealthInsuranceWebServer.Controllers
 
         // GET: api/Notifications
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Notification>>> GetNotification()        
-        {            
+        public async Task<ActionResult<IEnumerable<Notification>>> GetNotification()
+        {
             return await _context.Notification
-            .Include(n=>n.FromUser)
-            .Include(n=>n.ToUser)
+            .Include(n => n.FromUser)
+            .Include(n => n.ToUser)
             .ToListAsync();
         }
 
@@ -37,8 +42,8 @@ namespace HealthInsuranceWebServer.Controllers
         public async Task<ActionResult<Notification>> GetNotification(int id)
         {
             var notification = await _context.Notification
-            .Include(n=>n.FromUser)
-            .Include(n=>n.ToUser)
+            .Include(n => n.FromUser)
+            .Include(n => n.ToUser)
             .Where(n => n.Id == id).FirstOrDefaultAsync();
 
             if (notification == null)
@@ -87,7 +92,8 @@ namespace HealthInsuranceWebServer.Controllers
         [HttpPost]
         public async Task<ActionResult<Notification>> PostNotification(Notification notification)
         {
-            if(notification.ToUserId < 0){
+            if (notification.ToUserId < 0)
+            {
                 notification.ToUserId = _context.Employee.FirstOrDefault(e => e.Role == 0).EmployeeId;
             }
             _context.Notification.Add(notification);
@@ -117,8 +123,10 @@ namespace HealthInsuranceWebServer.Controllers
             return _context.Notification.Any(e => e.Id == id);
         }
 
-        public static Notification newNotification(String title, int fromId, int toId, String desc, int type, int relatedId, String relatedType, bool isAdminNotify){
-            return new Notification(){
+        public static Notification newNotification(String title, int fromId, int toId, String desc, int type, int relatedId, String relatedType, bool isAdminNotify)
+        {
+            return new Notification()
+            {
                 Title = title,
                 FromUserId = fromId,
                 ToUserId = toId,
@@ -129,6 +137,6 @@ namespace HealthInsuranceWebServer.Controllers
                 Date = DateTime.Now,
                 Status = true
             };
-        }
+        }        
     }
 }

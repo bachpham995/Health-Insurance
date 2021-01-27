@@ -385,21 +385,7 @@ const _admin_nav = [
             to: '/admin/tool/uploadDocument'
           }
         ]
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: <div className=""><CIcon className="mr-3" name="cib-gmail"/>Email</div>,
-        to:'/admin/mail'
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: <div className=""><CIcon className="mr-3" name="cil-calendar"/>Calendar</div>,
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: '',
-
-      },]
+      }]
   },
   {
     _tag: 'CSidebarNavDropdown',

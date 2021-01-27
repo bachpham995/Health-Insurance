@@ -57,12 +57,13 @@ const TheHeader = ({ user }) => {
       if (mounted) {
         let notifications = res?.filter(n => n.toUserId == Common.getUser().id);
         let activities = res?.filter(n => n.fromUserId == Common.getUser().id);
+        let feedbacks = res?.filter(n => n.toUserId == Common.getUser().id);
         setNotifications_0(GetNotificationsByType(notifications, 0));
         setNotifications_1(GetNotificationsByType(activities, 1));
-        // setNotifications_2(GetNotificationsByType(user?.toNotifications, 2));
+        setNotifications_2(GetNotificationsByType(feedbacks, 2));
         setCount_0(CountNotificationsByType(notifications, 0));
         setCount_1(CountNotificationsByType(activities, 1));
-        // setCount_2(CountNotificationsByType(user?.toNotifications, 2));
+        setCount_2(CountNotificationsByType(feedbacks?.filter(f => f.response == null || f.response == ""), 2));
       }
     }).catch(err => {
       console.log('Failed to Get data: ', err);
@@ -93,6 +94,12 @@ const TheHeader = ({ user }) => {
 
   useEffect(() => {
     let mounted = true;
+    setNotifications_0(GetNotificationsByType(user?.toNotifications, 0));
+    setNotifications_1(GetNotificationsByType(user?.fromNotifications, 1));
+    setNotifications_2(GetNotificationsByType(user?.toNotifications, 2));
+    setCount_0(CountNotificationsByType(user?.toNotifications, 0));
+    setCount_1(CountNotificationsByType(user?.fromNotifications, 1));
+    setCount_2(CountNotificationsByType(user?.toNotifications?.filter(f => f.response == null || f.response == ""), 2));
     let interval = setInterval(() => {
       FetchNotification(mounted);
     }, 3000);
@@ -123,9 +130,9 @@ const TheHeader = ({ user }) => {
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
-        <Notification user={user} ntfType="0" notifications={notifications_0} count={count_0} />
+        <Notification onClick={(e) => console.log("aaaaaaa")} user={user} ntfType="0" notifications={notifications_0} count={count_0} />
         <Notification user={user} ntfType="1" notifications={notifications_1} count={count_1} />
-        <Notification user={user} ntfType="2" notifications={notifications_2} count={count_2} />
+        {user?.role == 0 && <Notification user={user} ntfType="2" notifications={notifications_2} count={count_2} />}
         <TheHeaderDropdown user={user} />
       </CHeaderNav>
 
@@ -135,9 +142,6 @@ const TheHeader = ({ user }) => {
           routes={getRoute()}
         />
         <div className="d-md-down-none mfe-2 c-subheader-nav">
-          {/* <CLink className="c-subheader-nav-link" href="#">
-            <CIcon name="cil-speech" alt="Settings" />
-          </CLink> */}
           <CLink
             className="c-subheader-nav-link"
             aria-current="page"
@@ -145,9 +149,6 @@ const TheHeader = ({ user }) => {
           >
             <CIcon name="cil-graph" alt="Dashboard" />&nbsp;Dashboard
             </CLink>
-          {/* <CLink className="c-subheader-nav-link" href="#">
-            <CIcon name="cil-settings" alt="Settings" />&nbsp;Settings
-            </CLink> */}
         </div>
       </CSubheader>
     </CHeader>
