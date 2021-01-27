@@ -20,10 +20,8 @@ import {
   useParams,
   useHistory
 } from "react-router-dom";
-import MainChartExample from '../charts/MainChartExample.js'
 
 const WidgetsDropdown = lazy(() => import('../widgets/WidgetsDropdown.js'))
-// const WidgetsBrand = lazy(() => import('../widgets/WidgetsBrand.js'))
 
 
 
@@ -33,11 +31,13 @@ const Dashboard = () => {
   const [countApproval, setCountApproval] = useState(null);
   const [countFeedback, setCountFeedback] = useState(null);
   const [countRequest, setCountRequest] = useState(null);
+
   // Get new in date 
   const [newEmpInDates, setNewEmpInDates] = useState([]);
   const [newApInDates, setApInDates] = useState([]);
   const [newFbInDates, setFbInDates] = useState([]);
   const [newRqInDates, setRqInDates] = useState([]);
+
   const date = new Date().getTime();
 
   const history = useHistory();
@@ -47,71 +47,46 @@ const Dashboard = () => {
     return check
   }
 
-  const getEmployees = async () => {
-    let count = 0;
+  const getEmployees = async (mounted) => {
     await AxiosClient.get("/Employees").then(res => {
       console.log('Get data successfully: ', res);
-      res.forEach(item => {
-        count++;
-        const dateActive = new Date(item.joinDate).getTime();
-        // console.log(check(date - dateActive));
-        if (check(date - dateActive) == 0) {
-          setNewEmpInDates(e => [...e, item]);
-        }
-      });
-      setCountEmployee(count);
+     if(mounted){
+      setNewEmpInDates(res);
+     }
     }).catch(err => {
       console.log('Failed to Get data: ', err);
     });
   }
 
-  const getApprovals = async () => {
-    let count = 0;
+  const getApprovals = async (mounted) => {
     await AxiosClient.get("/PolicyApprovals").then(res => {
       // console.log('Get data successfully: ', res);
-      res.forEach(element => {
-        count++;
-        const dateActive = new Date(element.approvalDate).getTime();
-        if (check(date - dateActive) == 0) {
-          setApInDates(e => [...e, element]);
-        }
-      });
-      setCountApproval(count);
+      if (mounted = true) {
+        setApInDates(res);
+      }
     }).catch(err => {
       console.log('Failed to Get data: ', err);
     });
   }
-  const getFeedbacks = async () => {
-    let count = 0;
+  const getFeedbacks = async (mounted) => {
     await AxiosClient.get("/Feedbacks").then(res => {
       // console.log('Get data successfully: ', res);
       // console.log("Data Header:", Object.keys(res));
-      res.forEach(element => {
-        count++;
-        const dateActive = new Date(element.date).getTime();
-        if (check(date - dateActive) == 0) {
-          setFbInDates(e => [...e, element]);
-        }
-      });
-      setCountFeedback(count);
+
+      if (mounted = true) {
+        setFbInDates(res);
+      }
     }).catch(err => {
       console.log('Failed to Get data: ', err);
     });
   }
-  const getRequests = async () => {
-    let count = 0;
+  const getRequests = async (mounted) => {
     await AxiosClient.get("/PolicyRequests").then(res => {
       // console.log('Get data successfully: ', res);
       // console.log("Data Header:", Object.keys(res));
-      res.forEach(element => {
-        count++;
-        const dateActive = new Date(element.requestDate).getTime();
-        // console.log(check(date - dateActive));
-        if (check(date - dateActive) == 0) {
-          setRqInDates(e => [...e, element]);
-        }
-      });
-      setCountRequest(count);
+      if (mounted = true) {
+        setRqInDates(res)
+      }
     }).catch(err => {
       console.log('Failed to Get data: ', err);
     });
@@ -122,25 +97,26 @@ const Dashboard = () => {
     switch (string) {
       case "Feedback": return history.push(`/admin/feedbacks/read/${e}`);
       case "Request": return history.push(`/admin/requests/read/${e}`);
-      //     case "Approval": return  history.push(`/admin/requests/read/${e}`);
-      // }
+      case "Employee": return history.push(`/admin/employees/read/${e}`);
     }
 
   }
 
-  useEffect(async () => {
-    getEmployees();
-    getApprovals();
-    getFeedbacks();
-    getRequests();
+  useEffect(() => {
+    let mounted = true;
+    getEmployees(mounted);
+    getApprovals(mounted);
+    getFeedbacks(mounted);
+    getRequests(mounted);
+    return () => mounted = false;
   }, []);
 
   return (
     <>
-      <WidgetsDropdown employeeNumber={countEmplopyee}
-        approvalNumber={countApproval}
-        feedbackNumber={countFeedback}
-        requestNumber={countRequest} />
+      <WidgetsDropdown employeeNumber={newEmpInDates.length}
+        approvalNumber={newApInDates.length}
+        feedbackNumber={newFbInDates.length}
+        requestNumber={newRqInDates.length} />
       <CRow>
         <CCol>
           <CCard>
@@ -150,9 +126,9 @@ const Dashboard = () => {
             <CCardBody>
               <h6>Employees join in date</h6>
               <CRow xs="12" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <h5 hidden={newEmpInDates?.length != 0 ? true : false} > Don't have a Employee join to date</h5>
+                <h5 hidden={newEmpInDates?.filter(e => (check(date - new Date(e.joinDate).getTime()) == 0)).length != 0 ? true : false} > Don't have a Employee join to date</h5>
               </CRow>
-              <div hidden={newEmpInDates?.length != 0 ? false : true}>
+              <div hidden={newEmpInDates?.filter(e => (check(date - new Date(e.joinDate).getTime()) == 0)).length != 0 ? false : true}>
                 <table className="table table-hover table-outline mb-0 d-none d-sm-table">
                   <thead className="thead-light">
                     <tr>
@@ -162,12 +138,10 @@ const Dashboard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {newEmpInDates ? newEmpInDates.map((emp, index) => {
+                    {newEmpInDates?.filter(e => (check(date - new Date(e.joinDate).getTime()) == 0)).map((emp, index) => {
                       return (
-
                         <tr key={index}
                           onClick={() => onClickHandel(emp?.employeeId, "Employee")
-
                           }
                         >
                           <td className="text-center">
@@ -187,7 +161,7 @@ const Dashboard = () => {
                           </td>
                         </tr>
                       );
-                    }) : null
+                    })
                     }
                   </tbody>
                 </table>
@@ -195,9 +169,9 @@ const Dashboard = () => {
               <br />
               <h6>New FeedBack</h6>
               <CRow xs="12" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <h5 hidden={newFbInDates?.length != 0 ? true : false} > Don't have a new Feedback</h5>
+                <h5 hidden={newFbInDates?.filter(fb => (check(date - new Date(fb.date).getTime()) == 0)).length != 0 ? true : false} > Don't have a new Feedback</h5>
               </CRow>
-              <div hidden={newFbInDates?.length != 0 ? false : true} >
+              <div hidden={newFbInDates?.filter(fb => (check(date - new Date(fb.date).getTime()) == 0)).length != 0 ? false : true} >
                 <table className="table table-hover table-outline mb-0 d-none d-sm-table">
                   <thead className="thead-light">
                     <tr>
@@ -208,7 +182,7 @@ const Dashboard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {newFbInDates ? newFbInDates.map((fb, index) => {
+                    {newFbInDates?.filter(fb => (check(date - new Date(fb.date).getTime()) == 0)).map((fb, index) => {
                       return (
 
                         <tr key={index}
@@ -243,7 +217,7 @@ const Dashboard = () => {
                           </td>
                         </tr>
                       );
-                    }) : null
+                    })
                     }
                   </tbody>
                 </table>
@@ -251,9 +225,9 @@ const Dashboard = () => {
               <br />
               <h6>New Request</h6>
               <CRow xs="12" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <h5 hidden={newRqInDates?.length != 0 ? true : false} > Don't have a new Request</h5>
+                <h5 hidden={newRqInDates?.filter(res => (check(date - new Date(res.requestDate).getTime()) == 0)).length != 0 ? true : false} > Don't have a new Request</h5>
               </CRow>
-              <div hidden={newRqInDates?.length != 0 ? false : true}>
+              <div hidden={newRqInDates?.filter(res => (check(date - new Date(res.requestDate).getTime()) == 0)).length != 0 ? false : true}>
                 <table className="table table-hover table-outline mb-0 d-none d-sm-table">
                   <thead className="thead-light">
                     <tr>
@@ -264,7 +238,7 @@ const Dashboard = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {newRqInDates ? newRqInDates.map((rq, index) => {
+                    {newRqInDates?.filter(res => (check(date - new Date(res.requestDate).getTime()) == 0)).map((rq, index) => {
                       return (
 
                         <tr key={index}
@@ -302,32 +276,29 @@ const Dashboard = () => {
                           </td>
                         </tr>
                       );
-                    }) : null
+                    })
                     }
                   </tbody>
                 </table>
               </div>
-
               <br />
               <h6>New Approvals</h6>
               <CRow xs="12" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <h5 hidden={newApInDates?.length != 0 ? true : false} > Don't have a new Approval</h5>
+                <h5 hidden={newApInDates?.filter(a => (check(date - new Date(a.approvalDate).getTime()) == 0)).length != 0 ? true : false} > Don't have a new Approval</h5>
               </CRow>
-              <div hidden={newApInDates?.length != 0 ? false : true}>
+              <div hidden={newApInDates?.filter(a => (check(date - new Date(a.approvalDate).getTime()) == 0)).length != 0 ? false : true}>
                 <table className="table  table-outline mb-0 d-none d-sm-table">
                   <thead className="thead-light">
                     <tr>
                       <th className="text-center"><CIcon name="cil-people" /></th>
                       <th>User Name</th>
-                      {/* <th className="text-center">Send Date</th> */}
                       <th  >Approval Date</th>
                       <th className="text-center">Status</th>
                     </tr>
                   </thead>
                   <tbody>
-                    {newApInDates ? newApInDates.map((arv, index) => {
+                    {newApInDates?.filter(a => (check(date - new Date(a.approvalDate).getTime()) == 0)).map((arv, index) => {
                       return (
-
                         <tr key={index}
                           onClick={() => onClickHandel(arv?.approvalId, "Approval")
                           }
@@ -359,7 +330,7 @@ const Dashboard = () => {
                           </td>
                         </tr>
                       );
-                    }) : null
+                    })
                     }
                   </tbody>
                 </table>
