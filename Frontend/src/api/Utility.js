@@ -60,7 +60,7 @@ export default class Utility {
       case "PolicyRequest":
       case "PolicyRequests":
         return '/admin/requests';
-      
+
       case "PolicyRequestUser":
         return '/user/policyRequest';
 
@@ -75,7 +75,7 @@ export default class Utility {
       case "Employee":
       case "Employees":
         return '/admin/employees';
-      
+
       case "Policy":
       case "Policies":
         return '/admin/policies';
@@ -157,7 +157,7 @@ export default class Utility {
         //   sorter: false,
         //   filter: false
         // },
-         {
+        {
           key: "requestId",
           label: '#',
           _style: { width: '5%' }
@@ -249,7 +249,7 @@ export default class Utility {
     return await AxiosClient.post("/Notifications", JSON.stringify(data),
       {
         headers: { 'content-type': 'application/json' }
-      }).then(res =>{}
+      }).then(res => { }
         // console.log("A Notification is created successfully")
       ).catch(err => {
         console.log(err)

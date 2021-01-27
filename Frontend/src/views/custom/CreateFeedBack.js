@@ -60,7 +60,7 @@ const CreateFeedBack = ({ method }) => {
             {
                 headers: { 'content-type': 'application/json' }
             }).then(res => {
-                Utility.newNotification(Common.getUser().id, -1, "Feedback", "A user has submitted a feedback.", 2, res.feedbackId, "feedbacks");
+                Utility.newNotification(Common.getUser().id, -1, "Feedback", "A user has submitted a feedback.", 0, res.feedbackId, "feedbacks");
                 Utility.newNotification(Common.getUser().id, Common.getUser().id, "Feedback", "Submitted a Feedback", 1, res.feedbackId, "");
                 goBack();
             }).catch(err => {

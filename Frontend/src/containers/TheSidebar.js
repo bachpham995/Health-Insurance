@@ -1,5 +1,7 @@
 import React from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import logos from "../assets/logoFinal2.png";
+import logomini from "../assets/logoFinalMini.png";
 import {
   CCreateElement,
   CSidebar,
@@ -29,12 +31,12 @@ const TheSidebar = ({ user }) => {
       <CSidebarBrand className="d-md-down-none" to="/">
         <CIcon
           className="c-sidebar-brand-full"
-          name="logo-negative"
-          height={35}
+          src={logos}
+          height={60}
         />
         <CIcon
           className="c-sidebar-brand-minimized"
-          name="sygnet"
+          src={logomini}
           height={35}
         />
       </CSidebarBrand>

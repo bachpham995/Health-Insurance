@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
+import logos from "../assets/logoFinal2.png";
 import {
   CHeader,
   CToggler,
@@ -120,6 +121,7 @@ const TheHeader = ({ user }) => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
+        <CIcon name="logo" src={logos} height="60" alt="Logo" />
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
@@ -132,7 +134,7 @@ const TheHeader = ({ user }) => {
       <CHeaderNav className="px-3">
         <Notification onClick={(e) => console.log("aaaaaaa")} user={user} ntfType="0" notifications={notifications_0} count={count_0} />
         <Notification user={user} ntfType="1" notifications={notifications_1} count={count_1} />
-        {user?.role == 0 && <Notification user={user} ntfType="2" notifications={notifications_2} count={count_2} />}
+        {/* {user?.role == 0 && <Notification user={user} ntfType="2" notifications={notifications_2} count={count_2} />} */}
         <TheHeaderDropdown user={user} />
       </CHeaderNav>
 
