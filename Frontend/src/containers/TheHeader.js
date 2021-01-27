@@ -117,9 +117,9 @@ const TheHeader = ({ user }) => {
 
       <CHeaderNav className="d-md-down-none mr-auto">
         <CHeaderNavItem className="px-3" >
-          {user?.roles == 0 ? <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink> : <CHeaderNavLink to="/user/home">Home Page</CHeaderNavLink>}
-          {user?.roles == 1 ? <CHeaderNavLink to="/user/contactus">Contact Us</CHeaderNavLink> : ""}
+          {user?.role == 0 ? (<CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>) : (<CHeaderNavLink to="/user/home">Homepage</CHeaderNavLink>)}
         </CHeaderNavItem>
+        {user?.role == 1 ? (<CHeaderNavItem className="px-3" ><CHeaderNavLink to="/user/contactus">Contact Us</CHeaderNavLink></CHeaderNavItem>) : ""}
       </CHeaderNav>
 
       <CHeaderNav className="px-3">

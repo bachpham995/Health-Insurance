@@ -99,7 +99,7 @@ const ContactUs = ({ method }) => {
                         <CCol xl="7">
                             <h4 className="text-center">Feedback for us</h4>
                             <CForm onSubmit={onSubmit} wasValidated className="form-horizontal">
-                                <CCard className="bg-gradient-info text-white">
+                                <CCard className="bg-gradient-light text-dark">
                                     <CCardBody>
                                         <h5>How would you rate the support you received?</h5>
                                         <hr />
