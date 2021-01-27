@@ -87,6 +87,7 @@ const User = React.lazy(() => import('./views/users/User'));
 const Mailbox = React.lazy(() => import('./views/custom/Mailbox'));
 const Profile = React.lazy(() => import('./views/custom/Profile'));
 const ContactUs = React.lazy(() => import('./views/custom/ContactUs'));
+const Homepage = React.lazy(() => import('./views/custom/Homepage'));
 
 export const routes = [
   { path: '/', exact: true, name: 'Home' },
@@ -239,6 +240,7 @@ export const _admin_routes = [
 
 export const _user_routes = [
   { path: '/', exact: true, name: 'User' },
+  { path: '/user/home', exact: true, name: 'Home', component: Homepage },
   //Search
   { path: '/user/policySearch', exact: true, name: 'Policy Search', component: PolicySearch },
 
@@ -259,6 +261,7 @@ export const _user_routes = [
   //Profile
   { path: '/setting/profile', exact: true, name: 'Profile', component: Profile },
   { path: '/user/contactus', exact: true, name: 'Contact Us', component: ContactUs },
+
 ];
 
 
