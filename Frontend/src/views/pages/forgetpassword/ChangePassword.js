@@ -24,6 +24,7 @@ const ChangePassword = () => {
 
     const [valid, setValid] = useState(false);
     const [message, setMessage] = useState(null);
+    const [isChange, setChange] = useState(false);
 
     const getData = () => {
         setMessage(null);
@@ -48,11 +49,13 @@ const ChangePassword = () => {
                     console.log(response);
                     setValid(true);
                     setMessage("Change Password successfully!");
+                    setChange(true);
                 })
                 .catch(function (error) {
                     console.log(error);
                     setValid(false);
                     setMessage("Fail!");
+                    setChange(false);
                 });
         }
     }
@@ -75,11 +78,19 @@ const ChangePassword = () => {
                                         <CInputGroup className="mb-3">
                                             <CInput type="password" placeholder="Confirm Password" id="confirmPass" />
                                         </CInputGroup>
-                                        <CRow>
-                                            <CCol xs="6">
-                                                <CButton className="dark-color" color="" onClick={getData} type="button">Accept</CButton>
-                                            </CCol>
-                                        </CRow>
+                                        {isChange ?
+                                            (<CRow>
+                                                <CCol xs="6">
+                                                    <CButton className="dark-color" color="" onClick={getData} type="button">Accept</CButton>
+                                                </CCol>
+                                            </CRow>) : (
+                                                <CRow>
+                                                    <CCol xs="6">
+                                                        <CButton className="dark-color" color="" to="/login" type="button">Return to login</CButton>
+                                                    </CCol>
+                                                </CRow>
+                                            )
+                                        }
                                     </CForm>
                                 </CCardBody>
                             </CCard>

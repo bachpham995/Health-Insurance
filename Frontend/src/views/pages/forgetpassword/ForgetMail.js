@@ -14,8 +14,7 @@ import {
     CToaster,
     CToast,
     CToastHeader,
-    CToastBody,
-    CLink
+    CToastBody
 } from '@coreui/react'
 import AxiosClient from 'src/api/AxiosClient'
 
@@ -23,7 +22,7 @@ import AxiosClient from 'src/api/AxiosClient'
 const ForgetMail = () => {
     const [showResult, setShowResult] = useState(false);
     const [valid, setValid] = useState(false);
-
+    const [sendSuccess, setSendSuccess] = useState(false);
     const getForm = () => {
         setShowResult(false);
         var a = document.getElementById('forgetEmail');
@@ -32,12 +31,14 @@ const ForgetMail = () => {
                 console.log(response);
                 setValid(true);
                 setShowResult(true);
+                setSendSuccess(true);
             })
             .catch(function (error) {
                 console.log(error);
                 if (error.response.status == 404) {
                     setValid(false);
                     setShowResult(true);
+                    setSendSuccess(false);
                 }
             });
     }
@@ -57,10 +58,18 @@ const ForgetMail = () => {
 
                                             <CInput type="email" placeholder="Your Email" id="forgetEmail" />
                                         </CInputGroup>
-                                        <CRow>
-                                            <CButton className="dark-color" color="" onClick={getForm} type="button">Receive Email</CButton>
-                                            <CButton className="dark-outline-color" color="" to="/login" type="button">Cancel</CButton>
-                                        </CRow>
+                                        {!sendSuccess ?
+                                            (<CRow>
+                                                <CCol>
+                                                    <CButton className="dark-color" color="" onClick={getForm} type="button">Receive Email</CButton>
+                                                    <CButton className="dark-outline-color" color="" to="/login" type="button">Cancel</CButton>
+                                                </CCol>
+                                            </CRow>) : (
+                                                <CRow>
+                                                    <CCol><CButton className="dark-color" to="/login" type="button">Return Login</CButton></CCol>
+                                                </CRow>
+                                            )
+                                        }
                                     </CForm>
                                 </CCardBody>
                             </CCard>
