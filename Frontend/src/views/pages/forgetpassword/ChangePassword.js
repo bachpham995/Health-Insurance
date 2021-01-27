@@ -78,7 +78,7 @@ const ChangePassword = () => {
                                         <CInputGroup className="mb-3">
                                             <CInput type="password" placeholder="Confirm Password" id="confirmPass" />
                                         </CInputGroup>
-                                        {isChange ?
+                                        {!isChange ?
                                             (<CRow>
                                                 <CCol xs="6">
                                                     <CButton className="dark-color" color="" onClick={getData} type="button">Accept</CButton>
