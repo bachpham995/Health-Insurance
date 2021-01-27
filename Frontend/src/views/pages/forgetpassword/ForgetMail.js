@@ -14,7 +14,8 @@ import {
     CToaster,
     CToast,
     CToastHeader,
-    CToastBody
+    CToastBody,
+    CLink
 } from '@coreui/react'
 import AxiosClient from 'src/api/AxiosClient'
 
@@ -57,9 +58,8 @@ const ForgetMail = () => {
                                             <CInput type="email" placeholder="Your Email" id="forgetEmail" />
                                         </CInputGroup>
                                         <CRow>
-                                            <CCol xs="6">
-                                                <CButton className="dark-color" color="" onClick={getForm} type="button">Receive Email</CButton>
-                                            </CCol>
+                                            <CButton className="dark-color" color="" onClick={getForm} type="button">Receive Email</CButton>
+                                            <CButton className="dark-outline-color" color="" to="/login" type="button">Cancel</CButton>
                                         </CRow>
                                     </CForm>
                                 </CCardBody>
@@ -77,9 +77,9 @@ const ForgetMail = () => {
                         </CToastBody>
                     </CToast>
                 </CToaster>
-            </CContainer>
+            </CContainer >
 
-        </CRow>
+        </CRow >
     )
 }
 

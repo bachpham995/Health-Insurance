@@ -52,24 +52,6 @@ const _user_nav = [
         to: "/user/policyRequest"
       }
     ]
-  },
-  {
-    _tag: 'CSidebarNavDropdown',
-    name: 'FeedBack',
-    icon: 'cil-star',
-    _children: [
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'My FeedBack',
-        to: '/user/feedBacks'
-      },
-      {
-        _tag: 'CSidebarNavItem',
-        name: 'Add FeedBack',
-        to: '/user/feedBacks/create'
-      }
-    ],
   }
-
 ];
 export default _user_nav

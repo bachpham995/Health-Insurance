@@ -19,7 +19,8 @@ import {
   CToastHeader,
   CToastBody,
   CImg,
-  CLabel
+  CLabel,
+  CLink
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import AxiosClient from 'src/api/AxiosClient';
@@ -122,7 +123,9 @@ const Login = () => {
                           Login</CButton>
                       </CCol>
                       <CCol xs="6" className="text-right">
-                        <CButton color="link" className="px-0">Forgot password?</CButton>
+                        <CLink to="/forgetpassword">
+                          <CButton color="link" className="px-0">Forgot password?</CButton>
+                        </CLink>
                       </CCol>
                     </CRow>
                   </CForm>

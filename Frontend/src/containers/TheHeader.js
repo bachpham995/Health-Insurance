@@ -113,28 +113,19 @@ const TheHeader = ({ user }) => {
         onClick={toggleSidebar}
       />
       <CHeaderBrand className="mx-auto d-lg-none" to="/">
-        <img src="%PUBLIC_URL%/logoFinal.png" />
       </CHeaderBrand>
 
       <CHeaderNav className="d-md-down-none mr-auto">
         <CHeaderNavItem className="px-3" >
-          <CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>
+          {user?.role == 0 ? (<CHeaderNavLink to="/dashboard">Dashboard</CHeaderNavLink>) : (<CHeaderNavLink to="/user/home">Homepage</CHeaderNavLink>)}
         </CHeaderNavItem>
-        {/* <CHeaderNavItem className="px-3">
-          <CHeaderNavLink to="/users">Users</CHeaderNavLink>
-        </CHeaderNavItem>
-        <CHeaderNavItem className="px-3">
-          <CHeaderNavLink>Settings</CHeaderNavLink>
-        </CHeaderNavItem> */}
+        {user?.role == 1 ? (<CHeaderNavItem className="px-3" ><CHeaderNavLink to="/user/contactus">Contact Us</CHeaderNavLink></CHeaderNavItem>) : ""}
       </CHeaderNav>
 
       <CHeaderNav className="px-3">
         <Notification user={user} ntfType="0" notifications={notifications_0} count={count_0} />
         <Notification user={user} ntfType="1" notifications={notifications_1} count={count_1} />
         <Notification user={user} ntfType="2" notifications={notifications_2} count={count_2} />
-        {/* <TheHeaderDropdownNotif/>
-        <TheHeaderDropdownTasks/>
-        <TheHeaderDropdownMssg/>*/}
         <TheHeaderDropdown user={user} />
       </CHeaderNav>
 
