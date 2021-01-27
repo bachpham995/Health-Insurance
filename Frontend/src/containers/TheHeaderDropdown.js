@@ -63,14 +63,10 @@ const TheHeaderDropdown = ({ user }) => {
           <CDropdownItem onClick={profile}>
             <CIcon name="cil-user" className="mfe-2" />Profile
         </CDropdownItem>
-          <CDropdownItem>
+          {user?.role == 1 ? (<CDropdownItem to="/user/feedBacks">
             <CIcon name="cil-settings" className="mfe-2" />
-          Settings
-        </CDropdownItem>
-          {/* <CDropdownItem>
-          <CIcon name="cil-swap-horizontal" className="mfe-2" />
-          Employee Site
-        </CDropdownItem> */}
+            My Feedback
+          </CDropdownItem>) : ""}
           <CDropdownItem divider />
           <CDropdownItem onClick={toggle}>
             <CIcon name="cil-account-logout" className="mfe-2" />

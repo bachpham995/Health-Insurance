@@ -57,7 +57,7 @@ const TheContent = () => {
                     )} />
               )
             })}
-            {Common.getUser().role === 0?(<Redirect from="/" to="/dashboard" />):(<Redirect from="/" to="/user/policySearch" />)}
+            {Common.getUser().role === 0 ? (<Redirect from="/" to="/dashboard" />) : (<Redirect from="/" to="/user/home" />)}
           </Switch>
         </Suspense>
       </CContainer>
